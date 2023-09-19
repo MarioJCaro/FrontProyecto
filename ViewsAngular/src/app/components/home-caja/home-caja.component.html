@@ -1,0 +1,188 @@
+<!-- home-caja.component.html -->
+<div class="green-card" style="position: relative;">
+    <div class="container">
+        <button mat-raised-button class="mat-button" style="margin-right: 10px; background-color: #79D3B3;">Añadir Orden</button>
+        <button mat-raised-button class="mat-button" style="background-color: #79D3B3;" >Venta Bebida</button>
+        <button mat-fab class="mat-fab" style="background-color: #D1D1D1; color: black; position: absolute; top: 10px; right: 10px;">
+            <mat-icon>schedule</mat-icon>
+        </button>
+        <button mat-fab class="mat-fab" style="background-color: #D1D1D1;color: black; position: absolute; top: 50px; right: 10px; margin-top: 45px;">
+            <mat-icon>local_cafe</mat-icon>
+        </button>
+        <div fxLayout="row" style="margin-top: 10px;">
+            <!-- Lado izquierdo (Tabla) -->
+            <mat-card fxFlex="20%" fxFlex.lt-sm="100%" class="mat-card">
+                
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Mesa</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Mesa 1</td>
+                            <td>
+                                <button mat-icon-button class="mat-button">
+                                    <mat-icon>menu</mat-icon>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mesa 2</td>
+                            <td>
+                                <button mat-icon-button class="mat-button">
+                                    <mat-icon>menu</mat-icon>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mesa 5</td>
+                            <td>
+                                <button mat-icon-button class="mat-button">
+                                    <mat-icon>menu</mat-icon>
+                                </button>
+                            </td>
+                        </tr>
+                        <!-- Agrega más mesas según sea necesario -->
+                    </tbody>
+                </table>
+            </mat-card>
+
+            <div style="width: 150px;"></div>  <!-- Elemento espaciador -->
+            <!-- Lado derecho (Órdenes) -->
+            <mat-card fxFlex="80%" fxFlex.lt-sm="100%" class="mat-card">
+                
+                <div class="orders-flex-container" style="background-color: #7D9A93;;"> <!-- Este div es el contenedor de las tarjetas -->
+                    
+                    <mat-card class="order-card">
+                        <!-- Estado y Paga -->
+                        <mat-card-header class="order-header" style="background-color: #FFD686;">
+                            <mat-card-title-group>
+                                <mat-card-title>Estado: En cocina</mat-card-title>
+                                <mat-card-title>Paga: No</mat-card-title>
+                            </mat-card-title-group>
+                        </mat-card-header>
+                        <mat-divider></mat-divider>
+                        <!-- Información de la orden -->
+                        <mat-card-content class="order-info">
+                            <mat-card-title>Orden nº 10 23:05</mat-card-title>
+                            <p>Mesa 4 - Mozo: Juan</p>
+                            <div class="order-items">
+                                <p>1 x Salchipapa</p>
+                                <p>2 x Aritos de cebolla</p>
+                                <!-- Agrega más elementos de la orden aquí -->
+                            </div>
+                        </mat-card-content>
+                        <mat-divider></mat-divider>
+                        <mat-card-content class="order-total">
+                            <p>Total: $50.00</p> <!-- Puedes vincular esto a una variable si estás usando Angular -->
+                          </mat-card-content>
+                        
+                          <mat-divider></mat-divider>
+                        <mat-card-actions class="order-actions">
+                            <button mat-raised-button style="background-color: #4CA78E; text-align: center;" ><mat-icon class="big-icon">attach_money</mat-icon></button>
+                            <button mat-raised-button  style="background-color: #57BCDC; text-align: center;"><mat-icon class="big-icon">info</mat-icon></button>
+                            <button mat-raised-button style="background-color: #E98383; text-align: center;" ><mat-icon class="big-icon">delete</mat-icon></button>
+                        </mat-card-actions>
+                    </mat-card>
+                    <mat-card class="order-card">
+                        <!-- Estado y Paga -->
+                        <mat-card-header class="order-header" style="background-color: #FFD686;">
+                            <mat-card-title-group>
+                                <mat-card-title>Estado: En cocina</mat-card-title>
+                                <mat-card-title>Paga: No</mat-card-title>
+                            </mat-card-title-group>
+                        </mat-card-header>
+                        <mat-divider></mat-divider>
+                        <!-- Información de la orden -->
+                        <mat-card-content class="order-info">
+                            <mat-card-title>Orden nº 10 23:05</mat-card-title>
+                            <p>Mesa 4 - Mozo: Juan</p>
+                            <div class="order-items">
+                                <p>1 x Salchipapa</p>
+                                <p>2 x Aritos de cebolla</p>
+                                <!-- Agrega más elementos de la orden aquí -->
+                            </div>
+                        </mat-card-content>
+                        <mat-divider></mat-divider>
+                        <mat-card-content class="order-total">
+                            <p>Total: $50.00</p> <!-- Puedes vincular esto a una variable si estás usando Angular -->
+                          </mat-card-content>
+                        
+                          <mat-divider></mat-divider>
+                        <mat-card-actions class="order-actions">
+                            <button mat-raised-button style="background-color: #4CA78E; text-align: center;" ><mat-icon class="big-icon">attach_money</mat-icon></button>
+                            <button mat-raised-button  style="background-color: #57BCDC; text-align: center;"><mat-icon class="big-icon">info</mat-icon></button>
+                            <button mat-raised-button style="background-color: #E98383; text-align: center;" ><mat-icon class="big-icon">delete</mat-icon></button>
+                        </mat-card-actions>
+                    </mat-card>
+                    <mat-card class="order-card">
+                        <!-- Estado y Paga -->
+                        <mat-card-header class="order-header" style="background-color: #FFD686;">
+                            <mat-card-title-group>
+                                <mat-card-title>Estado: En cocina</mat-card-title>
+                                <mat-card-title>Paga: No</mat-card-title>
+                            </mat-card-title-group>
+                        </mat-card-header>
+                        <mat-divider></mat-divider>
+                        <!-- Información de la orden -->
+                        <mat-card-content class="order-info">
+                            <mat-card-title>Orden nº 10 23:05</mat-card-title>
+                            <p>Mesa 4 - Mozo: Juan</p>
+                            <div class="order-items">
+                                <p>1 x Salchipapa</p>
+                                <p>2 x Aritos de cebolla</p>
+                                <!-- Agrega más elementos de la orden aquí -->
+                            </div>
+                        </mat-card-content>
+                        <mat-divider></mat-divider>
+                        <mat-card-content class="order-total">
+                            <p>Total: $50.00</p> <!-- Puedes vincular esto a una variable si estás usando Angular -->
+                          </mat-card-content>
+                        
+                          <mat-divider></mat-divider>
+                        <mat-card-actions class="order-actions">
+                            <button mat-raised-button style="background-color: #4CA78E; text-align: center;" ><mat-icon class="big-icon">attach_money</mat-icon></button>
+                            <button mat-raised-button  style="background-color: #57BCDC; text-align: center;"><mat-icon class="big-icon">info</mat-icon></button>
+                            <button mat-raised-button style="background-color: #E98383; text-align: center;" ><mat-icon class="big-icon">delete</mat-icon></button>
+                        </mat-card-actions>
+                    </mat-card>
+                    <mat-card class="order-card">
+                        <!-- Estado y Paga -->
+                        <mat-card-header class="order-header" style="background-color: #FFD686;">
+                            <mat-card-title-group>
+                                <mat-card-title>Estado: En cocina</mat-card-title>
+                                <mat-card-title>Paga: No</mat-card-title>
+                            </mat-card-title-group>
+                        </mat-card-header>
+                        <mat-divider></mat-divider>
+                        <!-- Información de la orden -->
+                        <mat-card-content class="order-info">
+                            <mat-card-title>Orden nº 10 23:05</mat-card-title>
+                            <p>Mesa 4 - Mozo: Juan</p>
+                            <div class="order-items">
+                                <p>1 x Salchipapa</p>
+                                <p>2 x Aritos de cebolla</p>
+                                <!-- Agrega más elementos de la orden aquí -->
+                            </div>
+                        </mat-card-content>
+                        <mat-divider></mat-divider>
+                        <mat-card-content class="order-total">
+                            <p>Total: $50.00</p> <!-- Puedes vincular esto a una variable si estás usando Angular -->
+                          </mat-card-content>
+                        
+                          <mat-divider></mat-divider>
+                        <mat-card-actions class="order-actions">
+                            <button mat-raised-button style="background-color: #4CA78E; text-align: center;" ><mat-icon class="big-icon">attach_money</mat-icon></button>
+                            <button mat-raised-button  style="background-color: #57BCDC; text-align: center;"><mat-icon class="big-icon">info</mat-icon></button>
+                            <button mat-raised-button style="background-color: #E98383; text-align: center;" ><mat-icon class="big-icon">delete</mat-icon></button>
+                        </mat-card-actions>
+                    </mat-card>
+                    <!-- Puedes seguir agregando más tarjetas aquí -->
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>

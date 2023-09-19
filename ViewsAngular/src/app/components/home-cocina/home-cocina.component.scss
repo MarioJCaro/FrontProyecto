@@ -1,0 +1,54 @@
+.order-card {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #F4F4F4;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.green-card {
+  background-color: #7D9A93;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.mat-card {
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+/* Define una clase personalizada para el botón */
+/* Aumentar la especificidad */
+/* Estilos personalizados para la tarjeta */
+.custom-card {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #F4F4F4;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+/* Estilos personalizados para el título */
+.custom-title {
+  font-weight: bold;
+  font-size: 1.2em; /* Ajusta el tamaño según tu preferencia */
+}
+
+/* Estilos personalizados para la información */
+.custom-info {
+  font-size: 1em; /* Ajusta el tamaño según tu preferencia */
+}
+
+/* Estilos personalizados para las observaciones */
+.custom-observation {
+  font-style: italic;
+}
+
+/* Estilos para el botón (usando la clase mi-boton) */
+.mi-boton {
+  background-color: #4CA78E !important;
+  color: #000000 !important;
+}
+
+
