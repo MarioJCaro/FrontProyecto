@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from 'src/app/models/item.model';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { AgregarItemModalComponent } from 'src/app/ExtraComponents/agregar-item-modal/agregar-item-modal.component';
 
 @Component({
   selector: 'app-inventario',
@@ -20,7 +22,21 @@ export class InventarioComponent  implements OnInit {
     // ... puedes agregar más items
   ];
 
+  constructor(public dialog: MatDialog) {}
+
   ngOnInit() {
     this.dataSource = new MatTableDataSource(this.items);
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AgregarItemModalComponent, {
+      width: '400px',
+      data: {}  // Puedes pasar la data inicial aquí si es necesario.
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('El modal fue cerrado', result);
+      // Aquí puedes manejar el resultado del modal, por ejemplo, guardar el nuevo ítem.
+    });
   }
 }

@@ -17,6 +17,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
+
 
 
 import { HomeCocinaComponent } from './components/home-cocina/home-cocina.component';
@@ -27,6 +30,7 @@ import { HomeCajaComponent } from './components/home-caja/home-caja.component';
 import { HomeAdminComponent } from './components/home-admin/home-admin.component';
 import { LoginComponent } from './components/login/login.component';
 import { InventarioComponent } from './components/inventario/inventario.component';
+import { AgregarItemModalComponent } from './ExtraComponents/agregar-item-modal/agregar-item-modal.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +43,7 @@ import { InventarioComponent } from './components/inventario/inventario.componen
     HomeAdminComponent,
     LoginComponent,
     InventarioComponent,
+    AgregarItemModalComponent,
     
   ],
   imports: [
@@ -56,6 +61,8 @@ import { InventarioComponent } from './components/inventario/inventario.componen
     MatTableModule,
     MatPaginatorModule,
     MatMenuModule,
+    MatDialogModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]
