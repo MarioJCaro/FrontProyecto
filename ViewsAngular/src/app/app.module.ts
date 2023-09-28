@@ -6,6 +6,13 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+import { FormsModule } from '@angular/forms';
+
+import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './middlewares/auth.interceptor';
+import { ErrorInterceptor } from './middlewares/error.interceptor';
+
 import { MatCardModule } from '@angular/material/card'; // Importa el módulo de MatCard
 import { MatButtonModule } from '@angular/material/button'; // Importa el módulo de MatButtonModule
 import { MatIconModule } from '@angular/material/icon';  // Importa MatIconModule desde Angular Material
@@ -19,6 +26,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
@@ -31,6 +39,13 @@ import { HomeAdminComponent } from './components/home-admin/home-admin.component
 import { LoginComponent } from './components/login/login.component';
 import { InventarioComponent } from './components/inventario/inventario.component';
 import { AgregarItemModalComponent } from './ExtraComponents/agregar-item-modal/agregar-item-modal.component';
+import { ModificarItemModalComponent } from './ExtraComponents/modificar-item-modal/modificar-item-modal.component';
+import { EliminarItemModalComponent } from './ExtraComponents/eliminar-item-modal/eliminar-item-modal.component';
+import { GestionUsuariosComponent } from './components/gestion-usuarios/gestion-usuarios.component';
+import { GestionEmpleadosComponent } from './components/gestion-empleados/gestion-empleados.component';
+import { GestionClientesComponent } from './components/gestion-clientes/gestion-clientes.component';
+import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
+import { MesasPrototypeComponent } from './components/mesas-prototype/mesas-prototype.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +59,14 @@ import { AgregarItemModalComponent } from './ExtraComponents/agregar-item-modal/
     LoginComponent,
     InventarioComponent,
     AgregarItemModalComponent,
-    
+    ModificarItemModalComponent,
+    EliminarItemModalComponent,
+    GestionUsuariosComponent,
+    GestionEmpleadosComponent,
+    GestionClientesComponent,
+    UnauthorizedComponent,
+    MesasPrototypeComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -62,9 +84,15 @@ import { AgregarItemModalComponent } from './ExtraComponents/agregar-item-modal/
     MatPaginatorModule,
     MatMenuModule,
     MatDialogModule,
-    MatRadioModule
+    MatRadioModule,
+    FormsModule,
+    HttpClientModule,
+    MatSnackBarModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

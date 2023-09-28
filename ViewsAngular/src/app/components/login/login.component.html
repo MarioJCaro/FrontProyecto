@@ -6,18 +6,19 @@
         </div>
         <mat-form-field appearance="outline" class="input-field">
           <mat-label>Usuario</mat-label>
-          <input matInput type="text">
+          <input matInput type="text" [(ngModel)]="username">
         </mat-form-field>
   
         <mat-form-field appearance="outline" class="input-field">
           <mat-label>Contraseña</mat-label>
-          <input matInput type="password">
+          <input matInput type="password" [(ngModel)]="password"> 
         </mat-form-field>
   
         <div class="confirm-btn">
-          <button mat-button color="primary">Confirmar</button>
+          <button mat-button color="primary" (click)="login()" >Confirmar</button>
         </div>
       </div>
     </mat-card>
   </div>
+
   

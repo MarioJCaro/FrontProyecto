@@ -1,48 +1,47 @@
-
 // Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
-// Plus imports for other components in your app.
 
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
+// Include the common styles for Angular Material.
 @include mat.core();
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$ViewsAngular-primary: mat.define-palette(mat.$indigo-palette);
-$ViewsAngular-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+// Definir los colores customizados
+$primary-color: #2E8B57;  // Verde oscuro
+$secondary-color: #A9A9A9; // Gris
+$background-color: #F5F5F5; // Color de fondo ligero
 
-// The warn palette is optional (defaults to red).
-$ViewsAngular-warn: mat.define-palette(mat.$red-palette);
+// Definir las paletas usando tus colores
+$custom-primary: mat.define-palette(mat.$green-palette, 500);
+$custom-accent: mat.define-palette(mat.$grey-palette, A200, A100, A400);
+$custom-warn: mat.define-palette(mat.$red-palette);
 
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$ViewsAngular-theme: mat.define-light-theme((
+// Crear el tema customizado
+$custom-theme: mat.define-light-theme((
   color: (
-    primary: $ViewsAngular-primary,
-    accent: $ViewsAngular-accent,
-    warn: $ViewsAngular-warn,
+    primary: $custom-primary,
+    accent: $custom-accent,
+    warn: $custom-warn,
   )
 ));
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include mat.all-component-themes($ViewsAngular-theme);
+// Incluir estilos del tema para todos los componentes
+@include mat.all-component-themes($custom-theme);
 
-/* You can add global styles to this file, and also import other style files */
 
+// Estilos globales
 html, body { 
   height: 100%; 
   padding-left: 50px;
   padding-right: 50px;
-  background-color: #D8D8D8;}
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+  background-color: #D8D8D8;
+}
 
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
 
-
-@import "~bootstrap/dist/css/bootstrap.min.css";
+.cdk-overlay-dark-backdrop {
+  background-color: rgba(0, 0, 0, 0.8); // Aquí puedes ajustar la opacidad según tus necesidades.
+  backdrop-filter: blur(5px); // Esto agregará el efecto de difuminado.
+}
 

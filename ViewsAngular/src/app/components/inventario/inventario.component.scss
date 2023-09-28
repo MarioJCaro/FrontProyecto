@@ -1,37 +1,61 @@
 .container {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+
+  .header {
     display: flex;
-    flex-direction: column;
-    padding: 2rem;
-  
-    .header {
+    justify-content: space-between;
+    align-items: center;
+
+    .back-button,
+    .actions {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      
-      .back-button, .actions {
-        display: flex;
-        align-items: center;
-  
-        .filter, .search{
-          margin-right: 1rem;
-        }
+
+      .filter,
+      .search {
+        margin-right: 1em; // Cambiado a unidades relativas
       }
     }
   }
+}
+
+mat-paginator {
+  display: flex;
+  justify-content: center;
+  /* Centra horizontalmente */
+  align-items: center;
+  /* Centra verticalmente */
+  margin-top: 1em; // Cambiado a unidades relativas
+}
+
+.actions {
+  display: flex;
+  align-items: stretch;
+  /* Hace que todos los elementos hijos se estiren al mismo tamaño */
+
+  .filter,
+  .search {
+    margin-right: 1rem;
+  }
 
   .add-button {
-    background-color: #4CAF50 !important;  /* Color verde */
-    color: white;  /* Color de texto blanco */
-    
-    mat-icon {
-      margin-right: 0;  /* Elimina el espacio a la derecha del ícono */
-    }
-  }
-  
-  mat-paginator {
+    align-self: stretch;
+    /* Esto estirará el botón para que tenga la misma altura que sus hermanos */
     display: flex;
-    justify-content: center;  /* Centra horizontalmente */
-    align-items: center;  /* Centra verticalmente */
-    margin-top: 1rem;  /* Añade un poco de espacio arriba para separarlo de la tabla */
+    /* Para centrar el contenido del botón */
+    flex-direction: column;
+    /* Distribución vertical */
+    justify-content: center;
+    /* Centrar contenido verticalmente */
+    height: 3.45rem;
+    background-color: #4CAF50 !important;
+    /* Color verde */
+    line-height: 1;
+    /* Para controlar el espacio entre las líneas */
+    font-size: 0.9em;
+    /* Si deseas que el texto sea un poco más pequeño */
   }
-  
+
+}

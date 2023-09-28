@@ -21,8 +21,8 @@
       </mat-form-field>
 
       <button mat-raised-button class="add-button" (click)="openDialog()">
-        <mat-icon>add</mat-icon>
-      </button>
+        Agregar<br>Ítem
+    </button>
 
     </div>
   </div>
@@ -54,17 +54,23 @@
     </ng-container>
 
     <!-- Acciones Column -->
-    <ng-container matColumnDef="acciones">
-      <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
-      <mat-cell *matCellDef="let item">
-        <button mat-icon-button>
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-button>
-          <mat-icon>delete</mat-icon>
-        </button>
-      </mat-cell>
-    </ng-container>
+<ng-container matColumnDef="acciones">
+  <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+  <mat-cell *matCellDef="let item">
+    <button mat-icon-button >
+      <mat-icon>add_circle_outline</mat-icon>
+    </button>
+    <button mat-icon-button >
+      <mat-icon>remove_circle_outline</mat-icon>
+    </button>
+    <button mat-icon-button (click)="openEditDialog(item)">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button (click)="openDeleteDialog(item)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-cell>
+</ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

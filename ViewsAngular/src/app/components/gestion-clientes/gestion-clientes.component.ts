@@ -1,43 +1,36 @@
 import { Component, OnInit } from '@angular/core';
-import { Item } from 'src/app/models/item.model';
-import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { AgregarItemModalComponent } from 'src/app/ExtraComponents/agregar-item-modal/agregar-item-modal.component';
-import { ModificarItemModalComponent } from 'src/app/ExtraComponents/modificar-item-modal/modificar-item-modal.component';
-import { EliminarItemModalComponent } from 'src/app/ExtraComponents/eliminar-item-modal/eliminar-item-modal.component';
-
-
+import { MatTableDataSource } from '@angular/material/table';
+import { Cliente } from 'src/app/models/cliente.model';
 
 @Component({
-  selector: 'app-inventario',
-  templateUrl: './inventario.component.html',
-  styleUrls: ['./inventario.component.scss']
+  selector: 'app-gestion-clientes',
+  templateUrl: './gestion-clientes.component.html',
+  styleUrls: ['./gestion-clientes.component.scss']
 })
-export class InventarioComponent  implements OnInit {
+export class GestionClientesComponent implements OnInit {
 
-  displayedColumns: string[] = ['nombre', 'categoria', 'stock', 'costo', 'acciones'];
-  dataSource!: MatTableDataSource<Item>;
+  displayedColumns: string[] = ['nombre', 'cuenta', 'contacto', 'acciones'];
+  dataSource!: MatTableDataSource<Cliente>;
 
    // Datos ficticios para el dataSource
-   items: Item[] = [
-    { id: 1, nombre: 'Producto A', categoria: 'Electrónicos', stock: 15, costo: 150.50 },
-    { id: 2, nombre: 'Producto B', categoria: 'Hogar', stock: 40, costo: 75.20 },
-    { id: 3, nombre: 'Producto C', categoria: 'Deportes', stock: 9, costo: 210.00 },
+   clientes: Cliente[] = [
+    { id: 1, nombre: 'Pepe', cuenta: 300, contacto: '099123123'},
+    { id: 2, nombre: 'Juan', cuenta: 150, contacto: '098123123'},
+    { id: 3, nombre: 'Pedro', cuenta: 100, contacto: '092123123'},
     // ... puedes agregar más items
   ];
 
   constructor(public dialog: MatDialog) {}
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource(this.items);
+    this.dataSource = new MatTableDataSource(this.clientes);
   }
 
-  openDialog(): void {
+  /*openDialog(): void {
     const dialogRef = this.dialog.open(AgregarItemModalComponent, {
       width: '30rem',
-      data: {},  // Puedes pasar la data inicial aquí si es necesario.
-      hasBackdrop: true,
-      disableClose: false
+      data: {}  // Puedes pasar la data inicial aquí si es necesario.
     });
   
     dialogRef.afterClosed().subscribe(result => {
@@ -73,8 +66,5 @@ openDeleteDialog(item: Item): void {
     }
   });
 }
-
-
-
-  
+*/
 }
