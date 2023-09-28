@@ -9,13 +9,12 @@ import { Item } from 'src/app/models/item.model';
 })
 export class EliminarItemModalComponent {
 
-  public itemName: string;
 
   constructor(
     public dialogRef: MatDialogRef<EliminarItemModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Item
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.itemName = data.nombre;
+    
   }
 
   onCancel(): void {

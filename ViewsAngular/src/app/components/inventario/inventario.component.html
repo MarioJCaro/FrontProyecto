@@ -57,12 +57,12 @@
 <ng-container matColumnDef="acciones">
   <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
   <mat-cell *matCellDef="let item">
-    <button mat-icon-button >
+    <button mat-icon-button (click)="openAddStockDialog(item)">
       <mat-icon>add_circle_outline</mat-icon>
-    </button>
-    <button mat-icon-button >
+    </button>    
+    <button mat-icon-button (click)="openRemoveStockDialog(item)">
       <mat-icon>remove_circle_outline</mat-icon>
-    </button>
+    </button>    
     <button mat-icon-button (click)="openEditDialog(item)">
       <mat-icon>edit</mat-icon>
     </button>

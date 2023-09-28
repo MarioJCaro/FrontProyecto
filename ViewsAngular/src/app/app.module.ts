@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -46,6 +47,8 @@ import { GestionEmpleadosComponent } from './components/gestion-empleados/gestio
 import { GestionClientesComponent } from './components/gestion-clientes/gestion-clientes.component';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 import { MesasPrototypeComponent } from './components/mesas-prototype/mesas-prototype.component';
+import { AgregarStockModalComponent } from './ExtraComponents/agregar-stock-modal/agregar-stock-modal.component';
+import { QuitarStockModalComponent } from './ExtraComponents/quitar-stock-modal/quitar-stock-modal.component';
 
 @NgModule({
   declarations: [
@@ -66,9 +69,12 @@ import { MesasPrototypeComponent } from './components/mesas-prototype/mesas-prot
     GestionClientesComponent,
     UnauthorizedComponent,
     MesasPrototypeComponent,
+    AgregarStockModalComponent,
+    QuitarStockModalComponent,
 
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

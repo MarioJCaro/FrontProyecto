@@ -1,44 +1,40 @@
 <h2 mat-dialog-title>Modificar Ítem</h2>
 
 <mat-dialog-content class="dialog-content">
-  <!-- Campo de Nombre -->
+
   <mat-form-field appearance="fill" class="full-width">
-    <mat-label>Nombre</mat-label>
+    <mat-label><mat-icon>label</mat-icon> Nombre</mat-label>
     <input matInput [(ngModel)]="item.nombre">
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="full-width">
-    <mat-label>Descripcion</mat-label>
-    <input matInput [(ngModel)]="item.nombre">
+    <mat-label><mat-icon>description</mat-icon> Descripcion</mat-label>
+    <input matInput [(ngModel)]="item.descripcion"> <!-- Aquí corregí el ngModel -->
   </mat-form-field>
-  
 
-  <!-- Dropdown de Categoría y campo CantXCasillero -->
   <div class="row">
     <mat-form-field appearance="fill" class="half-width">
-      <mat-label>Categoría</mat-label>
+      <mat-label><mat-icon>category</mat-icon> Categoría</mat-label>
       <mat-select [(ngModel)]="item.categoria">
-        <!-- Opciones para tu dropdown aquí -->
         <mat-option value="opcion1">Opción 1</mat-option>
         <mat-option value="opcion2">Opción 2</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="half-width">
-      <mat-label>CantXCasillero</mat-label>
-      <input matInput >
+      <mat-label><mat-icon>storage</mat-icon> CantXCasillero</mat-label>
+      <input matInput>
     </mat-form-field>
   </div>
 
-  <!-- Selección de Costo: Casillero o Unidad -->
   <div class="row cost-section">
-    <mat-radio-group >
-      <mat-radio-button value="casillero" class="radio-btn">Casillero</mat-radio-button>
-      <mat-radio-button value="unidad" class="radio-btn">Unidad</mat-radio-button>
+    <mat-radio-group>
+      <mat-radio-button color="primary" value="casillero" class="radio-btn">Casillero</mat-radio-button>
+      <mat-radio-button color="primary" value="unidad" class="radio-btn">Unidad</mat-radio-button>
     </mat-radio-group>
 
     <mat-form-field appearance="fill" class="cost-input">
-      <mat-label>Costo</mat-label>
+      <mat-label><mat-icon>attach_money</mat-icon> Costo</mat-label>
       <input matInput [(ngModel)]="item.costo">
     </mat-form-field>
   </div>
