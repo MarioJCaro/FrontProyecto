@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ViewChild } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
@@ -28,6 +28,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatChipsModule } from '@angular/material/chips'; // Para los chips
+import { MatExpansionModule} from '@angular/material/expansion';
 
 
 
@@ -49,6 +51,19 @@ import { UnauthorizedComponent } from './components/unauthorized/unauthorized.co
 import { MesasPrototypeComponent } from './components/mesas-prototype/mesas-prototype.component';
 import { AgregarStockModalComponent } from './ExtraComponents/agregar-stock-modal/agregar-stock-modal.component';
 import { QuitarStockModalComponent } from './ExtraComponents/quitar-stock-modal/quitar-stock-modal.component';
+import { BackOfficeMenuComponent } from './components/back-office-menu/back-office-menu.component';
+import { AgregarItemMenuModalComponent } from './ExtraComponents/agregar-item-menu-modal/agregar-item-menu-modal.component';
+import { ConsultarItemMenuModalComponent } from './ExtraComponents/consultar-item-menu-modal/consultar-item-menu-modal.component';
+import { ModificarItemMenuModalComponent } from './ExtraComponents/modficar-item-menu-modal/modficar-item-menu-modal.component';
+import { ConfirmarAccionModalComponent } from './ExtraComponents/confirmar-accion-modal/confirmar-accion-modal.component';
+import { EliminarItemMenuModalComponent } from './ExtraComponents/eliminar-item-menu-modal/eliminar-item-menu-modal.component';
+import { HomeMozoComponent } from './components/home-mozo/home-mozo.component';
+import { MenuMozoComponent } from './components/menu-mozo/menu-mozo.component';
+import { OrdenesMesaComponent } from './components/ordenes-mesa/ordenes-mesa.component';
+import { AgregarOrdenModalComponent } from './ExtraComponents/agregar-orden-modal/agregar-orden-modal.component';
+import { EditarOrdenModalComponent } from './ExtraComponents/editar-orden-modal/editar-orden-modal.component';
+import { LiberarMesaModalComponent } from './ExtraComponents/liberar-mesa-modal/liberar-mesa-modal.component';
+import { ResumenOrdenModalComponent } from './ExtraComponents/resumen-orden-modal/resumen-orden-modal.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +86,19 @@ import { QuitarStockModalComponent } from './ExtraComponents/quitar-stock-modal/
     MesasPrototypeComponent,
     AgregarStockModalComponent,
     QuitarStockModalComponent,
+    BackOfficeMenuComponent,
+    AgregarItemMenuModalComponent,
+    ConsultarItemMenuModalComponent,
+    ModificarItemMenuModalComponent,
+    ConfirmarAccionModalComponent,
+    EliminarItemMenuModalComponent,
+    HomeMozoComponent,
+    MenuMozoComponent,
+    OrdenesMesaComponent,
+    AgregarOrdenModalComponent,
+    EditarOrdenModalComponent,
+    LiberarMesaModalComponent,
+    ResumenOrdenModalComponent,
 
   ],
   imports: [
@@ -94,6 +122,8 @@ import { QuitarStockModalComponent } from './ExtraComponents/quitar-stock-modal/
     FormsModule,
     HttpClientModule,
     MatSnackBarModule,
+    MatChipsModule,
+    MatExpansionModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

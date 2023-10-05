@@ -1,0 +1,94 @@
+/* Eliminar sombra en el div */
+.form-container {
+    background-color: #F4F4F4;
+    padding: 16px;
+  }  
+
+  .form-field {
+    margin-bottom: 16px; /* Espacio entre cada campo */
+    width: 100%; /* Ancho completo del contenedor */
+  }
+
+  /* Estilo específico para los botones */
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px; /* Espacio entre los campos y los botones */
+  }
+
+  /* Estilo para el botón "Cancelar" */
+  button.mat-warn {
+    margin-right: 8px; /* Espacio entre los botones */
+  }
+
+  /* Estilo para el botón "Continuar" */
+  button.mat-primary {
+    margin-left: 8px; /* Espacio entre los botones */
+  }
+
+  /* Estilo para el botón "Volver" */
+  #cancelar {
+    background-color: #FFFFFF;
+    color: #000000;
+  }
+
+  /* Estilo para el botón "Confirmar" */
+  #confirmar {
+    background-color: #4CA78E;
+    color: #FFFFFF;
+  }
+
+
+  .form-field {
+    margin-bottom: 16px; /* Espacio entre cada campo */
+    width: 100%; /* Ancho completo del contenedor */
+  }
+
+  /* Estilo específico para los botones */
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px; /* Espacio entre los campos y los botones */
+  }
+
+  /* Estilo para el botón "Cancelar" */
+  button.mat-warn {
+    margin-right: 8px; /* Espacio entre los botones */
+  }
+
+  /* Estilo para el botón "Continuar" */
+  button.mat-primary {
+    margin-left: 8px; /* Espacio entre los botones */
+  }
+
+  /* Estilo para el botón "Volver" */
+  #cancelar {
+    background-color: #FFFFFF;
+    color: #000000;
+  }
+
+  /* Estilo para el botón "Confirmar" */
+  #confirmar {
+    background-color: #4CA78E;
+    color: #FFFFFF;
+  }
+
+  mat-label {
+    font-size: 20px; /* Tamaño de fuente deseado */
+  }
+
+  /* Estilos para los elementos input */
+    input {
+    font-size: 16px; /* Tamaño de fuente deseado */
+    border: 2px solid #ccc; /* Borde personalizado */
+    border-radius: 4px; /* Bordes redondeados */
+    padding: 10px; /* Espaciado interno */
+    width: 100%; /* Ancho completo */
+    box-shadow: none; /* Eliminar sombra si es necesario */
+  }
+
+  /* Estilo para cuando el input está enfocado */
+    input:focus {
+    outline: none; /* Eliminar contorno al enfocar */
+    border-color: #4CA78E; /* Cambiar color del borde al enfocar */
+  }

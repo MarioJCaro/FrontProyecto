@@ -1,0 +1,139 @@
+/* Estilos para los botones "Añadir Orden" y "Ver Ordenes Antiguas" */ 
+
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px; /* Ajusta el margen inferior según sea necesario */
+}
+
+.history-button{
+    margin-right: 5%;
+}  
+
+.add-order-button {
+    background-color: #4CA78E;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-bottom: 10px; /* Ajusta el margen inferior según sea necesario */
+    margin-left: 3vh;
+}
+
+.add-order-button:hover {
+background-color: #347763; /* Cambia el color de fondo al hacer hover */
+}
+
+/* Container con el fondo verde */ 
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* Alinea a la izquierda */
+        background-color: #1B4338;
+        padding-top: 2.5vh; /* Ajusta el espacio superior en unidades relativas */
+        padding-bottom: 10vh; /* Ajusta el espacio inferior en unidades relativas */
+        max-width: 90vw; /* Establece un ancho máximo en unidades relativas */
+        min-height: 125vw;
+        max-height: 125vw;
+        margin: 0 auto; /* Centra el contenedor horizontalmente */
+        border-radius: 20px;
+    }
+
+/* Titulo "Mesas Ocupadas" */
+
+    h3 {
+        margin: 0;
+        color: white; /* Cambia el color del texto a blanco */
+        align-self: flex-start; /* Alinea el título a la izquierda */
+        padding-bottom: 2.5vh;
+    }
+
+    /* Elementos de la lista */
+
+        .table-box {
+            padding: 2%;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 5%;
+        }
+
+        .content{
+          background-color: #E8FFF9;
+          border-radius: 10px;
+          margin-bottom: 2.5%;
+          padding: 2%
+        }
+
+        /* Estilos para listar las mesas */
+
+        .order-info {
+          display: flex;
+          align-items: center;
+          width: 100%;
+        }
+
+        .order-number {
+          width: 50%;
+        }
+
+        .order-time {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          width: 50%;
+        }
+
+    .order-time p {
+      margin: 0;
+    }
+
+    .table-number {
+      display: flex;
+      margin: 0;
+      width: 100%;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-left: auto; /* Mueve los botones al extremo derecho del div */
+    }
+
+    .button {
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      border: none;
+      font-size: 0.01vh;
+      padding-left: 3%;
+    }
+
+    /* Colores para los botones */
+
+    .button:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .button-2 {
+      background-color: #57BCDC !important;
+      color: white;
+    }
+
+    .button-3 {
+      background-color: #4CA78E !important;
+      color: white;
+    }
+
+    .button-1 {
+      background-color: #E98383 !important;
+      color: white;
+    }

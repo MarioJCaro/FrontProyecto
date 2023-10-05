@@ -12,6 +12,10 @@ import { GestionClientesComponent } from './components/gestion-clientes/gestion-
 //Cosas del back
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component'
 import { MesasPrototypeComponent } from './components/mesas-prototype/mesas-prototype.component';
+import { BackOfficeMenuComponent } from './components/back-office-menu/back-office-menu.component';
+import { HomeMozoComponent } from './components/home-mozo/home-mozo.component';
+import { MenuMozoComponent } from './components/menu-mozo/menu-mozo.component';
+import { OrdenesMesaComponent } from './components/ordenes-mesa/ordenes-mesa.component';
 
 
 
@@ -42,6 +46,13 @@ const routes: Routes = [
   { path: 'unauthorized', component: UnauthorizedComponent },
   
   { path: 'mesas', component: MesasPrototypeComponent },
+  {
+    path:'backOfficeMenu', component:BackOfficeMenuComponent
+  },
+  {path:'homemozo', component:HomeMozoComponent},
+  {path:'ordenesmesa', component:OrdenesMesaComponent},
+  {path:'menumozo', component:MenuMozoComponent}
+
  
 ];
 

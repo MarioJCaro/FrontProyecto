@@ -1,0 +1,118 @@
+/* Estilos para los botones "Añadir Orden" y "Ver Ordenes Antiguas" */ 
+
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px; /* Ajusta el margen inferior según sea necesario */
+}
+
+.history-button{
+    margin-right: 5%;
+}  
+
+.add-order-button {
+    background-color: #4CA78E;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-bottom: 10px; /* Ajusta el margen inferior según sea necesario */
+    margin-left: 3vh;
+}
+
+.add-order-button:hover {
+background-color: #347763; /* Cambia el color de fondo al hacer hover */
+}
+
+/* Estilos para listar las mesas */ 
+
+/* Container con el fondo verde */ 
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* Alinea a la izquierda */
+        background-color: #1B4338;
+        padding-top: 2.5vh; /* Ajusta el espacio superior en unidades relativas */
+        padding-bottom: 10vh; /* Ajusta el espacio inferior en unidades relativas */
+        max-width: 90vw; /* Establece un ancho máximo en unidades relativas */
+        min-height: 125vw;
+        max-height: 125vw;
+        margin: 0 auto; /* Centra el contenedor horizontalmente */
+        border-radius: 20px;
+    }
+
+/* Titulo "Mesas Ocupadas" */
+
+    h3 {
+        margin: 0;
+        color: white; /* Cambia el color del texto a blanco */
+        align-self: flex-start; /* Alinea el título a la izquierda */
+        padding-bottom: 2.5vh;
+    }
+
+/* Elementos de la lista */
+
+    .table-box {
+        background-color: #E8FFF9;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 2vh;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    .content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%; /* Agrega esta línea para asegurarte de que ocupe todo el ancho */
+    }
+
+    /* Número de Mesa */
+
+        h2 {
+            margin: 0;
+        }
+
+    /* Botones para las opciones de la mesa */
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-left: auto; /* Alinea los botones a la derecha del div .content */
+        }
+
+        .button {
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            border: none;
+            font-size: 0.01vh;
+            padding-left: 3%;
+        }
+
+        /* Colores para los botones */
+
+            .button:hover {
+                background-color: rgba(255, 255, 255, 0.2);
+            }
+
+            .button-2 {
+                background-color: #57BCDC !important;
+                color: white;
+            }
+
+            .button-3 {
+                background-color: #4CA78E !important;
+                color: white;
+            }
