@@ -1,7 +1,10 @@
 export interface Cliente {
     id: number;
     nombre: string;
+    apellido: string;
     cuenta: number;
-    contacto: string;
+    telefono: string;
+    createdAt: Date;
+    updatedAt: Date;
   }
   

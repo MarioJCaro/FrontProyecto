@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { catchError } from 'rxjs';
 import { Cliente } from 'src/app/models/cliente.model';
+import { ClienteService, CreateClienteResponse } from 'src/app/services/cliente/cliente.service';
+import { ErrorHandlingService } from 'src/app/services/errorHandling/error-handling.service';
 
 @Component({
   selector: 'app-gestion-clientes',
@@ -13,18 +16,32 @@ export class GestionClientesComponent implements OnInit {
   displayedColumns: string[] = ['nombre', 'cuenta', 'contacto', 'acciones'];
   dataSource!: MatTableDataSource<Cliente>;
 
-   // Datos ficticios para el dataSource
-   clientes: Cliente[] = [
-    { id: 1, nombre: 'Pepe', cuenta: 300, contacto: '099123123'},
-    { id: 2, nombre: 'Juan', cuenta: 150, contacto: '098123123'},
-    { id: 3, nombre: 'Pedro', cuenta: 100, contacto: '092123123'},
-    // ... puedes agregar más items
-  ];
-
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private clienteService:ClienteService, private errorHandler:ErrorHandlingService) {}
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource(this.clientes);
+    this.getClientes();
+  }
+
+  getClientes(){
+    this.clienteService.getAll().subscribe(
+      (data: Cliente[]) => {
+        const clientes: Cliente[] = data.map(cliente => ({
+          id: cliente.id,
+          nombre: cliente.nombre,
+          apellido: cliente.apellido,
+          telefono: cliente.telefono,
+          cuenta: cliente.cuenta,
+          createdAt: cliente.createdAt,
+          updatedAt: cliente.updatedAt
+          // Añade otras propiedades si es necesario
+        }));
+
+        this.dataSource = new MatTableDataSource(clientes);
+      },
+      (error) => {
+        catchError(this.errorHandler.handleError);
+      }
+    );
   }
 
   /*openDialog(): void {
