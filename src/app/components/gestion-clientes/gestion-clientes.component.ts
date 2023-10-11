@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { AgregarClienteModalComponent } from 'src/app/ExtraComponents/agregar-cliente-modal/agregar-cliente-modal.component';
+import { EditarClienteModalComponent } from 'src/app/ExtraComponents/editar-cliente-modal/editar-cliente-modal.component';
+import { EliminarClienteModalComponent } from 'src/app/ExtraComponents/eliminar-cliente-modal/eliminar-cliente-modal.component';
 import { Cliente } from 'src/app/models/cliente.model';
 
 @Component({
@@ -15,9 +18,9 @@ export class GestionClientesComponent implements OnInit {
 
    // Datos ficticios para el dataSource
    clientes: Cliente[] = [
-    { id: 1, nombre: 'Pepe', cuenta: 300, contacto: '099123123'},
-    { id: 2, nombre: 'Juan', cuenta: 150, contacto: '098123123'},
-    { id: 3, nombre: 'Pedro', cuenta: 100, contacto: '092123123'},
+    { id: 1, nombre: 'Pepe', apellido:'Perez',telefono: '099123123',cuenta: 300},
+    { id: 2, nombre: 'Pepe', apellido:'Perez',telefono: '099123123',cuenta: 300},
+    { id: 3, nombre: 'Pepe', apellido:'Perez',telefono: '099123123',cuenta: 300},
     // ... puedes agregar más items
   ];
 
@@ -27,44 +30,49 @@ export class GestionClientesComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.clientes);
   }
 
-  /*openDialog(): void {
-    const dialogRef = this.dialog.open(AgregarItemModalComponent, {
-      width: '30rem',
-      data: {}  // Puedes pasar la data inicial aquí si es necesario.
+  openAddClientDialog(): void {
+    const dialogRef = this.dialog.open(AgregarClienteModalComponent, {
+      width: '30rem'
     });
   
     dialogRef.afterClosed().subscribe(result => {
-      console.log('El modal fue cerrado', result);
-      // Aquí puedes manejar el resultado del modal, por ejemplo, guardar el nuevo ítem.
+      if (result) {
+        // Aquí puedes agregar el nuevo empleado al arreglo de empleados
+        this.clientes.push(result);
+        this.dataSource = new MatTableDataSource(this.clientes); // Actualizar el dataSource
+      }
     });
   }
 
-  openEditDialog(item: Item): void {
-    const dialogRef = this.dialog.open(ModificarItemModalComponent, {
-      width: '30rem',
-      data: item  // Pasa el ítem a modificar como dato.
+  openEditDialog(cliente: Cliente): void {
+    const dialogRef = this.dialog.open(EditarClienteModalComponent, {
+      width: '400px',
+      data: { ...cliente } // pasamos una copia del empleado para evitar ediciones no deseadas
     });
   
     dialogRef.afterClosed().subscribe(result => {
-      console.log('El modal fue cerrado', result);
-      // Aquí puedes manejar el resultado del modal, por ejemplo, guardar los cambios.
+      if (result) {
+        // Aquí puedes manejar lo que quieras hacer cuando el modal se cierre, como actualizar el empleado en la lista o en una base de datos.
+      }
     });
   }
 
-  // En inventario.component.ts
-
-openDeleteDialog(item: Item): void {
-  const dialogRef = this.dialog.open(EliminarItemModalComponent, {
-    width: '15rem',
-    data: { item: item }  // Pasamos el ítem completo al modal
-  });
-
-  dialogRef.afterClosed().subscribe(result => {
-    if (result) {
-      // Aquí puedes eliminar el ítem
-      // TODO: Añadir la lógica para eliminar el ítem
-    }
-  });
-}
-*/
+  eliminarCliente(cliente: Cliente) {
+    const dialogRef = this.dialog.open(EliminarClienteModalComponent, {
+      width: '300px',
+      data: {nombre: cliente.nombre}
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Aquí se coloca la lógica para eliminar el empleado
+        // Por ejemplo: this.empleadosService.eliminar(empleado.id);
+        console.log(`Cliente ${cliente.nombre} eliminado`);
+      } else {
+        console.log('Operación cancelada');
+      }
+    });
+  }
+  
+  
 }

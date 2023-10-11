@@ -1,0 +1,51 @@
+<mat-dialog-content>
+    <h1>Resumen de la Orden</h1>
+    <!-- Bloque de detalles -->
+    <div class="order-details">
+        <!-- Columna izquierda: Nro Mesa, Fecha -->
+        <div class="detail-column">
+            <span><strong>Nro Mesa:</strong> 14</span>
+            <span><strong>Mozo:</strong> María</span>
+            <span><strong>Entregado en mesa:</strong> 00:40</span>
+        </div>
+
+        <!-- Columna derecha: Mozo, Cliente, Entregado en mesa y Cobrado -->
+        <div class="detail-column">
+            <span><strong>Fecha:</strong> 22/08/2023</span>
+            <span><strong>Cliente Preferencial:</strong> Juan</span>
+            <span><strong>Cobrado:</strong> 1:20</span>
+        </div>
+    </div>
+    <div class="div-resumen">
+        <table style="width: 100%; height: 100%;">
+          <tr>
+            <td>Cant</td>
+            <td>Producto</td>
+            <td>$ por unidad</td>
+            <td>$total</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>Hamburguesa con Fritas</td>
+            <td>120</td>
+            <td>120</td>
+          </tr>
+          <!-- Agrega más filas según sea necesario -->
+        </table>
+    </div>
+
+    <div class="div-obs">
+        <h3>Observaciones</h3>
+        <ul>
+          <li>Sin pepino</li>
+          <li>Sin mayonesa</li>
+        </ul>
+    </div>
+
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <div class="buttons">
+      <button mat-button >Volver</button>
+      <button mat-button class="confirm">Confirmar</button>
+    </div>
+  </mat-dialog-actions>

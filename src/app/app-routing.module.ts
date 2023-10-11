@@ -16,6 +16,7 @@ import { BackOfficeMenuComponent } from './components/back-office-menu/back-offi
 import { HomeMozoComponent } from './components/home-mozo/home-mozo.component';
 import { MenuMozoComponent } from './components/menu-mozo/menu-mozo.component';
 import { OrdenesMesaComponent } from './components/ordenes-mesa/ordenes-mesa.component';
+import { HistorialVentasComponent } from './components/historial-ventas/historial-ventas.component';
 
 
 
@@ -51,7 +52,8 @@ const routes: Routes = [
   },
   {path:'homemozo', component:HomeMozoComponent},
   {path:'ordenesmesa', component:OrdenesMesaComponent},
-  {path:'menumozo', component:MenuMozoComponent}
+  {path:'menumozo', component:MenuMozoComponent},
+  {path:'historialVentas', component:HistorialVentasComponent}
 
  
 ];

@@ -64,6 +64,15 @@ import { AgregarOrdenModalComponent } from './ExtraComponents/agregar-orden-moda
 import { EditarOrdenModalComponent } from './ExtraComponents/editar-orden-modal/editar-orden-modal.component';
 import { LiberarMesaModalComponent } from './ExtraComponents/liberar-mesa-modal/liberar-mesa-modal.component';
 import { ResumenOrdenModalComponent } from './ExtraComponents/resumen-orden-modal/resumen-orden-modal.component';
+import { HistorialVentasComponent } from './components/historial-ventas/historial-ventas.component';
+import { InfoOrdenModalComponent } from './ExtraComponents/info-orden-modal/info-orden-modal.component';
+import { AgregarEmpleadoModalComponent } from './ExtraComponents/agregar-empleado-modal/agregar-empleado-modal.component';
+import { EditarEmpleadoModalComponent } from './ExtraComponents/editar-empleado-modal/editar-empleado-modal.component';
+import { EliminarEmpleadoModalComponent } from './ExtraComponents/eliminar-empleado-modal/eliminar-empleado-modal.component';
+import { AgregarClienteModalComponent } from './ExtraComponents/agregar-cliente-modal/agregar-cliente-modal.component';
+import { EditarClienteModalComponent } from './ExtraComponents/editar-cliente-modal/editar-cliente-modal.component';
+import { EliminarClienteModalComponent } from './ExtraComponents/eliminar-cliente-modal/eliminar-cliente-modal.component';
+
 
 @NgModule({
   declarations: [
@@ -99,6 +108,15 @@ import { ResumenOrdenModalComponent } from './ExtraComponents/resumen-orden-moda
     EditarOrdenModalComponent,
     LiberarMesaModalComponent,
     ResumenOrdenModalComponent,
+    HistorialVentasComponent,
+    InfoOrdenModalComponent,
+    AgregarEmpleadoModalComponent,
+    EditarEmpleadoModalComponent,
+    EliminarEmpleadoModalComponent,
+    AgregarClienteModalComponent,
+    EditarClienteModalComponent,
+    EliminarClienteModalComponent,
+
 
   ],
   imports: [

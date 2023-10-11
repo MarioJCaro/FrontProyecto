@@ -1,0 +1,80 @@
+<div class="container">
+
+    <div class="header">
+        <button mat-button class="back-button">
+            <mat-icon>arrow_back</mat-icon> Volver
+        </button>
+
+        <div class="actions">
+            <mat-form-field appearance="fill" class="filter">
+                <mat-label>Filtro</mat-label>
+                <mat-select>
+                    <mat-option value="nombre">Nombre</mat-option>
+                    <mat-option value="categoria">Categoría</mat-option>
+                    <!-- Agregar más opciones de filtro si es necesario -->
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="search">
+                <mat-label>Buscar</mat-label>
+                <input matInput>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <mat-table [dataSource]="dataSource">
+
+        <!-- Nombre Column -->
+        <ng-container matColumnDef="nroOrden">
+            <mat-header-cell *matHeaderCellDef> Nro Orden </mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{item.nroOrden}} </mat-cell>
+        </ng-container>
+
+        <!-- Categoría Column -->
+        <ng-container matColumnDef="fecha">
+            <mat-header-cell *matHeaderCellDef> Fecha </mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{item.fecha}} </mat-cell>
+        </ng-container>
+
+        <!-- Stock Column -->
+        <ng-container matColumnDef="hora">
+            <mat-header-cell *matHeaderCellDef> Hora </mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{item.hora}} </mat-cell>
+        </ng-container>
+
+        <!-- Costo Column -->
+        <ng-container matColumnDef="nroMesa">
+            <mat-header-cell *matHeaderCellDef> Nro Mesa</mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{item.nroMesa }} </mat-cell>
+        </ng-container>
+
+        <!-- Stock Column -->
+        <ng-container matColumnDef="monto">
+            <mat-header-cell *matHeaderCellDef> Monto </mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{item.monto}} </mat-cell>
+        </ng-container>
+
+        <!-- Stock Column -->
+        <ng-container matColumnDef="mozo">
+            <mat-header-cell *matHeaderCellDef> Mozo </mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{item.mozo}} </mat-cell>
+        </ng-container>
+
+        <!-- Acciones Column -->
+        <ng-container matColumnDef="acciones">
+            <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+            <mat-cell *matCellDef="let item">
+                <button mat-icon-button (click)="openInfoOrdenModal(item)">
+                    <mat-icon>menu</mat-icon>
+                </button>
+                
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+</div>
