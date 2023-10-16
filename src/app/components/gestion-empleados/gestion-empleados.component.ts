@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { AgregarEmpleadoModalComponent } from 'src/app/ExtraComponents/agregar-empleado-modal/agregar-empleado-modal.component';
+import { EditarEmpleadoModalComponent } from 'src/app/ExtraComponents/editar-empleado-modal/editar-empleado-modal.component';
+import { EliminarEmpleadoModalComponent } from 'src/app/ExtraComponents/eliminar-empleado-modal/eliminar-empleado-modal.component';
 import { Empleado } from 'src/app/models/empleado.model';
 
 @Component({
@@ -15,9 +18,9 @@ export class GestionEmpleadosComponent implements OnInit {
 
    // Datos ficticios para el dataSource
    empleados: Empleado[] = [
-    { id: 1, nombre: 'Pepe', rol: 'Chef', contacto: '099123123'},
-    { id: 2, nombre: 'Juan', rol: 'Bartender', contacto: '098123123'},
-    { id: 3, nombre: 'Pedro', rol: 'Mozo', contacto: '092123123'},
+    { id: 1, nombre: 'Pepe',apellido:'Ramirez', telefono: '099123123', nick:'elpepe',password:'12345', rol: 'Chef', activo:true},
+    { id: 2, nombre: 'Juan',apellido:'Algo', telefono: '092123123', nick:'juancho',password:'12345', rol: 'Bartender', activo:true},
+    { id: 3, nombre: 'Pedro', apellido:'Algo', telefono: '098123123', nick:'pedron',password:'12345', rol: 'Mozo',  activo:true}, 
     // ... puedes agregar más items
   ];
 
@@ -27,44 +30,51 @@ export class GestionEmpleadosComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.empleados);
   }
 
-  /*openDialog(): void {
-    const dialogRef = this.dialog.open(AgregarItemModalComponent, {
-      width: '30rem',
-      data: {}  // Puedes pasar la data inicial aquí si es necesario.
+  openAddEmployeeDialog(): void {
+    const dialogRef = this.dialog.open(AgregarEmpleadoModalComponent, {
+      width: '30rem'
     });
   
     dialogRef.afterClosed().subscribe(result => {
-      console.log('El modal fue cerrado', result);
-      // Aquí puedes manejar el resultado del modal, por ejemplo, guardar el nuevo ítem.
+      if (result) {
+        // Aquí puedes agregar el nuevo empleado al arreglo de empleados
+        this.empleados.push(result);
+        this.dataSource = new MatTableDataSource(this.empleados); // Actualizar el dataSource
+      }
     });
   }
 
-  openEditDialog(item: Item): void {
-    const dialogRef = this.dialog.open(ModificarItemModalComponent, {
-      width: '30rem',
-      data: item  // Pasa el ítem a modificar como dato.
+  openEditDialog(empleado: Empleado): void {
+    const dialogRef = this.dialog.open(EditarEmpleadoModalComponent, {
+      width: '400px',
+      data: { ...empleado } // pasamos una copia del empleado para evitar ediciones no deseadas
     });
   
     dialogRef.afterClosed().subscribe(result => {
-      console.log('El modal fue cerrado', result);
-      // Aquí puedes manejar el resultado del modal, por ejemplo, guardar los cambios.
+      if (result) {
+        // Aquí puedes manejar lo que quieras hacer cuando el modal se cierre, como actualizar el empleado en la lista o en una base de datos.
+      }
     });
   }
 
-  // En inventario.component.ts
-
-openDeleteDialog(item: Item): void {
-  const dialogRef = this.dialog.open(EliminarItemModalComponent, {
-    width: '15rem',
-    data: { item: item }  // Pasamos el ítem completo al modal
-  });
-
-  dialogRef.afterClosed().subscribe(result => {
-    if (result) {
-      // Aquí puedes eliminar el ítem
-      // TODO: Añadir la lógica para eliminar el ítem
-    }
-  });
-}
-*/
+  eliminarEmpleado(empleado: Empleado) {
+    const dialogRef = this.dialog.open(EliminarEmpleadoModalComponent, {
+      width: '300px',
+      data: {nombre: empleado.nombre}
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Aquí se coloca la lógica para eliminar el empleado
+        // Por ejemplo: this.empleadosService.eliminar(empleado.id);
+        console.log(`Empleado ${empleado.nombre} eliminado`);
+      } else {
+        console.log('Operación cancelada');
+      }
+    });
+  }
+  
+  
+  
+  
 }

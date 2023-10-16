@@ -19,9 +19,10 @@
           <input matInput>
         </mat-form-field>
   
-        <button mat-raised-button class="add-button" >
+        <button mat-raised-button class="add-button" (click)="openAddClientDialog()">
           Agregar<br>Cliente
       </button>
+      
   
       </div>
     </div>
@@ -50,10 +51,10 @@
   <ng-container matColumnDef="acciones">
     <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
     <mat-cell *matCellDef="let item">
-      <button mat-icon-button >
+      <button mat-icon-button (click)="openEditDialog(item)">
         <mat-icon>edit</mat-icon>
-      </button>
-      <button mat-icon-button >
+      </button>    
+      <button mat-icon-button (click)="eliminarCliente(item)">
         <mat-icon>delete</mat-icon>
       </button>
     </mat-cell>
