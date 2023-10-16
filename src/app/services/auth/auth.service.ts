@@ -4,6 +4,7 @@ import { environment } from '../../../environments/environments';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ErrorHandlingService } from '../errorHandling/error-handling.service';
+import { Router } from '@angular/router';
 
 
 export interface LoginRequest {
@@ -30,7 +31,7 @@ export class AuthService {
 
   private apiUrl = environment.apiBaseUrl;
 
-  constructor(private http: HttpClient, private errorHandler:ErrorHandlingService) {}
+  constructor(private http: HttpClient, private errorHandler:ErrorHandlingService, private router: Router) {}
 
   login(data: LoginRequest): Observable<LoginResponse> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -39,4 +40,20 @@ export class AuthService {
     );
   }
 
+  redirectUserBasedOnRole(role: string): void {
+    switch (role) {
+      case 'Admin':
+        this.router.navigate(['/homeadmin']);
+        break;
+      case 'Mozo':
+        this.router.navigate(['/homemozo']);
+        break;
+      case 'Cocina':
+        this.router.navigate(['/homecocina']);
+        break;
+      default:
+        this.router.navigate(['/default-home']);
+        break;
+    }
+  }
 }

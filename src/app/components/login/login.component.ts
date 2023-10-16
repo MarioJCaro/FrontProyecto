@@ -24,8 +24,9 @@ export class LoginComponent {
         console.log('Token:', response.token);
         console.log('User:', response.empleado);
         localStorage.setItem('authToken', response.token);
+        localStorage.setItem('role', response.empleado.rol);
         this.toastService.showSuccess("Ha iniciado sesión con éxito");
-        this.router.navigate(['/']);
+        this.authService.redirectUserBasedOnRole(response.empleado.rol);
       },
       error: (error) => {
         console.error('Login Error:', error.error);
