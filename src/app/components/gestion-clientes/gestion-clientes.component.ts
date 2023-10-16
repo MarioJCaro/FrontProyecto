@@ -54,11 +54,6 @@ export class GestionClientesComponent implements OnInit {
     });
   
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        // Aquí puedes agregar el nuevo empleado al arreglo de empleados
-        this.clientes.push(result);
-        this.dataSource = new MatTableDataSource(this.clientes); // Actualizar el dataSource
-      }
     });
   }
 

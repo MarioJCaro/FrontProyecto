@@ -9,22 +9,13 @@ import { Cliente } from 'src/app/models/cliente.model';
 })
 export class AgregarClienteModalComponent {
 
-  cliente: Cliente = {
-    id: 0, // Esto es solo un valor por defecto. Debes manejar cómo asignar un ID adecuadamente.
-    nombre: '',
-    apellido: '',
-    telefono: '',
-    cuenta: 0
-  };
-
-
   constructor(
     public dialogRef: MatDialogRef<AgregarClienteModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   onConfirm(): void {
     // Confirmar y cerrar el modal retornando el nuevo empleado
-    this.dialogRef.close(this.cliente);
+    this.dialogRef.close();
   }
 
   onCancel(): void {
