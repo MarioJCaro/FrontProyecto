@@ -8,7 +8,7 @@
     </button>
 
     <mat-form-field>
-      <input matInput type="number" [(ngModel)]="currentStock" readonly>
+      <input matInput type="number" [(ngModel)]="currentStock">
     </mat-form-field>
 
     <button mat-icon-button (click)="increaseStock()" [disabled]="currentStock >= item.stock">
@@ -17,7 +17,7 @@
   </div>
 
   <div class="total-section">
-    Cantidad que se quitará: {{item.stock - currentStock}}
+    Cantidad que se quitará: {{currentStock}}
   </div>
 </mat-dialog-content>
 

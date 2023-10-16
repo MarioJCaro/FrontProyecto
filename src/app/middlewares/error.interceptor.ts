@@ -23,8 +23,11 @@ export class ErrorInterceptor implements HttpInterceptor {
       
         // Retroalimentación al usuario
         
-        if (error.error.error) {
+        if(error.error.error){
           this.toastService.showError(error.error.error);
+        }
+        else if (error.error) {
+          this.toastService.showError(error.error.message);
         }
         else {
           this.toastService.showError('Ha ocurrido un error. Por favor, intenta nuevamente.');
