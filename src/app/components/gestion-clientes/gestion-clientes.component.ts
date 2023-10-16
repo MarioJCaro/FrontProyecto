@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { catchError } from 'rxjs';
 import { AgregarClienteModalComponent } from 'src/app/ExtraComponents/agregar-cliente-modal/agregar-cliente-modal.component';
 import { EditarClienteModalComponent } from 'src/app/ExtraComponents/editar-cliente-modal/editar-cliente-modal.component';
 import { EliminarClienteModalComponent } from 'src/app/ExtraComponents/eliminar-cliente-modal/eliminar-cliente-modal.component';
 import { Cliente } from 'src/app/models/cliente.model';
-import { ClienteService, CreateClienteResponse } from 'src/app/services/cliente/cliente.service';
+import { ClienteService, GetAllClientesResponse } from 'src/app/services/cliente/cliente.service';
 import { ErrorHandlingService } from 'src/app/services/errorHandling/error-handling.service';
 
 @Component({
@@ -18,18 +20,23 @@ export class GestionClientesComponent implements OnInit {
 
   displayedColumns: string[] = ['nombre', 'cuenta', 'contacto', 'acciones'];
   dataSource!: MatTableDataSource<Cliente>;
+  totalCount: number = 0;
+  pageEvent: PageEvent = {pageIndex: 0, pageSize: 10, length: 0};
+  ClientesArray: any[] = [];
+  filterField: string = '';
+  filterValue: string = '';
 
-
-  constructor(public dialog: MatDialog, private clienteService:ClienteService, private errorHandler:ErrorHandlingService) {}
+  constructor(public dialog: MatDialog, private clienteService:ClienteService, private errorHandler:ErrorHandlingService, private router: Router) {}
 
   ngOnInit() {
     this.getClientes();
   }
 
-  getClientes(){
-    this.clienteService.getAll().subscribe(
-      (data: Cliente[]) => {
-        const clientes: Cliente[] = data.map(cliente => ({
+  getClientes(campo?: any, valor?: any) {
+    this.clienteService.getAll(this.pageEvent.pageIndex + 1, this.pageEvent.pageSize, this.filterField, this.filterValue).subscribe({
+      next: (response: GetAllClientesResponse) => {
+        const clientesFromResponse = response.items;
+        const clientesToAdd = clientesFromResponse.map(cliente => ({
           id: cliente.id,
           nombre: cliente.nombre,
           apellido: cliente.apellido,
@@ -40,13 +47,46 @@ export class GestionClientesComponent implements OnInit {
           // Añade otras propiedades si es necesario
         }));
 
-        this.dataSource = new MatTableDataSource(clientes);
+        this.ClientesArray = [];
+        this.ClientesArray = [...this.ClientesArray, ...clientesToAdd];
+
+        this.totalCount = response.total;
+        this.dataSource = new MatTableDataSource(this.ClientesArray);
       },
-      (error) => {
+      error: (error) => {
         catchError(this.errorHandler.handleError);
       }
-    );
+    });
   }
+
+  onFilterChange(event: any) {
+    this.filterField = event.value;
+    this.filterValue = ''; // Resetear el valor de filtro
+}
+
+onCategoryChange(event: any) {
+  this.filterValue = event.value;
+  this.applyFilter();
+}
+
+onSearchChange(value: string) {
+  this.filterValue = value;
+  this.applyFilter();
+}
+
+applyFilter() {
+    if (this.filterField && this.filterValue) {
+        this.getClientes(this.filterField, this.filterValue);
+    } else {
+        this.getClientes();
+    }
+} 
+
+onPaginateChange(event: PageEvent) {
+  this.pageEvent = event;
+  
+  this.getClientes();
+}
 
   openAddClientDialog(): void {
     const dialogRef = this.dialog.open(AgregarClienteModalComponent, {
@@ -73,7 +113,7 @@ export class GestionClientesComponent implements OnInit {
   eliminarCliente(cliente: Cliente) {
     const dialogRef = this.dialog.open(EliminarClienteModalComponent, {
       width: '300px',
-      data: {nombre: cliente.nombre}
+      data: {cliente}
     });
   
     dialogRef.afterClosed().subscribe(result => {
@@ -87,5 +127,8 @@ export class GestionClientesComponent implements OnInit {
     });
   }
   
-  
+  navigateTo(route: string) {
+    this.router.navigate([route]);
+  }
+
 }

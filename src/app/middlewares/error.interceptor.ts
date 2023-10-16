@@ -33,11 +33,11 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.toastService.showError('Ha ocurrido un error. Por favor, intenta nuevamente.');
         }
         // Redirección basada en el error
-        if (error.status === 401) {
+        /*if (error.status === 401) {
           this.router.navigate(['/login']);  // Redirige al usuario al inicio de sesión
         } else if (error.status === 403) {
           this.router.navigate(['/unauthorized']);  // Informa al usuario que no tiene permisos
-        }
+        }*/
       
         return throwError(() => error);
       })

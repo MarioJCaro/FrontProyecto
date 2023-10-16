@@ -10,9 +10,10 @@ import { QuitarStockModalComponent } from 'src/app/ExtraComponents/quitar-stock-
 import { GetAllItemResponse, InventarioService } from 'src/app/services/inventario/inventario.service';
 import { catchError } from 'rxjs';
 import { ErrorHandlingService } from 'src/app/services/errorHandling/error-handling.service';
-import { CategoriaService } from 'src/app/services/categoria/categoria.service';
+import { CategoriaService, CategoriasResponse, GetAllCategoriasResponse } from 'src/app/services/categoria/categoria.service';
 import { PageEvent } from '@angular/material/paginator';
 import { Categoria } from 'src/app/models/categoria.model';
+import { Router } from '@angular/router';
 
 
 
@@ -32,17 +33,11 @@ export class InventarioComponent  implements OnInit {
   filterValue: string = '';
   categorias: Categoria[] = [];
 
-  constructor(public dialog: MatDialog, private inventarioService:InventarioService, private categoriaService:CategoriaService, private errorHandler:ErrorHandlingService) {}
+  constructor(public dialog: MatDialog, private inventarioService:InventarioService, private categoriaService:CategoriaService, private errorHandler:ErrorHandlingService, private router: Router) {}
 
   ngOnInit() {
     this.getItems();
     this.getCategorias();
-  }
-
-  onPaginateChange(event: PageEvent) {
-    this.pageEvent = event;
-    
-    this.getItems();
   }
 
   getItems(campo?:any , valor?:any){
@@ -78,21 +73,32 @@ export class InventarioComponent  implements OnInit {
 
 getCategorias() {
   this.categoriaService.getAll().subscribe(
-    (data: Categoria[]) => {
-      const categorias: Categoria[] = data.map(categoria  => ({
-        id: categoria.id,
-        nombre: categoria.nombre,
-        createdAt: categoria.createdAt,
-        updatedAt: categoria.updatedAt,     
-        // Añade otras propiedades si es necesario
-      }));
+    (response: GetAllCategoriasResponse) => {
+      if (Array.isArray(response.items)) {
+        const categorias: CategoriasResponse[] = response.items.map(categoria  => ({
+          id: categoria.id,
+          nombre: categoria.nombre,
+          descripcion: categoria.descripcion,
+          createdAt: categoria.createdAt,
+          updatedAt: categoria.updatedAt,
+          // Añade otras propiedades si es necesario
+        }));
 
-      this.categorias = data;
+        this.categorias = categorias; // Asignar el resultado mapeado a la variable de categorías
+      } else {
+        console.error('La respuesta del servicio no es un array válido.');
+      }
     },
     (error) => {
       catchError(this.errorHandler.handleError);
     }
   );
+}
+
+onPaginateChange(event: PageEvent) {
+  this.pageEvent = event;
+  
+  this.getItems();
 }
 
 onFilterChange(event: any) {
@@ -194,8 +200,8 @@ openRemoveStockDialog(item: Item): void {
   });
 }
 
-
-
-
+  navigateTo(route: string) {
+    this.router.navigate([route]);
+  }
   
 }

@@ -5,6 +5,18 @@ import { Observable, catchError } from 'rxjs';
 import { Categoria } from 'src/app/models/categoria.model';
 import { environment } from 'src/environments/environments';
 
+export interface GetAllCategoriasResponse {
+  total: number;
+  items: CategoriasResponse[];  // Aquí es un array de ítems, no un solo ítem
+}
+
+export interface CategoriasResponse {
+  id: number;
+  nombre: string;
+  descripcion: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +26,9 @@ export class CategoriaService {
 
   constructor(private http: HttpClient, private errorHandler:ErrorHandlingService) { }
 
-  getAll(): Observable<any>{
+  getAll(): Observable<GetAllCategoriasResponse>{
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.get<Categoria[]>(`${this.apiUrl}/categorias`, { headers }).pipe(
+    return this.http.get<GetAllCategoriasResponse>(`${this.apiUrl}/categorias`, { headers }).pipe(
       catchError(this.errorHandler.handleError)
     );
   }

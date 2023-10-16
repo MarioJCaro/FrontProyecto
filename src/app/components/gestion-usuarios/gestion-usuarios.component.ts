@@ -11,13 +11,6 @@ export class GestionUsuariosComponent {
   constructor(private router: Router) { }
 
   navigateTo(route: string) {
-    switch(route) {
-      case 'empleados':
-        this.router.navigate(['/ruta-a-empleados']);
-        break;
-      case 'clientes':
-        this.router.navigate(['/ruta-a-clientes']);
-        break;
-    }
+    this.router.navigate([route]);
   }
 }

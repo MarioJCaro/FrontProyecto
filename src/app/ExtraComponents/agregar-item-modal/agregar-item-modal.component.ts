@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError } from 'rxjs';
 import { Categoria } from 'src/app/models/categoria.model';
-import { CategoriaService } from 'src/app/services/categoria/categoria.service';
+import { CategoriaService, CategoriasResponse, GetAllCategoriasResponse } from 'src/app/services/categoria/categoria.service';
 import { ErrorHandlingService } from 'src/app/services/errorHandling/error-handling.service';
 import { InventarioService } from 'src/app/services/inventario/inventario.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
@@ -47,16 +47,21 @@ export class AgregarItemModalComponent {
 
   getCategorias() {
     this.categoriaService.getAll().subscribe(
-      (data: Categoria[]) => {
-        const categorias: Categoria[] = data.map(categoria  => ({
-          id: categoria.id,
-          nombre: categoria.nombre,
-          createdAt: categoria.createdAt,
-          updatedAt: categoria.updatedAt,     
-          // Añade otras propiedades si es necesario
-        }));
-
-        this.categorias = data;
+      (response: GetAllCategoriasResponse) => {
+        if (Array.isArray(response.items)) {
+          const categorias: CategoriasResponse[] = response.items.map(categoria  => ({
+            id: categoria.id,
+            nombre: categoria.nombre,
+            descripcion: categoria.descripcion,
+            createdAt: categoria.createdAt,
+            updatedAt: categoria.updatedAt,
+            // Añade otras propiedades si es necesario
+          }));
+  
+          this.categorias = categorias; // Asignar el resultado mapeado a la variable de categorías
+        } else {
+          console.error('La respuesta del servicio no es un array válido.');
+        }
       },
       (error) => {
         catchError(this.errorHandler.handleError);
