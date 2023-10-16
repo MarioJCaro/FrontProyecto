@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -30,7 +31,6 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatChipsModule } from '@angular/material/chips'; // Para los chips
 import { MatExpansionModule} from '@angular/material/expansion';
-
 
 
 import { HomeCocinaComponent } from './components/home-cocina/home-cocina.component';
@@ -123,7 +123,8 @@ import { ResumenOrdenModalComponent } from './ExtraComponents/resumen-orden-moda
     HttpClientModule,
     MatSnackBarModule,
     MatChipsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

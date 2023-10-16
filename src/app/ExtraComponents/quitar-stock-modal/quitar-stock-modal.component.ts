@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Item } from 'src/app/models/item.model';
+import { InventarioService } from 'src/app/services/inventario/inventario.service';
+import { ToastService } from 'src/app/services/toast/toast.service';
 
 @Component({
   selector: 'app-quitar-stock-modal',
@@ -13,10 +15,12 @@ export class QuitarStockModalComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<QuitarStockModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private inventarioService: InventarioService,
+    private toastService: ToastService
   ) {
     this.item = data.item;
-    this.currentStock = this.item.stock;
+    this.currentStock = 0;
   }
 
   ngOnInit(): void {}
@@ -25,6 +29,19 @@ export class QuitarStockModalComponent implements OnInit {
     if (this.currentStock > 0) {
       this.currentStock--;
     }
+  }
+
+  updateStock(id:number, amount:any){
+    const stockData = { amount: -amount };
+    this.inventarioService.updateStock(id, stockData).subscribe({
+      next:(response) => {
+        this.toastService.showSuccess("Stock reducido con exito");
+        this.dialogRef.close();
+      },
+      error:(error) => {
+        
+      }
+  });
   }
 
   increaseStock() {
@@ -39,6 +56,7 @@ export class QuitarStockModalComponent implements OnInit {
 
   confirm() {
     // Aquí podrías actualizar el stock en tu base de datos o servicio
+    this.updateStock(this.item.id, this.currentStock);
     this.dialogRef.close(this.currentStock);
   }
 }
