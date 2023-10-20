@@ -10,12 +10,26 @@ export interface GetAllCategoriasResponse {
   items: CategoriasResponse[];  // Aquí es un array de ítems, no un solo ítem
 }
 
+export interface CreateCategoriaRequest{
+  nombre: string;
+}
+
 export interface CategoriasResponse {
   id: number;
   nombre: string;
   descripcion: string;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface GetAllCategoriaResponse {
+  total: number;
+  items: CategoriaResponse[];  // Aquí es un array de ítems, no un solo ítem
+}
+
+export interface CategoriaResponse {
+  id: number;
+  nombre: string;
 }
 
 @Injectable({
@@ -25,6 +39,19 @@ export class CategoriaService {
   private apiUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient, private errorHandler:ErrorHandlingService) { }
+
+  getAllCats(currentPage: number, pageSize: number, campo?: string, valor?: any): Observable<GetAllCategoriaResponse> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let url = `${this.apiUrl}/categorias?page=${currentPage}&limit=${pageSize}`;
+
+    if (campo && valor) {
+        url += `&${campo}=${valor}`;
+    }
+
+    return this.http.get<GetAllCategoriaResponse>(url, { headers }).pipe(
+        catchError(this.errorHandler.handleError)
+    );
+  }
 
   getAll(): Observable<GetAllCategoriasResponse>{
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -36,6 +63,24 @@ export class CategoriaService {
   getById(id : number): Observable<Categoria>{
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.get<Categoria>(`${this.apiUrl}/categorias/${id}`, { headers }).pipe(
+      catchError(this.errorHandler.handleError));
+  }
+
+  create(categoria: CreateCategoriaRequest): Observable<CategoriaResponse> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<CategoriaResponse>(`${this.apiUrl}/categorias`, categoria, { headers }).pipe(
+      catchError(this.errorHandler.handleError));
+  }
+
+  update(id: number, item: CreateCategoriaRequest): Observable<CategoriaResponse> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.put<CategoriaResponse>(`${this.apiUrl}/categorias/${id}`, item, { headers }).pipe(
+      catchError(this.errorHandler.handleError));
+  }
+
+  remove(id: number): Observable<any>{
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.delete<any>(`${this.apiUrl}/categorias/${id}`, { headers }).pipe(
       catchError(this.errorHandler.handleError));
   }
 

@@ -18,6 +18,7 @@ import { MenuMozoComponent } from './components/menu-mozo/menu-mozo.component';
 import { OrdenesMesaComponent } from './components/ordenes-mesa/ordenes-mesa.component';
 import { HistorialVentasComponent } from './components/historial-ventas/historial-ventas.component';
 import { AuthGuard } from './middlewares/auth.guard';
+import { CategoriasComponent } from './components/categorias/categorias/categorias.component';
 
 
 
@@ -37,8 +38,8 @@ const routes: Routes = [
   {path:'homemozo', component:HomeMozoComponent, canActivate: [AuthGuard], data: { roles: ['Admin','Mozo'] }},
   {path:'ordenesmesa', component:OrdenesMesaComponent, canActivate: [AuthGuard], data: { roles: ['Admin','Mozo'] }},
   {path:'menumozo', component:MenuMozoComponent, canActivate: [AuthGuard], data: { roles: ['Admin','Mozo'] }},
-  {path:'historialVentas', component:HistorialVentasComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }}
-
+  {path:'historialVentas', component:HistorialVentasComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
+  {path:'categorias', component:CategoriasComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }}
  
 ];
 
