@@ -9,6 +9,10 @@ import { ModificarItemMenuModalComponent } from 'src/app/ExtraComponents/modfica
 import { ConfirmarAccionModalComponent } from 'src/app/ExtraComponents/confirmar-accion-modal/confirmar-accion-modal.component';
 import { EliminarItemMenuModalComponent } from 'src/app/ExtraComponents/eliminar-item-menu-modal/eliminar-item-menu-modal.component';
 import { Item } from 'src/app/models/item.model';
+import { PageEvent } from '@angular/material/paginator';
+import { MenubackofficeService } from 'src/app/services/menubackoffice/menubackoffice.service';
+import { Router } from '@angular/router';
+import { ErrorHandlingService } from 'src/app/services/errorHandling/error-handling.service';
 
 @Component({
   selector: 'app-back-office-menu',
@@ -19,7 +23,11 @@ export class BackOfficeMenuComponent implements OnInit {
 
   displayedColumns: string[] = ['nombre', 'categoria', 'precio', 'acciones'];
   dataSource!: MatTableDataSource<ItemMenu>;
-  categorias = CategoriasItemMenu;
+  totalCount: number = 0;
+  pageEvent: PageEvent = {pageIndex: 0, pageSize: 10, length: 0};
+  itemsArray: any[] = [];
+  filterField: string = '';
+  filterValue: string = '';
 
   // Datos ficticios para el dataSource
   items: ItemMenu[] = [
@@ -29,7 +37,7 @@ export class BackOfficeMenuComponent implements OnInit {
     // ... puedes agregar más items
   ];
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private errorHandler:ErrorHandlingService, private router: Router, backofficeService: MenubackofficeService) {}
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource(this.items);

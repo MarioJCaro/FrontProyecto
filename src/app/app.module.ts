@@ -72,6 +72,10 @@ import { EliminarEmpleadoModalComponent } from './ExtraComponents/eliminar-emple
 import { AgregarClienteModalComponent } from './ExtraComponents/agregar-cliente-modal/agregar-cliente-modal.component';
 import { EditarClienteModalComponent } from './ExtraComponents/editar-cliente-modal/editar-cliente-modal.component';
 import { EliminarClienteModalComponent } from './ExtraComponents/eliminar-cliente-modal/eliminar-cliente-modal.component';
+import { CategoriasComponent } from './components/categorias/categorias/categorias.component';
+import { AgregarCategoriaModalComponent } from './ExtraComponents/agregar-categoria-modal/agregar-categoria-modal/agregar-categoria-modal.component';
+import { ModificarCategoriaModalComponent } from './ExtraComponents/modificar-categoria-modal/modificar-categoria-modal/modificar-categoria-modal.component';
+import { EliminarCategoriaModalComponent } from './ExtraComponents/eliminar-categoria-modal/eliminar-categoria-modal/eliminar-categoria-modal.component';
 
 
 @NgModule({
@@ -116,6 +120,10 @@ import { EliminarClienteModalComponent } from './ExtraComponents/eliminar-client
     AgregarClienteModalComponent,
     EditarClienteModalComponent,
     EliminarClienteModalComponent,
+    CategoriasComponent,
+    AgregarCategoriaModalComponent,
+    ModificarCategoriaModalComponent,
+    EliminarCategoriaModalComponent,
 
 
   ],
