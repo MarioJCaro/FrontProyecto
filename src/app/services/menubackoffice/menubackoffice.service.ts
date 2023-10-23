@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { ErrorHandlingService } from '../errorHandling/error-handling.service';
 import { Observable, catchError } from 'rxjs';
 import { environment } from 'src/environments/environments';
+import { Grupo } from 'src/app/models/grupo.model';
 
 export interface CreateItemMenuRequest {
   nombre: string;
@@ -15,6 +16,7 @@ export interface CreateItemMenuRequest {
 export interface CreateItemResponse {
   total: number,
   item: {
+    id: number;
     nombre: string;
     descripcion: string;
     precio: number;
@@ -29,11 +31,12 @@ export interface GetAllItemMenuResponse {
 }
 
 export interface ItemMenuResponse {
+  id: number;
   nombre: string;
   descripcion: string;
   precio: number;
   imagen: number;
-  grupoId: number;
+  grupo: Grupo;
 }
 
 @Injectable({

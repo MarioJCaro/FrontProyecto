@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Subject, takeUntil } from 'rxjs';
 import { ResumenOrdenModalComponent } from 'src/app/ExtraComponents/resumen-orden-modal/resumen-orden-modal.component';
+import { DataTransferService } from 'src/app/services/DataTransferService/data-transfer-service.service';
 
 @Component({
   selector: 'app-menu-mozo',
@@ -8,8 +10,29 @@ import { ResumenOrdenModalComponent } from 'src/app/ExtraComponents/resumen-orde
   styleUrls: ['./menu-mozo.component.scss']
 })
 export class MenuMozoComponent {
+  private destroy$ = new Subject<void>();
 
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,
+    private dataTransferService: DataTransferService // Inyectar el servicio
+  ) {
+    // Subscribirse al servicio para recibir los datos
+    this.dataTransferService.ordenData$
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(data => {
+      if (data) {
+        console.log('Datos recibidos:', data);
+        // Aquí puedes manejar y usar los datos recibidos
+      }
+    });
+
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+  
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ResumenOrdenModalComponent, {

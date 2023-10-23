@@ -59,6 +59,13 @@ export class ClienteService {
   );
   }
 
+  getAllClientes(){
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get<CreateClienteResponse>(`${this.apiUrl}/clientes`, { headers }).pipe(
+      catchError(this.errorHandler.handleError)
+    );
+  }
+
   create(cliente:CreateClienteRequest): Observable<CreateClienteResponse>{
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<CreateClienteResponse>(`${this.apiUrl}/clientes`, cliente, { headers }).pipe(

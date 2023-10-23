@@ -1,34 +1,40 @@
-<!-- mesa-form.component.html -->
-<div class="form-container">
-    <div class="form-field">
-        <mat-label>Nro Mesa</mat-label>
-        <mat-select placeholder="Selecciona uno o más elementos" multiple>
-          <mat-option value="item1">Elemento 1</mat-option>
-          <mat-option value="item2">Elemento 2</mat-option>
-          <mat-option value="item3">Elemento 3</mat-option>
-          <!-- Agrega más opciones según sea necesario -->
-        </mat-select>
-    </div>
-
-    <div class="form-field">
-      <mat-label>Cantidad de comensales</mat-label>
-      <input matInput placeholder="Cantidad" type="number">
-    </div>
-
-    <div class="form-field">
-      <mat-label>Cliente preferencial</mat-label>
-      <mat-select placeholder="Selecciona un cliente preferencial">
-        <mat-option value="item1">Elemento 1</mat-option>
+<form [formGroup]="OrdenForm" class="form-container" (ngSubmit)="onSubmit()" >
+  <div class="form-field">
+    <mat-form-field appearance="fill" class="half-width">
+      <mat-label>Nro Mesa</mat-label>
+      <mat-select formControlName="nroMesa">
+        <!-- Opciones para tu dropdown aquí -->
+        <mat-option *ngFor="let mesa of mesas" [value]="mesa.id">
+          {{ mesa.nroMesa }}
+        </mat-option>
       </mat-select>
-    </div>
-
-    <div class="form-field">
-      <mat-label>Nombre del Cliente</mat-label>
-      <input matInput placeholder="Nombre" type="text">
-    </div>
-
-    <div class="button-container">
-      <button mat-raised-button color="warn" id="cancelar" (click)="onCancel()">Cancelar</button>
-      <button mat-raised-button color="primary" id="confirmar">Continuar</button>
-    </div>
+    </mat-form-field>
   </div>
+
+  <div class="form-field">
+    <mat-label>Cantidad de comensales</mat-label>
+    <input matInput placeholder="Cantidad" type="number" formControlName="cantComensales">
+  </div>
+
+  <div class="form-field">
+    <mat-form-field appearance="fill" class="half-width">
+      <mat-label>Cliente Preferencial</mat-label>
+      <mat-select formControlName="clientePreferencial">
+        <!-- Opciones para tu dropdown aquí -->
+        <mat-option *ngFor="let cliente of clientes" [value]="cliente.id">
+          {{ cliente.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="form-field">
+    <mat-label>Nombre del Cliente</mat-label>
+    <input matInput placeholder="Nombre" type="text">
+  </div>
+
+  <div class="button-container">
+    <button mat-raised-button color="warn" id="cancelar" (click)="onCancel()">Cancelar</button>
+    <button mat-raised-button color="primary" id="confirmar">Continuar</button>
+  </div>
+</form>
