@@ -39,7 +39,7 @@ export class AgregarOrdenModalComponent {
       this.getClientes();
   
       this.OrdenForm = this.formBuilder.group({
-        nroMesa: ['', Validators.required],
+        nroMesa: [[], Validators.required], 
         libre: [true],
         cantComensales: ['', Validators.required],
         clientePreferencial: ['', Validators.required],

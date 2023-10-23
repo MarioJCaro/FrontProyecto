@@ -1,15 +1,15 @@
 <form [formGroup]="OrdenForm" class="form-container" (ngSubmit)="onSubmit()" >
   <div class="form-field">
     <mat-form-field appearance="fill" class="half-width">
-      <mat-label>Nro Mesa</mat-label>
-      <mat-select formControlName="nroMesa">
-        <!-- Opciones para tu dropdown aquí -->
-        <mat-option *ngFor="let mesa of mesas" [value]="mesa.id">
-          {{ mesa.nroMesa }}
-        </mat-option>
-      </mat-select>
+        <mat-label>Nro Mesa</mat-label>
+        <mat-select formControlName="nroMesa" multiple>
+            <mat-option *ngFor="let mesa of mesas" [value]="mesa.id">
+                {{ mesa.nroMesa }}
+            </mat-option>
+        </mat-select>
     </mat-form-field>
-  </div>
+</div>
+
 
   <div class="form-field">
     <mat-label>Cantidad de comensales</mat-label>

@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { itemSeleccionadoInterface } from 'src/app/components/menu-mozo/menu-mozo.component';
 import { CreateOrdenRequest, ItemsRequest, OrdenService } from 'src/app/services/orden/orden.service';
 
 @Component({
@@ -22,9 +23,9 @@ export class ResumenOrdenModalComponent {
 
         // Asumo que el ID está almacenado como string
 
-        const itemsRequest: ItemsRequest[] = this.data.items.map((item: ItemsRequest) => {
+        const itemsRequest: ItemsRequest[] = this.data.items.map((item: itemSeleccionadoInterface) => {
           return {
-            itemMenuId: item.itemMenuId,
+            itemMenuId: item.id,
             cantidad: item.cantidad,
             precio: item.precio
           };
@@ -40,7 +41,7 @@ export class ResumenOrdenModalComponent {
         clienteId: this.data.ordenData.clientePreferencial,
         empleadoId: empleadoId,
         items: itemsRequest,
-        mesas: [this.data.ordenData.nroMesa]  // Asumo que solo hay una mesa, si hay más, ajusta según corresponda
+        mesas: this.data.ordenData.nroMesa
       };
 
       return orderRequest;
@@ -48,6 +49,7 @@ export class ResumenOrdenModalComponent {
 
     sendOrder(): void {
       const orderRequest = this.generateOrderRequest();
+      console.log('Orden a enviar:', orderRequest);
       this.ordenService.create(orderRequest).subscribe({
         next:response => {
         console.log('Orden creada:', response);
