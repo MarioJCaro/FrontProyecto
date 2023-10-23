@@ -24,7 +24,7 @@ export class GrupoComidaService {
 
   getAll(): Observable<GetAllGruposResponse>{
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.get<GetAllGruposResponse>(`${this.apiUrl}/grupos`, { headers }).pipe(
+    return this.http.get<GetAllGruposResponse>(`${this.apiUrl}/grupos?page=-1`, { headers }).pipe(
       catchError(this.errorHandler.handleError)
     );
   }
