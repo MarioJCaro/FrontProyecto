@@ -1,30 +1,36 @@
-<mat-accordion>
-    <mat-expansion-panel *ngFor="let grupo of grupos" color="primary">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                {{ grupo.nombre }}
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-        
-        <!-- Iteración para los items de este grupo -->
-        <div class="option" *ngFor="let item of itemsPorGrupo[grupo.id]"> 
-            <div class="option-content">
-                <p>{{ item.nombre }}</p>
+<div class="button-container">
+    <button class="add-order-button" (click)="openDialog()">Finalizar Orden</button>
+    <button mat-icon-button class="history-button"><mat-icon>history</mat-icon></button>
+</div>
+<div class="container">
+    <mat-accordion>
+        <mat-expansion-panel *ngFor="let grupo of grupos" color="primary">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{ grupo.nombre }}
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            
+            <!-- Iteración para los items de este grupo -->
+            <div class="option" *ngFor="let item of itemsPorGrupo[grupo.id]"> 
+                <div class="option-content">
+                    <p>{{ item.nombre }}</p>
+                </div>
+                <div class="option-buttons">
+                    <button mat-icon-button class="remove">
+                        <mat-icon class="material-symbols-outlined">
+                            remove
+                        </mat-icon>
+                    </button>
+                    <input type="number" class="cantidad" placeholder="0">
+                    <button mat-icon-button class="add">
+                        <mat-icon class="material-symbols-outlined">
+                            add
+                        </mat-icon>
+                    </button>
+                </div>
             </div>
-            <div class="option-buttons">
-                <button mat-icon-button class="remove">
-                    <mat-icon class="material-symbols-outlined">
-                        remove
-                    </mat-icon>
-                </button>
-                <input type="number" class="cantidad" placeholder="0">
-                <button mat-icon-button class="add">
-                    <mat-icon class="material-symbols-outlined">
-                        add
-                    </mat-icon>
-                </button>
-            </div>
-        </div>
-
-    </mat-expansion-panel>
-</mat-accordion>
+    
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
