@@ -17,18 +17,19 @@
                     <p>{{ item.nombre }}</p>
                 </div>
                 <div class="option-buttons">
-                    <button mat-icon-button class="remove">
+                    <button mat-icon-button class="remove" (click)="disminuirCantidad(item)">
                         <mat-icon class="material-symbols-outlined">
                             remove
                         </mat-icon>
                     </button>
-                    <input type="number" class="cantidad" placeholder="0">
-                    <button mat-icon-button class="add">
+                    <input type="number" class="cantidad" placeholder="0" [(ngModel)]="cantidades[item.id]">
+                    <button mat-icon-button class="add" (click)="aumentarCantidad(item)">
                         <mat-icon class="material-symbols-outlined">
                             add
                         </mat-icon>
                     </button>
                 </div>
+                
             </div>
     
         </mat-expansion-panel>

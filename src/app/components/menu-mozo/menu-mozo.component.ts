@@ -1,3 +1,4 @@
+import { NumberSymbol } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject, takeUntil } from 'rxjs';
@@ -8,6 +9,15 @@ import { DataTransferService } from 'src/app/services/DataTransferService/data-t
 import { GrupoComidaService } from 'src/app/services/grupoComida/grupo-comida.service';
 import {  MenuMozoService, ItemMenuResponse } from 'src/app/services/menumozo/menu-mozo.service';
 
+export interface itemSeleccionadoInterface{
+  id: number;
+  nombre: string;
+  descripcion: string;
+  precio: number;
+  grupo: Grupo;
+  cantidad: Number;
+}
+
 @Component({
   selector: 'app-menu-mozo',
   templateUrl: './menu-mozo.component.html',
@@ -17,6 +27,9 @@ export class MenuMozoComponent {
   private destroy$ = new Subject<void>();
   public grupos: Grupo[] =  [];
   public itemsPorGrupo: { [grupoId: number]: ItemMenuResponse[] } = {};
+  public ordenData: any;
+  public cantidades: { [itemId: number]: number } = {};
+
 
   constructor(
     public dialog: MatDialog,
@@ -30,6 +43,7 @@ export class MenuMozoComponent {
     .subscribe(data => {
       if (data) {
         console.log('Datos recibidos:', data);
+        this.ordenData = data;
         // Aquí puedes manejar y usar los datos recibidos
       }
     });
@@ -43,12 +57,30 @@ export class MenuMozoComponent {
     this.destroy$.next();
     this.destroy$.complete();
   }
-  
 
   openDialog(): void {
+    const itemsSeleccionados : itemSeleccionadoInterface[] = [];
+    for (const key in this.itemsPorGrupo) {
+        this.itemsPorGrupo[key].forEach(item => {
+            if (this.cantidades[item.id] && this.cantidades[item.id] > 0) {
+                itemsSeleccionados.push({
+                    ...item,
+                    cantidad: this.cantidades[item.id]
+                });
+            }
+        });
+    }
+
+    const data = {
+        items: itemsSeleccionados,
+        ordenData: this.ordenData
+    };
+
+    console.log(data);
+
     const dialogRef = this.dialog.open(ResumenOrdenModalComponent, {
-      width: '30rem',
-      data: {}  // Puedes pasar la data inicial aquí si es necesario.
+        width: '30rem',
+        data: data  // Pasamos la data al modal.
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -56,6 +88,20 @@ export class MenuMozoComponent {
       // Aquí puedes manejar el resultado del modal, por ejemplo, guardar el nuevo ítem.
     });
   }
+
+  aumentarCantidad(item: any) {
+    if (!this.cantidades[item.id]) {
+        this.cantidades[item.id] = 0;
+    }
+    this.cantidades[item.id]++;
+}
+
+disminuirCantidad(item: any) {
+    if (this.cantidades[item.id] && this.cantidades[item.id] > 0) {
+        this.cantidades[item.id]--;
+    }
+}
+
 
   //función para obtener todos los grupos de comidas del sistema
   getAllGrupos() {
