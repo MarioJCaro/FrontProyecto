@@ -1,19 +1,23 @@
-<form [formGroup]="OrdenForm" class="form-container" (ngSubmit)="onSubmit()" >
+<form [formGroup]="OrdenForm" class="form-container" (ngSubmit)="onSubmit()">
   <div class="form-field">
     <mat-form-field appearance="fill" class="half-width">
-        <mat-label>Nro Mesa</mat-label>
-        <mat-select formControlName="nroMesa" multiple>
-            <mat-option *ngFor="let mesa of mesas" [value]="mesa.id">
-                {{ mesa.nroMesa }}
-            </mat-option>
-        </mat-select>
+      <mat-label>Nro Mesa</mat-label>
+      <mat-select formControlName="nroMesa" multiple>
+        <mat-option *ngFor="let mesa of mesas" [value]="mesa.id">
+          {{ mesa.nroMesa }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
-</div>
-
+  </div>
 
   <div class="form-field">
     <mat-label>Cantidad de comensales</mat-label>
-    <input matInput placeholder="Cantidad" type="number" formControlName="cantComensales">
+    <input
+      matInput
+      placeholder="Cantidad"
+      type="number"
+      formControlName="cantComensales"
+    />
   </div>
 
   <div class="form-field">
@@ -30,11 +34,18 @@
 
   <div class="form-field">
     <mat-label>Nombre del Cliente</mat-label>
-    <input matInput placeholder="Nombre" type="text">
+    <input
+      matInput
+      placeholder="Nombre"
+      type="text"
+      formControlName="nombreCliente"
+    />
   </div>
 
   <div class="button-container">
-    <button mat-raised-button color="warn" id="cancelar" (click)="onCancel()">Cancelar</button>
+    <button mat-raised-button color="warn" id="cancelar" (click)="onCancel()">
+      Cancelar
+    </button>
     <button mat-raised-button color="primary" id="confirmar">Continuar</button>
   </div>
 </form>

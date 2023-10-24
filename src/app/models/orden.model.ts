@@ -21,7 +21,4 @@ export interface Orden {
     mesas: Mesa[];
     cliente: Cliente;
     empleado: Empleado;
-    itemNames: { [itemId: number]: string }; //objeto que mapea el ID del ítem a su nombre
-    itemGroups: { [key: number]: string };  // nuevo campo para el grupo de cada ítem
-
   }

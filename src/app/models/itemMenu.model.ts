@@ -5,7 +5,7 @@ export interface ItemMenu{
     id:number;
     nombre:string;
     descripcion:string;
-    categoria: Grupo;
+    grupo: Grupo;
     precio:number;
     imagen: string;
     activo: boolean;

@@ -1,3 +1,4 @@
+import { ItemMenu } from "./itemMenu.model";
 
 export interface ItemOrden {
     id: number;
@@ -7,4 +8,6 @@ export interface ItemOrden {
     precio: number;
     createdAt: Date;
     updatedAt: Date;
+    itemMenu: ItemMenu;
+    
 }

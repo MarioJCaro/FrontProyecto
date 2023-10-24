@@ -38,27 +38,13 @@ export class HomeCocinaComponent implements OnInit {
     this.ordenService.getAll(1, 4, undefined, undefined, 'En cocina').subscribe({
         next: (response: OrdenResponse) => {
             this.ordenes = response.items;
-
-            // Iterar sobre todas las órdenes y obtener los nombres y grupos de los ítems
-            for (let orden of this.ordenes) {
-                orden.itemNames = {};
-                orden.itemGroups = {};
-                
-                for (let item of orden.items) {
-                  
-                    this.backOfficeService.getItem(item.itemMenuId).subscribe({
-                        next: (response: any) => {
-                            orden.itemNames[item.itemMenuId] = response.nombre;
-                            orden.itemGroups[item.itemMenuId] = response.grupo.nombre;  // guardar el grupo del ítem
-                          
-                            this.filteredItemsMap[orden.id] = orden.items.filter(item => !EXCLUDED_GROUPS.includes(orden.itemGroups[item.itemMenuId]));
-                          },
-                        error: (error) => {
-                            console.error('Hubo un error al obtener el nombre del item', error);
-                        }
-                    });
-                    }
-            }
+          //recorremos las ordenes y para cada una de ellas recorremos sus items, guardamos en filteredItemsMap todos los items cuyo item.itemMenu.grupo.nombre != "bebida"
+          this.ordenes.forEach(orden => {
+            this.filteredItemsMap[orden.id] = orden.items.filter(item => !EXCLUDED_GROUPS.includes(item.itemMenu.grupo.nombre));
+          }
+          );
+          
+         
             console.log(this.filteredItemsMap);
         },
         error: (error) => {

@@ -16,11 +16,11 @@
             <!-- Solo si el índice es par, mostrar dos ítems -->
             <ng-container *ngIf="i % 2 === 0">
                 <div class="item">
-                    <span> {{ item.cantidad }} x {{ orden.itemNames[item.itemMenuId] || 'Item N/A' }}</span>
+                    <span> {{ item.cantidad }} x {{ item.itemMenu.nombre || 'Item N/A' }}</span>
                     
                     <!-- Si hay un siguiente ítem, mostrarlo también -->
                     <ng-container *ngIf="filteredItemsMap[orden.id][i + 1]">
-                        <span> {{ filteredItemsMap[orden.id][i + 1].cantidad }} x {{ orden.itemNames[filteredItemsMap[orden.id][i + 1].itemMenuId] || 'Item N/A' }}</span>
+                        <span> {{ filteredItemsMap[orden.id][i + 1].cantidad }} x {{  filteredItemsMap[orden.id][i + 1].itemMenu.nombre || 'Item N/A' }}</span>
                     </ng-container>
                 </div>
                 <hr>

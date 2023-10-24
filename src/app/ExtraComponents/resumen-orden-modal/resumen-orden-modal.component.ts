@@ -35,7 +35,7 @@ export class ResumenOrdenModalComponent {
       const orderRequest: CreateOrdenRequest = {
         fecha: new Date(),
         hora: new Date(),
-        responsable: 'nombre del responsable',  // Aquí coloca cómo obtienes el nombre del responsable
+        responsable: this.data.ordenData.nombreCliente,  
         ocupacion: this.data.ordenData.cantComensales,
         observaciones: this.observaciones,
         clienteId: this.data.ordenData.clientePreferencial,
@@ -43,6 +43,7 @@ export class ResumenOrdenModalComponent {
         items: itemsRequest,
         mesas: this.data.ordenData.nroMesa
       };
+      console.log('clienteId:', orderRequest.clienteId);
 
       return orderRequest;
     }
@@ -54,6 +55,8 @@ export class ResumenOrdenModalComponent {
         next:response => {
         console.log('Orden creada:', response);
         // Aquí maneja la respuesta, por ejemplo, mostrando un mensaje al usuario
+        //redireccionar a /homemozo
+
       }, 
         error:error => {
           console.log('Error al crear orden:', error);
