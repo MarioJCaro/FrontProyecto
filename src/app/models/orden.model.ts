@@ -6,7 +6,7 @@ import { Mesa } from "./mesa.model";
 export interface Orden {
     id: number;
     fecha: Date;
-    hora: Date;
+    hora: string;
     total: number;
     responsable: string;
     estado: string;
@@ -21,4 +21,7 @@ export interface Orden {
     mesas: Mesa[];
     cliente: Cliente;
     empleado: Empleado;
+    itemNames: { [itemId: number]: string }; //objeto que mapea el ID del ítem a su nombre
+    itemGroups: { [key: number]: string };  // nuevo campo para el grupo de cada ítem
+
   }

@@ -24,6 +24,7 @@ export interface CreateItemResponse {
     grupoId: number;
   };
 }
+  
 
 export interface GetAllItemMenuResponse {
   total: number;
@@ -56,6 +57,14 @@ export class MenubackofficeService {
     }
 
     return this.http.get<GetAllItemMenuResponse>(url, { headers }).pipe(
+        catchError(this.errorHandler.handleError)
+    );
+  }
+
+  //getItem por id
+  getItem(id: number): Observable<ItemMenuResponse> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get<ItemMenuResponse>(`${this.apiUrl}/itemsMenu/${id}`, { headers }).pipe(
         catchError(this.errorHandler.handleError)
     );
   }
