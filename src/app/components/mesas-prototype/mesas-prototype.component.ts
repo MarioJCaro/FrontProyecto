@@ -11,8 +11,9 @@ import { environment } from '../../../environments/environments';
 export class MesasPrototypeComponent implements OnInit {
 
   private socketUrl = environment.socketUrl;
-  mesas: any[] = [];
   private socket: Socket;
+  mesas: any[] = [];
+  
 
   constructor(private mesaService: MesaService) { 
     this.socket = io(this.socketUrl); // Asegúrate de que esta URL sea la de tu servidor
