@@ -93,5 +93,12 @@ export class OrdenService {
     );
   }
 
+  getOrdenesCaja(): Observable<OrdenResponse> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get<OrdenResponse>(`${this.apiUrl}/ordenes/caja`, { headers }).pipe(
+        catchError(this.errorHandler.handleError)
+    );
+  }
+
 
 }

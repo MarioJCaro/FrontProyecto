@@ -54,134 +54,38 @@
             <!-- Lado derecho (Órdenes) -->
             <mat-card fxFlex="80%" fxFlex.lt-sm="100%" class="mat-card">
                 
-                <div class="orders-flex-container" style="background-color: #7D9A93;;"> <!-- Este div es el contenedor de las tarjetas -->
-                    
-                    <mat-card class="order-card">
+                <div class="orders-flex-container" style="background-color: #7D9A93;;"> 
+                    <mat-card class="order-card" *ngFor="let orden of ordenes">
                         <!-- Estado y Paga -->
-                        <mat-card-header class="order-header" style="background-color: #FFD686;">
+                        <mat-card-header class="order-header" [ngStyle]="getCardHeaderStyle(orden.estado)">
                             <mat-card-title-group>
-                                <mat-card-title>Estado: En cocina</mat-card-title>
-                                <mat-card-title>Paga: No</mat-card-title>
+                                <mat-card-title>Estado: {{ orden.estado }}</mat-card-title>
+                                <mat-card-title>Paga: {{ orden.paga ? 'Sí' : 'No' }}</mat-card-title>
                             </mat-card-title-group>
                         </mat-card-header>
                         <mat-divider></mat-divider>
                         <!-- Información de la orden -->
                         <mat-card-content class="order-info">
-                            <mat-card-title>Orden nº 10 23:05</mat-card-title>
-                            <p>Mesa 4 - Mozo: Juan</p>
+                            <mat-card-title>Orden nº {{ orden.id }} {{ orden.hora }}</mat-card-title>
+                            <p>Mesa {{ orden.mesas[0]?.nroMesa }} - Mozo: {{ orden.empleado?.nombre }}</p>
                             <div class="order-items">
-                                <p>1 x Salchipapa</p>
-                                <p>2 x Aritos de cebolla</p>
-                                <!-- Agrega más elementos de la orden aquí -->
+                                <p *ngFor="let item of orden.items">{{ item.cantidad }} x {{ item.itemMenu.nombre }}</p>
                             </div>
                         </mat-card-content>
                         <mat-divider></mat-divider>
                         <mat-card-content class="order-total">
-                            <p>Total: $50.00</p> <!-- Puedes vincular esto a una variable si estás usando Angular -->
-                          </mat-card-content>
+                            <p>Total: ${{ orden.total }}</p>
+                        </mat-card-content>
                         
-                          <mat-divider></mat-divider>
+                        <mat-divider></mat-divider>
                         <mat-card-actions class="order-actions">
                             <button mat-raised-button style="background-color: #4CA78E; text-align: center;" ><mat-icon class="big-icon">attach_money</mat-icon></button>
                             <button mat-raised-button  style="background-color: #57BCDC; text-align: center;"><mat-icon class="big-icon">info</mat-icon></button>
                             <button mat-raised-button style="background-color: #E98383; text-align: center;" ><mat-icon class="big-icon">delete</mat-icon></button>
                         </mat-card-actions>
                     </mat-card>
-                    <mat-card class="order-card">
-                        <!-- Estado y Paga -->
-                        <mat-card-header class="order-header" style="background-color: #FFD686;">
-                            <mat-card-title-group>
-                                <mat-card-title>Estado: En cocina</mat-card-title>
-                                <mat-card-title>Paga: No</mat-card-title>
-                            </mat-card-title-group>
-                        </mat-card-header>
-                        <mat-divider></mat-divider>
-                        <!-- Información de la orden -->
-                        <mat-card-content class="order-info">
-                            <mat-card-title>Orden nº 10 23:05</mat-card-title>
-                            <p>Mesa 4 - Mozo: Juan</p>
-                            <div class="order-items">
-                                <p>1 x Salchipapa</p>
-                                <p>2 x Aritos de cebolla</p>
-                                <!-- Agrega más elementos de la orden aquí -->
-                            </div>
-                        </mat-card-content>
-                        <mat-divider></mat-divider>
-                        <mat-card-content class="order-total">
-                            <p>Total: $50.00</p> <!-- Puedes vincular esto a una variable si estás usando Angular -->
-                          </mat-card-content>
-                        
-                          <mat-divider></mat-divider>
-                        <mat-card-actions class="order-actions">
-                            <button mat-raised-button style="background-color: #4CA78E; text-align: center;" ><mat-icon class="big-icon">attach_money</mat-icon></button>
-                            <button mat-raised-button  style="background-color: #57BCDC; text-align: center;"><mat-icon class="big-icon">info</mat-icon></button>
-                            <button mat-raised-button style="background-color: #E98383; text-align: center;" ><mat-icon class="big-icon">delete</mat-icon></button>
-                        </mat-card-actions>
-                    </mat-card>
-                    <mat-card class="order-card">
-                        <!-- Estado y Paga -->
-                        <mat-card-header class="order-header" style="background-color: #FFD686;">
-                            <mat-card-title-group>
-                                <mat-card-title>Estado: En cocina</mat-card-title>
-                                <mat-card-title>Paga: No</mat-card-title>
-                            </mat-card-title-group>
-                        </mat-card-header>
-                        <mat-divider></mat-divider>
-                        <!-- Información de la orden -->
-                        <mat-card-content class="order-info">
-                            <mat-card-title>Orden nº 10 23:05</mat-card-title>
-                            <p>Mesa 4 - Mozo: Juan</p>
-                            <div class="order-items">
-                                <p>1 x Salchipapa</p>
-                                <p>2 x Aritos de cebolla</p>
-                                <!-- Agrega más elementos de la orden aquí -->
-                            </div>
-                        </mat-card-content>
-                        <mat-divider></mat-divider>
-                        <mat-card-content class="order-total">
-                            <p>Total: $50.00</p> <!-- Puedes vincular esto a una variable si estás usando Angular -->
-                          </mat-card-content>
-                        
-                          <mat-divider></mat-divider>
-                        <mat-card-actions class="order-actions">
-                            <button mat-raised-button style="background-color: #4CA78E; text-align: center;" ><mat-icon class="big-icon">attach_money</mat-icon></button>
-                            <button mat-raised-button  style="background-color: #57BCDC; text-align: center;"><mat-icon class="big-icon">info</mat-icon></button>
-                            <button mat-raised-button style="background-color: #E98383; text-align: center;" ><mat-icon class="big-icon">delete</mat-icon></button>
-                        </mat-card-actions>
-                    </mat-card>
-                    <mat-card class="order-card">
-                        <!-- Estado y Paga -->
-                        <mat-card-header class="order-header" style="background-color: #FFD686;">
-                            <mat-card-title-group>
-                                <mat-card-title>Estado: En cocina</mat-card-title>
-                                <mat-card-title>Paga: No</mat-card-title>
-                            </mat-card-title-group>
-                        </mat-card-header>
-                        <mat-divider></mat-divider>
-                        <!-- Información de la orden -->
-                        <mat-card-content class="order-info">
-                            <mat-card-title>Orden nº 10 23:05</mat-card-title>
-                            <p>Mesa 4 - Mozo: Juan</p>
-                            <div class="order-items">
-                                <p>1 x Salchipapa</p>
-                                <p>2 x Aritos de cebolla</p>
-                                <!-- Agrega más elementos de la orden aquí -->
-                            </div>
-                        </mat-card-content>
-                        <mat-divider></mat-divider>
-                        <mat-card-content class="order-total">
-                            <p>Total: $50.00</p> <!-- Puedes vincular esto a una variable si estás usando Angular -->
-                          </mat-card-content>
-                        
-                          <mat-divider></mat-divider>
-                        <mat-card-actions class="order-actions">
-                            <button mat-raised-button style="background-color: #4CA78E; text-align: center;" ><mat-icon class="big-icon">attach_money</mat-icon></button>
-                            <button mat-raised-button  style="background-color: #57BCDC; text-align: center;"><mat-icon class="big-icon">info</mat-icon></button>
-                            <button mat-raised-button style="background-color: #E98383; text-align: center;" ><mat-icon class="big-icon">delete</mat-icon></button>
-                        </mat-card-actions>
-                    </mat-card>
-                    <!-- Puedes seguir agregando más tarjetas aquí -->
                 </div>
+                
             </mat-card>
         </div>
     </div>

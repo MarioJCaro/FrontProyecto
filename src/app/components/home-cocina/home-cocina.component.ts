@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environments';
 import { io, Socket } from 'socket.io-client';
 import { MenubackofficeService } from 'src/app/services/menubackoffice/menubackoffice.service';
 import { EXCLUDED_GROUPS } from 'src/app/constants/groups.constants'
+import { ESTADOS } from 'src/app/constants/estadosOrden.constant';
 @Component({
   selector: 'app-home-cocina',
   templateUrl: './home-cocina.component.html',
@@ -35,7 +36,7 @@ export class HomeCocinaComponent implements OnInit {
   
 
   fetchOrdenesEnCocina(): void {
-    this.ordenService.getAll(1, 4, undefined, undefined, 'En cocina').subscribe({
+    this.ordenService.getAll(1, 4, undefined, undefined, ESTADOS.EN_COCINA).subscribe({
         next: (response: OrdenResponse) => {
             this.ordenes = response.items;
           //recorremos las ordenes y para cada una de ellas recorremos sus items, guardamos en filteredItemsMap todos los items cuyo item.itemMenu.grupo.nombre != "bebida"
