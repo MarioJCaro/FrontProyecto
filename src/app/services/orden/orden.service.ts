@@ -6,8 +6,8 @@ import { Observable, catchError } from 'rxjs';
 import { Orden } from 'src/app/models/orden.model';
 
 export interface CreateOrdenRequest {
-  fecha: Date;
-  hora: Date;
+  fecha: String;
+  hora: String;
   responsable: string;
   ocupacion: number;
   observaciones: string;
@@ -59,6 +59,25 @@ export interface ItemsRequest{
   precio: number;
 }
 
+
+export interface UpdateOrdenRequest {
+  fecha?: Date;
+  hora?: string;
+  responsable?: string;
+  estado?: string;
+  ocupacion?: number;
+  observaciones?: string;
+  paga?: boolean;
+  clienteId?: number;
+  empleadoId?: number;
+}
+
+export interface UpdateOrdenResponse {
+  message: string;
+}
+
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -100,5 +119,20 @@ export class OrdenService {
     );
   }
 
+  getOcupacion(): Observable<number> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get<number>(`${this.apiUrl}/ordenes/ocupacion`, { headers }).pipe(
+        catchError(this.errorHandler.handleError)
+    );
+  }
+
+
+  updateOrden(id: number, item: UpdateOrdenRequest): Observable<UpdateOrdenResponse> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.put<UpdateOrdenResponse>(`${this.apiUrl}/ordenes/${id}`, item, { headers }).pipe(
+      catchError(this.errorHandler.handleError)
+    );
+  }
+  
 
 }

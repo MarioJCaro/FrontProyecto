@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Orden } from 'src/app/models/orden.model';
-import { OrdenResponse, OrdenService } from 'src/app/services/orden/orden.service';
+import { OrdenResponse, OrdenService, UpdateOrdenRequest } from 'src/app/services/orden/orden.service';
 import { environment } from 'src/environments/environments';
 import { io, Socket } from 'socket.io-client';
 import { MenubackofficeService } from 'src/app/services/menubackoffice/menubackoffice.service';
@@ -54,6 +54,25 @@ export class HomeCocinaComponent implements OnInit {
     });
 }
 
+
+  prepararOrden(ordenId: number): void {
+    // Preparamos los datos que queremos actualizar
+    const datosActualizar: UpdateOrdenRequest = {
+      estado: ESTADOS.PARA_ENTREGAR, // Aquí estamos actualizando el estado de la orden
+    };
+
+    // Llamamos al método de actualización del servicio y nos suscribimos al Observable
+    this.ordenService.updateOrden(ordenId, datosActualizar).subscribe({
+      next: (response) => {
+        console.log('Orden actualizada, respuesta:', response);
+        // Aquí podrías también manejar cualquier lógica post-actualización como alertas de éxito o refrescar la lista de órdenes
+      },
+      error: (error) => {
+        console.error('Hubo un error al actualizar la orden:', error);
+        // Aquí podrías manejar errores, como mostrar mensajes de error al usuario
+      }
+    });
+  }
 
 
 }

@@ -23,6 +23,7 @@ export class CurrentTimeComponent implements OnInit {
     const now = new Date();
     const hours = now.getHours();
     const minutes = now.getMinutes();
+
     this.currentTime = `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
   }
 }

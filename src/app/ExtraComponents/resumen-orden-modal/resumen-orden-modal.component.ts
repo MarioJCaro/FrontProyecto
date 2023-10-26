@@ -31,10 +31,15 @@ export class ResumenOrdenModalComponent {
           };
         });
         
+        const ahora = new Date();
+
+        const fecha = `${ahora.getFullYear()}-${String(ahora.getMonth() + 1).padStart(2, '0')}-${String(ahora.getDate()).padStart(2, '0')}`;
+        
+        const hora = `${String(ahora.getHours()).padStart(2, '0')}:${String(ahora.getMinutes()).padStart(2, '0')}:${String(ahora.getSeconds()).padStart(2, '0')}`;
 
       const orderRequest: CreateOrdenRequest = {
-        fecha: new Date(),
-        hora: new Date(),
+        fecha: fecha,
+        hora: hora,
         responsable: this.data.ordenData.nombreCliente,  
         ocupacion: this.data.ordenData.cantComensales,
         observaciones: this.observaciones,

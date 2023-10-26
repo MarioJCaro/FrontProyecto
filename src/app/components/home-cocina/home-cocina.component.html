@@ -34,7 +34,7 @@
           <p class="custom-observation">{{ orden.observaciones }}</p>
           <hr>
           <div class="d-flex justify-content-center mt-3">
-            <button mat-raised-button class="mi-boton">Orden Preparada</button>
+            <button mat-raised-button class="mi-boton" (click)="prepararOrden(orden.id)">Orden Preparada</button>
           </div>
         </mat-card>
       </ng-container>

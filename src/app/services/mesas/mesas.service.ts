@@ -20,6 +20,14 @@ export interface MesasRequest {
     mesas: MesasResponse[];
 }
 
+
+export interface MesasOcupadasResponse {
+    mesas: MesasResponse[];
+    totalCount: number;
+    libreCount: number;
+    ocupadasCount: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -33,6 +41,15 @@ export class MesasService {
     let url = `${this.apiUrl}/mesas`;
 
     return this.http.get<GetAllMesasResponse>(url, { headers }).pipe(
+        catchError(this.errorHandler.handleError)
+    );
+  }
+
+  getOcupadas(): Observable<MesasOcupadasResponse> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let url = `${this.apiUrl}/mesas/ocupadas`;
+
+    return this.http.get<MesasOcupadasResponse>(url, { headers }).pipe(
         catchError(this.errorHandler.handleError)
     );
   }
