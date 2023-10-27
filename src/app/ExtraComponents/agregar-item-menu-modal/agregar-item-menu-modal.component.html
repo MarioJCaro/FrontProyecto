@@ -18,8 +18,8 @@
       <div class="row">
         <mat-form-field class="half-width">
           <mat-label>Categoría</mat-label>
-          <mat-select formControlName="grupos">
-            <mat-option *ngFor="let grupo of grupos" [value]="grupo">
+          <mat-select formControlName="grupoId">
+            <mat-option *ngFor="let grupo of grupos" [value]="grupo.id">
               {{ grupo.nombre }}
             </mat-option>
           </mat-select>

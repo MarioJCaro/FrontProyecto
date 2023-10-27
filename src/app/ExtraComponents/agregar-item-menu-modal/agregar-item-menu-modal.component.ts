@@ -6,7 +6,7 @@ import { CategoriasItemMenu } from 'src/app/enums/categoria-item-menu.enum';
 import { Grupo } from 'src/app/models/grupo.model';
 import { ErrorHandlingService } from 'src/app/services/errorHandling/error-handling.service';
 import { GetAllGruposResponse, GrupoComidaService, GrupoResponse } from 'src/app/services/grupoComida/grupo-comida.service';
-import { MenubackofficeService } from 'src/app/services/menubackoffice/menubackoffice.service';
+import { CreateItemMenuRequest, MenubackofficeService } from 'src/app/services/menubackoffice/menubackoffice.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
 
 @Component({
@@ -34,9 +34,10 @@ export class AgregarItemMenuModalComponent {
       this.ItemMenuForm = this.formBuilder.group({
         nombre: ['', Validators.required],
         descripcion: ['', Validators.required],
-        grupos: ['', Validators.required],
+        grupoId: ['', Validators.required],
         precio: ['', Validators.required],
-      });
+        imagen: ['']  // Campo de imagen en base64
+    });    
     }
 
     getGrupos() {
@@ -66,14 +67,35 @@ export class AgregarItemMenuModalComponent {
           const reader = new FileReader();
           reader.onload = (e: any) => {
               this.selectedImage = e.target.result;
+              this.ItemMenuForm.patchValue({
+                  imagen: e.target.result.split(',')[1]  // Guarda solo el contenido base64, no el tipo de datos
+              });
           };
           reader.readAsDataURL(file);
       }
+    }
+
+  createItemMenu(item : any){
+    this.backofficeService.create(item).subscribe({
+      next:(response) => {
+        this.toastService.showSuccess("Item creado con exito");
+        this.dialogRef.close();
+      },
+      error:(error) => {
+        
+      }}
+    );
   }
 
-    onSubmit(): void {
-        
+  onSubmit(): void {
+    if (this.ItemMenuForm.valid) {
+      const formData = this.ItemMenuForm.value;
+      
+      this.createItemMenu(formData);
     }
+
+    this.dialogRef.close();
+  }
 
     onCancel(): void {
         // Cierra el modal sin hacer nada

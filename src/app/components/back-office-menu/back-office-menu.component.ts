@@ -126,7 +126,7 @@ toggleItemVisibility(item: any) {
   });
 }
 
-openDeleteDialog(item: Item): void {
+openDeleteDialog(item: ItemMenu): void {
   
   const dialogRef = this.dialog.open(EliminarItemMenuModalComponent, {
     width: '15rem',

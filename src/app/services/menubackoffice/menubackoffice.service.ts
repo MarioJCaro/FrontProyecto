@@ -9,18 +9,18 @@ export interface CreateItemMenuRequest {
   nombre: string;
   descripcion: string;
   precio: number;
-  imagen: number;
+  imagen: string;
   grupoId: number;
 }
 
-export interface CreateItemResponse {
+export interface CreateItemMenuResponse {
   total: number,
   item: {
     id: number;
     nombre: string;
     descripcion: string;
     precio: number;
-    imagen: number;
+    imagen: string;
     grupoId: number;
   };
 }
@@ -36,7 +36,7 @@ export interface ItemMenuResponse {
   nombre: string;
   descripcion: string;
   precio: number;
-  imagen: number;
+  imagen: string;
   grupo: Grupo;
 }
 
@@ -67,6 +67,24 @@ export class MenubackofficeService {
     return this.http.get<ItemMenuResponse>(`${this.apiUrl}/itemsMenu/${id}`, { headers }).pipe(
         catchError(this.errorHandler.handleError)
     );
+  }
+
+  create(item: CreateItemMenuRequest): Observable<CreateItemMenuResponse> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<CreateItemMenuResponse>(`${this.apiUrl}/itemsMenu`, item, { headers }).pipe(
+      catchError(this.errorHandler.handleError));
+  }
+
+  update(id: number, item: CreateItemMenuRequest): Observable<CreateItemMenuResponse> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.put<CreateItemMenuResponse>(`${this.apiUrl}/itemsMenu/${id}`, item, { headers }).pipe(
+      catchError(this.errorHandler.handleError));
+  }
+
+  remove(id: number): Observable<any>{
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.delete<any>(`${this.apiUrl}/itemsMenu/${id}`, { headers }).pipe(
+      catchError(this.errorHandler.handleError));
   }
   
 }
