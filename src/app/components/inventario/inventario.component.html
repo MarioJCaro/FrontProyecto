@@ -1,29 +1,41 @@
 <div class="container">
 
   <div class="header">
-    <button mat-button class="back-button">
+    <button mat-button class="back-button" (click)="navigateTo('homeadmin')">
       <mat-icon>arrow_back</mat-icon> Volver
     </button>
 
     <div class="actions">
       <mat-form-field appearance="fill" class="filter">
         <mat-label>Filtro</mat-label>
-        <mat-select>
+        <mat-select (selectionChange)="onFilterChange($event)">
           <mat-option value="nombre">Nombre</mat-option>
-          <mat-option value="categoria">Categoría</mat-option>
+          <mat-option value="categoriaId">Categoría</mat-option>
           <!-- Agregar más opciones de filtro si es necesario -->
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="fill" class="search">
-        <mat-label>Buscar</mat-label>
-        <input matInput>
-      </mat-form-field>
+      <!-- Campo de búsqueda dinámico -->
+      <ng-container *ngIf="filterField !== 'categoriaId'">
+        <mat-form-field appearance="fill" class="search">
+            <mat-label>Buscar</mat-label>
+            <input matInput #searchInput (keyup)="onSearchChange(searchInput.value)">
+        </mat-form-field>
+      </ng-container>
+
+      <!-- Dropdown de categorías para filtrar -->
+      <ng-container *ngIf="filterField === 'categoriaId'">
+        <mat-form-field appearance="fill" class="search">
+            <mat-label>Categoría</mat-label>
+            <mat-select (selectionChange)="onCategoryChange($event)">
+                <mat-option *ngFor="let cat of categorias" [value]="cat.id">{{ cat.nombre }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+      </ng-container>
 
       <button mat-raised-button class="add-button" (click)="openDialog()">
-        Agregar<br>Ítem
-    </button>
-
+          Agregar<br>Ítem
+      </button>
     </div>
   </div>
 
@@ -38,7 +50,7 @@
     <!-- Categoría Column -->
     <ng-container matColumnDef="categoria">
       <mat-header-cell *matHeaderCellDef> Categoría </mat-header-cell>
-      <mat-cell *matCellDef="let item"> {{item.categoria}} </mat-cell>
+      <mat-cell *matCellDef="let item"> {{item.categoria.nombre}} </mat-cell>
     </ng-container>
 
     <!-- Stock Column -->
@@ -76,6 +88,6 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  <mat-paginator [length]="totalCount" [pageSize]="pageEvent.pageSize" [pageSizeOptions]="[5, 10, 20]" (page)="onPaginateChange($event)" showFirstLastButtons></mat-paginator>
 
 </div>

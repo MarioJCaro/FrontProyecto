@@ -1,23 +1,26 @@
 <div class="container">
 
     <div class="header">
-      <button mat-button class="back-button">
+      <button mat-button class="back-button" (click)="navigateTo('gestionusers')">
         <mat-icon>arrow_back</mat-icon> Volver
       </button>
   
       <div class="actions">
         <mat-form-field appearance="fill" class="filter">
           <mat-label>Filtro</mat-label>
-          <mat-select>
+          <mat-select (selectionChange)="onFilterChange($event)">
             <mat-option value="nombre">Nombre</mat-option>
             <!-- Agregar más opciones de filtro si es necesario -->
           </mat-select>
         </mat-form-field>
   
-        <mat-form-field appearance="fill" class="search">
-          <mat-label>Buscar</mat-label>
-          <input matInput>
-        </mat-form-field>
+        <!-- Campo de búsqueda dinámico -->
+        <ng-container>
+          <mat-form-field appearance="fill" class="search">
+              <mat-label>Buscar</mat-label>
+              <input matInput #searchInput (keyup)="onSearchChange(searchInput.value)">
+          </mat-form-field>
+        </ng-container>
   
         <button mat-raised-button class="add-button" (click)="openAddClientDialog()">
           Agregar<br>Cliente
@@ -44,7 +47,7 @@
       <!-- Contacto Column -->
       <ng-container matColumnDef="contacto">
         <mat-header-cell *matHeaderCellDef> Contacto </mat-header-cell>
-        <mat-cell *matCellDef="let item"> {{item.contacto}} </mat-cell>
+        <mat-cell *matCellDef="let item"> {{item.telefono}} </mat-cell>
       </ng-container>
   
       <!-- Acciones Column -->
@@ -64,6 +67,6 @@
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
   
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    <mat-paginator [length]="totalCount" [pageSize]="pageEvent.pageSize" [pageSizeOptions]="[5, 10, 20]" (page)="onPaginateChange($event)" showFirstLastButtons></mat-paginator>
   
   </div>    

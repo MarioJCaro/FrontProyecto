@@ -8,24 +8,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  username: string = '';
+  nick: string = '';
   password: string = '';
 
   constructor(private authService: AuthService, private router: Router, private toastService: ToastService) {}
 
   login() {
     const loginData: LoginRequest = {
-      username: this.username,
+      nick: this.nick,
       password: this.password
     };
   
     this.authService.login(loginData).subscribe({
       next: (response) => {
         console.log('Token:', response.token);
-        console.log('User:', response.user);
+        console.log('User:', response.empleado);
         localStorage.setItem('authToken', response.token);
+        localStorage.setItem('role', response.empleado.rol);
         this.toastService.showSuccess("Ha iniciado sesión con éxito");
-        this.router.navigate(['/']);
+        this.authService.redirectUserBasedOnRole(response.empleado.rol);
       },
       error: (error) => {
         console.error('Login Error:', error.error);

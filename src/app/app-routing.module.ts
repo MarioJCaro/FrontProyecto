@@ -17,44 +17,29 @@ import { HomeMozoComponent } from './components/home-mozo/home-mozo.component';
 import { MenuMozoComponent } from './components/menu-mozo/menu-mozo.component';
 import { OrdenesMesaComponent } from './components/ordenes-mesa/ordenes-mesa.component';
 import { HistorialVentasComponent } from './components/historial-ventas/historial-ventas.component';
+import { AuthGuard } from './middlewares/auth.guard';
+import { CategoriasComponent } from './components/categorias/categorias/categorias.component';
 
 
 
 const routes: Routes = [
 
-  {
-    path:'homecocina', component:HomeCocinaComponent
-  },
-  {path:'homecaja', component:HomeCajaComponent},
-  {
-    path:'homeadmin', component:HomeAdminComponent
-  },
-  {
-    path: 'login', component:LoginComponent
-  },
-  {
-    path:'inventario', component:InventarioComponent
-  },
-  {
-    path: 'gestionusers', component:GestionUsuariosComponent
-  },
-  {
-    path: 'gestionempleados', component:GestionEmpleadosComponent
-  },
-  {
-    path: 'gestionclientes', component:GestionClientesComponent
-  },
-  { path: 'unauthorized', component: UnauthorizedComponent },
-  
-  { path: 'mesas', component: MesasPrototypeComponent },
-  {
-    path:'backOfficeMenu', component:BackOfficeMenuComponent
-  },
-  {path:'homemozo', component:HomeMozoComponent},
-  {path:'ordenesmesa', component:OrdenesMesaComponent},
-  {path:'menumozo', component:MenuMozoComponent},
-  {path:'historialVentas', component:HistorialVentasComponent}
-
+  {path:'homecocina', component:HomeCocinaComponent, canActivate: [AuthGuard], data: { roles: ['Admin', 'Cocina'] }},
+  {path:'homecaja', component:HomeCajaComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
+  {path:'homeadmin', component:HomeAdminComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
+  {path: 'login', component:LoginComponent},
+  {path:'inventario', component:InventarioComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
+  {path: 'gestionusers', component:GestionUsuariosComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
+  {path: 'gestionempleados', component:GestionEmpleadosComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
+  {path: 'gestionclientes', component:GestionClientesComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
+  {path: 'unauthorized', component: UnauthorizedComponent},
+  {path: 'mesas', component: MesasPrototypeComponent, canActivate: [AuthGuard], data: { roles: ['Admin','Mozo'] }},
+  {path:'backOfficeMenu', component:BackOfficeMenuComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
+  {path:'homemozo', component:HomeMozoComponent, canActivate: [AuthGuard], data: { roles: ['Admin','Mozo'] }},
+  {path:'ordenesmesa', component:OrdenesMesaComponent, canActivate: [AuthGuard], data: { roles: ['Admin','Mozo'] }},
+  {path:'menumozo', component:MenuMozoComponent, canActivate: [AuthGuard], data: { roles: ['Admin','Mozo'] }},
+  {path:'historialVentas', component:HistorialVentasComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
+  {path:'categorias', component:CategoriasComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }}
  
 ];
 
