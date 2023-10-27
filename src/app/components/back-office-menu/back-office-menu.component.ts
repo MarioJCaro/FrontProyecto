@@ -52,21 +52,10 @@ export class BackOfficeMenuComponent implements OnInit {
     });
 }
 
-openConsultarItemModal() {
-  const dialogRef = this.dialog.open(ConsultarItemMenuModalComponent, {
-      width: '500px',  // Establece el ancho del modal
-      data: { /* data that you want to send to modal */ }
-  });
-
-  dialogRef.afterClosed().subscribe(result => {
-      console.log('El modal se cerró', result);
-      // Si devuelves algún dato desde el modal, result contendrá esos datos.
-  });
-}
 
 abrirModal() {
   const dialogRef = this.dialog.open(ConsultarItemMenuModalComponent, {
-    width: '400px', // Ajusta el tamaño según tus necesidades
+    width: '30rem', // Ajusta el tamaño según tus necesidades
     // data: { algunaData: 'data que desees pasar al modal' } // Opcional
   });
 
@@ -77,7 +66,7 @@ abrirModal() {
 }
 openModifyItemModal(item: any) {
   const dialogRef = this.dialog.open(ModificarItemMenuModalComponent, {
-    width: '500px',
+    width: '30rem',
     data: item
   });
 
@@ -91,7 +80,7 @@ openModifyItemModal(item: any) {
 
 toggleItemVisibility(item: any) {
   const dialogRef = this.dialog.open(ConfirmarAccionModalComponent, {
-    width: '400px',
+    width: '30rem',
     data: item // pasamos el ítem al modal
   });
 

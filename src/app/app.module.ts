@@ -72,6 +72,17 @@ import { EliminarEmpleadoModalComponent } from './ExtraComponents/eliminar-emple
 import { AgregarClienteModalComponent } from './ExtraComponents/agregar-cliente-modal/agregar-cliente-modal.component';
 import { EditarClienteModalComponent } from './ExtraComponents/editar-cliente-modal/editar-cliente-modal.component';
 import { EliminarClienteModalComponent } from './ExtraComponents/eliminar-cliente-modal/eliminar-cliente-modal.component';
+import { MovimientosCajaModalComponent } from './ExtraComponents/movimientos-caja-modal/movimientos-caja-modal.component';
+import { OrdenesMesaCajaModalComponent } from './ExtraComponents/ordenes-mesa-caja-modal/ordenes-mesa-caja-modal.component';
+import { PagarTodoModalComponent } from './ExtraComponents/pagar-todo-modal/pagar-todo-modal.component';
+import { PagarParcialModalComponent } from './ExtraComponents/pagar-parcial-modal/pagar-parcial-modal.component';
+import { AccionesBotellasModalComponent } from './ExtraComponents/acciones-botellas-modal/acciones-botellas-modal.component';
+import { AbrirBotellaModalComponent } from './ExtraComponents/abrir-botella-modal/abrir-botella-modal.component';
+import { DescontarBotellaModalComponent } from './ExtraComponents/descontar-botella-modal/descontar-botella-modal.component';
+import { DisponibilidadMesasModalComponent } from './ExtraComponents/disponibilidad-mesas-modal/disponibilidad-mesas-modal.component';
+import { RetirarEfectivoModalComponent } from './ExtraComponents/retirar-efectivo-modal/retirar-efectivo-modal.component';
+import { IngresarEfectivoModalComponent } from './ExtraComponents/ingresar-efectivo-modal/ingresar-efectivo-modal.component';
+import { VentaBebidaModalComponent } from './ExtraComponents/venta-bebida-modal/venta-bebida-modal.component';
 
 
 @NgModule({
@@ -116,6 +127,17 @@ import { EliminarClienteModalComponent } from './ExtraComponents/eliminar-client
     AgregarClienteModalComponent,
     EditarClienteModalComponent,
     EliminarClienteModalComponent,
+    MovimientosCajaModalComponent,
+    OrdenesMesaCajaModalComponent,
+    PagarTodoModalComponent,
+    PagarParcialModalComponent,
+    AccionesBotellasModalComponent,
+    AbrirBotellaModalComponent,
+    DescontarBotellaModalComponent,
+    DisponibilidadMesasModalComponent,
+    RetirarEfectivoModalComponent,
+    IngresarEfectivoModalComponent,
+    VentaBebidaModalComponent,
 
 
   ],
