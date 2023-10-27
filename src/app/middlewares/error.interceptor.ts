@@ -26,7 +26,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         if(error.error.error){
           this.toastService.showError(error.error.error);
         }
-        else if (error.error) {
+        else if (error.error.message) {
           this.toastService.showError(error.error.message);
         }
         else {

@@ -10,9 +10,10 @@ import { ConfirmarAccionModalComponent } from 'src/app/ExtraComponents/confirmar
 import { EliminarItemMenuModalComponent } from 'src/app/ExtraComponents/eliminar-item-menu-modal/eliminar-item-menu-modal.component';
 import { Item } from 'src/app/models/item.model';
 import { PageEvent } from '@angular/material/paginator';
-import { MenubackofficeService } from 'src/app/services/menubackoffice/menubackoffice.service';
+import { GetAllItemMenuResponse, MenubackofficeService } from 'src/app/services/menubackoffice/menubackoffice.service';
 import { Router } from '@angular/router';
 import { ErrorHandlingService } from 'src/app/services/errorHandling/error-handling.service';
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-back-office-menu',
@@ -29,19 +30,40 @@ export class BackOfficeMenuComponent implements OnInit {
   filterField: string = '';
   filterValue: string = '';
 
-  // Datos ficticios para el dataSource
-  items: ItemMenu[] = [
-    { id: 1, nombre: 'Producto A', descripcion:'Un item', categoria: CategoriasItemMenu.Cervezas,  precio: 15, imagen: 'link', activo: false },
-    { id: 2, nombre: 'Producto B', descripcion:'Un item',  categoria: CategoriasItemMenu.Gramajo, precio: 15, imagen: 'link', activo: true },
-    { id: 3, nombre: 'Producto C', descripcion:'Un item',  categoria: CategoriasItemMenu.Hamburguesas , precio: 15, imagen: 'link', activo: true },
-    // ... puedes agregar más items
-  ];
 
-  constructor(public dialog: MatDialog, private errorHandler:ErrorHandlingService, private router: Router, backofficeService: MenubackofficeService) {}
+  constructor(public dialog: MatDialog, private errorHandler:ErrorHandlingService, private router: Router, private backofficeService: MenubackofficeService) {}
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource(this.items);
+    this.getItems();
   }
+
+  getItems(campo?:any , valor?:any){
+    this.backofficeService.getAll(this.pageEvent.pageIndex + 1, this.pageEvent.pageSize, this.filterField, this.filterValue).subscribe({
+      next:(response: GetAllItemMenuResponse) => {
+        const itemsFromResponse = response.items;
+        // Recorremos el arreglo de ítems y lo procesamos
+        const itemsToAdd = itemsFromResponse.map(item => ({
+          id: item.id,
+          nombre: item.nombre,
+          descripcion: item.descripcion,
+          precio: item.precio,
+          categoria: item.grupo,
+          imagen: item.imagen
+        }));
+        
+        // Agregamos los nuevos ítems al itemsArray
+        this.itemsArray = [];
+        this.itemsArray = [...this.itemsArray, ...itemsToAdd];
+
+        this.totalCount = response.total;
+        this.dataSource = new MatTableDataSource(this.itemsArray);
+        
+      },
+      error:(error) => {
+        catchError(this.errorHandler.handleError);
+      }
+    });
+}
 
   openDialog(): void {
     
@@ -49,14 +71,7 @@ export class BackOfficeMenuComponent implements OnInit {
       width: '30rem',
       // Puedes pasar data inicial si es necesario
     });
-
     dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-            // Agregar lógica aquí para añadir el nuevo ítem al dataSource o enviar al servidor
-            this.items.push(result);
-            this.dataSource.data = this.items;
-            
-        }
     });
 }
 
@@ -100,7 +115,7 @@ toggleItemVisibility(item: any) {
   });
 }
 
-openDeleteDialog(item: Item): void {
+openDeleteDialog(item: ItemMenu): void {
   
   const dialogRef = this.dialog.open(EliminarItemMenuModalComponent, {
     width: '15rem',

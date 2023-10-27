@@ -1,6 +1,6 @@
-<h2 mat-dialog-title>Agregar ítem</h2>
-
-<mat-dialog-content class="dialog-content">
+<form [formGroup]="ItemMenuForm">
+    <h2 mat-dialog-title>Agregar ítem</h2>
+    <mat-dialog-content class="dialog-content">
     <!-- Vista previa de la imagen -->
     <div class="image-preview" [style.backgroundImage]="selectedImage ? 'url(' + selectedImage + ')' : 'none'">
         <input type="file" (change)="onImageSelected($event)" hidden #imageInput>
@@ -9,36 +9,35 @@
         </button>
     </div>
 
-    <!-- Campo de Nombre -->
     <mat-form-field appearance="fill" class="full-width">
         <mat-label>Nombre</mat-label>
-        <input matInput>
-    </mat-form-field>
-
-    <!-- Dropdown de Categoría y campo de Precio -->
-    <div class="row">
+        <input matInput formControlName="nombre">
+      </mat-form-field>
+  
+      <!-- Dropdown de Categoría y campo de Precio -->
+      <div class="row">
         <mat-form-field class="half-width">
-            <mat-label>Categoría</mat-label>
-            <mat-select [(ngModel)]="categoria">
-                <mat-option *ngFor="let cat of Object.values(categorias)" [value]="cat">
-                    {{ cat }}
-                </mat-option>
-            </mat-select>
+          <mat-label>Categoría</mat-label>
+          <mat-select formControlName="grupoId">
+            <mat-option *ngFor="let grupo of grupos" [value]="grupo.id">
+              {{ grupo.nombre }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
-
+  
         <mat-form-field appearance="fill" class="half-width">
-            <mat-label>Precio</mat-label>
-            <input matInput>
+          <mat-label>Precio</mat-label>
+          <input matInput formControlName="precio">
         </mat-form-field>
-    </div>
-
-    <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Descripcion</mat-label>
-        <input matInput>
-    </mat-form-field>
-</mat-dialog-content>
-
-<mat-dialog-actions class="dialog-actions">
+      </div>
+  
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Descripción</mat-label>
+        <input matInput formControlName="descripcion">
+      </mat-form-field>
+    </mat-dialog-content>
+  </form>
+  <mat-dialog-actions class="dialog-actions">
     <button mat-button (click)="onCancel()">Cancelar</button>
     <button mat-button color="primary" (click)="onSubmit()">Confirmar</button>
-</mat-dialog-actions>
+  </mat-dialog-actions>

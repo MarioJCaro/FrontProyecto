@@ -15,6 +15,7 @@ export interface LoginRequest {
 export interface LoginResponse {
   token: string;
   empleado: {
+    id: number;
     nick: string;
     nombre: string;
     apellido: string;
