@@ -99,7 +99,7 @@ onPaginateChange(event: PageEvent) {
 
   openEditDialog(cliente: Cliente): void {
     const dialogRef = this.dialog.open(EditarClienteModalComponent, {
-      width: '400px',
+      width: '30rem',
       data: { ...cliente } // pasamos una copia del empleado para evitar ediciones no deseadas
     });
   
@@ -112,7 +112,7 @@ onPaginateChange(event: PageEvent) {
 
   eliminarCliente(cliente: Cliente) {
     const dialogRef = this.dialog.open(EliminarClienteModalComponent, {
-      width: '300px',
+      width: '20rem',
       data: {cliente}
     });
   

@@ -2,11 +2,11 @@
 <div class="green-card" style="position: relative;">
     <div class="container">
         <button mat-raised-button class="mat-button" style="margin-right: 10px; background-color: #79D3B3;">Añadir Orden</button>
-        <button mat-raised-button class="mat-button" style="background-color: #79D3B3;" >Venta Bebida</button>
-        <button mat-fab class="mat-fab" style="background-color: #D1D1D1; color: black; position: absolute; top: 10px; right: 10px;">
+        <button mat-raised-button class="mat-button" style="background-color: #79D3B3;" (click)="openVentaBebidaModal()" >Venta Bebida</button>
+        <button mat-fab class="mat-fab" style="background-color: #D1D1D1; color: black; position: absolute; top: 10px; right: 10px;" (click)="openHistoryModal()">
             <mat-icon>schedule</mat-icon>
         </button>
-        <button mat-fab class="mat-fab" style="background-color: #D1D1D1;color: black; position: absolute; top: 50px; right: 10px; margin-top: 45px;">
+        <button mat-fab class="mat-fab" style="background-color: #D1D1D1;color: black; position: absolute; top: 50px; right: 10px; margin-top: 45px;" (click)="openBotellasModal()">
             <mat-icon>local_cafe</mat-icon>
         </button>
         <div fxLayout="row" style="margin-top: 10px;">
@@ -24,7 +24,7 @@
                         <tr>
                             <td>Mesa 1</td>
                             <td>
-                                <button mat-icon-button class="mat-button">
+                                <button mat-icon-button class="mat-button" (click)="openOrdenesModal()">
                                     <mat-icon>menu</mat-icon>
                                 </button>
                             </td>
@@ -54,8 +54,7 @@
             <!-- Lado derecho (Órdenes) -->
             <mat-card fxFlex="80%" fxFlex.lt-sm="100%" class="mat-card">
                 
-                <div class="orders-flex-container" style="background-color: #7D9A93;;"> <!-- Este div es el contenedor de las tarjetas -->
-                    
+                <div class="orders-flex-container"> <!-- Este div es el contenedor de las tarjetas -->
                     <mat-card class="order-card">
                         <!-- Estado y Paga -->
                         <mat-card-header class="order-header" style="background-color: #FFD686;">
