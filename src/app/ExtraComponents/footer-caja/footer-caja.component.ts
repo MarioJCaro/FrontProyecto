@@ -6,6 +6,10 @@ import {
 } from 'src/app/services/mesas/mesas.service';
 import { OrdenService } from 'src/app/services/orden/orden.service';
 import { environment } from 'src/environments/environments';
+import { DisponibilidadMesasModalComponent } from '../disponibilidad-mesas-modal/disponibilidad-mesas-modal.component';
+import { MatDialog } from '@angular/material/dialog';
+import { RetirarEfectivoModalComponent } from '../retirar-efectivo-modal/retirar-efectivo-modal.component';
+import { IngresarEfectivoModalComponent } from '../ingresar-efectivo-modal/ingresar-efectivo-modal.component';
 
 @Component({
   selector: 'app-footer-caja',
@@ -20,7 +24,7 @@ export class FooterCajaComponent implements OnInit {
   ocupadasCount: number = 0;
   ocupacionLocal: number = 0;
 
-  constructor(private mesasService: MesasService, private ordenService: OrdenService) {
+  constructor(public dialog: MatDialog, private mesasService: MesasService, private ordenService: OrdenService) {
     this.socket = io(this.socketUrl);
   }
 
@@ -60,4 +64,23 @@ export class FooterCajaComponent implements OnInit {
       },
     });
   }
+  
+  openDisponibilidadModal(): void {
+    const dialogRef = this.dialog.open(DisponibilidadMesasModalComponent, {
+      width: '30rem',
+    });
+
+}
+openRetiroModal(): void {
+  const dialogRef = this.dialog.open(RetirarEfectivoModalComponent, {
+    width: '30rem',
+  });
+
+}
+openIngresoModal(): void {
+  const dialogRef = this.dialog.open(IngresarEfectivoModalComponent, {
+    width: '30rem',
+  });
+
+}
 }

@@ -30,7 +30,7 @@ export class HistorialVentasComponent {
 
   openInfoOrdenModal(venta: any) {
     const dialogRef = this.dialog.open(InfoOrdenModalComponent, {
-      width: '600px', 
+      width: '35rem', 
       data: venta // Pasamos la venta actual para mostrar su información
     });
     

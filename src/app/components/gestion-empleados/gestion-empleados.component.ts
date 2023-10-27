@@ -110,7 +110,7 @@ applyFilter() {
 
   openEditDialog(empleado: Empleado): void {
     const dialogRef = this.dialog.open(EditarEmpleadoModalComponent, {
-      width: '400px',
+      width: '30rem',
       data: { ...empleado } // pasamos una copia del empleado para evitar ediciones no deseadas
     });
   
@@ -123,7 +123,7 @@ applyFilter() {
 
   eliminarEmpleado(empleado: Empleado) {
     const dialogRef = this.dialog.open(EliminarEmpleadoModalComponent, {
-      width: '300px',
+      width: '20rem',
       data: {empleado: empleado}
     });
   

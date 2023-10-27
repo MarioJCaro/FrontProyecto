@@ -1,0 +1,20 @@
+<h2 mat-dialog-title style="text-align: center; font-size: large;">Abrir Botella</h2>
+<mat-dialog-content class="custom-modal">
+    <div class="modal-header">
+      Seleccionar bebida
+    </div>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Bebida</mat-label>
+      <mat-select [(value)]="selectedDrink">
+        <mat-option value="fernet-branca">Fernet branca</mat-option>
+        <!-- Puedes añadir más opciones aquí -->
+      </mat-select>
+    </mat-form-field>
+  
+    <div class="modal-actions">
+      <button mat-button mat-dialog-close>Cancelar</button>
+      <button mat-button color="primary" >Confirmar</button>
+    </div>
+  </mat-dialog-content>
+  

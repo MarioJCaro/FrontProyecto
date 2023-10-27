@@ -2,6 +2,7 @@
 .green-card {
   background-color: #7D9A93;
   padding: 50px;
+  
   border-radius: 20px;
 }
 /* Contenedor flex para las tarjetas de órdenes */
@@ -10,6 +11,7 @@
   flex-direction: row;
   flex-wrap: nowrap;
   overflow-x: auto;
+  background-color: #A9A9A9;
 }
 
 /* Estilo para la tarjeta de orden */
@@ -76,4 +78,8 @@
 .big-icon {
   font-size: 20px !important;
   vertical-align: middle !important;
+}
+
+.mat-fab {
+  z-index: 1000; /* Un valor alto para asegurar que se superponga a otros elementos */
 }
