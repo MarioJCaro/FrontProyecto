@@ -10,6 +10,7 @@ import { DisponibilidadMesasModalComponent } from '../disponibilidad-mesas-modal
 import { MatDialog } from '@angular/material/dialog';
 import { RetirarEfectivoModalComponent } from '../retirar-efectivo-modal/retirar-efectivo-modal.component';
 import { IngresarEfectivoModalComponent } from '../ingresar-efectivo-modal/ingresar-efectivo-modal.component';
+import { CajaResponse, CajaService } from 'src/app/services/caja/caja.service';
 
 @Component({
   selector: 'app-footer-caja',
@@ -23,18 +24,25 @@ export class FooterCajaComponent implements OnInit {
   libreCount: number = 0;
   ocupadasCount: number = 0;
   ocupacionLocal: number = 0;
+  cajaTotal: number = 0;
 
-  constructor(public dialog: MatDialog, private mesasService: MesasService, private ordenService: OrdenService) {
+  constructor(public dialog: MatDialog, private mesasService: MesasService, private ordenService: OrdenService, private cajaService: CajaService) {
     this.socket = io(this.socketUrl);
   }
 
   ngOnInit(): void {
     this.getOcupadas();
     this.getOcupacion();
+    this.getTotalCaja();
 
     this.socket.on('fetchOrdenes', (data: any) => {
       this.getOcupadas();
       this.getOcupacion();
+      this.getTotalCaja();
+    });
+
+    this.socket.on('fetchTotalCaja', (data: any) => {
+      this.getTotalCaja();
     });
   }
 
@@ -63,6 +71,18 @@ export class FooterCajaComponent implements OnInit {
         console.error('Hubo un error al obtener la ocupación', error);
       },
     });
+  }
+
+  getTotalCaja(): void {
+    this.cajaService.getCajaTotal(1).subscribe({
+      next: (response: CajaResponse) => {
+        this.cajaTotal = response.total;
+        console.log(this.cajaTotal);
+      },
+    error: (error) => {
+    console.error('Error obteniendo el total de la caja:', error);
+    },
+   });
   }
   
   openDisponibilidadModal(): void {
