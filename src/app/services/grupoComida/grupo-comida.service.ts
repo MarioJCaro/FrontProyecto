@@ -28,4 +28,11 @@ export class GrupoComidaService {
       catchError(this.errorHandler.handleError)
     );
   }
+
+  getGrupoByNombre(nombre: string): Observable<GetAllGruposResponse>{
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get<GetAllGruposResponse>(`${this.apiUrl}/grupos?page=1&limit=1&nombre=${nombre}`, { headers }).pipe(
+      catchError(this.errorHandler.handleError)
+    );
+  }
 }

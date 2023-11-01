@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { itemSeleccionadoInterface } from 'src/app/components/menu-mozo/menu-mozo.component';
+import { ESTADOS } from 'src/app/constants/estadosOrden.constant';
 import { CreateOrdenRequest, ItemsRequest, OrdenService } from 'src/app/services/orden/orden.service';
 
 @Component({
@@ -46,7 +47,8 @@ export class ResumenOrdenModalComponent {
         clienteId: this.data.ordenData.clientePreferencial,
         empleadoId: empleadoId,
         items: itemsRequest,
-        mesas: this.data.ordenData.nroMesa
+        mesas: this.data.ordenData.nroMesa,
+        estado: ESTADOS.EN_COCINA,
       };
       console.log('clienteId:', orderRequest.clienteId);
 

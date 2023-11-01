@@ -27,17 +27,24 @@ export class MenuMozoService {
 
   constructor(private http: HttpClient, private errorHandler:ErrorHandlingService) { }
 
-  getAll(currentPage: number, pageSize: number, campo?: string, valor?: any): Observable<GetItemsMenuActivoBasicResponse> {
+  getAll(currentPage: number, pageSize: number, campo1?: string, valor1?: any, campo2?: string, valor2?: any): Observable<GetItemsMenuActivoBasicResponse> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     let url = `${this.apiUrl}/itemsMenu/activos/basic?page=${currentPage}&limit=${pageSize}`;
 
-    if (campo && valor) {
-        url += `&${campo}=${valor}`;
+    if (campo1 && valor1) {
+        url += `&${campo1}=${valor1}`;
+    }
+
+    if (campo2 && valor2) {
+        url += `&${campo2}=${valor2}`;
     }
 
     return this.http.get<GetItemsMenuActivoBasicResponse>(url, { headers }).pipe(
         catchError(this.errorHandler.handleError)
     );
-  }
+}
+
   
 }
+
+
