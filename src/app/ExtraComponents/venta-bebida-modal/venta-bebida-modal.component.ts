@@ -7,6 +7,10 @@ import { forkJoin, map } from 'rxjs';
 import { ClienteResponse, ClienteService } from 'src/app/services/cliente/cliente.service';
 import { CreateOrdenRequest, ItemsRequest, OrdenService } from 'src/app/services/orden/orden.service';
 import { ESTADOS } from 'src/app/constants/estadosOrden.constant';
+import { ToastService } from 'src/app/services/toast/toast.service';
+import { MatDialogRef } from '@angular/material/dialog';
+
+
 @Component({
   selector: 'app-venta-bebida-modal',
   templateUrl: './venta-bebida-modal.component.html',
@@ -17,8 +21,8 @@ export class VentaBebidaModalComponent implements OnInit {
   displayedColumns: string[] = ['bebida', 'precio', 'cantidad'];
   dataSource: ItemMenuResponse[] = [];
   searchTerm: string = '';
-  grupoId = 9;
-
+// Variable de clase para almacenar los IDs de grupo
+grupoIds: number[] = [];
 
   public clientesPreferenciales: ClienteResponse[] = [];
   public clienteSeleccionado: ClienteResponse  | undefined;
@@ -29,7 +33,8 @@ export class VentaBebidaModalComponent implements OnInit {
 
 
 
-  constructor(private menuService: MenuMozoService, private grupoService: GrupoComidaService, private clienteService: ClienteService, private ordenService: OrdenService) { }
+  constructor(private menuService: MenuMozoService, private grupoService: GrupoComidaService, private clienteService: ClienteService, private ordenService: OrdenService, private toastService: ToastService, private dialogRef: MatDialogRef<VentaBebidaModalComponent>
+    ) { }
   
   ngOnInit(): void {
     this.empleadoNombre = localStorage.getItem('empleadoNombre');
@@ -98,27 +103,30 @@ prepareCreateOrdenRequest(): CreateOrdenRequest {
   };
 }
 
-
 onConfirmar(): void {
   const request: CreateOrdenRequest = this.prepareCreateOrdenRequest();
 
-  this.ordenService.create(request).subscribe(
-      response => {
-          console.log('Orden creada con éxito!', response);
-          // Aquí puedes mostrar una notificación de éxito o redirigir al usuario
-      },
-      error => {
-          console.error('Error al crear la orden', error);
-          // Aquí puedes mostrar un mensaje de error al usuario
-      }
-  );
+  this.ordenService.create(request).subscribe({
+    next: (response) => {
+      this.toastService.showSuccess("Orden creada con éxito");
+      this.dialogRef.close();
+
+    },
+    error: (error) => {
+        console.error('Error al crear la orden', error);
+        // Aquí puedes mostrar un mensaje de error al usuario
+    }
+  });
 }
 
 cargarClientes(): void {
-  this.clienteService.getAllClientesByLimit().subscribe(response => {
-    this.clientesPreferenciales = response.items;
-  }, error => {
-    console.error('Error al cargar los clientes:', error);
+  this.clienteService.getAllClientesByLimit().subscribe({
+    next: (response) => {
+      this.clientesPreferenciales = response.items;
+    },
+    error: (error) => {
+      console.error('Error al cargar los clientes:', error);
+    }
   });
 }
 
@@ -137,28 +145,38 @@ loadGrupoIdAndThenMenuItems(): void {
   );
 
   // Combina todos los observables en uno y suscríbete a él
-  forkJoin(observables).subscribe(grupoIds => {
-    // Ahora tienes todos los IDs de grupo en grupoIds
-    this.loadMenuItems(grupoIds);
-  }, error => {
-    console.error('Error al obtener los IDs de grupo:', error);
+  forkJoin(observables).subscribe({
+    next: (grupoIds) => {
+      // Ahora tienes todos los IDs de grupo en grupoIds
+      this.loadMenuItems(grupoIds);
+    },
+    error: (error) => {
+      console.error('Error al obtener los IDs de grupo:', error);
+    }
   });
 }
 
 
 
+searchMenuItems(): void {
+  // Verificar si ya tienes los grupoIds cargados, si no, cargarlos primero
+  if (this.grupoIds.length > 0) {
+    // Realizar la búsqueda incluyendo los grupoIds si ya están disponibles
+    this.menuService.getAll(1, 100, 'nombre', this.searchTerm, 'grupoId', this.grupoIds.join()).subscribe(response => {
+      this.dataSource = response.items;
+    });
+  } else {
+    // Si no se han cargado los grupoIds, cárgalos primero
+    this.loadGrupoIdAndThenMenuItems();
+  }
+}
 
+// Modifica la función loadMenuItems para guardar los IDs de grupo
 loadMenuItems(grupoIds: number[]): void {
+  this.grupoIds = grupoIds; // Almacena los IDs de grupo en la variable de clase
   this.menuService.getAll(1, 100, 'grupoId', grupoIds.join()).subscribe(response => {
       this.dataSource = response.items;
   });
-}
-
-  
-  searchMenuItems(): void {
-    this.menuService.getAll(1, 100, 'nombre', this.searchTerm, 'grupoId', this.grupoId).subscribe(response => {
-      this.dataSource = response.items;
-    });
 }
 
   
