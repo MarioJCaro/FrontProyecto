@@ -47,6 +47,14 @@ export class GrupoComidaService {
     );
   }
 
+
+  getGrupoByNombre(nombre: string): Observable<GetAllGruposResponse>{
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get<GetAllGruposResponse>(`${this.apiUrl}/grupos?page=1&limit=1&nombre=${nombre}`, { headers }).pipe(
+      catchError(this.errorHandler.handleError)
+    );
+  }
+
   getAllGrupos(currentPage: number, pageSize: number, campo?: string, valor?: any): Observable<GetAllGrupoResponse> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     let url = `${this.apiUrl}/grupos?page=${currentPage}&limit=${pageSize}`;
@@ -77,4 +85,5 @@ export class GrupoComidaService {
     return this.http.delete<any>(`${this.apiUrl}/grupos/${id}`, { headers }).pipe(
       catchError(this.errorHandler.handleError));
   }
+
 }

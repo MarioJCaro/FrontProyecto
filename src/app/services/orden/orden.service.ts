@@ -8,13 +8,14 @@ import { Orden } from 'src/app/models/orden.model';
 export interface CreateOrdenRequest {
   fecha: String;
   hora: String;
-  responsable: string;
+  responsable: string | null;
   ocupacion: number;
   observaciones: string;
-  clienteId: number;
+  clienteId: number | null;
   empleadoId: number;
   items: ItemsRequest[];
   mesas: number[];
+  estado : string;
 }
 
 export interface CreateOrdenResponse {

@@ -7,6 +7,7 @@ import { ESTADOS } from 'src/app/constants/estadosOrden.constant';
 import { MesasOcupadasResponse, MesasResponse, MesasService } from 'src/app/services/mesas/mesas.service';
 import { AgregarOrdenModalComponent } from 'src/app/ExtraComponents/agregar-orden-modal/agregar-orden-modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import { VentaBebidaModalComponent } from 'src/app/ExtraComponents/venta-bebida-modal/venta-bebida-modal.component';
 
 @Component({
   selector: 'app-home-caja',
@@ -27,18 +28,6 @@ export class HomeCajaComponent  implements OnInit{
     
    }
 
-   
-  openAgregarDialog(): void {
-    const dialogRef = this.dialog.open(AgregarOrdenModalComponent, {
-      width: '30rem',
-      data: {}  // Puedes pasar la data inicial aquí si es necesario.
-    });
-
-    dialogRef.afterClosed().subscribe((result: any) => {
-      console.log('El modal fue cerrado', result);
-      // Aquí puedes manejar el resultado del modal, por ejemplo, guardar el nuevo ítem.
-    });
-  }
 
   ngOnInit(): void {
     this.fetchOrdenesEnCaja();
@@ -78,6 +67,8 @@ export class HomeCajaComponent  implements OnInit{
             return { 'background-color': '#FFD686' };
         case ESTADOS.PARA_ENTREGAR:
             return { 'background-color': '#E1F180' };
+        case ESTADOS.ENTREGADA:
+            return { 'background-color': '#C6F6D5' };    
         default:
             return {};
     }
@@ -114,4 +105,38 @@ export class HomeCajaComponent  implements OnInit{
         }
     });
 }
+
+
+
+openVentaBebidasDialog(): void {
+  const dialogRef = this.dialog.open(VentaBebidaModalComponent, {
+    width: '100rem',
+    data: {}  // Puedes pasar la data inicial aquí si es necesario.
+  });
+
+  dialogRef.afterClosed().subscribe((result: any) => {
+    console.log('El modal fue cerrado', result);
+    // Aquí puedes manejar el resultado del modal, por ejemplo, guardar el nuevo ítem.
+  });
+}
+
+ 
+openAgregarDialog(): void {
+  const dialogRef = this.dialog.open(AgregarOrdenModalComponent, {
+    width: '30rem',
+    data: {}  // Puedes pasar la data inicial aquí si es necesario.
+  });
+
+  dialogRef.afterClosed().subscribe((result: any) => {
+    console.log('El modal fue cerrado', result);
+    // Aquí puedes manejar el resultado del modal, por ejemplo, guardar el nuevo ítem.
+  });
+}
+
+
+
+
+
+
+
 }
