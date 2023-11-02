@@ -94,6 +94,7 @@ onPaginateChange(event: PageEvent) {
     });
   
     dialogRef.afterClosed().subscribe(result => {
+      this.getClientes();
     });
   }
 
@@ -105,6 +106,7 @@ onPaginateChange(event: PageEvent) {
   
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+        this.getClientes();
         // Aquí puedes manejar lo que quieras hacer cuando el modal se cierre, como actualizar el empleado en la lista o en una base de datos.
       }
     });
@@ -118,8 +120,7 @@ onPaginateChange(event: PageEvent) {
   
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // Aquí se coloca la lógica para eliminar el empleado
-        // Por ejemplo: this.empleadosService.eliminar(empleado.id);
+        this.getClientes();
         console.log(`Cliente ${cliente.nombre} eliminado`);
       } else {
         console.log('Operación cancelada');

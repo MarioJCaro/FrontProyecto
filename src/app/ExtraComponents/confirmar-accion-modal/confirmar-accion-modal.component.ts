@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ItemMenu } from 'src/app/models/itemMenu.model';
 
 @Component({
   selector: 'app-confirmar-accion-modal',
@@ -10,7 +11,9 @@ export class ConfirmarAccionModalComponent {
 
   constructor(
     public dialogRef: MatDialogRef<ConfirmarAccionModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: ItemMenu) { }
+
+  
 
   onConfirm(): void {
     this.dialogRef.close(true); // retornamos true si confirma

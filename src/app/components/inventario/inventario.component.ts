@@ -53,7 +53,7 @@ export class InventarioComponent  implements OnInit {
           stock: item.stock,
           costo: item.costo,
           cantxCasillero: item.cantxCasillero,
-          porUnidad: item.porUnidad
+          porUnidad: item.ventaPorUnidad
           // Añade otras propiedades si es necesario
         }));
         
@@ -137,7 +137,7 @@ applyFilter() {
   
     dialogRef.afterClosed().subscribe(result => {
       console.log('El modal fue cerrado', result);
-      // Aquí puedes manejar el resultado del modal, por ejemplo, guardar el nuevo ítem.
+      this.getItems();
     });
   }
 
@@ -149,6 +149,7 @@ applyFilter() {
   
     dialogRef.afterClosed().subscribe(result => {
       console.log('El modal fue cerrado', result);
+      this.getItems();
       // Aquí puedes manejar el resultado del modal, por ejemplo, guardar los cambios.
     });
   }
@@ -165,6 +166,7 @@ openDeleteDialog(item: Item): void {
 
   dialogRef.afterClosed().subscribe(result => {
     if (result) {
+      this.getItems();
       // Aquí puedes eliminar el ítem
       // TODO: Añadir la lógica para eliminar el ítem
     }
