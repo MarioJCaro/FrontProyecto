@@ -4,48 +4,47 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs';
-import { AgregarCategoriaModalComponent } from 'src/app/ExtraComponents/agregar-categoria-modal/agregar-categoria-modal/agregar-categoria-modal.component';
-import { EliminarCategoriaModalComponent } from 'src/app/ExtraComponents/eliminar-categoria-modal/eliminar-categoria-modal/eliminar-categoria-modal.component';
-import { ModificarCategoriaModalComponent } from 'src/app/ExtraComponents/modificar-categoria-modal/modificar-categoria-modal/modificar-categoria-modal.component';
-import { Categoria } from 'src/app/models/categoria.model';
-import { CategoriaService, GetAllCategoriaResponse } from 'src/app/services/categoria/categoria.service';
+import { AgregarGrupoModalComponent } from 'src/app/ExtraComponents/agregar-grupo-modal/agregar-grupo-modal/agregar-grupo-modal.component';
+import { EliminarGrupoModalComponent } from 'src/app/ExtraComponents/eliminar-grupo-modal/eliminar-grupo-modal/eliminar-grupo-modal.component';
+import { ModificarGrupoModalComponent } from 'src/app/ExtraComponents/modificar-grupo-modal/modificar-grupo-modal/modificar-grupo-modal.component';
+import { Grupo } from 'src/app/models/grupo.model';
 import { ErrorHandlingService } from 'src/app/services/errorHandling/error-handling.service';
+import { GetAllGruposResponse, GrupoComidaService } from 'src/app/services/grupoComida/grupo-comida.service';
 
 @Component({
-  selector: 'app-categorias',
-  templateUrl: './categorias.component.html',
-  styleUrls: ['./categorias.component.scss']
+  selector: 'app-grupos',
+  templateUrl: './grupos.component.html',
+  styleUrls: ['./grupos.component.scss']
 })
-export class CategoriasComponent {
-
+export class GruposComponent {
   displayedColumns: string[] = ['id', 'nombre', 'acciones'];
-  dataSource!: MatTableDataSource<Categoria>;
+  dataSource!: MatTableDataSource<Grupo>;
   totalCount: number = 0;
   pageEvent: PageEvent = {pageIndex: 0, pageSize: 10, length: 0};
   itemsArray: any[] = [];
   filterField: string = '';
   filterValue: string = '';
 
-  constructor(public dialog: MatDialog, private categoriaService:CategoriaService, private errorHandler:ErrorHandlingService, private router: Router) {}
+  constructor(public dialog: MatDialog, private grupoService: GrupoComidaService, private errorHandler:ErrorHandlingService, private router: Router) {}
 
   ngOnInit() {
-    this.getCategorias();
+    this.getGrupos();
   }
 
-  getCategorias(campo?:any , valor?:any){
-    this.categoriaService.getAllCats(this.pageEvent.pageIndex + 1, this.pageEvent.pageSize, this.filterField, this.filterValue).subscribe({
-      next:(response: GetAllCategoriaResponse) => {
-        const categoriasFromResponse = response.items;
+  getGrupos(campo?:any , valor?:any){
+    this.grupoService.getAllGrupos(this.pageEvent.pageIndex + 1, this.pageEvent.pageSize, this.filterField, this.filterValue).subscribe({
+      next:(response: GetAllGruposResponse) => {
+        const gruposFromResponse = response.items;
         // Recorremos el arreglo de ítems y lo procesamos
-        const categoriasToAdd = categoriasFromResponse.map(categoria => ({
-          id: categoria.id,
-          nombre: categoria.nombre,
+        const gruposToAdd = gruposFromResponse.map(grupo => ({
+          id: grupo.id,
+          nombre: grupo.nombre,
           // Añade otras propiedades si es necesario
         }));
         
         // Agregamos los nuevos ítems al itemsArray
         this.itemsArray = [];
-        this.itemsArray = [...this.itemsArray, ...categoriasToAdd];
+        this.itemsArray = [...this.itemsArray, ...gruposToAdd];
 
         this.totalCount = response.total;
         this.dataSource = new MatTableDataSource(this.itemsArray);
@@ -60,18 +59,18 @@ export class CategoriasComponent {
 onPaginateChange(event: PageEvent) {
   this.pageEvent = event;
   
-  this.getCategorias();
+  this.getGrupos();
 }
 
 onFilterChange(event: any) {
     this.filterField = event.value;
     this.filterValue = ''; // Resetear el valor de filtro
-    if (this.filterField === 'categoriaId') { // Actualizar a 'categoriaId'
+    if (this.filterField === 'grupoId') { // Actualizar a 'categoriaId'
         this.applyFilter();
     }
 }
 
-onCategoryChange(event: any) {
+onGrupoChange(event: any) {
   this.filterValue = event.value;
   this.applyFilter();
 }
@@ -83,14 +82,14 @@ onSearchChange(value: string) {
 
 applyFilter() {
   if (this.filterField && this.filterValue) {
-      this.getCategorias(this.filterField, this.filterValue);
+      this.getGrupos(this.filterField, this.filterValue);
   } else {
-      this.getCategorias();
+      this.getGrupos();
   }
 }
 
 openDialog(): void {
-  const dialogRef = this.dialog.open(AgregarCategoriaModalComponent, {
+  const dialogRef = this.dialog.open(AgregarGrupoModalComponent, {
     width: '30rem',
     data: {},  // Puedes pasar la data inicial aquí si es necesario.
     hasBackdrop: true,
@@ -99,35 +98,34 @@ openDialog(): void {
 
   dialogRef.afterClosed().subscribe(result => {
     console.log('El modal fue cerrado', result);
-    this.getCategorias();
+    this.getGrupos();
     // Aquí puedes manejar el resultado del modal, por ejemplo, guardar el nuevo ítem.
   });
 }
 
-openEditDialog(categoria: Categoria): void {
-  const dialogRef = this.dialog.open(ModificarCategoriaModalComponent, {
+openEditDialog(grupo: Grupo): void {
+  const dialogRef = this.dialog.open(ModificarGrupoModalComponent, {
     width: '30rem',
-    data: categoria  // Pasa el ítem a modificar como dato.
+    data: grupo  // Pasa el ítem a modificar como dato.
   });
 
   dialogRef.afterClosed().subscribe(result => {
     console.log('El modal fue cerrado', result);
-    this.getCategorias();
+    this.getGrupos();
     // Aquí puedes manejar el resultado del modal, por ejemplo, guardar los cambios.
   });
 }
 
-openDeleteDialog(categoria: Categoria): void {
-  
-  const dialogRef = this.dialog.open(EliminarCategoriaModalComponent, {
+openDeleteDialog(grupo: Grupo): void {
+  const dialogRef = this.dialog.open(EliminarGrupoModalComponent, {
     width: '15rem',
-    data: { categoria: categoria },  // Pasamos el ítem completo al modal
+    data: { grupo: grupo },  // Pasamos el ítem completo al modal
   }
   );
 
   dialogRef.afterClosed().subscribe(result => {
     if (result) {
-      this.getCategorias();
+      this.getGrupos();
       // Aquí puedes eliminar el ítem
       // TODO: Añadir la lógica para eliminar el ítem
     }

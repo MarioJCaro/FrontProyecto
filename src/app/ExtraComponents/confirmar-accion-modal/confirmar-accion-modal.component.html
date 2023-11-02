@@ -1,6 +1,15 @@
-<h2 mat-dialog-title>
-    {{ data.activo ? "¿Ocultar el item" : "¿Mostrar el item" }} {{ data.nombre }} del menú?
-  </h2>
+<mat-dialog-content class="dialog-content">
+  <!-- Radio Buttons -->
+  <mat-radio-group aria-label="Forma de venta"> 
+      <mat-radio-button color="primary" [value]="false">Trago</mat-radio-button>
+      <mat-radio-button color="primary" [value]="true">Unidad</mat-radio-button>
+  </mat-radio-group>
+  
+
+  <!-- Chips y Dropdown -->
+  <div class="chip-list">
+
+  </div>
   
   <mat-dialog-actions class="dialog-actions">
     <button mat-button (click)="onCancel()">Cancelar</button>

@@ -44,12 +44,11 @@ export interface ItemResponse {
   stock: number;
   cantxCasillero: number;
   costo: number;
-  porUnidad: boolean;
+  ventaPorUnidad: boolean;
   categoria: Categoria;
   createdAt: Date;
   updatedAt: Date;
 }
-
 
 export interface StockItemRequest {
     amount: number;
@@ -75,6 +74,12 @@ export class InventarioService {
         catchError(this.errorHandler.handleError)
     );
 }
+
+  getById(id : number): Observable<ItemResponse>{
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get<ItemResponse>(`${this.apiUrl}/itemsInventario/${id}`, { headers }).pipe(
+      catchError(this.errorHandler.handleError));
+  }
 
 
   create(item: CreateItemRequest): Observable<CreateItemResponse> {

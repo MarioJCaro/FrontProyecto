@@ -19,6 +19,7 @@ import { OrdenesMesaComponent } from './components/ordenes-mesa/ordenes-mesa.com
 import { HistorialVentasComponent } from './components/historial-ventas/historial-ventas.component';
 import { AuthGuard } from './middlewares/auth.guard';
 import { CategoriasComponent } from './components/categorias/categorias/categorias.component';
+import { GruposComponent } from './components/grupos/grupos/grupos.component';
 
 
 
@@ -39,7 +40,8 @@ const routes: Routes = [
   {path:'ordenesmesa', component:OrdenesMesaComponent, canActivate: [AuthGuard], data: { roles: ['Admin','Mozo'] }},
   {path:'menumozo', component:MenuMozoComponent, canActivate: [AuthGuard], data: { roles: ['Admin','Mozo'] }},
   {path:'historialVentas', component:HistorialVentasComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
-  {path:'categorias', component:CategoriasComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }}
+  {path:'categorias', component:CategoriasComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
+  {path:'grupos', component:GruposComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }}
  
 ];
 
