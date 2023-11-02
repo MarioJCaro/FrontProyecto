@@ -4,6 +4,7 @@ import { ErrorHandlingService } from '../errorHandling/error-handling.service';
 import { Observable, catchError } from 'rxjs';
 import { environment } from 'src/environments/environments';
 import { Grupo } from 'src/app/models/grupo.model';
+import { ItemMenu } from 'src/app/models/itemMenu.model';
 
 export interface CreateItemMenuRequest {
   nombre: string;
@@ -38,6 +39,18 @@ export interface ItemMenuResponse {
   precio: number;
   imagen: string;
   grupo: Grupo;
+  activo: boolean;
+}
+
+export interface addItemInventarioRequest {
+  itemsInventario: { id: number }[];
+  porUnidad: boolean;
+}
+
+
+export interface addItemInventarioResponse{
+  message: string;
+  items : ItemMenu;
 }
 
 @Injectable({
@@ -84,6 +97,12 @@ export class MenubackofficeService {
   remove(id: number): Observable<any>{
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.delete<any>(`${this.apiUrl}/itemsMenu/${id}`, { headers }).pipe(
+      catchError(this.errorHandler.handleError));
+  }
+
+  addItemsInventario(id: number, item: addItemInventarioRequest): Observable<addItemInventarioResponse> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.put<addItemInventarioResponse>(`${this.apiUrl}/itemsMenu/${id}/addItemsInventario`, item, { headers }).pipe(
       catchError(this.errorHandler.handleError));
   }
   

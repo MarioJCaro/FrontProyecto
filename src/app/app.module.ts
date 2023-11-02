@@ -87,6 +87,10 @@ import { CategoriasComponent } from './components/categorias/categorias/categori
 import { AgregarCategoriaModalComponent } from './ExtraComponents/agregar-categoria-modal/agregar-categoria-modal/agregar-categoria-modal.component';
 import { ModificarCategoriaModalComponent } from './ExtraComponents/modificar-categoria-modal/modificar-categoria-modal/modificar-categoria-modal.component';
 import { EliminarCategoriaModalComponent } from './ExtraComponents/eliminar-categoria-modal/eliminar-categoria-modal/eliminar-categoria-modal.component';
+import { GruposComponent } from './components/grupos/grupos/grupos.component';
+import { AgregarGrupoModalComponent } from './ExtraComponents/agregar-grupo-modal/agregar-grupo-modal/agregar-grupo-modal.component';
+import { ModificarGrupoModalComponent } from './ExtraComponents/modificar-grupo-modal/modificar-grupo-modal/modificar-grupo-modal.component';
+import { EliminarGrupoModalComponent } from './ExtraComponents/eliminar-grupo-modal/eliminar-grupo-modal/eliminar-grupo-modal.component';
 
 
 @NgModule({
@@ -146,6 +150,10 @@ import { EliminarCategoriaModalComponent } from './ExtraComponents/eliminar-cate
     AgregarCategoriaModalComponent,
     ModificarCategoriaModalComponent,
     EliminarCategoriaModalComponent,
+    GruposComponent,
+    AgregarGrupoModalComponent,
+    ModificarGrupoModalComponent,
+    EliminarGrupoModalComponent,
 
 
   ],

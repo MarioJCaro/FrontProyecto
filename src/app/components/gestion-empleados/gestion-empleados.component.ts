@@ -104,6 +104,7 @@ applyFilter() {
   
     dialogRef.afterClosed().subscribe(result => {
       console.log('El modal fue cerrado');
+      this.getEmpleados();
       // Aquí puedes manejar el resultado del modal, por ejemplo, guardar el nuevo ítem.
     });
   }
@@ -116,6 +117,7 @@ applyFilter() {
   
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+        this.getEmpleados();
         // Aquí puedes manejar lo que quieras hacer cuando el modal se cierre, como actualizar el empleado en la lista o en una base de datos.
       }
     });
@@ -132,6 +134,7 @@ applyFilter() {
         // Aquí se coloca la lógica para eliminar el empleado
         // Por ejemplo: this.empleadosService.eliminar(empleado.id);
         console.log(`Empleado ${empleado.nombre} eliminado`);
+        this.getEmpleados();
       } else {
         console.log('Operación cancelada');
       }
