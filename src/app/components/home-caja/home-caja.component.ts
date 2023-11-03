@@ -8,7 +8,12 @@ import { MesasOcupadasResponse, MesasResponse, MesasService } from 'src/app/serv
 import { AgregarOrdenModalComponent } from 'src/app/ExtraComponents/agregar-orden-modal/agregar-orden-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { VentaBebidaModalComponent } from 'src/app/ExtraComponents/venta-bebida-modal/venta-bebida-modal.component';
+
+import { OrdenesMesaCajaModalComponent } from 'src/app/ExtraComponents/ordenes-mesa-caja-modal/ordenes-mesa-caja-modal.component';
+import { PagarOrdenModalComponent } from 'src/app/ExtraComponents/pagar-orden-modal/pagar-orden-modal.component';
+
 import { AbrirBotellaModalComponent } from 'src/app/ExtraComponents/abrir-botella-modal/abrir-botella-modal.component';
+
 
 @Component({
   selector: 'app-home-caja',
@@ -59,6 +64,23 @@ export class HomeCajaComponent  implements OnInit{
      
   }
 
+  openModalConMesa(mesa: MesasResponse): void {  // Asegúrate de usar el tipo correcto en lugar de 'any' si tienes un modelo definido para 'mesa'
+    const dialogRef = this.dialog.open(OrdenesMesaCajaModalComponent, {
+      width: '100rem',
+      data: { mesa: mesa }  // Pasando la data aquí
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // Aquí puedes manejar los resultados después de que se cierre el modal
+    });
+  }
+
+  openModalOrdenModal(orden: Orden): void {
+    const dialogRef = this.dialog.open(PagarOrdenModalComponent, {
+      width: '60rem',
+      data: { orden: orden } 
+    });
+  }
 
   public getCardHeaderStyle(estado: string): object {
     switch (estado) {
