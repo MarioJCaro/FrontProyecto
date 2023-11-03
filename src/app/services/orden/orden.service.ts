@@ -77,6 +77,10 @@ export interface UpdateOrdenResponse {
   message: string;
 }
 
+export interface removeMesaRequest{
+  mesas: number[];
+}
+
 
 
 @Injectable({
@@ -113,9 +117,15 @@ export class OrdenService {
     );
   }
 
-  getOrdenesCaja(): Observable<OrdenResponse> {
+  getOrdenesCaja(mesaId?: number): Observable<OrdenResponse> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.get<OrdenResponse>(`${this.apiUrl}/ordenes/caja`, { headers }).pipe(
+    let url = `${this.apiUrl}/ordenes/caja`;
+  
+    if (mesaId) {
+        url += `?mesaId=${mesaId}`;
+    }
+
+    return this.http.get<OrdenResponse>(url, { headers }).pipe(
         catchError(this.errorHandler.handleError)
     );
   }
@@ -134,6 +144,11 @@ export class OrdenService {
       catchError(this.errorHandler.handleError)
     );
   }
-  
 
+  getOrdenMesa(id:number){
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get<OrdenResponse>(`${this.apiUrl}/ordenes/mozo?mesaId=${id}`, { headers }).pipe(
+        catchError(this.errorHandler.handleError)
+    );
+  }
 }

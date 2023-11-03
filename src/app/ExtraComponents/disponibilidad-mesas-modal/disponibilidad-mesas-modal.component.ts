@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { catchError } from 'rxjs';
 import { Mesa } from 'src/app/models/mesa.model';
@@ -12,9 +13,11 @@ import { GetAllMesasResponse, MesasResponse, MesasService } from 'src/app/servic
 })
 export class DisponibilidadMesasModalComponent implements OnInit {
 
+
   displayedColumns: string[] = ['mesa', 'estado'];
   mesas: Mesa[] = [];
   dataSource!: MatTableDataSource<Mesa>;
+
 
   constructor(private mesasService: MesasService, private errorHandler: ErrorHandlingService) { }
 
@@ -45,5 +48,9 @@ export class DisponibilidadMesasModalComponent implements OnInit {
         catchError(this.errorHandler.handleError);
       },
     });
+  }
+
+  onClose(){
+    this.dialogRef.close();
   }
 }

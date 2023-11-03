@@ -32,7 +32,7 @@
     >
       <mat-icon>schedule</mat-icon>
     </button>
-    <button
+    <button (click)="openAbrirBotellasModal()"
       mat-fab
       class="mat-fab"
       style="
@@ -48,26 +48,27 @@
     </button>
     <div fxLayout="row" style="margin-top: 10px">
       <!-- Lado izquierdo (Tabla) -->
-      <mat-card fxFlex="20%" fxFlex.lt-sm="100%" class="mat-card">
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Mesa</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let mesa of mesasOcupadas">
-              <td>Mesa {{ mesa.nroMesa }}</td>
-              <td>
-                <button mat-icon-button class="mat-button">
-                  <mat-icon>menu</mat-icon>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </mat-card>
+    <mat-card fxFlex="20%" fxFlex.lt-sm="100%" class="mat-card">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Mesa</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let mesa of mesasOcupadas">
+            <td>Mesa {{ mesa.nroMesa }}</td>
+            <td>
+              <button mat-icon-button class="mat-button" (click)="openModalConMesa(mesa)">
+                <mat-icon>menu</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-card>
+
 
       <div style="width: 150px"></div>
       <!-- Elemento espaciador -->
@@ -133,9 +134,9 @@
               <button
                 *ngIf="orden.estado !== ESTADOS.POR_CONFIRMAR"
                 mat-raised-button
-                style="background-color: #4ca78e; text-align: center"
+                style="background-color: #4ca78e; text-align: center" (click)="openModalOrdenModal(orden)"
               >
-                <mat-icon class="big-icon">attach_money</mat-icon>
+                <mat-icon class="big-icon" >attach_money</mat-icon>
               </button>
 
               <!-- Botón de Eliminar (para todos los estados) -->

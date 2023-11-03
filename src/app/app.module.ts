@@ -107,6 +107,11 @@ import { AgregarGrupoModalComponent } from './ExtraComponents/agregar-grupo-moda
 import { ModificarGrupoModalComponent } from './ExtraComponents/modificar-grupo-modal/modificar-grupo-modal/modificar-grupo-modal.component';
 import { EliminarGrupoModalComponent } from './ExtraComponents/eliminar-grupo-modal/eliminar-grupo-modal/eliminar-grupo-modal.component';
 
+import { PagarOrdenModalComponent } from './ExtraComponents/pagar-orden-modal/pagar-orden-modal.component';
+
+import { ActivarItemMenuModalComponent } from './ExtraComponents/activar-item-menu-modal/activar-item-menu-modal/activar-item-menu-modal.component';
+
+
 
 
 import { NgChartsModule } from 'ng2-charts';
@@ -165,7 +170,6 @@ import { EstadisticasBarraComponent } from './components/estadisticas-barra/esta
     RetirarEfectivoModalComponent,
     IngresarEfectivoModalComponent,
     VentaBebidaModalComponent,
-
     HomeMenuComponent,
     SeleccionarItemMenuComponent,
     GrupoMenuComponent,
@@ -185,6 +189,9 @@ import { EstadisticasBarraComponent } from './components/estadisticas-barra/esta
     AgregarGrupoModalComponent,
     ModificarGrupoModalComponent,
     EliminarGrupoModalComponent,
+    PagarOrdenModalComponent,
+    ActivarItemMenuModalComponent,
+
 
 
 
@@ -217,6 +224,7 @@ import { EstadisticasBarraComponent } from './components/estadisticas-barra/esta
     MatDatepickerModule,
     MatNativeDateModule,
     NgChartsModule
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
