@@ -19,7 +19,7 @@ export class DisponibilidadMesasModalComponent implements OnInit {
   dataSource!: MatTableDataSource<Mesa>;
 
 
-  constructor(private mesasService: MesasService, private errorHandler: ErrorHandlingService) { }
+  constructor(public dialogRef: MatDialogRef<DisponibilidadMesasModalComponent>,private mesasService: MesasService, private errorHandler: ErrorHandlingService) { }
 
   ngOnInit() {
     this.getMesas();
