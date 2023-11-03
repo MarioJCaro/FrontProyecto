@@ -30,8 +30,8 @@ $custom-theme: mat.define-light-theme((
 // Estilos globales
 html, body { 
   height: 100%; 
-
   background-color: #D8D8D8;
+  
 }
 
 body { 
@@ -44,3 +44,9 @@ body {
   backdrop-filter: blur(5px); // Esto agregará el efecto de difuminado.
 }
 
+@font-face {
+  font-family: 'PaytoneOne'; // Puedes poner el nombre que quieras
+  src: url('./assets/fonts/PaytoneOne-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}

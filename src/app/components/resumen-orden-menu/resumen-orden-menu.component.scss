@@ -1,0 +1,108 @@
+
+mat-expansion-panel-header {
+    justify-content: space-between;
+  }
+  mat-toolbar {
+    display: flex;
+    align-items: center; // Centrar verticalmente
+    .logo {
+        width: 10rem;
+        height: 11rem;
+        margin-right: 1rem;
+      }
+    .texts {
+        display: flex;
+        flex-direction: column; // Alineación vertical de los textos
+        align-items: center;
+        color: #1B4338;
+        .main-text {
+            font-size: 2em; // Ajusta el tamaño como desees
+            margin: 0; // Remueve márgenes adicionales
+        }
+        .subtitle {
+            font-size: 1em;
+            margin-top: 5px; // Espacio entre los textos, ajusta como desees
+        }
+    }
+}
+
+.menu-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #E0E0E0;
+    padding: 15px 0;
+
+    
+
+    .item-image {
+        width: 6rem; /* Ajusta según la dimensión deseada */
+        height: 5rem;
+        margin-right: 1rem;
+    }
+
+    .item-details {
+        flex-grow: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    
+        .item-text {
+            display: flex;
+            flex-direction: row; // Change from column to row
+            align-items: center; // Vertically align items in the row
+            .item-title {
+                margin-left: 10px;
+                font-size: 1.2rem;
+                font-weight: bold;
+                margin-bottom: 5px; // Pequeño espacio entre el título y la descripción.
+            }
+    
+            .item-count {
+                background-color: #D1F4EB; 
+                color: #273B4A;
+                border-radius: 50%;
+                padding: 5px 10px;
+                font-weight: bold;
+                z-index: 1;
+                margin-right: 5px; // Added some space to the right of the count
+            }
+        }
+    
+        .item-price-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+
+            .item-price {
+                margin-right: 10px; // Ajusta este margen si es necesario.
+                font-size: 1.5rem;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+.container-button {
+    position: fixed;
+    bottom: 0.5rem;  // O el espacio que quieras desde la parte inferior.
+    left: 50%; // Esto centrará el botón en horizontal.
+    transform: translateX(-50%); // Esto es necesario para que realmente se centre.
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+    align-items: center;
+
+    .add-button {
+        width: 100%;
+        background-color: #2E8B57;
+        color: white;
+    }
+}
+
+mat-accordion {
+    display: flex;
+    flex-direction: column;
+    flex: 1; // Hacer que ocupe el espacio disponible
+  }
+  

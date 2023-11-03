@@ -1,0 +1,70 @@
+<div style="background-color: #7D9A93; height: 100vh; width: 100%; display: flex; flex-direction: column;">
+    <mat-toolbar style="background-color: #D1F4EB; height: auto; font-family: PaytoneOne;">
+        <img src="../../../assets/LogoSinFondo.png" alt="Logo" class="logo">
+
+        <!-- Div para envolver los textos -->
+        <div class="texts">
+            <span class="main-text">Hacé tu pedido</span>
+            <span class="subtitle">Y lo llevamos a tu mesa</span>
+        </div>
+    </mat-toolbar>
+    <br>
+    <mat-accordion style="flex: 1; overflow-y: auto;">
+        <mat-expansion-panel #resumenPanel expanded (closed)="onPanelClosed(resumenPanel)" hideToggle style="flex: 1; display: flex; flex-direction: column;">
+            <mat-expansion-panel-header style="font-weight: bold; font-size: 0.9rem;">
+                Resumen de orden:
+            </mat-expansion-panel-header>
+            <div class="menu-item">
+                <div class="item-details">
+                    <div class="item-text">
+                        <span class="item-count">2</span> <!-- Moved this up -->
+                        <span class="item-title">Pizza Caprese</span>
+                        <!-- <span class="item-description">Tomate y Albahaca</span> --> <!-- Commented this out -->
+                    </div>
+                    <div class="item-price-container">
+                        <span class="item-price">$350</span>
+                    </div>
+                </div>
+            </div> 
+            <div class="menu-item">
+                <div class="item-details">
+                    <div class="item-text">
+                        <span class="item-count">2</span> <!-- Moved this up -->
+                        <span class="item-title">Pizza Caprese</span>
+                        <!-- <span class="item-description">Tomate y Albahaca</span> --> <!-- Commented this out -->
+                    </div>
+                    <div class="item-price-container">
+                        <span class="item-price">$350</span>
+                    </div>
+                </div>
+            </div> 
+            <div class="menu-item">
+                <div class="item-details">
+                    <div class="item-text">
+                        <span class="item-count">2</span> <!-- Moved this up -->
+                        <span class="item-title">Pizza Caprese</span>
+                        <!-- <span class="item-description">Tomate y Albahaca</span> --> <!-- Commented this out -->
+                    </div>
+                    <div class="item-price-container">
+                        <span class="item-price">$350</span>
+                    </div>
+                </div>
+            </div> 
+            <div class="menu-item">
+                <div class="item-details">
+                    <div class="item-text">
+                        <span class="item-count">2</span> <!-- Moved this up -->
+                        <span class="item-title">Pizza Caprese</span>
+                        <!-- <span class="item-description">Tomate y Albahaca</span> --> <!-- Commented this out -->
+                    </div>
+                    <div class="item-price-container">
+                        <span class="item-price">$350</span>
+                    </div>
+                </div>
+            </div> 
+            <div class="container-button">
+                <button mat-raised-button class="add-button" (click)="openDialog()">Confirmar orden - $800</button>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
