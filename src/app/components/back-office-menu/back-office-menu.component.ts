@@ -14,6 +14,7 @@ import { GetAllItemMenuResponse, MenubackofficeService } from 'src/app/services/
 import { Router } from '@angular/router';
 import { ErrorHandlingService } from 'src/app/services/errorHandling/error-handling.service';
 import { catchError } from 'rxjs';
+import { ActivarItemMenuModalComponent } from 'src/app/ExtraComponents/activar-item-menu-modal/activar-item-menu-modal/activar-item-menu-modal.component';
 
 @Component({
   selector: 'app-back-office-menu',
@@ -111,7 +112,7 @@ toggleItemVisibility(item: ItemMenu) {
 
   dialogRef.afterClosed().subscribe(result => {
     if (result) {
-
+      
     }
   });
 }
@@ -129,7 +130,21 @@ openDeleteDialog(item: ItemMenu): void {
   });
 }
 
+openActivateDialog(item: ItemMenu){
+  const dialogRef = this.dialog.open(ActivarItemMenuModalComponent, {
+    width: '15rem',
+    data: { item: item },  // Pasamos el ítem completo al modal
+  }
+  );
+
+  dialogRef.afterClosed().subscribe(result => {
+    this.getItems();
+  });
+}
+
 navigateTo(route: string) {
   this.router.navigate([route]);
 }
+
+
 }

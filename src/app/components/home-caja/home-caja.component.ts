@@ -8,8 +8,12 @@ import { MesasOcupadasResponse, MesasResponse, MesasService } from 'src/app/serv
 import { AgregarOrdenModalComponent } from 'src/app/ExtraComponents/agregar-orden-modal/agregar-orden-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { VentaBebidaModalComponent } from 'src/app/ExtraComponents/venta-bebida-modal/venta-bebida-modal.component';
+
 import { OrdenesMesaCajaModalComponent } from 'src/app/ExtraComponents/ordenes-mesa-caja-modal/ordenes-mesa-caja-modal.component';
 import { PagarOrdenModalComponent } from 'src/app/ExtraComponents/pagar-orden-modal/pagar-orden-modal.component';
+
+import { AbrirBotellaModalComponent } from 'src/app/ExtraComponents/abrir-botella-modal/abrir-botella-modal.component';
+
 
 @Component({
   selector: 'app-home-caja',
@@ -138,7 +142,6 @@ openVentaBebidasDialog(): void {
     // Aquí puedes manejar el resultado del modal, por ejemplo, guardar el nuevo ítem.
   });
 }
-
  
 openAgregarDialog(): void {
   const dialogRef = this.dialog.open(AgregarOrdenModalComponent, {
@@ -152,7 +155,17 @@ openAgregarDialog(): void {
   });
 }
 
+openAbrirBotellasModal(){
+  const dialogRef = this.dialog.open(AbrirBotellaModalComponent, {
+    width: '30rem',
+    data: {}  // Puedes pasar la data inicial aquí si es necesario.
+  });
 
+  dialogRef.afterClosed().subscribe((result: any) => {
+    console.log('El modal fue cerrado', result);
+    // Aquí puedes manejar el resultado del modal, por ejemplo, guardar el nuevo ítem.
+  });
+}
 
 
 

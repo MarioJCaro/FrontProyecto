@@ -1,0 +1,82 @@
+<div style="background-color: #7D9A93; height: 100%; width: 100%;">
+    <mat-toolbar style="background-color: #D1F4EB; height: auto; font-family: PaytoneOne;">
+        <img src="../../../assets/LogoSinFondo.png" alt="Logo" class="logo">
+    
+        <!-- Div para envolver los textos -->
+        <div class="texts">
+            <span class="main-text">Hacé tu pedido</span>
+            <span class="subtitle">Y lo llevamos a tu mesa</span>
+        </div>
+    </mat-toolbar>
+    
+  <br>
+  <mat-accordion>
+    <!-- Comidas -->
+    <mat-expansion-panel #comidasPanel expanded (closed)="onPanelClosed(comidasPanel)" hideToggle>
+      <mat-expansion-panel-header style="font-weight: bold; font-size: 0.9rem;">
+        COMIDAS
+      </mat-expansion-panel-header>
+      <mat-divider></mat-divider>
+      <div class="menu-item">
+        <span class="item-title">Pizzas</span>
+        <mat-icon class="item-icon">navigate_next</mat-icon>
+    </div>
+    <div class="menu-item">
+        <span class="item-title">Hamburguesas</span>
+        <mat-icon class="item-icon">navigate_next</mat-icon>
+    </div>
+      
+    <div class="menu-item">
+        <span class="item-title">Papas</span>
+        <mat-icon class="item-icon">navigate_next</mat-icon>
+    </div>
+    <div class="menu-item">
+        <span class="item-title">Gramajos</span>
+        <mat-icon class="item-icon">navigate_next</mat-icon>
+    </div>
+    <div class="menu-item">
+        <span class="item-title">Wok de Carne y quesadillas</span>
+        <mat-icon class="item-icon">navigate_next</mat-icon>
+    </div>
+      
+      
+      <!-- Aquí irían tus items de comida, como Pizzas, Papas, etc. -->
+  
+    </mat-expansion-panel>
+    </mat-accordion>
+    <br>
+    <mat-accordion>
+    <!-- Bebidas -->
+    <mat-expansion-panel #bebidasPanel expanded (closed)="onPanelClosed(bebidasPanel)" hideToggle>
+      <mat-expansion-panel-header style="font-weight: bold; font-size: 0.9rem;">
+        BEBIDAS
+      </mat-expansion-panel-header>
+      <mat-divider></mat-divider>
+      <div class="menu-item">
+        <!--<img src="../../../assets/Cerveza.jpg" alt="Cerveza" class="item-image">-->
+        <span class="item-title">Cervezas</span>
+        <mat-icon class="item-icon">navigate_next</mat-icon>
+    </div>
+    <div class="menu-item">
+        <span class="item-title">Cervezas de barril</span>
+        <mat-icon class="item-icon">navigate_next</mat-icon>
+    </div>
+    <div class="menu-item">
+        <span class="item-title">Whiskys</span>
+        <mat-icon class="item-icon">navigate_next</mat-icon>
+    </div>
+    <div class="menu-item">
+        <span class="item-title">Bebidas sin alcohol</span>
+        <mat-icon class="item-icon">navigate_next</mat-icon>
+    </div>
+      
+      <!-- Aquí irían tus items de bebidas, como Cervezas, Whiskys, etc. -->
+  
+    </mat-expansion-panel>
+  
+    <!-- Puedes agregar más categorías siguiendo la estructura anterior -->
+  </mat-accordion>
+  <div class="container-button">
+    <button mat-raised-button class="add-button">Ver orden - $800</button>
+</div>
+</div>

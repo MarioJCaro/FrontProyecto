@@ -1,0 +1,78 @@
+.bold-title {
+    font-weight: bold;
+  }
+  
+  .filters {
+    display: flex;
+    flex-direction: column;
+  
+    mat-form-field {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+  }
+  
+  .stat-section {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .stat-card {
+    margin-top: 1rem;
+    text-align: center;
+    
+    &.total-ventas {
+      background-color: #4CA78E;
+    }
+  
+    &.ordenes-procesadas {
+      background-color: #E1F180;
+    }
+  
+    &.top-productos {
+      background-color: #57BCDC;
+    }
+  }
+  
+  .stat-value {
+    font-size: 1.5em;
+    margin-top: 1rem;
+  }
+  
+  .card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;  // Añade un poco de espacio alrededor del contenido
+  }
+  
+  .stat-card.top-productos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .centered-title {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .centered-list {
+    width: 100%; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+  }
+  
+  .centered-item {
+    width: 100%; 
+    display: flex;
+    justify-content: center;
+  }
+  
+  .producto-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  

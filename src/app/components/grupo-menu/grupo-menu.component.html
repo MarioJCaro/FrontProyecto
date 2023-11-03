@@ -1,0 +1,62 @@
+<div class="container">
+    <mat-toolbar class="custom-toolbar">
+        <button mat-icon-button>
+            <mat-icon class="back-arrow">arrow_back</mat-icon> <!-- Ícono de flecha hacia atrás -->
+        </button>
+        <span class="spacer"></span> <!-- Espaciador para empujar el logo hacia la derecha -->
+        <img src="../../../assets/LogoSinFondo.png" alt="Logo" class="logo">
+    </mat-toolbar>
+
+    <br>
+    <mat-accordion>
+        <mat-expansion-panel #grupoPanel expanded (closed)="onPanelClosed(grupoPanel)" hideToggle>
+            <mat-expansion-panel-header class="header-panel">
+                PIZZAS
+            </mat-expansion-panel-header>
+            <mat-divider></mat-divider>
+            <div class="menu-item" (click)="openModal()">
+                <img src="../../../assets/Pizza.jpeg" alt="Pizza" class="item-image">
+                <div class="item-details">
+                    <div class="item-text">
+                        <span class="item-title">Pizza Caprese</span>
+                        <span class="item-description">Tomate y Albahaca</span>
+                    </div>
+                    <div class="item-price-container"> <!-- Nuevo contenedor para precio y contador -->
+                        <span class="item-price">$350</span>
+                        <span class="item-count">2</span>
+                    </div>
+                </div>
+            </div>                      
+            <div class="menu-item" (click)="openModal()">
+                <img src="../../../assets/Pizza.jpeg" alt="Pizza" class="item-image">
+                <div class="item-details">
+                    <div class="item-text">
+                        <span class="item-title">Pizza Caprese</span>
+                        <span class="item-description">Tomate y Albahaca</span>
+                    </div>
+                    <div class="item-price-container"> <!-- Nuevo contenedor para precio y contador -->
+                        <span class="item-price">$350</span>
+                        <span class="item-count">2</span>
+                    </div>
+                </div>
+            </div>  
+            <div class="menu-item" (click)="openModal()">
+                <img src="../../../assets/Pizza.jpeg" alt="Pizza" class="item-image">
+                <div class="item-details">
+                    <div class="item-text">
+                        <span class="item-title">Pizza Caprese</span>
+                        <span class="item-description">Tomate y Albahaca</span>
+                    </div>
+                    <div class="item-price-container"> <!-- Nuevo contenedor para precio y contador -->
+                        <span class="item-price">$350</span>
+                        <span class="item-count">2</span>
+                    </div>
+                </div>
+            </div>  
+            <!-- Repite para los otros ítems... -->
+        </mat-expansion-panel>
+    </mat-accordion>
+    <div class="container-button">
+        <button mat-raised-button class="add-button">Ver orden - $800</button>
+    </div>
+</div>

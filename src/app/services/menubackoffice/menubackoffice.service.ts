@@ -5,6 +5,7 @@ import { Observable, catchError } from 'rxjs';
 import { environment } from 'src/environments/environments';
 import { Grupo } from 'src/app/models/grupo.model';
 import { ItemMenu } from 'src/app/models/itemMenu.model';
+import { Item } from 'src/app/models/item.model';
 
 export interface CreateItemMenuRequest {
   nombre: string;
@@ -26,7 +27,6 @@ export interface CreateItemMenuResponse {
   };
 }
   
-
 export interface GetAllItemMenuResponse {
   total: number;
   items: ItemMenuResponse[];  // Aquí es un array de ítems, no un solo ítem
@@ -51,6 +51,17 @@ export interface addItemInventarioRequest {
 export interface addItemInventarioResponse{
   message: string;
   items : ItemMenu;
+}
+
+export interface getItemMenuResponse{
+  id: number;
+  nombre: string;
+  descripcion: string;
+  precio: number;
+  createdAt: Date;
+  updatedAt: Date;
+  grupo: Grupo;
+  ItemInventarios: Item[];
 }
 
 @Injectable({
@@ -100,10 +111,29 @@ export class MenubackofficeService {
       catchError(this.errorHandler.handleError));
   }
 
+  activar(id: number): Observable<any>{
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.patch<any>(`${this.apiUrl}/itemsMenu/${id}/activate`, { headers }).pipe(
+      catchError(this.errorHandler.handleError));
+  }
+
   addItemsInventario(id: number, item: addItemInventarioRequest): Observable<addItemInventarioResponse> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.put<addItemInventarioResponse>(`${this.apiUrl}/itemsMenu/${id}/addItemsInventario`, item, { headers }).pipe(
       catchError(this.errorHandler.handleError));
+  }
+
+  removeItemsInventario(id: number, item: addItemInventarioRequest): Observable<addItemInventarioResponse> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.put<addItemInventarioResponse>(`${this.apiUrl}/itemsMenu/${id}/removeItemsInventario`, item, { headers }).pipe(
+      catchError(this.errorHandler.handleError));
+  }
+
+  getItemsMenu(id: number): Observable<getItemMenuResponse>{
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get<getItemMenuResponse>(`${this.apiUrl}/itemsMenu/${id}/itemsMenuInventario`, { headers }).pipe(
+        catchError(this.errorHandler.handleError)
+    );
   }
   
 }
