@@ -1,0 +1,67 @@
+
+  mat-expansion-panel-header {
+    justify-content: space-between;
+  }
+  mat-toolbar {
+    display: flex;
+    align-items: center; // Centrar verticalmente
+    .logo {
+        width: 10rem;
+        height: 11rem;
+        margin-right: 1rem;
+      }
+    .texts {
+        display: flex;
+        flex-direction: column; // Alineación vertical de los textos
+        align-items: center;
+        color: #1B4338;
+        .main-text {
+            font-size: 2em; // Ajusta el tamaño como desees
+            margin: 0; // Remueve márgenes adicionales
+        }
+        .subtitle {
+            font-size: 1em;
+            margin-top: 5px; // Espacio entre los textos, ajusta como desees
+        }
+    }
+}
+
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0; /* Esto añadirá una línea divisoria entre items */
+}
+
+.item-image {
+    width: 6rem; /* Ajusta según la dimensión deseada */
+    height: 5rem;
+    margin-right: 1rem;
+}
+
+.item-title {
+    flex: 1; /* Esto hará que el título ocupe todo el espacio disponible entre la imagen y el icono */
+    font-size: 1.5em;
+}
+
+.item-icon {
+    color: #9E9E9E; /* Color de gris medio para el icono. Ajusta según lo desees */
+}
+
+.container-button {
+  position: fixed;
+  bottom: 0.5rem;  // O el espacio que quieras desde la parte inferior.
+  left: 50%; // Esto centrará el botón en horizontal.
+  transform: translateX(-50%); // Esto es necesario para que realmente se centre.
+  display: flex;
+  width: 80%;
+  flex-direction: column;
+  align-items: center;
+
+  .add-button {
+      width: 100%;
+      background-color: #2E8B57;
+      color: white;
+  }
+}

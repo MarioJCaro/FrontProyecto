@@ -17,14 +17,24 @@ import { HomeMozoComponent } from './components/home-mozo/home-mozo.component';
 import { MenuMozoComponent } from './components/menu-mozo/menu-mozo.component';
 import { OrdenesMesaComponent } from './components/ordenes-mesa/ordenes-mesa.component';
 import { HistorialVentasComponent } from './components/historial-ventas/historial-ventas.component';
+
+import { HomeMenuComponent } from './components/home-menu/home-menu.component';
+import { GrupoMenuComponent } from './components/grupo-menu/grupo-menu.component';
+import { ResumenOrdenMenuComponent } from './components/resumen-orden-menu/resumen-orden-menu.component';
+import { HomeEstadisticasComponent } from './components/home-estadisticas/home-estadisticas.component';
+import { EstadisticasGeneralesComponent } from './components/estadisticas-generales/estadisticas-generales.component';
+import { EstadisticasClientesComponent } from './components/estadisticas-clientes/estadisticas-clientes.component';
+import { EstadisticasVentasComponent } from './components/estadisticas-ventas/estadisticas-ventas.component';
+import { EstadisticasBarraComponent } from './components/estadisticas-barra/estadisticas-barra.component';
+
 import { AuthGuard } from './middlewares/auth.guard';
 import { CategoriasComponent } from './components/categorias/categorias/categorias.component';
 import { GruposComponent } from './components/grupos/grupos/grupos.component';
 
 
 
-const routes: Routes = [
 
+const routes: Routes = [
   {path:'homecocina', component:HomeCocinaComponent, canActivate: [AuthGuard], data: { roles: ['Admin', 'Cocina'] }},
   {path:'homecaja', component:HomeCajaComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
   {path:'homeadmin', component:HomeAdminComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
@@ -41,8 +51,16 @@ const routes: Routes = [
   {path:'menumozo', component:MenuMozoComponent, canActivate: [AuthGuard], data: { roles: ['Admin','Mozo'] }},
   {path:'historialVentas', component:HistorialVentasComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
   {path:'categorias', component:CategoriasComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
-  {path:'grupos', component:GruposComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }}
- 
+  {path:'grupos', component:GruposComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
+  {path:'homemenu', component:HomeMenuComponent},
+  {path:'grupomenu', component:GrupoMenuComponent},
+  {path: 'resumenordenmenu', component:ResumenOrdenMenuComponent},
+  {path: 'estadisticas', component:HomeEstadisticasComponent},
+  {path: 'estadisticasgenerales', component:EstadisticasGeneralesComponent},
+  {path: 'estadisticasclientes', component:EstadisticasClientesComponent},
+  {path: 'estadisticasventas', component:EstadisticasVentasComponent},
+  {path: 'estadisticasbarra', component:EstadisticasBarraComponent},
+
 ];
 
 @NgModule({
