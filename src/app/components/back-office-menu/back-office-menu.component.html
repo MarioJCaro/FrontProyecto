@@ -64,7 +64,7 @@
       <button mat-icon-button *ngIf="item.activo" (click)="openDeleteDialog(item)">
         <mat-icon>visibility</mat-icon>
       </button>
-      <button mat-icon-button *ngIf="!item.activo" (click)="openDeleteDialog(item)">
+      <button mat-icon-button *ngIf="!item.activo" (click)="openActivateDialog(item)">
         <mat-icon>visibility_off</mat-icon>
       </button>
     </mat-cell>

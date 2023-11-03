@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -10,6 +11,9 @@ export class DisponibilidadMesasModalComponent implements OnInit {
 
   displayedColumns: string[] = ['mesa','estado'];
   dataSource!: MatTableDataSource<any>;
+  
+  constructor(public dialogRef: MatDialogRef<DisponibilidadMesasModalComponent>,){
+  }
 
   // Datos ficticios para el dataSource
   mesas: any[] = [
@@ -21,5 +25,9 @@ export class DisponibilidadMesasModalComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource(this.mesas);
+  }
+
+  onClose(){
+    this.dialogRef.close();
   }
 }

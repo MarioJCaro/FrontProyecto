@@ -91,6 +91,7 @@ import { GruposComponent } from './components/grupos/grupos/grupos.component';
 import { AgregarGrupoModalComponent } from './ExtraComponents/agregar-grupo-modal/agregar-grupo-modal/agregar-grupo-modal.component';
 import { ModificarGrupoModalComponent } from './ExtraComponents/modificar-grupo-modal/modificar-grupo-modal/modificar-grupo-modal.component';
 import { EliminarGrupoModalComponent } from './ExtraComponents/eliminar-grupo-modal/eliminar-grupo-modal/eliminar-grupo-modal.component';
+import { ActivarItemMenuModalComponent } from './ExtraComponents/activar-item-menu-modal/activar-item-menu-modal/activar-item-menu-modal.component';
 
 
 @NgModule({
@@ -154,6 +155,7 @@ import { EliminarGrupoModalComponent } from './ExtraComponents/eliminar-grupo-mo
     AgregarGrupoModalComponent,
     ModificarGrupoModalComponent,
     EliminarGrupoModalComponent,
+    ActivarItemMenuModalComponent,
 
 
   ],
@@ -180,7 +182,7 @@ import { EliminarGrupoModalComponent } from './ExtraComponents/eliminar-grupo-mo
     MatSnackBarModule,
     MatChipsModule,
     MatExpansionModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
