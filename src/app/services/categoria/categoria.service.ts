@@ -66,6 +66,19 @@ export class CategoriaService {
       catchError(this.errorHandler.handleError));
   }
 
+  getCatByNombre(valor?: any): Observable<GetAllCategoriaResponse> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let url = `${this.apiUrl}/categorias?page=1&limit=1&nombre=`;
+
+    if (valor) {
+        url += valor;
+    }
+
+    return this.http.get<GetAllCategoriaResponse>(url, { headers }).pipe(
+        catchError(this.errorHandler.handleError)
+    );
+  }
+
   create(categoria: CreateCategoriaRequest): Observable<CategoriaResponse> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<CategoriaResponse>(`${this.apiUrl}/categorias`, categoria, { headers }).pipe(

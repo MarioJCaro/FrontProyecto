@@ -66,6 +66,14 @@ export class ClienteService {
     );
   }
 
+  //Esta funcion debería ser la que cumpla la funcion de la anterior, pero como note que el tipo de respuesta era diferente, la deje para no romper nada de lo que ya estaba hecho
+  getAllClientesByLimit(){
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get<GetAllClientesResponse>(`${this.apiUrl}/clientes?limit=-1`, { headers }).pipe(
+      catchError(this.errorHandler.handleError)
+    );
+  }
+
   create(cliente:CreateClienteRequest): Observable<CreateClienteResponse>{
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<CreateClienteResponse>(`${this.apiUrl}/clientes`, cliente, { headers }).pipe(

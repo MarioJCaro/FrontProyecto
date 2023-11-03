@@ -48,7 +48,8 @@ export class BackOfficeMenuComponent implements OnInit {
           descripcion: item.descripcion,
           precio: item.precio,
           categoria: item.grupo,
-          imagen: item.imagen
+          imagen: item.imagen,
+          activo: item.activo,
         }));
         
         // Agregamos los nuevos ítems al itemsArray
@@ -76,9 +77,10 @@ export class BackOfficeMenuComponent implements OnInit {
 }
 
 
-abrirModal() {
+abrirModal(item: any) {
   const dialogRef = this.dialog.open(ConsultarItemMenuModalComponent, {
     width: '30rem', // Ajusta el tamaño según tus necesidades
+    data: item
     // data: { algunaData: 'data que desees pasar al modal' } // Opcional
   });
 
@@ -101,7 +103,7 @@ openModifyItemModal(item: any) {
   });
 }
 
-toggleItemVisibility(item: any) {
+toggleItemVisibility(item: ItemMenu) {
   const dialogRef = this.dialog.open(ConfirmarAccionModalComponent, {
     width: '30rem',
     data: item // pasamos el ítem al modal
@@ -109,8 +111,7 @@ toggleItemVisibility(item: any) {
 
   dialogRef.afterClosed().subscribe(result => {
     if (result) {
-      item.activo = !item.activo; // cambiamos la visibilidad del ítem
-      // Aquí puedes también hacer alguna llamada al servidor para guardar el cambio, si es necesario.
+
     }
   });
 }
@@ -124,10 +125,11 @@ openDeleteDialog(item: ItemMenu): void {
   );
 
   dialogRef.afterClosed().subscribe(result => {
-    if (result) {
-      // Aquí puedes eliminar el ítem
-      // TODO: Añadir la lógica para eliminar el ítem
-    }
+    this.getItems();
   });
+}
+
+navigateTo(route: string) {
+  this.router.navigate([route]);
 }
 }

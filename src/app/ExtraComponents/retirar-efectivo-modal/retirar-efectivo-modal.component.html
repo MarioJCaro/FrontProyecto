@@ -1,23 +1,24 @@
-<div style="background-color: #D3D7D1;">
-    <div class="header">
-        <h2>Retiro de Efectivo</h2>
-    </div>
-    <div class="payment-options">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div style="background-color: #D3D7D1;">
+      <!-- ... -->
+      <div class="payment-options">
         <div class="payment-label-input">
-            <label>Monto:</label>
-            <mat-form-field appearance="fill" class="input-field">
-                <input matInput style="color: red;">
-            </mat-form-field>
+          <label>Monto:</label>
+          <mat-form-field appearance="fill" class="input-field">
+            <input matInput formControlName="monto" style="color: red;">
+          </mat-form-field>
         </div>
         <div class="payment-label-input">
-            <label>Observacion:</label>
-            <mat-form-field appearance="fill" class="input-field">
-                <input matInput>
-            </mat-form-field>
+          <label>Observacion:</label>
+          <mat-form-field appearance="fill" class="input-field">
+            <input matInput formControlName="observacion">
+          </mat-form-field>
         </div>
+      </div>
+      <mat-dialog-actions class="dialog-actions">
+        <button mat-button type="button" style="justify-content: center;">Cancelar</button>
+        <button mat-button type="submit" color="primary">Confirmar</button>
+      </mat-dialog-actions>
     </div>
-    <mat-dialog-actions class="dialog-actions">
-        <button mat-button style="justify-content: center;">Cancelar</button>
-        <button mat-button color="primary">Confirmar</button>
-    </mat-dialog-actions>
-</div>
+  </form>
+  

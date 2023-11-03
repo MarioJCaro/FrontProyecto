@@ -9,5 +9,4 @@ export interface ItemMenu{
     precio:number;
     imagen: string;
     activo: boolean;
-
 }

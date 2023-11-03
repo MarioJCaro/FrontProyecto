@@ -99,6 +99,7 @@ openDialog(): void {
 
   dialogRef.afterClosed().subscribe(result => {
     console.log('El modal fue cerrado', result);
+    this.getCategorias();
     // Aquí puedes manejar el resultado del modal, por ejemplo, guardar el nuevo ítem.
   });
 }
@@ -111,6 +112,7 @@ openEditDialog(categoria: Categoria): void {
 
   dialogRef.afterClosed().subscribe(result => {
     console.log('El modal fue cerrado', result);
+    this.getCategorias();
     // Aquí puedes manejar el resultado del modal, por ejemplo, guardar los cambios.
   });
 }
@@ -125,6 +127,7 @@ openDeleteDialog(categoria: Categoria): void {
 
   dialogRef.afterClosed().subscribe(result => {
     if (result) {
+      this.getCategorias();
       // Aquí puedes eliminar el ítem
       // TODO: Añadir la lógica para eliminar el ítem
     }
