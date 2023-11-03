@@ -1,0 +1,59 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title class="bold-title">Estadísticas generales</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <div class="filters">
+            <!-- Primer select sigue igual -->
+            <mat-form-field appearance="fill">
+                <mat-label>Filtrar por</mat-label>
+                <mat-select [(value)]="selectedFilter" (selectionChange)="updateSecondSelect($event.value)">
+                    <mat-option value="mes">Mes</mat-option>
+                    <mat-option value="año">Año</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!-- Segundo select: cambia según el valor del primero -->
+            <mat-form-field appearance="fill">
+                <mat-label>Selecciona</mat-label>
+                <mat-select [(value)]="selectedValue">
+                    <mat-option *ngFor="let option of currentOptions" [value]="option">{{ option }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+        </div>
+
+        <div class="stat-section">
+            <mat-card class="stat-card total-ventas">
+                <mat-card-content>
+                    <mat-card-title>Total de Ventas</mat-card-title>
+                    <div class="stat-value">{{ totalVentas | currency }}</div>
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card class="stat-card ordenes-procesadas">
+                <mat-card-content>
+                    <mat-card-title>Órdenes Procesadas</mat-card-title>
+                    <div class="stat-value">{{ ordenesProcesadas }}</div>
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card class="stat-card top-productos">
+                <mat-card-content>
+                    <mat-card-title class="centered-title">Top 5 Productos</mat-card-title>
+                    <mat-list class="centered-list">
+                        <mat-list-item *ngFor="let producto of topCincoProductos" class="centered-item">
+                            <div class="producto-container">
+                                <img [src]="producto.imagen" alt="{{ producto.nombre }}" class="producto-imagen">
+                                <div class="producto-info">
+                                    {{ producto.nombre }}: {{ producto.cantidad }}
+                                </div>
+                            </div>
+                        </mat-list-item>
+                    </mat-list>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </mat-card-content>
+</mat-card>

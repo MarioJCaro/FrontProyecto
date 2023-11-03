@@ -1,0 +1,69 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title class="bold-title">Estadísticas Clientes</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <div class="filters">
+            <!-- Primer select sigue igual -->
+            <mat-form-field appearance="fill">
+                <mat-label>Filtrar por</mat-label>
+                <mat-select [(value)]="selectedFilter" (selectionChange)="updateSecondSelect($event.value)">
+                    <mat-option value="mes">Mes</mat-option>
+                    <mat-option value="año">Año</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!-- Segundo select: cambia según el valor del primero -->
+            <mat-form-field appearance="fill">
+                <mat-label>Selecciona</mat-label>
+                <mat-select [(value)]="selectedValue">
+                    <mat-option *ngFor="let option of currentOptions" [value]="option">{{ option }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+        </div>
+
+        <div class="stat-section">
+            <mat-card class="stat-card total-ventas">
+                <mat-card-content>
+                    <mat-card-title>Consumo total efectivo</mat-card-title>
+                    <div class="stat-value">{{ consumoTotalEfectivo| currency }}</div>
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card class="stat-card ordenes-procesadas">
+                <mat-card-content>
+                    <mat-card-title>Consultar consumo</mat-card-title>
+                    
+                    <!-- Agrega el select de clientes aquí -->
+                    <mat-form-field appearance="fill" style="margin-top: 0.5rem;">
+                        <mat-label>Cliente</mat-label>
+                        <mat-select [(value)]="selectedClient" (selectionChange)="updateClientConsumption($event.value)">
+                            <mat-option *ngFor="let client of clients" [value]="client">{{ client }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+            
+                    <!-- Muestra el consumo del cliente seleccionado -->
+                    <div class="stat-value" *ngIf="selectedClient">{{ clientConsumption | currency }}</div>
+                </mat-card-content>
+            </mat-card>
+            
+
+            <mat-card class="stat-card top-productos">
+                <mat-card-content>
+                    <mat-card-title class="centered-title">Top Clientes</mat-card-title>
+                    <mat-list class="centered-list">
+                        <mat-list-item *ngFor="let producto of topClientes" class="centered-item">
+                            <div class="producto-container">                   
+                                <div class="producto-info">
+                                    {{ producto.nombre }}: {{ producto.cantidad }}
+                                </div>
+                            </div>
+                        </mat-list-item>
+                    </mat-list>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </mat-card-content>
+</mat-card>

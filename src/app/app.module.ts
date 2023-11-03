@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -31,6 +30,9 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatChipsModule } from '@angular/material/chips'; // Para los chips
 import { MatExpansionModule} from '@angular/material/expansion';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 
 
 import { HomeCocinaComponent } from './components/home-cocina/home-cocina.component';
@@ -83,11 +85,20 @@ import { DisponibilidadMesasModalComponent } from './ExtraComponents/disponibili
 import { RetirarEfectivoModalComponent } from './ExtraComponents/retirar-efectivo-modal/retirar-efectivo-modal.component';
 import { IngresarEfectivoModalComponent } from './ExtraComponents/ingresar-efectivo-modal/ingresar-efectivo-modal.component';
 import { VentaBebidaModalComponent } from './ExtraComponents/venta-bebida-modal/venta-bebida-modal.component';
-import { CategoriasComponent } from './components/categorias/categorias/categorias.component';
-import { AgregarCategoriaModalComponent } from './ExtraComponents/agregar-categoria-modal/agregar-categoria-modal/agregar-categoria-modal.component';
-import { ModificarCategoriaModalComponent } from './ExtraComponents/modificar-categoria-modal/modificar-categoria-modal/modificar-categoria-modal.component';
-import { EliminarCategoriaModalComponent } from './ExtraComponents/eliminar-categoria-modal/eliminar-categoria-modal/eliminar-categoria-modal.component';
+import { HomeMenuComponent } from './components/home-menu/home-menu.component';
+import { SeleccionarItemMenuComponent } from './ExtraComponents/seleccionar-item-menu/seleccionar-item-menu.component';
+import { GrupoMenuComponent } from './components/grupo-menu/grupo-menu.component';
+import { ResumenOrdenMenuComponent } from './components/resumen-orden-menu/resumen-orden-menu.component';
+import { ConfirmarOrdenMenuComponent } from './ExtraComponents/confirmar-orden-menu/confirmar-orden-menu.component';
+import { ExitoOrdenMenuComponent } from './ExtraComponents/exito-orden-menu/exito-orden-menu.component';
+import { HomeEstadisticasComponent } from './components/home-estadisticas/home-estadisticas.component';
+import { EstadisticasGeneralesComponent } from './components/estadisticas-generales/estadisticas-generales.component';
+import { EstadisticasClientesComponent } from './components/estadisticas-clientes/estadisticas-clientes.component';
+import { EstadisticasVentasComponent } from './components/estadisticas-ventas/estadisticas-ventas.component';
 
+
+import { NgChartsModule } from 'ng2-charts';
+import { EstadisticasBarraComponent } from './components/estadisticas-barra/estadisticas-barra.component';
 
 @NgModule({
   declarations: [
@@ -142,10 +153,19 @@ import { EliminarCategoriaModalComponent } from './ExtraComponents/eliminar-cate
     RetirarEfectivoModalComponent,
     IngresarEfectivoModalComponent,
     VentaBebidaModalComponent,
-    CategoriasComponent,
-    AgregarCategoriaModalComponent,
-    ModificarCategoriaModalComponent,
-    EliminarCategoriaModalComponent,
+    HomeMenuComponent,
+    SeleccionarItemMenuComponent,
+    GrupoMenuComponent,
+    ResumenOrdenMenuComponent,
+    ConfirmarOrdenMenuComponent,
+    ExitoOrdenMenuComponent,
+    HomeEstadisticasComponent,
+    EstadisticasGeneralesComponent,
+    EstadisticasClientesComponent,
+    EstadisticasVentasComponent,
+    EstadisticasBarraComponent
+    
+    
 
 
   ],
@@ -172,11 +192,15 @@ import { EliminarCategoriaModalComponent } from './ExtraComponents/eliminar-cate
     MatSnackBarModule,
     MatChipsModule,
     MatExpansionModule,
-    ReactiveFormsModule
+    MatToolbarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgChartsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
   ],
   bootstrap: [AppComponent]
 })

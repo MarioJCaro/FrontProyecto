@@ -17,30 +17,60 @@ import { HomeMozoComponent } from './components/home-mozo/home-mozo.component';
 import { MenuMozoComponent } from './components/menu-mozo/menu-mozo.component';
 import { OrdenesMesaComponent } from './components/ordenes-mesa/ordenes-mesa.component';
 import { HistorialVentasComponent } from './components/historial-ventas/historial-ventas.component';
-import { AuthGuard } from './middlewares/auth.guard';
-import { CategoriasComponent } from './components/categorias/categorias/categorias.component';
+import { HomeMenuComponent } from './components/home-menu/home-menu.component';
+import { GrupoMenuComponent } from './components/grupo-menu/grupo-menu.component';
+import { ResumenOrdenMenuComponent } from './components/resumen-orden-menu/resumen-orden-menu.component';
+import { HomeEstadisticasComponent } from './components/home-estadisticas/home-estadisticas.component';
+import { EstadisticasGeneralesComponent } from './components/estadisticas-generales/estadisticas-generales.component';
+import { EstadisticasClientesComponent } from './components/estadisticas-clientes/estadisticas-clientes.component';
+import { EstadisticasVentasComponent } from './components/estadisticas-ventas/estadisticas-ventas.component';
+import { EstadisticasBarraComponent } from './components/estadisticas-barra/estadisticas-barra.component';
+
 
 
 
 const routes: Routes = [
 
-  {path:'homecocina', component:HomeCocinaComponent, canActivate: [AuthGuard], data: { roles: ['Admin', 'Cocina'] }},
-  {path:'homecaja', component:HomeCajaComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
-  {path:'homeadmin', component:HomeAdminComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
-  {path: 'login', component:LoginComponent},
-  {path:'inventario', component:InventarioComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
-  {path: 'gestionusers', component:GestionUsuariosComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
-  {path: 'gestionempleados', component:GestionEmpleadosComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
-  {path: 'gestionclientes', component:GestionClientesComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
-  {path: 'unauthorized', component: UnauthorizedComponent},
-  {path: 'mesas', component: MesasPrototypeComponent, canActivate: [AuthGuard], data: { roles: ['Admin','Mozo'] }},
-  {path:'backOfficeMenu', component:BackOfficeMenuComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
-  {path:'homemozo', component:HomeMozoComponent, canActivate: [AuthGuard], data: { roles: ['Admin','Mozo'] }},
-  {path:'ordenesmesa', component:OrdenesMesaComponent, canActivate: [AuthGuard], data: { roles: ['Admin','Mozo'] }},
-  {path:'menumozo', component:MenuMozoComponent, canActivate: [AuthGuard], data: { roles: ['Admin','Mozo'] }},
-  {path:'historialVentas', component:HistorialVentasComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
-  {path:'categorias', component:CategoriasComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }}
- 
+  {
+    path:'homecocina', component:HomeCocinaComponent
+  },
+  {path:'homecaja', component:HomeCajaComponent},
+  {
+    path:'homeadmin', component:HomeAdminComponent
+  },
+  {
+    path: 'login', component:LoginComponent
+  },
+  {
+    path:'inventario', component:InventarioComponent
+  },
+  {
+    path: 'gestionusers', component:GestionUsuariosComponent
+  },
+  {
+    path: 'gestionempleados', component:GestionEmpleadosComponent
+  },
+  {
+    path: 'gestionclientes', component:GestionClientesComponent
+  },
+  { path: 'unauthorized', component: UnauthorizedComponent },
+  
+  { path: 'mesas', component: MesasPrototypeComponent },
+  {
+    path:'backOfficeMenu', component:BackOfficeMenuComponent
+  },
+  {path:'homemozo', component:HomeMozoComponent},
+  {path:'ordenesmesa', component:OrdenesMesaComponent},
+  {path:'menumozo', component:MenuMozoComponent},
+  {path:'historialVentas', component:HistorialVentasComponent},
+  {path:'homemenu', component:HomeMenuComponent},
+  {path:'grupomenu', component:GrupoMenuComponent},
+  {path: 'resumenordenmenu', component:ResumenOrdenMenuComponent},
+  {path: 'estadisticas', component:HomeEstadisticasComponent},
+  {path: 'estadisticasgenerales', component:EstadisticasGeneralesComponent},
+  {path: 'estadisticasclientes', component:EstadisticasClientesComponent},
+  {path: 'estadisticasventas', component:EstadisticasVentasComponent},
+  {path: 'estadisticasbarra', component:EstadisticasBarraComponent},
 ];
 
 @NgModule({
