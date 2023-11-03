@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -175,10 +176,7 @@ import { EstadisticasBarraComponent } from './components/estadisticas-barra/esta
     EstadisticasGeneralesComponent,
     EstadisticasClientesComponent,
     EstadisticasVentasComponent,
-    EstadisticasBarraComponent
-    
-    
-
+    EstadisticasBarraComponent,
     CategoriasComponent,
     AgregarCategoriaModalComponent,
     ModificarCategoriaModalComponent,
@@ -214,6 +212,7 @@ import { EstadisticasBarraComponent } from './components/estadisticas-barra/esta
     MatSnackBarModule,
     MatChipsModule,
     MatExpansionModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatDatepickerModule,
     MatNativeDateModule,
