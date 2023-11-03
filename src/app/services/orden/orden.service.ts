@@ -77,6 +77,10 @@ export interface UpdateOrdenResponse {
   message: string;
 }
 
+export interface removeMesaRequest{
+  mesas: number[];
+}
+
 
 
 @Injectable({
@@ -134,6 +138,11 @@ export class OrdenService {
       catchError(this.errorHandler.handleError)
     );
   }
-  
 
+  getOrdenMesa(id:number){
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get<OrdenResponse>(`${this.apiUrl}/ordenes/mozo?mesaId=${id}`, { headers }).pipe(
+        catchError(this.errorHandler.handleError)
+    );
+  }
 }

@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -105,6 +106,7 @@ import { GruposComponent } from './components/grupos/grupos/grupos.component';
 import { AgregarGrupoModalComponent } from './ExtraComponents/agregar-grupo-modal/agregar-grupo-modal/agregar-grupo-modal.component';
 import { ModificarGrupoModalComponent } from './ExtraComponents/modificar-grupo-modal/modificar-grupo-modal/modificar-grupo-modal.component';
 import { EliminarGrupoModalComponent } from './ExtraComponents/eliminar-grupo-modal/eliminar-grupo-modal/eliminar-grupo-modal.component';
+import { ActivarItemMenuModalComponent } from './ExtraComponents/activar-item-menu-modal/activar-item-menu-modal/activar-item-menu-modal.component';
 
 
 
@@ -187,6 +189,7 @@ import { EstadisticasBarraComponent } from './components/estadisticas-barra/esta
     AgregarGrupoModalComponent,
     ModificarGrupoModalComponent,
     EliminarGrupoModalComponent,
+    ActivarItemMenuModalComponent,
 
 
 
@@ -214,10 +217,14 @@ import { EstadisticasBarraComponent } from './components/estadisticas-barra/esta
     MatSnackBarModule,
     MatChipsModule,
     MatExpansionModule,
+
+    ReactiveFormsModule,
+
     MatToolbarModule,
     MatDatepickerModule,
     MatNativeDateModule,
     NgChartsModule
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
