@@ -170,7 +170,6 @@ import { EstadisticasBarraComponent } from './components/estadisticas-barra/esta
     RetirarEfectivoModalComponent,
     IngresarEfectivoModalComponent,
     VentaBebidaModalComponent,
-
     HomeMenuComponent,
     SeleccionarItemMenuComponent,
     GrupoMenuComponent,
@@ -181,10 +180,7 @@ import { EstadisticasBarraComponent } from './components/estadisticas-barra/esta
     EstadisticasGeneralesComponent,
     EstadisticasClientesComponent,
     EstadisticasVentasComponent,
-    EstadisticasBarraComponent
-    
-    
-
+    EstadisticasBarraComponent,
     CategoriasComponent,
     AgregarCategoriaModalComponent,
     ModificarCategoriaModalComponent,
@@ -193,9 +189,7 @@ import { EstadisticasBarraComponent } from './components/estadisticas-barra/esta
     AgregarGrupoModalComponent,
     ModificarGrupoModalComponent,
     EliminarGrupoModalComponent,
-
     PagarOrdenModalComponent,
-
     ActivarItemMenuModalComponent,
 
 
@@ -225,9 +219,7 @@ import { EstadisticasBarraComponent } from './components/estadisticas-barra/esta
     MatSnackBarModule,
     MatChipsModule,
     MatExpansionModule,
-
     ReactiveFormsModule,
-
     MatToolbarModule,
     MatDatepickerModule,
     MatNativeDateModule,
