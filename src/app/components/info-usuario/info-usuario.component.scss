@@ -1,0 +1,34 @@
+.info-usuario-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    .info-card {
+      width: 100%;
+      max-width: 37rem; // Puedes cambiar esto según tu diseño preferido
+  
+      mat-card-title {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+      }
+  
+      p {
+        margin: 4px 0;
+        strong {
+          color: rgba(0, 0, 0, 0.87);
+        }
+      }
+  
+      mat-card-actions {
+        display: flex;
+        justify-content: flex-end;
+  
+        button {
+          margin-left: 8px;
+        }
+      }
+    }
+  }
+
+  
+  

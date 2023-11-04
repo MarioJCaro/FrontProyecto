@@ -30,6 +30,9 @@ import { EstadisticasBarraComponent } from './components/estadisticas-barra/esta
 import { AuthGuard } from './middlewares/auth.guard';
 import { CategoriasComponent } from './components/categorias/categorias/categorias.component';
 import { GruposComponent } from './components/grupos/grupos/grupos.component';
+import { InfoUsuarioComponent } from './components/info-usuario/info-usuario.component';
+import { HeaderComponent } from './ExtraComponents/header/header.component';
+
 
 
 
@@ -60,7 +63,8 @@ const routes: Routes = [
   {path: 'estadisticasclientes', component:EstadisticasClientesComponent},
   {path: 'estadisticasventas', component:EstadisticasVentasComponent},
   {path: 'estadisticasbarra', component:EstadisticasBarraComponent},
-
+  {path: 'infousuario', component:InfoUsuarioComponent},
+  {path: 'header', component:HeaderComponent},
 ];
 
 @NgModule({
