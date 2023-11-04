@@ -22,34 +22,34 @@ export class AgregarGrupoModalComponent {
     ngOnInit(): void {
       this.GrupoForm = this.formBuilder.group({
         nombre: ['', Validators.required],
+        esBebida: ['', Validators.required],
       });
     }
 
     createGrupo(grupo: any){
+      // Ajustamos el valor de 'esBebida' para que sea un booleano antes de enviarlo
+      grupo.esBebida = Boolean(Number(grupo.esBebida));
+      
       this.grupoService.create(grupo).subscribe({
         next:(response) => {
-          this.toastService.showSuccess("Item creado con exito");
-          this.dialogRef.close();
+          this.toastService.showSuccess("Grupo creado con éxito.");
+          this.dialogRef.close(true); // Cerrar y retornar 'true' para indicar la creación exitosa
         },
         error:(error) => {
-          
-        }}
-      );
+          this.toastService.showError("Hubo un error al crear el grupo.");
+          console.error(error);
+        }
+      });
     }
 
     onSubmit(): void {
       if (this.GrupoForm.valid) {
-        // Puedes acceder a los valores del formulario como this.ItemForm.value
         const formData = this.GrupoForm.value;
-  
         this.createGrupo(formData);
-  
-        this.dialogRef.close();
       }
     }
 
     onCancel(): void {
-      // Cancelar y cerrar el modal sin retornar datos
       this.dialogRef.close();
     }
 }

@@ -7,11 +7,13 @@ import { Observable, catchError } from 'rxjs';
 export interface CreateGrupoRequest {
   id: number;
   nombre: string;
+  esBebida: boolean;
 }
 
 export interface CreateGrupoResponse {
   id: number;
   nombre: string;
+  esBebida: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -30,6 +32,7 @@ export interface GetAllGrupoResponse {
 export interface GrupoResponse {
   id: number;
   nombre: string;
+  esBebida: boolean;
 }
 
 @Injectable({
