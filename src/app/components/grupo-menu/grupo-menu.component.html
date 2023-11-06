@@ -1,6 +1,6 @@
 <div class="container">
     <mat-toolbar class="custom-toolbar">
-        <button mat-icon-button>
+        <button mat-icon-button (click)="navigateTo('homemenu')">
             <mat-icon class="back-arrow">arrow_back</mat-icon> <!-- Ícono de flecha hacia atrás -->
         </button>
         <span class="spacer"></span> <!-- Espaciador para empujar el logo hacia la derecha -->
@@ -14,45 +14,22 @@
                 PIZZAS
             </mat-expansion-panel-header>
             <mat-divider></mat-divider>
-            <div class="menu-item" (click)="openModal()">
-                <img src="../../../assets/Pizza.jpeg" alt="Pizza" class="item-image">
+            <div *ngFor="let item of itemsDelGrupo" class="menu-item" (click)="openModal(item)">
+                <!-- Usamos la propiedad 'imagen' del item para mostrar la imagen -->
+                <img [src]="item.imagen" alt="{{ item.nombre }}" class="item-image">
                 <div class="item-details">
-                    <div class="item-text">
-                        <span class="item-title">Pizza Caprese</span>
-                        <span class="item-description">Tomate y Albahaca</span>
-                    </div>
-                    <div class="item-price-container"> <!-- Nuevo contenedor para precio y contador -->
-                        <span class="item-price">$350</span>
-                        <span class="item-count">2</span>
-                    </div>
+                  <div class="item-text">
+                    <span class="item-title">{{ item.nombre }}</span>
+                    <span class="item-description">{{ item.descripcion }}</span>
+                  </div>
+                  <div class="item-price-container">
+                    <span class="item-price">${{ item.precio }}</span>
+                    <!-- Si tienes un contador o cantidad, aquí lo puedes mostrar -->
+                    <!-- <span class="item-count">{{ item.cantidad }}</span> -->
+                  </div>
                 </div>
-            </div>                      
-            <div class="menu-item" (click)="openModal()">
-                <img src="../../../assets/Pizza.jpeg" alt="Pizza" class="item-image">
-                <div class="item-details">
-                    <div class="item-text">
-                        <span class="item-title">Pizza Caprese</span>
-                        <span class="item-description">Tomate y Albahaca</span>
-                    </div>
-                    <div class="item-price-container"> <!-- Nuevo contenedor para precio y contador -->
-                        <span class="item-price">$350</span>
-                        <span class="item-count">2</span>
-                    </div>
-                </div>
-            </div>  
-            <div class="menu-item" (click)="openModal()">
-                <img src="../../../assets/Pizza.jpeg" alt="Pizza" class="item-image">
-                <div class="item-details">
-                    <div class="item-text">
-                        <span class="item-title">Pizza Caprese</span>
-                        <span class="item-description">Tomate y Albahaca</span>
-                    </div>
-                    <div class="item-price-container"> <!-- Nuevo contenedor para precio y contador -->
-                        <span class="item-price">$350</span>
-                        <span class="item-count">2</span>
-                    </div>
-                </div>
-            </div>  
+              </div>
+                         
             <!-- Repite para los otros ítems... -->
         </mat-expansion-panel>
     </mat-accordion>

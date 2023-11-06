@@ -18,7 +18,6 @@ export interface CreateGrupoResponse {
   updatedAt: Date;
 }
 
-
 export interface GetAllGruposResponse {
   total: number;
   items: GrupoResponse[];  // Aquí es un array de ítems, no un solo ítem
@@ -68,6 +67,13 @@ export class GrupoComidaService {
 
     return this.http.get<GetAllGrupoResponse>(url, { headers }).pipe(
         catchError(this.errorHandler.handleError)
+    );
+  }
+
+  getGrupoByBebida(esBebida: boolean): Observable<GetAllGruposResponse>{
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get<GetAllGruposResponse>(`${this.apiUrl}/grupos?esBebida=${esBebida}`, { headers }).pipe(
+      catchError(this.errorHandler.handleError)
     );
   }
 

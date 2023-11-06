@@ -53,7 +53,7 @@ const routes: Routes = [
   {path:'categorias', component:CategoriasComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
   {path:'grupos', component:GruposComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
   {path:'homemenu', component:HomeMenuComponent},
-  {path:'grupomenu', component:GrupoMenuComponent},
+  {path:'grupomenu/:id', component:GrupoMenuComponent},
   {path: 'resumenordenmenu', component:ResumenOrdenMenuComponent},
   {path: 'estadisticas', component:HomeEstadisticasComponent},
   {path: 'estadisticasgenerales', component:EstadisticasGeneralesComponent},
