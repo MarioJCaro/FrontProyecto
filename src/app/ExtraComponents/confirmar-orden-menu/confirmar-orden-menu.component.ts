@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ExitoOrdenMenuComponent } from '../exito-orden-menu/exito-orden-menu.component';
 import { itemSeleccionado } from 'src/app/components/home-menu/home-menu.component';
-import { CreateOrdenClienteRequest } from 'src/app/services/orden/orden.service';
+import { CreateOrdenClienteRequest, OrdenService } from 'src/app/services/orden/orden.service';
 
 @Component({
   selector: 'app-confirmar-orden-menu',
@@ -16,6 +16,7 @@ export class ConfirmarOrdenMenuComponent {
   constructor(
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<ConfirmarOrdenMenuComponent>,
+    private ordenService: OrdenService,
     @Inject(MAT_DIALOG_DATA) public data: { itemsMenu: itemSeleccionado[], observaciones: string, totalOrden: number }
   ) {}
 
@@ -34,6 +35,9 @@ export class ConfirmarOrdenMenuComponent {
     
     const hora = `${String(ahora.getHours()).padStart(2, '0')}:${String(ahora.getMinutes()).padStart(2, '0')}:${String(ahora.getSeconds()).padStart(2, '0')}`;
 
+    //Buscamos el numero mesa en la local storage
+    const numeroMesa = localStorage.getItem('numeroMesa');
+    
     //Creamos la request
     const orderRequest: CreateOrdenClienteRequest = {
       fecha: fecha,
@@ -42,8 +46,26 @@ export class ConfirmarOrdenMenuComponent {
       ocupacion: this.cantidadComensales,
       observaciones: this.data.observaciones,
       items: itemsParaEnvio,
-      mesas: []
+      mesas: numeroMesa ? [parseInt(numeroMesa)] : []
     };
+
+    // Usamos el servicio para enviar la solicitud al backend
+    this.ordenService.createCliente(orderRequest).subscribe({
+      next: (response) => {
+        // Manejar la respuesta exitosa aquí si es necesario
+        console.log('Orden creada con éxito', response);
+
+        // Cierra el modal actual
+        this.dialogRef.close();
+
+        // Opcionalmente, abrir el modal de éxito aquí o manejar la navegación
+        this.openModalExito();
+      },
+      error: (error) => {
+        // Manejar el error aquí
+        console.error('Error al crear la orden', error);
+      }
+    });
 
     console.log(orderRequest);
   }

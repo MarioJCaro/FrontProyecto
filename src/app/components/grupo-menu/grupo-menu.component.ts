@@ -74,6 +74,17 @@ export class GrupoMenuComponent implements OnInit {
     });
   }
 
+  convertirBufferAImagen(data: any): string {
+    let binary = '';
+    const bytes = new Uint8Array(data);
+    const len = bytes.byteLength;
+    for (let i = 0; i < len; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+    return window.btoa(binary);
+  }
+  
+
   openModal(item: ItemMenuResponse) {
     const dialogRef = this.dialog.open(SeleccionarItemMenuComponent, {
       width: '80%',

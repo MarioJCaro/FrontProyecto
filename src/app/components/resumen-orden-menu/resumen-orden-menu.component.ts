@@ -1,5 +1,5 @@
 import { Component, Inject, ViewChild } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { ConfirmarOrdenMenuComponent } from 'src/app/ExtraComponents/confirmar-orden-menu/confirmar-orden-menu.component';
 import { itemSeleccionado } from '../home-menu/home-menu.component';
@@ -15,6 +15,7 @@ export class ResumenOrdenMenuComponent {
 
   constructor(
     public dialog: MatDialog,
+    public dialogRef: MatDialogRef<ResumenOrdenMenuComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { itemsMenu: itemSeleccionado[], observaciones: string, totalOrden: number }
   ) {}
 
@@ -40,6 +41,7 @@ openDialog(): void {
 
   dialogRef.afterClosed().subscribe(result => {
     console.log('El dialogo ConfirmarOrdenMenuComponent fue cerrado', result);
+    this.dialogRef.close();
     // Aquí puedes hacer algo con el resultado si es necesario, como volver a la vista principal.
   });
 }

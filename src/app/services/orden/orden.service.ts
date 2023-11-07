@@ -106,6 +106,12 @@ export class OrdenService {
       catchError(this.errorHandler.handleError));
   }
 
+  createCliente(item: CreateOrdenClienteRequest): Observable<CreateOrdenResponse> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<CreateOrdenResponse>(`${this.apiUrl}/ordenes`, item, { headers }).pipe(
+      catchError(this.errorHandler.handleError));
+  }
+
   //get all, se consulta con page, limit, empleadoId, clienteId, estado (todos opcionales)
   getAll(currentPage: number, pageSize: number, empleadoId?: number, clienteId?: number, estado?: string): Observable<OrdenResponse> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');

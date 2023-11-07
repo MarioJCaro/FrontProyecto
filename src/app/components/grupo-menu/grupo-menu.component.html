@@ -16,7 +16,7 @@
             <mat-divider></mat-divider>
             <div *ngFor="let item of itemsDelGrupo" class="menu-item" (click)="openModal(item)">
                 <!-- Usamos la propiedad 'imagen' del item para mostrar la imagen -->
-                <img [src]="item.imagen" alt="{{ item.nombre }}" class="item-image">
+                <img [src]="'data:image/png;base64,' + convertirBufferAImagen(item.imagen)" alt="{{ item.nombre }}" class="item-image">
                 <div class="item-details">
                   <div class="item-text">
                     <span class="item-title">{{ item.nombre }}</span>

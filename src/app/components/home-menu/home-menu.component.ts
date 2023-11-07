@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatExpansionPanel } from '@angular/material/expansion';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmarOrdenMenuComponent } from 'src/app/ExtraComponents/confirmar-orden-menu/confirmar-orden-menu.component';
 import { EstadoCompartidoService } from 'src/app/services/estadocompartido/estado-compartido.service';
 import { GrupoComidaService, GrupoResponse } from 'src/app/services/grupoComida/grupo-comida.service';
@@ -33,7 +33,8 @@ export class HomeMenuComponent implements OnInit {
     public dialog: MatDialog,
     private grupoComidaService: GrupoComidaService,
     private router: Router,
-    private estadoCompartidoService: EstadoCompartidoService
+    private estadoCompartidoService: EstadoCompartidoService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
@@ -45,6 +46,18 @@ export class HomeMenuComponent implements OnInit {
   
     // Calcula el total de la orden
     this.calcularTotalOrden();
+
+    this.route.paramMap.subscribe(params => {
+      const numeroMesa = params.get('mesa');
+      if (numeroMesa !== null) {
+        // Si hay un número de mesa, guárdalo en localStorage
+        localStorage.setItem('numeroMesa', numeroMesa);
+      } else {
+        // Si no hay número de mesa, decide qué hacer. Por ejemplo, usar un valor predeterminado o manejar la ausencia del número de mesa.
+        console.warn('Número de mesa no proporcionado en la URL');
+        // Aquí podrías establecer un valor predeterminado o simplemente no establecer nada en localStorage
+      }
+    });
   }
 
   calcularTotalOrden() {
