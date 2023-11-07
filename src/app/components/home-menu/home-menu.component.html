@@ -41,7 +41,9 @@
   
     <!-- Puedes agregar más categorías siguiendo la estructura anterior -->
   </mat-accordion>
-  <div class="container-button">
-    <button mat-raised-button class="add-button">Ver orden - $800</button>
-</div>
+
+  <div class="container-button" *ngIf="itemsMenu.length > 0">
+    <button mat-raised-button class="add-button" (click)="openResumenOrdenDialog()">Ver orden - ${{ totalOrden }}</button>
+  </div>
+
 </div>

@@ -37,6 +37,15 @@ export interface CreateOrdenResponse {
   };
 }
 
+export interface CreateOrdenClienteRequest {
+  fecha: String;
+  hora: String;
+  responsable: string | null;
+  ocupacion: number;
+  observaciones: string;
+  items: ItemsRequest[];
+  mesas: number[];
+}
 
 export interface OrdenResponse {
   total: number;

@@ -105,4 +105,20 @@ mat-accordion {
     flex-direction: column;
     flex: 1; // Hacer que ocupe el espacio disponible
   }
+
+  .observaciones-container {
+    margin-top: 1rem; /* Añade un margen en la parte superior */
+    padding: 0.5rem; /* Añade padding alrededor del texto */
+    background-color: #e0f2f1; /* Un color de fondo suave */
+    border-radius: 8px; /* Bordes redondeados */
+  }
+  
+  .observaciones-title {
+    font-weight: bold; /* Texto en negrita para el título */
+  }
+  
+  .observaciones-text {
+    display: block; /* Asegura que las observaciones estén en una nueva línea */
+    margin-top: 0.5rem; /* Espacio entre el título y el texto */
+  }
   

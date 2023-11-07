@@ -1,8 +1,8 @@
 <div class="container">
     <mat-toolbar class="custom-toolbar">
-        <button mat-icon-button (click)="navigateTo('homemenu')">
-            <mat-icon class="back-arrow">arrow_back</mat-icon> <!-- Ícono de flecha hacia atrás -->
-        </button>
+      <button mat-icon-button (click)="navigateToHome()">
+        <mat-icon class="back-arrow">arrow_back</mat-icon>
+      </button>
         <span class="spacer"></span> <!-- Espaciador para empujar el logo hacia la derecha -->
         <img src="../../../assets/LogoSinFondo.png" alt="Logo" class="logo">
     </mat-toolbar>
@@ -33,7 +33,7 @@
             <!-- Repite para los otros ítems... -->
         </mat-expansion-panel>
     </mat-accordion>
-    <div class="container-button">
-        <button mat-raised-button class="add-button">Ver orden - $800</button>
+    <div class="container-button" *ngIf="itemsMenu.length > 0">
+      <button mat-raised-button class="add-button" (click)="openResumenOrdenDialog()">Ver orden - ${{ totalOrden }}</button>
     </div>
 </div>
