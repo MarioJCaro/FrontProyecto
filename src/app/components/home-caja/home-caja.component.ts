@@ -13,6 +13,7 @@ import { OrdenesMesaCajaModalComponent } from 'src/app/ExtraComponents/ordenes-m
 import { PagarOrdenModalComponent } from 'src/app/ExtraComponents/pagar-orden-modal/pagar-orden-modal.component';
 
 import { AbrirBotellaModalComponent } from 'src/app/ExtraComponents/abrir-botella-modal/abrir-botella-modal.component';
+import { AccionesBotellasModalComponent } from 'src/app/ExtraComponents/acciones-botellas-modal/acciones-botellas-modal.component';
 
 
 @Component({
@@ -156,8 +157,9 @@ openAgregarDialog(): void {
 }
 
 openAbrirBotellasModal(){
-  const dialogRef = this.dialog.open(AbrirBotellaModalComponent, {
-    width: '30rem',
+  const dialogRef = this.dialog.open(AccionesBotellasModalComponent, {
+    width: '70rem',
+    height: '50rem',
     data: {}  // Puedes pasar la data inicial aquí si es necesario.
   });
 
