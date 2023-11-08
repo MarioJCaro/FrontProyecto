@@ -70,6 +70,13 @@ export class GrupoComidaService {
     );
   }
 
+  getGrupoById(id: number): Observable<CreateGrupoResponse>{
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get<CreateGrupoResponse>(`${this.apiUrl}/grupos/${id}`, { headers }).pipe(
+      catchError(this.errorHandler.handleError)
+    );
+  }
+
   getGrupoByBebida(esBebida: boolean): Observable<GetAllGruposResponse>{
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.get<GetAllGruposResponse>(`${this.apiUrl}/grupos?esBebida=${esBebida}`, { headers }).pipe(

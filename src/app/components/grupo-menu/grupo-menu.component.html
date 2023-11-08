@@ -10,13 +10,13 @@
     <br>
     <mat-accordion>
         <mat-expansion-panel #grupoPanel expanded (closed)="onPanelClosed(grupoPanel)" hideToggle>
-            <mat-expansion-panel-header class="header-panel">
-                PIZZAS
+            <mat-expansion-panel-header class="header-panel" *ngIf="grupo">
+                {{grupo.nombre || 'Vacio'}}
             </mat-expansion-panel-header>
             <mat-divider></mat-divider>
             <div *ngFor="let item of itemsDelGrupo" class="menu-item" (click)="openModal(item)">
                 <!-- Usamos la propiedad 'imagen' del item para mostrar la imagen -->
-                <img [src]="'data:image/png;base64,' + convertirBufferAImagen(item.imagen)" alt="{{ item.nombre }}" class="item-image">
+                <img [src]="'data:image/png;base64,' + item.imagen" alt="{{ item.nombre }}" class="item-image">
                 <div class="item-details">
                   <div class="item-text">
                     <span class="item-title">{{ item.nombre }}</span>

@@ -20,5 +20,5 @@ export interface Orden {
     items: ItemOrden[];
     mesas: Mesa[];
     cliente: Cliente;
-    empleado: Empleado;
+    empleado?: Empleado;
   }

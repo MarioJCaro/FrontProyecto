@@ -95,7 +95,7 @@
                 >Orden nº {{ orden.id }} {{ orden.hora }}</mat-card-title
               >
               <p>
-                Mesa {{ getMesas(orden) }} - Mozo: {{ orden.empleado.nombre }}
+                Mesa {{ getMesas(orden) }} - Mozo: {{ orden.empleado?.nombre  || 'Autoservicio'}}
               </p>
               <div class="order-items">
                 <p *ngFor="let item of orden.items">

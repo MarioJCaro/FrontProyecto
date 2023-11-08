@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { ExitoOrdenMenuComponent } from '../exito-orden-menu/exito-orden-menu.component';
 import { itemSeleccionado } from 'src/app/components/home-menu/home-menu.component';
 import { CreateOrdenClienteRequest, OrdenService } from 'src/app/services/orden/orden.service';
+import { EstadoCompartidoService } from 'src/app/services/estadocompartido/estado-compartido.service';
 
 @Component({
   selector: 'app-confirmar-orden-menu',
@@ -17,7 +18,8 @@ export class ConfirmarOrdenMenuComponent {
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<ConfirmarOrdenMenuComponent>,
     private ordenService: OrdenService,
-    @Inject(MAT_DIALOG_DATA) public data: { itemsMenu: itemSeleccionado[], observaciones: string, totalOrden: number }
+    private estadoCompartidoService: EstadoCompartidoService,
+    @Inject(MAT_DIALOG_DATA) public data: { itemsMenu: itemSeleccionado[], observaciones: string, totalOrden: number}
   ) {}
 
   crearOrden(){
@@ -54,6 +56,9 @@ export class ConfirmarOrdenMenuComponent {
       next: (response) => {
         // Manejar la respuesta exitosa aquí si es necesario
         console.log('Orden creada con éxito', response);
+
+        this.estadoCompartidoService.actualizarItemsMenu([]);
+        this.estadoCompartidoService.actualizarObservaciones("");
 
         // Cierra el modal actual
         this.dialogRef.close();

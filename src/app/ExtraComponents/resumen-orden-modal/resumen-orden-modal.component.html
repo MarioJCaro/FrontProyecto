@@ -16,18 +16,23 @@
         </tr>
     </table>
       <div class="div-obs">
-        <mat-divider></mat-divider>
-        <mat-label style="display:flex; justify-content:flex-end; padding-right: 1rem;">TOTAL: $1700</mat-label>
-        <h3>Observaciones</h3>
-        <textarea [(ngModel)]="observaciones" placeholder="Ingresa las observaciones aquí"></textarea>
-    </div>
+          <mat-divider></mat-divider>
+          <mat-label style="display:flex; justify-content:flex-end; padding-right: 1rem;">
+            TOTAL: ${{ calcularTotal() }}
+          </mat-label>
+          <h3>Observaciones</h3>
+          <ul>
+            <li *ngFor="let obs of observacionesSeparadas">{{ obs }}</li>
+          </ul>
+        </div>
+
   
     </div>
 
   </mat-dialog-content>
   <mat-dialog-actions>
     <div class="buttons">
-      <button mat-button >Volver</button>
+      <button mat-button (click)="onCancel()">Volver</button>
       <button mat-button class="confirm" (click)="sendOrder()">Confirmar</button>
     </div>
   </mat-dialog-actions>

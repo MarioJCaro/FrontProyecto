@@ -41,7 +41,10 @@ export class HomeCocinaComponent implements OnInit {
             this.ordenes = response.items;
           //recorremos las ordenes y para cada una de ellas recorremos sus items, guardamos en filteredItemsMap todos los items cuyo item.itemMenu.grupo.nombre != "bebida"
           this.ordenes.forEach(orden => {
-            this.filteredItemsMap[orden.id] = orden.items.filter(item => !EXCLUDED_GROUPS.includes(item.itemMenu.grupo.nombre));
+            this.filteredItemsMap[orden.id] = orden.items.filter(item =>
+              !EXCLUDED_GROUPS.includes(item.itemMenu.grupo?.nombre ?? '')
+            );
+            
           }
           );
           

@@ -7,7 +7,7 @@
             Orden nº {{ orden.id }} - {{ orden.hora.split(':').slice(0, 2).join(':') || 'N/A' }}
           </mat-card-title>        
           <p class="custom-info">
-            Mesa {{ getMesas(orden) }} - Mozo: {{ orden.empleado.nombre }}
+            Mesa {{ getMesas(orden) }} - Mozo: {{ orden.empleado?.nombre || 'Autoservicio' }}
           </p>
           
           <hr>

@@ -7,6 +7,8 @@ import { SeleccionarItemMenuComponent } from 'src/app/ExtraComponents/selecciona
 import { itemSeleccionado } from '../home-menu/home-menu.component';
 import { EstadoCompartidoService } from 'src/app/services/estadocompartido/estado-compartido.service';
 import { ResumenOrdenMenuComponent } from '../resumen-orden-menu/resumen-orden-menu.component';
+import { Grupo } from 'src/app/models/grupo.model';
+import { CreateGrupoResponse, GrupoComidaService } from 'src/app/services/grupoComida/grupo-comida.service';
 
 @Component({
   selector: 'app-grupo-menu',
@@ -20,13 +22,15 @@ export class GrupoMenuComponent implements OnInit {
   itemsMenu: itemSeleccionado[];
   observaciones : string;
   totalOrden: number = 0;
+  grupo!: Grupo;
 
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute, // Inyecta ActivatedRoute
     private menubackofficeService: MenubackofficeService, // Inyecta tu servicio
     private router: Router,
-    private estadoCompartidoService: EstadoCompartidoService
+    private estadoCompartidoService: EstadoCompartidoService,
+    private grupoComidaService: GrupoComidaService
   ) {
     const navigation = this.router.getCurrentNavigation();
 
@@ -54,6 +58,7 @@ export class GrupoMenuComponent implements OnInit {
     }
     // Calcula el total de la orden
     this.calcularTotalOrden();
+    this.getGrupo();
   }
 
   calcularTotalOrden() {
@@ -61,6 +66,21 @@ export class GrupoMenuComponent implements OnInit {
       return acumulado + (item.precio * item.cantidad);
     }, 0);
   }
+
+  getGrupo() {
+  if (this.grupoId) {
+    this.grupoComidaService.getGrupoById(this.grupoId).subscribe({
+      next: (grupo) => {
+        this.grupo = grupo;
+        // Cualquier otra lógica que dependa de `this.grupo` debería ir aquí
+      },
+      error: (error) => {
+        console.error('Error al obtener el grupo', error);
+      }
+    });
+  }
+}
+
 
   cargarItemsDelGrupo() {
     // Llama al servicio con el grupoId obtenido de la ruta
@@ -73,17 +93,6 @@ export class GrupoMenuComponent implements OnInit {
       }
     });
   }
-
-  convertirBufferAImagen(data: any): string {
-    let binary = '';
-    const bytes = new Uint8Array(data);
-    const len = bytes.byteLength;
-    for (let i = 0; i < len; i++) {
-      binary += String.fromCharCode(bytes[i]);
-    }
-    return window.btoa(binary);
-  }
-  
 
   openModal(item: ItemMenuResponse) {
     const dialogRef = this.dialog.open(SeleccionarItemMenuComponent, {
