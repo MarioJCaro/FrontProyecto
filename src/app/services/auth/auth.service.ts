@@ -25,6 +25,15 @@ export interface LoginResponse {
   };
 }
 
+export interface ResetPasswordRequest {
+  currentPassword: string;
+  newPassword: string;
+}
+
+export interface ResetPasswordResponse {
+  message: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -56,5 +65,12 @@ export class AuthService {
         this.router.navigate(['/default-home']);
         break;
     }
+  }
+  
+  resetPassword(employeeId: number, data: ResetPasswordRequest): Observable<ResetPasswordResponse> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.patch<ResetPasswordResponse>(`${this.apiUrl}/resetPassword/${employeeId}`, data, { headers }).pipe(
+      catchError(this.errorHandler.handleError)
+    );
   }
 }

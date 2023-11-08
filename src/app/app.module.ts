@@ -116,6 +116,10 @@ import { ActivarItemMenuModalComponent } from './ExtraComponents/activar-item-me
 
 import { NgChartsModule } from 'ng2-charts';
 import { EstadisticasBarraComponent } from './components/estadisticas-barra/estadisticas-barra.component';
+import { InfoUsuarioComponent } from './components/info-usuario/info-usuario.component';
+import { ResetPasswordModalComponent } from './ExtraComponents/reset-password-modal/reset-password-modal.component';
+import { HistorialOrdenesModalComponent } from './ExtraComponents/historial-ordenes-modal/historial-ordenes-modal.component';
+
 import { ConfirmarCancelarOrdenModalComponent } from './ExtraComponents/confirmar-cancelar-orden-modal/confirmar-cancelar-orden-modal/confirmar-cancelar-orden-modal.component';
 import { AgregarObservacionOrdenModalComponent } from './ExtraComponents/agregar-observacion-orden-modal/agregar-observacion-orden-modal/agregar-observacion-orden-modal.component';
 
@@ -193,6 +197,10 @@ import { AgregarObservacionOrdenModalComponent } from './ExtraComponents/agregar
     EliminarGrupoModalComponent,
     PagarOrdenModalComponent,
     ActivarItemMenuModalComponent,
+    InfoUsuarioComponent,
+    ResetPasswordModalComponent,
+    HistorialOrdenesModalComponent,
+
     ConfirmarCancelarOrdenModalComponent,
     AgregarObservacionOrdenModalComponent,
 

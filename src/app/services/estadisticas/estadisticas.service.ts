@@ -5,13 +5,6 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ErrorHandlingService } from '../errorHandling/error-handling.service';
 
-export interface CajaResponse {
-    id: number;
-    total: number;
-    createdAt: Date;
-    updatedAt: Date;
-}
-
 export interface ItemInventario {
   id: number;
   nombre: string;
@@ -35,31 +28,34 @@ export interface ItemsInventarioResponse {
   items: ItemInventario[];
 }
 
-export interface AbrirBotellaRequest {
-  empleadoId: number;
+export interface LogEntry {
+  id: number;
+  fechaHoraAbierta: string;
+  fechaHoraCerrada: string;
   itemInventarioId: number;
+  createdAt: string;
+  updatedAt: string;
+  cantTragos: number;
+  fechaAbiertaUy: string;
+  horaAbiertaUy: string;
+  fechaCerradaUy: string;
+  horaCerradaUy: string;
 }
 
-export interface CerrarBotellaRequest {
-  empleadoId: number;
-  itemInventarioId: number;
+export interface LogsResponse {
+  count: number;
+  rows: LogEntry[];
 }
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class CajaService {
+export class EstadisticasService {
+
   private apiUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient, private errorHandler:ErrorHandlingService) { }
-
-  getCajaTotal(id: number): Observable<CajaResponse> {
-    const headers = new HttpHeaders()
-      .set('Content-Type', 'application/json');
-
-    return this.http.get<CajaResponse>(`${this.apiUrl}/cajas/${id}`, { headers }).pipe(
-      catchError(this.errorHandler.handleError));
-  }
 
   getItemsInventarioTrago(porUnidad: boolean): Observable<ItemsInventarioResponse> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -71,17 +67,10 @@ export class CajaService {
     );
   }  
 
-  abrirBotella(data: AbrirBotellaRequest): Observable<any> {
+  getLogsPorItem(itemId: number): Observable<LogsResponse> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.post<any>(`${this.apiUrl}/log/abrirBotella`, data, { headers }).pipe(
-      catchError(this.errorHandler.handleError)
-    );
-  }
+    return this.http.get<LogsResponse>(`${this.apiUrl}/logs/${itemId}`, { headers })
+      .pipe(catchError(this.errorHandler.handleError));
+  }  
 
-  cerrarBotella(data: AbrirBotellaRequest): Observable<any> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.post<any>(`${this.apiUrl}/log/cerrarBotella`, data, { headers }).pipe(
-      catchError(this.errorHandler.handleError)
-    );
-  }
 }

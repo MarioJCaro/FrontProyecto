@@ -17,7 +17,10 @@ export class AccionesBotellasModalComponent {
   openAbrirBotellaModal(): void {
     const dialogRef = this.dialog.open(AbrirBotellaModalComponent, {
       width: '20rem',
-      
+    });
+    dialogRef.afterClosed().subscribe((result: any) => {
+      console.log('El modal fue cerrado', result);
+      // Aquí puedes manejar el resultado del modal, por ejemplo, guardar el nuevo ítem.
     });
 
 }
@@ -27,7 +30,10 @@ openDescontarBotellaModal(): void {
     width: '20rem',
     
   });
-
+  dialogRef.afterClosed().subscribe((result: any) => {
+    console.log('El modal fue cerrado', result);
+    // Aquí puedes manejar el resultado del modal, por ejemplo, guardar el nuevo ítem.
+  });
 }
 
 }

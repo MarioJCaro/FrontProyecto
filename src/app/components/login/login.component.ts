@@ -21,10 +21,13 @@ export class LoginComponent {
   
     this.authService.login(loginData).subscribe({
       next: (response) => {
+
+        console.log('Login Success:', response)
         localStorage.setItem('authToken', response.token);
         localStorage.setItem('role', response.empleado.rol);
         localStorage.setItem('empleadoId', response.empleado.id.toString());
         localStorage.setItem('empleadoNombre', response.empleado.nombre);
+        localStorage.setItem('empleado', JSON.stringify(response.empleado));
         this.toastService.showSuccess("Ha iniciado sesión con éxito");
         this.authService.redirectUserBasedOnRole(response.empleado.rol);
       },

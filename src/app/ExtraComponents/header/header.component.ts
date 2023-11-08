@@ -13,7 +13,7 @@ export class HeaderComponent {
 
 constructor(private authService: AuthService, private router: Router, private toastService: ToastService) {}
 
-redirectUserBasedOnRole() {
+ /*redirectUserBasedOnRole() {
   const storedRole = localStorage.getItem('role');
 
   if (typeof storedRole === 'string') {
@@ -22,6 +22,6 @@ redirectUserBasedOnRole() {
   } else {
     console.error('El valor almacenado en "role" no es una cadena.');
   }
-}
+}*/
 
 }

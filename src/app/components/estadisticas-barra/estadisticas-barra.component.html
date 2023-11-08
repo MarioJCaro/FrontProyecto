@@ -9,26 +9,28 @@
             <label>Seleccionar bebida:</label>
             <mat-form-field appearance="fill">
                 <mat-label>Bebida</mat-label>
-                <mat-select [(value)]="selectedBebida">
-                    <mat-option *ngFor="let bebida of bebidas" [value]="bebida">{{bebida}}</mat-option>
+                <!-- Utiliza [(ngModel)] para el two-way data binding en el select -->
+                <mat-select [(ngModel)]="selectedDrink" (selectionChange)="onDrinkSelect()">
+                  <!-- Itera sobre drinksList para mostrar las opciones -->
+                  <mat-option *ngFor="let drink of drinksList" [value]="drink.id">{{ drink.nombre }}</mat-option>
                 </mat-select>
-            </mat-form-field>
+              </mat-form-field>
         </div>
         
         <h2 class="sub-title">Historial de utilización</h2>
 
         <!-- Tabla de Historial -->
-        <mat-table [dataSource]="historial">
+        <mat-table [dataSource]="dataSource">
             <!-- Hora Abierto Column -->
             <ng-container matColumnDef="horaAbierto">
                 <mat-header-cell *matHeaderCellDef> Hora abierto </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.horaAbierto}} </mat-cell>
+                <mat-cell *matCellDef="let element"> {{element.fechaAbiertaUy}} - {{element.horaAbiertaUy}}  </mat-cell>
             </ng-container>
 
             <!-- Hora Cerrado Column -->
             <ng-container matColumnDef="horaCerrado">
                 <mat-header-cell *matHeaderCellDef> Hora cerrado </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.horaCerrado}} </mat-cell>
+                <mat-cell *matCellDef="let element"> {{element.fechaCerradaUy}} - {{element.horaCerradaUy}} </mat-cell>
             </ng-container>
 
             <!-- Cant.Tragos Column -->
