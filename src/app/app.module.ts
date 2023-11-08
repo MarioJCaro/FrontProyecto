@@ -118,6 +118,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { EstadisticasBarraComponent } from './components/estadisticas-barra/estadisticas-barra.component';
 import { InfoUsuarioComponent } from './components/info-usuario/info-usuario.component';
 import { ResetPasswordModalComponent } from './ExtraComponents/reset-password-modal/reset-password-modal.component';
+import { HistorialOrdenesModalComponent } from './ExtraComponents/historial-ordenes-modal/historial-ordenes-modal.component';
 
 @NgModule({
   declarations: [
@@ -195,6 +196,7 @@ import { ResetPasswordModalComponent } from './ExtraComponents/reset-password-mo
     ActivarItemMenuModalComponent,
     InfoUsuarioComponent,
     ResetPasswordModalComponent,
+    HistorialOrdenesModalComponent,
 
 
 

@@ -14,6 +14,7 @@ import { PagarOrdenModalComponent } from 'src/app/ExtraComponents/pagar-orden-mo
 
 import { AbrirBotellaModalComponent } from 'src/app/ExtraComponents/abrir-botella-modal/abrir-botella-modal.component';
 import { AccionesBotellasModalComponent } from 'src/app/ExtraComponents/acciones-botellas-modal/acciones-botellas-modal.component';
+import { HistorialOrdenesModalComponent } from 'src/app/ExtraComponents/historial-ordenes-modal/historial-ordenes-modal.component';
 
 
 @Component({
@@ -170,7 +171,13 @@ openAbrirBotellasModal(){
 }
 
 
-
+openHistorialOrdenes(){
+  const dialogRef = this.dialog.open(HistorialOrdenesModalComponent, {
+    width: '70rem',
+    height: '50rem',
+    data: {}  // Puedes pasar la data inicial aquí si es necesario.
+  });
+}
 
 
 }

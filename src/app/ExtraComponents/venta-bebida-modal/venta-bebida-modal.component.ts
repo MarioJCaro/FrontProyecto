@@ -85,9 +85,11 @@ prepareCreateOrdenRequest(): CreateOrdenRequest {
       }
   }
 
-  const date = new Date();
-  const fecha = date.toISOString().split('T')[0];
-  const hora = date.toTimeString().split(' ')[0];
+  const ahora = new Date();
+
+  const fecha = `${ahora.getFullYear()}-${String(ahora.getMonth() + 1).padStart(2, '0')}-${String(ahora.getDate()).padStart(2, '0')}`;
+  
+  const hora = `${String(ahora.getHours()).padStart(2, '0')}:${String(ahora.getMinutes()).padStart(2, '0')}:${String(ahora.getSeconds()).padStart(2, '0')}`;
 
   return {
       fecha,
