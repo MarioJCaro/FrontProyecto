@@ -42,36 +42,34 @@ export class AgregarStockModalComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  updateStock(id:number, amount:number){
+  updateStock(id: number, amount: number) {
     const empleadoId = localStorage.getItem('empleadoId');
-
+  
     if (!empleadoId) {
       this.toastService.showError('No se encontró el ID del empleado en la sesión');
       return;
     }
-
-     // Obtiene la fecha y hora actuales
-    // Crear objeto Date para la fecha actual con la hora a 00:00:00.000
-    const fecha = new Date();
-    fecha.setHours(0, 0, 0, 0);
-
-    // Crear objeto Date para la hora actual manteniendo la fecha neutra (p.ej., 1970-01-01)
-    const hora = new Date();
-    const neutralDate = new Date(0);
-    neutralDate.setHours(hora.getHours(), hora.getMinutes(), hora.getSeconds());
- 
-
-    // Debes definir los otros campos del CreateCompraRequest basado en tu lógica de negocio
-    const compraData: CreateCompraRequest = {
-      fecha: fecha, // Usa la fecha actual o la que corresponda
-      hora: hora,  // Usa la hora actual o la que corresponda
-      cantidadxCasillero: this.item.cantxCasillero, // Ajusta este valor según tu lógica de negocio
+  
+    const ahora = new Date();
+    const fecha = `${ahora.getFullYear()}-${String(ahora.getMonth() + 1).padStart(2, '0')}-${String(ahora.getDate()).padStart(2, '0')}`;
+    const hora = `${String(ahora.getHours()).padStart(2, '0')}:${String(ahora.getMinutes()).padStart(2, '0')}:${String(ahora.getSeconds()).padStart(2, '0')}`;
+  
+    // Objeto base para compraData
+    const compraData: Partial<CreateCompraRequest> = {
+      fecha: fecha,
+      hora: hora,
       cantidad: amount,
-      empleadoId: +empleadoId, // Asumo que obtendrás el id del empleado de alguna parte
+      empleadoId: +empleadoId,
       itemInventarioId: id,
     };
-
-    this.compraService.create(compraData).subscribe({
+  
+    // Si cantidadxCasillero no es null, inclúyelo en el objeto compraData
+    if (this.item.cantxCasillero != null) {
+      compraData.cantidadxCasillero = this.item.cantxCasillero;
+    }
+  
+    // Llama al servicio de compra con el objeto compraData
+    this.compraService.create(compraData as CreateCompraRequest).subscribe({
       next: (response) => {
         this.toastService.showSuccess("Compra registrada y stock actualizado con éxito");
         this.dialogRef.close();
@@ -81,6 +79,7 @@ export class AgregarStockModalComponent implements OnInit {
       }
     });
   }
+  
 
   confirm(): void {
     // Aquí puedes implementar lógica adicional si es necesario
