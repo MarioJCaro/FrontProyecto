@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Grupo } from 'src/app/models/grupo.model';
 import { ErrorHandlingService } from 'src/app/services/errorHandling/error-handling.service';
@@ -12,7 +12,7 @@ import { ToastService } from 'src/app/services/toast/toast.service';
   styleUrls: ['./modificar-grupo-modal.component.scss']
 })
 export class ModificarGrupoModalComponent {
-  GrupoForm!: FormGroup; // No es necesario inicializarlo aquí
+  GrupoForm!: FormGroup;
   idGrupo: number = this.grupo.id;
 
   constructor(
@@ -23,36 +23,39 @@ export class ModificarGrupoModalComponent {
     private toastService: ToastService,
     @Inject(MAT_DIALOG_DATA) public grupo: Grupo) { }
 
-    ngOnInit(): void {
-  
-      this.GrupoForm = this.formBuilder.group({
-        nombre: [this.grupo.nombre],
-      });
-    }
+  ngOnInit(): void {
+    this.GrupoForm = this.formBuilder.group({
+      nombre: [this.grupo.nombre, Validators.required],
+      esBebida: [this.grupo.esBebida, Validators.required], // Suponiendo que 'esBebida' es una propiedad del grupo
+      
+    });
+    console.log(this.GrupoForm);
+  }
 
-    onCancel(): void {
-      this.dialogRef.close();
-    }
+  onCancel(): void {
+    this.dialogRef.close();
+  }
 
-    updateGrupo(item: any){
-      this.grupoService.update(this.idGrupo, item).subscribe({
-        next:(response) => {
-          this.toastService.showSuccess("Item modificado con exito");
-          this.dialogRef.close();
-        },
-        error:(error) => {
-        }}
-      );
-    }
+  updateGrupo(grupo: any){
+    // Ajustamos el valor de 'esBebida' para que sea un booleano antes de enviarlo
+    grupo.esBebida = Boolean(Number(grupo.esBebida));
 
-    onSubmit() {
-      if (this.GrupoForm.valid) {
-        // Puedes acceder a los valores del formulario como this.ItemForm.value
-        const formData = this.GrupoForm.value;
-
-        this.updateGrupo(formData);
-  
-        this.dialogRef.close();
+    this.grupoService.update(this.idGrupo, grupo).subscribe({
+      next: (response) => {
+        this.toastService.showSuccess("Grupo modificado con éxito.");
+        this.dialogRef.close(true); // Cerrar y retornar 'true' para indicar la actualización exitosa
+      },
+      error: (error) => {
+        this.toastService.showError("Hubo un error al modificar el grupo.");
+        this.errorHandler.handleError;
       }
+    });
+  }
+
+  onSubmit() {
+    if (this.GrupoForm.valid) {
+      const formData = this.GrupoForm.value;
+      this.updateGrupo(formData);
     }
+  }
 }

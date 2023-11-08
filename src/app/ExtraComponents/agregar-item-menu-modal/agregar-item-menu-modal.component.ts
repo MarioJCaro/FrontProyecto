@@ -46,7 +46,8 @@ export class AgregarItemMenuModalComponent {
           if (Array.isArray(response.items)) {
             const grupos: GrupoResponse[] = response.items.map(categoria  => ({
               id: categoria.id,
-              nombre: categoria.nombre
+              nombre: categoria.nombre,
+              esBebida: categoria.esBebida
               // Añade otras propiedades si es necesario
             }));
     

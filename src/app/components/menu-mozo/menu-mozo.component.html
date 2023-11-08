@@ -17,16 +17,26 @@
                     <p>{{ item.nombre }}</p>
                 </div>
                 <div class="option-buttons">
-                    <button mat-icon-button class="remove" (click)="disminuirCantidad(item)">
-                        <mat-icon class="material-symbols-outlined">
-                            remove
-                        </mat-icon>
+                    <!-- Botón con icono de mensaje que solo se muestra si la cantidad es mayor que cero -->
+                    <button mat-icon-button class="message" *ngIf="cantidades[item.id] > 0" (click)="agregarObservacion(item)">
+                      <mat-icon>message</mat-icon>
                     </button>
+                  
+                    <!-- Botón existente para disminuir la cantidad -->
+                    <button mat-icon-button class="remove" (click)="disminuirCantidad(item)">
+                      <mat-icon class="material-symbols-outlined">
+                        remove
+                      </mat-icon>
+                    </button>
+                  
+                    <!-- Campo de entrada para la cantidad -->
                     <input type="number" class="cantidad" placeholder="0" [(ngModel)]="cantidades[item.id]">
+                  
+                    <!-- Botón existente para aumentar la cantidad -->
                     <button mat-icon-button class="add" (click)="aumentarCantidad(item)">
-                        <mat-icon class="material-symbols-outlined">
-                            add
-                        </mat-icon>
+                      <mat-icon class="material-symbols-outlined">
+                        add
+                      </mat-icon>
                     </button>
                 </div>
                 

@@ -116,6 +116,8 @@ import { ActivarItemMenuModalComponent } from './ExtraComponents/activar-item-me
 
 import { NgChartsModule } from 'ng2-charts';
 import { EstadisticasBarraComponent } from './components/estadisticas-barra/estadisticas-barra.component';
+import { ConfirmarCancelarOrdenModalComponent } from './ExtraComponents/confirmar-cancelar-orden-modal/confirmar-cancelar-orden-modal/confirmar-cancelar-orden-modal.component';
+import { AgregarObservacionOrdenModalComponent } from './ExtraComponents/agregar-observacion-orden-modal/agregar-observacion-orden-modal/agregar-observacion-orden-modal.component';
 
 @NgModule({
   declarations: [
@@ -191,6 +193,8 @@ import { EstadisticasBarraComponent } from './components/estadisticas-barra/esta
     EliminarGrupoModalComponent,
     PagarOrdenModalComponent,
     ActivarItemMenuModalComponent,
+    ConfirmarCancelarOrdenModalComponent,
+    AgregarObservacionOrdenModalComponent,
 
 
 

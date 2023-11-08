@@ -37,6 +37,15 @@ export interface CreateOrdenResponse {
   };
 }
 
+export interface CreateOrdenClienteRequest {
+  fecha: String;
+  hora: String;
+  responsable: string | null;
+  ocupacion: number;
+  observaciones: string;
+  items: ItemsRequest[];
+  mesas: number[];
+}
 
 export interface OrdenResponse {
   total: number;
@@ -92,6 +101,12 @@ export class OrdenService {
   constructor(private http: HttpClient, private errorHandler:ErrorHandlingService) { }
 
   create(item: CreateOrdenRequest): Observable<CreateOrdenResponse> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<CreateOrdenResponse>(`${this.apiUrl}/ordenes`, item, { headers }).pipe(
+      catchError(this.errorHandler.handleError));
+  }
+
+  createCliente(item: CreateOrdenClienteRequest): Observable<CreateOrdenResponse> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<CreateOrdenResponse>(`${this.apiUrl}/ordenes`, item, { headers }).pipe(
       catchError(this.errorHandler.handleError));
