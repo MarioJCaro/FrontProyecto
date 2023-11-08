@@ -35,9 +35,8 @@ export class AgregarItemModalComponent {
       nombre: ['', Validators.required],
       descripcion: ['', Validators.required],
       categoriaId: ['', Validators.required],
-      cantxCasillero: ['', Validators.required],
+      cantxCasillero: [''],
       costo: ['', Validators.required],
-      porUnidad: ['', Validators.required], // Establece un valor predeterminado
     });
   }
 
@@ -86,10 +85,8 @@ export class AgregarItemModalComponent {
       // Puedes acceder a los valores del formulario como this.ItemForm.value
       const formData = this.ItemForm.value;
       
-      if(formData.porUnidad == "unidad"){
-        formData.porUnidad = true;
-      }else{
-        formData.porUnidad = false;
+      if(formData.cantxCasillero == ""){
+        formData.cantxCasillero = null;
       }
 
       this.createItem(formData);
