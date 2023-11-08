@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { itemSeleccionadoInterface } from 'src/app/components/menu-mozo/menu-mozo.component';
 import { ESTADOS } from 'src/app/constants/estadosOrden.constant';
 import { CreateOrdenRequest, ItemsRequest, OrdenService } from 'src/app/services/orden/orden.service';
@@ -15,8 +16,13 @@ export class ResumenOrdenModalComponent {
   constructor(
     public dialogRef: MatDialogRef<ResumenOrdenModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private ordenService:OrdenService
-    ) { }
+    private ordenService:OrdenService,
+    private router: Router
+    ) { 
+      if (data.observaciones) {
+        this.observaciones = data.observaciones;
+      }
+    }
 
     generateOrderRequest(): CreateOrdenRequest {
       const storedValue = localStorage.getItem('empleadoId');
@@ -55,6 +61,14 @@ export class ResumenOrdenModalComponent {
       return orderRequest;
     }
 
+    get observacionesSeparadas(): string[] {
+      return this.observaciones.split(' & ');
+    }
+
+    calcularTotal(): number {
+      return this.data.items.reduce((acumulado : number, item : ItemsRequest) => acumulado + (item.cantidad * item.precio), 0);
+    }
+
     sendOrder(): void {
       const orderRequest = this.generateOrderRequest();
       console.log('Orden a enviar:', orderRequest);
@@ -63,6 +77,8 @@ export class ResumenOrdenModalComponent {
         console.log('Orden creada:', response);
         // Aquí maneja la respuesta, por ejemplo, mostrando un mensaje al usuario
         //redireccionar a /homemozo
+        this.dialogRef.close();
+        this.router.navigateByUrl('/homemozo');
 
       }, 
         error:error => {

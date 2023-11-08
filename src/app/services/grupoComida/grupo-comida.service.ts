@@ -7,15 +7,16 @@ import { Observable, catchError } from 'rxjs';
 export interface CreateGrupoRequest {
   id: number;
   nombre: string;
+  esBebida: boolean;
 }
 
 export interface CreateGrupoResponse {
   id: number;
   nombre: string;
+  esBebida: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
-
 
 export interface GetAllGruposResponse {
   total: number;
@@ -30,6 +31,7 @@ export interface GetAllGrupoResponse {
 export interface GrupoResponse {
   id: number;
   nombre: string;
+  esBebida: boolean;
 }
 
 @Injectable({
@@ -65,6 +67,20 @@ export class GrupoComidaService {
 
     return this.http.get<GetAllGrupoResponse>(url, { headers }).pipe(
         catchError(this.errorHandler.handleError)
+    );
+  }
+
+  getGrupoById(id: number): Observable<CreateGrupoResponse>{
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get<CreateGrupoResponse>(`${this.apiUrl}/grupos/${id}`, { headers }).pipe(
+      catchError(this.errorHandler.handleError)
+    );
+  }
+
+  getGrupoByBebida(esBebida: boolean): Observable<GetAllGruposResponse>{
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get<GetAllGruposResponse>(`${this.apiUrl}/grupos?esBebida=${esBebida}`, { headers }).pipe(
+      catchError(this.errorHandler.handleError)
     );
   }
 

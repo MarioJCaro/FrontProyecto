@@ -8,6 +8,11 @@
         </mat-form-field>
     </mat-dialog-content>
 
+    <mat-radio-group formControlName="esBebida">
+        <mat-radio-button color="primary" [value]="1" class="radio-btn">Bebida</mat-radio-button>
+        <mat-radio-button color="primary" [value]="0" class="radio-btn">Comida</mat-radio-button>
+      </mat-radio-group>      
+
     <mat-dialog-actions align="end">
         <button mat-button (click)="onCancel()">Cancelar</button>
         <button mat-raised-button color="primary">Agregar</button>

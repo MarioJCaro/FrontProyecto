@@ -120,6 +120,9 @@ import { InfoUsuarioComponent } from './components/info-usuario/info-usuario.com
 import { ResetPasswordModalComponent } from './ExtraComponents/reset-password-modal/reset-password-modal.component';
 import { HistorialOrdenesModalComponent } from './ExtraComponents/historial-ordenes-modal/historial-ordenes-modal.component';
 
+import { ConfirmarCancelarOrdenModalComponent } from './ExtraComponents/confirmar-cancelar-orden-modal/confirmar-cancelar-orden-modal/confirmar-cancelar-orden-modal.component';
+import { AgregarObservacionOrdenModalComponent } from './ExtraComponents/agregar-observacion-orden-modal/agregar-observacion-orden-modal/agregar-observacion-orden-modal.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -197,6 +200,9 @@ import { HistorialOrdenesModalComponent } from './ExtraComponents/historial-orde
     InfoUsuarioComponent,
     ResetPasswordModalComponent,
     HistorialOrdenesModalComponent,
+
+    ConfirmarCancelarOrdenModalComponent,
+    AgregarObservacionOrdenModalComponent,
 
 
 

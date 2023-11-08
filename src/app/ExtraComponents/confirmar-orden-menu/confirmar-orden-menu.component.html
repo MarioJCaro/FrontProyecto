@@ -4,21 +4,17 @@
     <mat-dialog-content>
         <mat-form-field appearance="outline" class="full-width">
         <mat-label style="font-weight: bold;">Nombre del cliente</mat-label>
-        <input matInput placeholder="Nombre del cliente" style="font-weight: bold;">
+        <input matInput placeholder="Nombre del cliente" [(ngModel)]="nombreCliente" style="font-weight: bold;">
       </mat-form-field>
       
       <mat-form-field appearance="outline" class="full-width">
         <mat-label style="font-weight: bold;">Cantidad de comensales</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let number of [1,2,3,4,5]" [value]="number">
-            {{ number }}
-          </mat-option>
-        </mat-select>
+        <input matInput placeholder="Cantidad de Comensales" [(ngModel)]="cantidadComensales" type="number" style="font-weight: bold;">
       </mat-form-field>
     </mat-dialog-content>
     <mat-divider class="full-divider"></mat-divider>
     <mat-dialog-actions align="end">
-      <button mat-flat-button color="primary" mat-dialog-close style="font-weight: bold;" (click)="openModalExito()">CONFIRMAR</button>
+      <button mat-flat-button color="primary" mat-dialog-close style="font-weight: bold;" (click)="crearOrden()">CONFIRMAR</button>
     </mat-dialog-actions>
   </div>
   

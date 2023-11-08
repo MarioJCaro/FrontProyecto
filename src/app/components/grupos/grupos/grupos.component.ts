@@ -39,6 +39,7 @@ export class GruposComponent {
         const gruposToAdd = gruposFromResponse.map(grupo => ({
           id: grupo.id,
           nombre: grupo.nombre,
+          esBebida: grupo.esBebida
           // Añade otras propiedades si es necesario
         }));
         

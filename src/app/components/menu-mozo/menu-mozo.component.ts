@@ -2,6 +2,7 @@ import { NumberSymbol } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject, takeUntil } from 'rxjs';
+import { AgregarObservacionOrdenModalComponent } from 'src/app/ExtraComponents/agregar-observacion-orden-modal/agregar-observacion-orden-modal/agregar-observacion-orden-modal.component';
 import { ResumenOrdenModalComponent } from 'src/app/ExtraComponents/resumen-orden-modal/resumen-orden-modal.component';
 import { Grupo } from 'src/app/models/grupo.model';
 import { ItemMenu } from 'src/app/models/itemMenu.model';
@@ -29,7 +30,7 @@ export class MenuMozoComponent {
   public itemsPorGrupo: { [grupoId: number]: ItemMenuResponse[] } = {};
   public ordenData: any;
   public cantidades: { [itemId: number]: number } = {};
-
+  public observaciones: string = "";
 
   constructor(
     public dialog: MatDialog,
@@ -59,33 +60,55 @@ export class MenuMozoComponent {
   }
 
   openDialog(): void {
-    const itemsSeleccionados : itemSeleccionadoInterface[] = [];
+    const itemsSeleccionados: itemSeleccionadoInterface[] = [];
     for (const key in this.itemsPorGrupo) {
-        this.itemsPorGrupo[key].forEach(item => {
-            if (this.cantidades[item.id] && this.cantidades[item.id] > 0) {
-                itemsSeleccionados.push({
-                    ...item,
-                    cantidad: this.cantidades[item.id]
-                });
-            }
-        });
+      this.itemsPorGrupo[key].forEach(item => {
+        if (this.cantidades[item.id] && this.cantidades[item.id] > 0) {
+          itemsSeleccionados.push({
+            ...item,
+            cantidad: this.cantidades[item.id]
+          });
+        }
+      });
     }
-
+  
     const data = {
-        items: itemsSeleccionados,
-        ordenData: this.ordenData
+      items: itemsSeleccionados,
+      ordenData: this.ordenData,
+      observaciones: this.observaciones // Incluir las observaciones aquí
     };
-
+  
     console.log(data);
-
+  
     const dialogRef = this.dialog.open(ResumenOrdenModalComponent, {
-        width: '30rem',
-        data: data  // Pasamos la data al modal.
+      width: '30rem',
+      data: data  // Pasamos la data al modal, incluyendo las observaciones.
     });
-
+  
     dialogRef.afterClosed().subscribe(result => {
       console.log('El modal fue cerrado', result);
-      // Aquí puedes manejar el resultado del modal, por ejemplo, guardar el nuevo ítem.
+      // Aquí puedes manejar el resultado del modal.
+      // Si necesitas actualizar algo en este componente basado en la interacción con el modal, hazlo aquí.
+    });
+  }  
+
+  agregarObservacion(item: any) {
+    const dialogRef = this.dialog.open(AgregarObservacionOrdenModalComponent, {
+      width: '30rem',
+      data: {
+        item: item, // El ítem al que se refiere la observación
+        comentario: '' // Inicializa el comentario como un string vacío
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(observacionFormateada => {
+      if (observacionFormateada) {
+        // Si ya existen observaciones, concatena con "&", de lo contrario, inicia la cadena
+        this.observaciones = this.observaciones ?
+          `${this.observaciones} & ${observacionFormateada}` :
+          observacionFormateada;
+        console.log('Observaciones actualizadas:', this.observaciones);
+      }
     });
   }
 
