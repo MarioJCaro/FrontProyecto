@@ -125,6 +125,7 @@
                 *ngIf="orden.estado !== ESTADOS.POR_CONFIRMAR"
                 mat-raised-button
                 style="background-color: #57bcdc; text-align: center"
+                (click)="openConsultarOrden(orden)"
               >
                 <mat-icon class="big-icon">info</mat-icon>
               </button>

@@ -15,6 +15,7 @@ import { PagarOrdenModalComponent } from 'src/app/ExtraComponents/pagar-orden-mo
 import { AbrirBotellaModalComponent } from 'src/app/ExtraComponents/abrir-botella-modal/abrir-botella-modal.component';
 import { AccionesBotellasModalComponent } from 'src/app/ExtraComponents/acciones-botellas-modal/acciones-botellas-modal.component';
 import { HistorialOrdenesModalComponent } from 'src/app/ExtraComponents/historial-ordenes-modal/historial-ordenes-modal.component';
+import { ConsultarOrdenCajaComponent } from 'src/app/ExtraComponents/consultar-orden-caja/consultar-orden-caja.component';
 
 
 @Component({
@@ -179,5 +180,17 @@ openHistorialOrdenes(){
   });
 }
 
+openConsultarOrden(orden : Orden){
+  const dialogRef = this.dialog.open(ConsultarOrdenCajaComponent, {
+    width: '70rem',
+    height: '50rem',
+    data: {orden}  // Puedes pasar la data inicial aquí si es necesario.
+  });
+
+  dialogRef.afterClosed().subscribe((result: any) => {
+    console.log('El modal fue cerrado', result);
+    // Aquí puedes manejar el resultado del modal, por ejemplo, guardar el nuevo ítem.
+  });
+}
 
 }
