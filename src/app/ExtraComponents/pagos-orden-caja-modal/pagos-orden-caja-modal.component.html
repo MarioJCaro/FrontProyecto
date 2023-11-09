@@ -1,0 +1,26 @@
+<mat-dialog-content>
+    <h1>Resumen de la Orden</h1>
+    <div class="div-resumen">
+      <table style="width: 100%; height: 100%;">
+        <tr>
+          <td>Fecha</td>
+          <td>Hora</td>
+          <td>Total</td>
+          <td>Metodo Pago</td>
+        </tr>
+        <tr *ngFor="let itemPago of data.estadoPagos.infoPagos">
+            <td>{{ itemPago.fecha | date: 'shortDate' }}</td>
+            <td>{{ itemPago.hora | date: 'shortTime' }}</td>
+            <td>{{ itemPago.total | currency }}</td>
+            <td>{{ itemPago.metodoPago }}</td>
+        </tr>
+      </table>
+      <div class="div-obs">
+        <mat-divider></mat-divider>
+        <mat-label style="display:flex; justify-content:flex-end; padding-right: 1rem;">
+          TOTAL: {{ data.estadoPagos.totalOrden| currency }} PAGO: {{ data.estadoPagos.totalPagado | currency }}:
+        </mat-label>
+      </div>
+    </div>
+  </mat-dialog-content>
+  

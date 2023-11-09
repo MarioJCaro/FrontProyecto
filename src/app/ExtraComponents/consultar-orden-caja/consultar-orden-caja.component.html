@@ -34,13 +34,18 @@
       <div class="div-obs">
         <mat-divider></mat-divider>
         <mat-label style="display:flex; justify-content:flex-end; padding-right: 1rem;">
-          TOTAL: {{ data.orden.total | currency }}
+          TOTAL: {{ data.orden.total| currency }} PAGO: {{ estadoPagos?.totalPagado | currency }}:
         </mat-label>
         <h3>Observaciones</h3>
         <ul>
           <li>{{ data.orden.observaciones }}</li>
         </ul>
       </div>
+    </div>
+
+    <!-- Nuevo botón debajo de las observaciones -->
+    <div class="div-acciones">
+      <button mat-button (click)="abrirModalPagos()">Pagos de la orden</button>
     </div>
   </mat-dialog-content>
   
