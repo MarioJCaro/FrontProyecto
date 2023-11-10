@@ -113,7 +113,7 @@ export class OrdenService {
   }
 
   //get all, se consulta con page, limit, empleadoId, clienteId, estado (todos opcionales)
-  getAll(currentPage: number, pageSize: number, empleadoId?: number, clienteId?: number, estado?: string): Observable<OrdenResponse> {
+  getAll(currentPage: number, pageSize: number, empleadoId?: number, clienteId?: number, estado?: string, fecha?:string): Observable<OrdenResponse> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     let url = `${this.apiUrl}/ordenes?page=${currentPage}&limit=${pageSize}`;
 
@@ -126,6 +126,10 @@ export class OrdenService {
     if (estado) {
       url += `&estado=${estado}`;
     }
+    if (fecha) {
+      url += `&fecha=${fecha}`;
+    }
+
 
     return this.http.get<OrdenResponse>(url, { headers }).pipe(
         catchError(this.errorHandler.handleError)
@@ -164,6 +168,15 @@ export class OrdenService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.get<OrdenResponse>(`${this.apiUrl}/ordenes/mozo?mesaId=${id}`, { headers }).pipe(
         catchError(this.errorHandler.handleError)
+    );
+  }
+
+  getHistorialOrdenes(): Observable<OrdenResponse> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const url = `${this.apiUrl}/ordenes/historial`;
+
+    return this.http.get<OrdenResponse>(url, { headers }).pipe(
+      catchError(this.errorHandler.handleError)
     );
   }
 }

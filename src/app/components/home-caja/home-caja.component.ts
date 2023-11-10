@@ -34,7 +34,7 @@ export class HomeCajaComponent  implements OnInit{
   this.socket = io(this.socketUrl);
 
     
-   }
+   }  
 
 
   ngOnInit(): void {
@@ -173,7 +173,7 @@ openAbrirBotellasModal(){
 
 openHistorialOrdenes(){
   const dialogRef = this.dialog.open(HistorialOrdenesModalComponent, {
-    width: '70rem',
+    width: '80%',
     height: '50rem',
     data: {}  // Puedes pasar la data inicial aquí si es necesario.
   });

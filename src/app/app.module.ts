@@ -122,6 +122,8 @@ import { HistorialOrdenesModalComponent } from './ExtraComponents/historial-orde
 
 import { ConfirmarCancelarOrdenModalComponent } from './ExtraComponents/confirmar-cancelar-orden-modal/confirmar-cancelar-orden-modal/confirmar-cancelar-orden-modal.component';
 import { AgregarObservacionOrdenModalComponent } from './ExtraComponents/agregar-observacion-orden-modal/agregar-observacion-orden-modal/agregar-observacion-orden-modal.component';
+import { HistorialCajaComponent } from './ExtraComponents/historial-caja/historial-caja.component';
+import { PagosCajaModalComponent } from './ExtraComponents/pagos-caja-modal/pagos-caja-modal.component';
 
 @NgModule({
   declarations: [
@@ -203,6 +205,8 @@ import { AgregarObservacionOrdenModalComponent } from './ExtraComponents/agregar
 
     ConfirmarCancelarOrdenModalComponent,
     AgregarObservacionOrdenModalComponent,
+    HistorialCajaComponent,
+    PagosCajaModalComponent,
 
 
 
