@@ -83,3 +83,9 @@
 .mat-fab {
   z-index: 1000; /* Un valor alto para asegurar que se superponga a otros elementos */
 }
+
+.total-pago-container {
+  display: flex; /* Activa flexbox para el contenedor */
+  justify-content: space-between; /* Separa los elementos uniformemente */
+  align-items: center; /* Centra los elementos verticalmente */
+}

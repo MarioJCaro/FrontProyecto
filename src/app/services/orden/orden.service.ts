@@ -4,6 +4,7 @@ import { ErrorHandlingService } from '../errorHandling/error-handling.service';
 import { environment } from 'src/environments/environments';
 import { Observable, catchError } from 'rxjs';
 import { Orden } from 'src/app/models/orden.model';
+import { Pago } from 'src/app/models/pago.model';
 
 export interface CreateOrdenRequest {
   fecha: String;
@@ -90,7 +91,12 @@ export interface removeMesaRequest{
   mesas: number[];
 }
 
-
+export interface estadoPagosResponse{
+  totalPagado : number;
+  totalOrden : number;
+  paga : boolean;
+  infoPagos: Pago[];
+}
 
 @Injectable({
   providedIn: 'root'
@@ -110,6 +116,26 @@ export class OrdenService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<CreateOrdenResponse>(`${this.apiUrl}/ordenes`, item, { headers }).pipe(
       catchError(this.errorHandler.handleError));
+  }
+
+  addItem(idOrden : number, itemsPayload: { items: ItemsRequest[] }): Observable<string> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<string>(`${this.apiUrl}/ordenes/${idOrden}/items`, itemsPayload, { headers }).pipe(
+      catchError(this.errorHandler.handleError));
+  }
+
+  removeItem(idOrden: number, items: number[]): Observable<string> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const body = {
+      items: items // Esta es la lista de IDs de ítems que quieres eliminar
+    };
+
+    return this.http.request<string>('delete', `${this.apiUrl}/ordenes/${idOrden}/items`, {
+      headers: headers,
+      body: body // Aquí agregas el body a la petición delete
+    }).pipe(
+      catchError(this.errorHandler.handleError)
+    );
   }
 
   //get all, se consulta con page, limit, empleadoId, clienteId, estado (todos opcionales)
@@ -152,6 +178,12 @@ export class OrdenService {
     );
   }
 
+  getEstadosPagos(id : number): Observable<estadoPagosResponse> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get<estadoPagosResponse>(`${this.apiUrl}/ordenes/${id}/estadoPagos`, { headers }).pipe(
+        catchError(this.errorHandler.handleError)
+    );
+  }
 
   updateOrden(id: number, item: UpdateOrdenRequest): Observable<UpdateOrdenResponse> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');

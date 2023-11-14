@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-historial-ordenes-modal',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class HistorialOrdenesModalComponent {
 
+  constructor(
+    public dialogRef: MatDialogRef<HistorialOrdenesModalComponent>,
+  ){}
+
+  close(){
+    this.dialogRef.close();
+  }
 }

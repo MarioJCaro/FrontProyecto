@@ -65,6 +65,12 @@ export class EmpleadoService {
     );
   }
 
+  getById(idEmpleado: number): Observable<EmpleadoResponse> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get<EmpleadoResponse>(`${this.apiUrl}/empleados/${idEmpleado}`, { headers }).pipe(
+      catchError(this.errorHandler.handleError));
+  }
+
   create(empleados: CreateEmpleadoRequest): Observable<CreateEmpleadoResponse> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post<CreateEmpleadoResponse>(`${this.apiUrl}/empleados`, empleados, { headers }).pipe(

@@ -85,6 +85,13 @@
                 <mat-card-title
                   >Paga: {{ orden.paga ? "Sí" : "No" }}</mat-card-title
                 >
+                <button
+                *ngIf="orden.estado !== ESTADOS.POR_CONFIRMAR"
+                mat-raised-button
+                style="background-color: #FFFF66; text-align: center" (click)="openModificarOrdenModal(orden)"
+              >
+                <mat-icon class="big-icon" >edit</mat-icon>
+              </button>
               </mat-card-title-group>
             </mat-card-header>
             <mat-divider></mat-divider>
@@ -104,7 +111,10 @@
             </mat-card-content>
             <mat-divider></mat-divider>
             <mat-card-content class="order-total">
-              <p>Total: ${{ orden.total }}</p>
+              <div class="total-pago-container">
+                <div>Total: ${{ orden.total }}</div>
+                <div>Pago: ${{ pagosOrdenMap.get(orden.id) || 0 }}</div>
+              </div>
             </mat-card-content>
 
             <mat-divider></mat-divider>
@@ -125,6 +135,7 @@
                 *ngIf="orden.estado !== ESTADOS.POR_CONFIRMAR"
                 mat-raised-button
                 style="background-color: #57bcdc; text-align: center"
+                (click)="openConsultarOrden(orden)"
               >
                 <mat-icon class="big-icon">info</mat-icon>
               </button>

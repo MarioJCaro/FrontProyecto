@@ -32,6 +32,7 @@ import { CategoriasComponent } from './components/categorias/categorias/categori
 import { GruposComponent } from './components/grupos/grupos/grupos.component';
 import { InfoUsuarioComponent } from './components/info-usuario/info-usuario.component';
 import { HeaderComponent } from './ExtraComponents/header/header.component';
+import { MesasComponent } from './components/mesas/mesas/mesas.component';
 
 
 
@@ -47,7 +48,6 @@ const routes: Routes = [
   {path: 'gestionempleados', component:GestionEmpleadosComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
   {path: 'gestionclientes', component:GestionClientesComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
   {path: 'unauthorized', component: UnauthorizedComponent},
-  {path: 'mesas', component: MesasPrototypeComponent, canActivate: [AuthGuard], data: { roles: ['Admin','Mozo'] }},
   {path:'backOfficeMenu', component:BackOfficeMenuComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
   {path:'homemozo', component:HomeMozoComponent, canActivate: [AuthGuard], data: { roles: ['Admin','Mozo'] }},
   {path:'ordenesmesa', component:OrdenesMesaComponent, canActivate: [AuthGuard], data: { roles: ['Admin','Mozo'] }},
@@ -66,6 +66,7 @@ const routes: Routes = [
   {path: 'estadisticasbarra', component:EstadisticasBarraComponent},
   {path: 'infousuario', component:InfoUsuarioComponent},
   {path: 'header', component:HeaderComponent},
+  {path: 'mesas', component:MesasComponent},
 ];
 
 @NgModule({
