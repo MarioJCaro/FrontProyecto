@@ -15,6 +15,8 @@ import { PagarOrdenModalComponent } from 'src/app/ExtraComponents/pagar-orden-mo
 import { AbrirBotellaModalComponent } from 'src/app/ExtraComponents/abrir-botella-modal/abrir-botella-modal.component';
 import { AccionesBotellasModalComponent } from 'src/app/ExtraComponents/acciones-botellas-modal/acciones-botellas-modal.component';
 import { HistorialOrdenesModalComponent } from 'src/app/ExtraComponents/historial-ordenes-modal/historial-ordenes-modal.component';
+import { ToastService } from 'src/app/services/toast/toast.service';
+
 import { ConsultarOrdenCajaComponent } from 'src/app/ExtraComponents/consultar-orden-caja/consultar-orden-caja.component';
 import { ModificarOrdenModalComponent } from 'src/app/ExtraComponents/modificar-orden-modal/modificar-orden-modal/modificar-orden-modal.component';
 
@@ -34,7 +36,7 @@ export class HomeCajaComponent  implements OnInit{
 
   ordenes: Orden[] = [];
 
-  constructor(private ordenService: OrdenService, private mesasService: MesasService, public dialog: MatDialog) {
+  constructor(private ordenService: OrdenService, private mesasService: MesasService, private toastService: ToastService, public dialog: MatDialog) {
   this.socket = io(this.socketUrl);
    }
 
@@ -150,6 +152,18 @@ export class HomeCajaComponent  implements OnInit{
             // Aquí podrías manejar errores, como mostrar mensajes de error al usuario
         }
     });
+}
+
+cancelarOrden(ordenId: number): void {
+  this.ordenService.deleteOrden(ordenId).subscribe({
+      next: (response) => {
+          console.log('Orden eliminada, respuesta:', response);
+          this.toastService.showSuccess("Orden cancelada con exito");      },
+      error: (error) => {
+          console.error('Hubo un error al eliminar la orden:', error);
+          // Aquí podrías manejar errores, como mostrar mensajes de error al usuario
+      }
+  });
 }
 
 
