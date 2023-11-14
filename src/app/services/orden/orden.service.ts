@@ -152,6 +152,13 @@ export class OrdenService {
     );
   }
 
+  deleteOrden(id: number): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.delete<any>(`${this.apiUrl}/ordenes/${id}`, { headers }).pipe(
+        catchError(this.errorHandler.handleError)
+    );
+  }
+
 
   updateOrden(id: number, item: UpdateOrdenRequest): Observable<UpdateOrdenResponse> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
