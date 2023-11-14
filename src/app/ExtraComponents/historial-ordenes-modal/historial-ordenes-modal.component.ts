@@ -5,6 +5,7 @@ import { OrdenResponse, OrdenService } from 'src/app/services/orden/orden.servic
 import { ESTADOS } from 'src/app/constants/estadosOrden.constant';
 
 import { MatDialogRef } from '@angular/material/dialog';
+import { DialogRef } from '@angular/cdk/dialog';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class HistorialOrdenesModalComponent {
   ordenes: Orden[] = [];
   ESTADOS = ESTADOS; 
   
-constructor(private ordenService: OrdenService, private mesasService: MesasService) { }
+constructor(private ordenService: OrdenService, private mesasService: MesasService, private dialogRef: DialogRef ) { }
   ngOnInit(): void {
     this.fetchOrdenesEnCaja();
   }
