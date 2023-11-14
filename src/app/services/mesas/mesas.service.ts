@@ -20,12 +20,20 @@ export interface MesasRequest {
     mesas: MesasResponse[];
 }
 
-
 export interface MesasOcupadasResponse {
     mesas: MesasResponse[];
     totalCount: number;
     libreCount: number;
     ocupadasCount: number;
+}
+
+export interface CreateMesaRequest{
+  nroMesa : number;
+  libre : boolean;
+}
+
+export interface UpdateMesaRequest{
+  libre : boolean;
 }
 
 @Injectable({
@@ -53,4 +61,29 @@ export class MesasService {
         catchError(this.errorHandler.handleError)
     );
   }
+
+  create(mesa: CreateMesaRequest): Observable<string> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<string>(`${this.apiUrl}/mesas`, mesa, { headers }).pipe(
+      catchError(this.errorHandler.handleError));
+  }
+
+  update(id: number, item: UpdateMesaRequest): Observable<string> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.put<string>(`${this.apiUrl}/mesas/${id}`, item, { headers }).pipe(
+      catchError(this.errorHandler.handleError));
+  }
+
+  updateMesa(id: number, item: CreateMesaRequest): Observable<string> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.put<string>(`${this.apiUrl}/mesas/${id}`, item, { headers }).pipe(
+      catchError(this.errorHandler.handleError));
+  }
+
+  remove(id: number): Observable<any>{
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.delete<any>(`${this.apiUrl}/mesas/${id}`, { headers }).pipe(
+      catchError(this.errorHandler.handleError));
+  }
+
 }

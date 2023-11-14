@@ -122,6 +122,14 @@ import { HistorialOrdenesModalComponent } from './ExtraComponents/historial-orde
 
 import { ConfirmarCancelarOrdenModalComponent } from './ExtraComponents/confirmar-cancelar-orden-modal/confirmar-cancelar-orden-modal/confirmar-cancelar-orden-modal.component';
 import { AgregarObservacionOrdenModalComponent } from './ExtraComponents/agregar-observacion-orden-modal/agregar-observacion-orden-modal/agregar-observacion-orden-modal.component';
+import { MesasComponent } from './components/mesas/mesas/mesas.component';
+import { AgregarMesaModalComponent } from './ExtraComponents/agregar-mesa-modal/agregar-mesa-modal/agregar-mesa-modal.component';
+import { ModificarMesaModalComponent } from './ExtraComponents/modificar-mesa-modal/modificar-mesa-modal/modificar-mesa-modal.component';
+import { EliminarMesaModalComponent } from './ExtraComponents/eliminar-mesa-modal/eliminar-mesa-modal/eliminar-mesa-modal.component';
+import { ConsultarOrdenCajaComponent } from './ExtraComponents/consultar-orden-caja/consultar-orden-caja.component';
+import { PagosOrdenCajaModalComponent } from './ExtraComponents/pagos-orden-caja-modal/pagos-orden-caja-modal.component';
+import { ModificarOrdenModalComponent } from './ExtraComponents/modificar-orden-modal/modificar-orden-modal/modificar-orden-modal.component';
+import { EliminarItemOrdenComponent } from './ExtraComponents/eliminar-item-orden/eliminar-item-orden.component';
 
 @NgModule({
   declarations: [
@@ -203,6 +211,14 @@ import { AgregarObservacionOrdenModalComponent } from './ExtraComponents/agregar
 
     ConfirmarCancelarOrdenModalComponent,
     AgregarObservacionOrdenModalComponent,
+    MesasComponent,
+    AgregarMesaModalComponent,
+    ModificarMesaModalComponent,
+    EliminarMesaModalComponent,
+    ConsultarOrdenCajaComponent,
+    PagosOrdenCajaModalComponent,
+    ModificarOrdenModalComponent,
+    EliminarItemOrdenComponent,
 
 
 

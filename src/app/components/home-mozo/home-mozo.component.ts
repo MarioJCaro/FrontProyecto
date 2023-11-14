@@ -33,14 +33,15 @@ export class HomeMozoComponent implements OnInit {
     );
   }
 
-  openDialog(): void {
+  openDialog(mesa: Mesa): void {
     const dialogRef = this.dialog.open(LiberarMesaModalComponent, {
       width: '30rem',
-      data: {}  // Puedes pasar la data inicial aquí si es necesario.
+      data: { mesa: mesa } // Pasar la mesa aquí
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('El modal fue cerrado', result);
+      this.getMesasOcupadas();
       // Aquí puedes manejar el resultado del modal, por ejemplo, guardar el nuevo ítem.
     });
   }

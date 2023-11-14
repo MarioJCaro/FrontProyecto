@@ -17,6 +17,9 @@ import { AccionesBotellasModalComponent } from 'src/app/ExtraComponents/acciones
 import { HistorialOrdenesModalComponent } from 'src/app/ExtraComponents/historial-ordenes-modal/historial-ordenes-modal.component';
 import { ToastService } from 'src/app/services/toast/toast.service';
 
+import { ConsultarOrdenCajaComponent } from 'src/app/ExtraComponents/consultar-orden-caja/consultar-orden-caja.component';
+import { ModificarOrdenModalComponent } from 'src/app/ExtraComponents/modificar-orden-modal/modificar-orden-modal/modificar-orden-modal.component';
+
 
 @Component({
   selector: 'app-home-caja',
@@ -26,15 +29,15 @@ import { ToastService } from 'src/app/services/toast/toast.service';
 export class HomeCajaComponent  implements OnInit{
   private socketUrl = environment.socketUrl;
   private socket: Socket;
-   mesasOcupadas: MesasResponse[] = [];
-   ESTADOS = ESTADOS; 
+  mesasOcupadas: MesasResponse[] = [];
+  ESTADOS = ESTADOS; 
+  public pagosOrdenMap = new Map<number, number>(); // Mapa para guardar el total pagado por orden
+
 
   ordenes: Orden[] = [];
 
   constructor(private ordenService: OrdenService, private mesasService: MesasService, private toastService: ToastService, public dialog: MatDialog) {
   this.socket = io(this.socketUrl);
-
-    
    }
 
 
@@ -46,7 +49,6 @@ export class HomeCajaComponent  implements OnInit{
       this.fetchOrdenesEnCaja();
       this.getOcupadas();
     });
-  
   }
 
   getMesas(orden: Orden): string {
@@ -85,6 +87,13 @@ export class HomeCajaComponent  implements OnInit{
     });
   }
 
+  openModificarOrdenModal(orden: Orden){
+    const dialogRef = this.dialog.open(ModificarOrdenModalComponent, {
+      width: '45rem',
+      data: { orden } 
+    });
+  }
+
   public getCardHeaderStyle(estado: string): object {
     switch (estado) {
         case ESTADOS.POR_CONFIRMAR:
@@ -106,7 +115,10 @@ export class HomeCajaComponent  implements OnInit{
     this.ordenService.getOrdenesCaja().subscribe({
         next: (response: OrdenResponse) => {
             this.ordenes = response.items;
-            console.log(this.ordenes);
+            // Para cada orden, obtener el total pagado y actualizar el mapa
+            this.ordenes.forEach((orden) => {
+              this.actualizarPagosOrden(orden.id);
+            });
         },
         error: (error) => {
             console.error('Hubo un error al obtener las órdenes', error);
@@ -114,6 +126,16 @@ export class HomeCajaComponent  implements OnInit{
     });
   }
 
+  actualizarPagosOrden(ordenId: number): void {
+    this.ordenService.getEstadosPagos(ordenId).subscribe({
+      next: (estadoPagosResponse) => {
+        this.pagosOrdenMap.set(ordenId, estadoPagosResponse.totalPagado);
+      },
+      error: (error) => {
+        console.error('Hubo un error al obtener los pagos', error);
+    }
+    });
+  }
 
   cambiarEstado(ordenId: number, nuevoEstado: string): void {
     const datosActualizar = {
@@ -192,5 +214,17 @@ openHistorialOrdenes(){
   });
 }
 
+openConsultarOrden(orden : Orden){
+  const dialogRef = this.dialog.open(ConsultarOrdenCajaComponent, {
+    width: '70rem',
+    height: '50rem',
+    data: {orden}  // Puedes pasar la data inicial aquí si es necesario.
+  });
+
+  dialogRef.afterClosed().subscribe((result: any) => {
+    console.log('El modal fue cerrado', result);
+    // Aquí puedes manejar el resultado del modal, por ejemplo, guardar el nuevo ítem.
+  });
+}
 
 }
