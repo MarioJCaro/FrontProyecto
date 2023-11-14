@@ -27,15 +27,15 @@ import { ModificarOrdenModalComponent } from 'src/app/ExtraComponents/modificar-
 export class HomeCajaComponent  implements OnInit{
   private socketUrl = environment.socketUrl;
   private socket: Socket;
-   mesasOcupadas: MesasResponse[] = [];
-   ESTADOS = ESTADOS; 
+  mesasOcupadas: MesasResponse[] = [];
+  ESTADOS = ESTADOS; 
+  public pagosOrdenMap = new Map<number, number>(); // Mapa para guardar el total pagado por orden
+
 
   ordenes: Orden[] = [];
 
   constructor(private ordenService: OrdenService, private mesasService: MesasService, public dialog: MatDialog) {
   this.socket = io(this.socketUrl);
-
-    
    }
 
 
@@ -47,7 +47,6 @@ export class HomeCajaComponent  implements OnInit{
       this.fetchOrdenesEnCaja();
       this.getOcupadas();
     });
-  
   }
 
   getMesas(orden: Orden): string {
@@ -114,7 +113,10 @@ export class HomeCajaComponent  implements OnInit{
     this.ordenService.getOrdenesCaja().subscribe({
         next: (response: OrdenResponse) => {
             this.ordenes = response.items;
-            console.log(this.ordenes);
+            // Para cada orden, obtener el total pagado y actualizar el mapa
+            this.ordenes.forEach((orden) => {
+              this.actualizarPagosOrden(orden.id);
+            });
         },
         error: (error) => {
             console.error('Hubo un error al obtener las órdenes', error);
@@ -122,6 +124,16 @@ export class HomeCajaComponent  implements OnInit{
     });
   }
 
+  actualizarPagosOrden(ordenId: number): void {
+    this.ordenService.getEstadosPagos(ordenId).subscribe({
+      next: (estadoPagosResponse) => {
+        this.pagosOrdenMap.set(ordenId, estadoPagosResponse.totalPagado);
+      },
+      error: (error) => {
+        console.error('Hubo un error al obtener los pagos', error);
+    }
+    });
+  }
 
   cambiarEstado(ordenId: number, nuevoEstado: string): void {
     const datosActualizar = {

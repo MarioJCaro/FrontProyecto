@@ -124,6 +124,20 @@ export class OrdenService {
       catchError(this.errorHandler.handleError));
   }
 
+  removeItem(idOrden: number, items: number[]): Observable<string> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const body = {
+      items: items // Esta es la lista de IDs de ítems que quieres eliminar
+    };
+
+    return this.http.request<string>('delete', `${this.apiUrl}/ordenes/${idOrden}/items`, {
+      headers: headers,
+      body: body // Aquí agregas el body a la petición delete
+    }).pipe(
+      catchError(this.errorHandler.handleError)
+    );
+  }
+
   //get all, se consulta con page, limit, empleadoId, clienteId, estado (todos opcionales)
   getAll(currentPage: number, pageSize: number, empleadoId?: number, clienteId?: number, estado?: string): Observable<OrdenResponse> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');

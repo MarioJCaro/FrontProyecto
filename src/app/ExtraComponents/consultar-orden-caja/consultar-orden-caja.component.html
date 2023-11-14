@@ -17,20 +17,27 @@
             </div>
           </div>
 
-      <table style="width: 100%; height: 100%;">
-        <tr>
-          <td>Cant</td>
-          <td>Producto</td>
-          <td>$ por unidad</td>
-          <td>$total</td>
-        </tr>
-        <tr *ngFor="let item of data.orden.items">
-          <td>{{ item.cantidad }}</td>
-          <td>{{ item.itemMenu.nombre }}</td> <!-- Suponiendo que tienes un campo nombreProducto en tus items -->
-          <td>{{ item.precio | currency }}</td>
-          <td>{{ item.cantidad * item.precio | currency }}</td>
-        </tr>
-      </table>
+          <table style="width: 100%; height: 100%;">
+            <tr>
+              <th>Cant</th>
+              <th>Producto</th>
+              <th>$ por unidad</th>
+              <th>$total</th>
+              <th>Acciones</th> <!-- Encabezado de la nueva columna -->
+            </tr>
+            <tr *ngFor="let item of data.orden.items">
+              <td>{{ item.cantidad }}</td>
+              <td>{{ item.itemMenu.nombre }}</td>
+              <td>{{ item.precio | currency }}</td>
+              <td>{{ item.cantidad * item.precio | currency }}</td>
+              <td>
+                <!-- Botón de acción -->
+                <button class="btn-action" (click)="abrirModalEliminarItem(item)">
+                  <mat-icon>remove</mat-icon><!-- Icono de FontAwesome -->
+                </button>
+              </td>
+            </tr>
+          </table>          
       <div class="div-obs">
         <mat-divider></mat-divider>
         <mat-label style="display:flex; justify-content:flex-end; padding-right: 1rem;">

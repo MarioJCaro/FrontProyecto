@@ -21,4 +21,16 @@
       flex-direction: column;
     }
   }
+
+  th, td {
+    text-align: center; /* Centra el texto horizontalmente */
+    vertical-align: middle; /* Centra el texto verticalmente */
+  }
+  
+  .btn-action {
+    /* Otros estilos que ya tengas, más... */
+    display: block; /* Hace que el botón sea un bloque para poder centrarlo */
+    margin: 0 auto; /* Centra el botón horizontalmente en la celda */
+  }
+  
   
