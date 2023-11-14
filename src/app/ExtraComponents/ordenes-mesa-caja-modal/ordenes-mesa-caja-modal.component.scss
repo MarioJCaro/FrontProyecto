@@ -1,147 +1,99 @@
 .orders-flex-container {
-    padding-top: 1rem;
-    padding-left: 1rem;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    background-color: #D3D7D1;
-  }
+  padding-top: 1rem;
+  padding-left: 1rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  background-color: #D3D7D1;
+}
 /* Estilo para la tarjeta de orden */
 .order-card {
-    display: flex;         /* Nueva línea */
-    flex-direction: column; /* Nueva línea */
-    border-radius: 10px;
-    margin-left: 5px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    width: 15rem;
-    height: 35rem;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    background-color: #F4F4F4;
-  }
-  
-  /* Media query para pantallas pequeñas */
-  @media (max-width: 600px) {
-    .order-card {
-      width: 11rem;
-      height: 34rem;
-    }
-  }
+  display: flex;         /* Nueva línea */
+  flex-direction: column; /* Nueva línea */
+  border-radius: 10px;
+  margin-left: 5px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  width: 240px;
+  height: 650px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  background-color: #F4F4F4;
+}
 
-  /* Estilo para el encabezado */
-  .order-header {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    background-color: #FFD686;
-    padding: 10px;
-    font-weight: bold;
+/* Media query para pantallas pequeñas */
+@media (max-width: 600px) {
+  .order-card {
+    width: 180px;
+    height: 550px;
   }
-  
-  /* Estilo para la información de la orden */
-  .order-info {
-    padding: 10px;
-    flex-grow: 1; /* Nueva línea */
-  }
-  
-  /* Estilo para los elementos de la orden */
-  .order-items {
-    padding: 5px;
-    flex-grow: 1; /* Nueva línea */
-  }
-  
-  /* Estilo para el total de la orden */
-  .order-total {
-    background-color: #EEE;
-    padding: 10px;
-    font-weight: bold;
-    text-align: right;
-  }
-  
-  /* Estilo para las acciones */
-  .order-actions {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-  }
-  
-  /* Estilo para los botones */
-  .order-actions button {
-    margin: 0 5px;
-  }
+}
+/* Estilo para el encabezado */
+.order-header {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #FFD686;
+  padding: 10px;
+  font-weight: bold;
+}
 
-  .modal-footer {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
-    background-color: #D3D7D1;
+/* Estilo para la información de la orden */
+.order-info {
+  padding: 10px;
+  flex-grow: 1; /* Nueva línea */
+}
+
+/* Estilo para los elementos de la orden */
+.order-items {
+  padding: 5px;
+  flex-grow: 1; /* Nueva línea */
+}
+
+/* Estilo para el total de la orden */
+.order-total {
+  background-color: #EEE;
+  padding: 10px;
+  font-weight: bold;
+  text-align: right;
+}
+
+/* Estilo para las acciones */
+.order-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+/* Estilo para los botones */
+.order-actions button {
+  margin: 0 5px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #D3D7D1;
 }
 
 
-/* Estilo para la tarjeta de notas */
-.notes-card {
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px;
-    margin-left: 5px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    width: 15rem;
-    height: 35rem;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    background-color: #EDEDED; /* Puedes cambiar este color según tu diseño */
-}
 
-/* Estilo para el encabezado de las notas */
-.notes-header {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    background-color: #FFD686;
-    padding: 10px;
-    font-weight: bold;
-}
+
+
 
 /* Estilo para el contenido de las notas */
-.notes-content {
-    padding: 0.9rem;
-    flex-grow: 1;
-    background-color: #B0B0B0;
-}
+
 
 /* Asegúrate de que tu sección .orders-flex-container tiene espacio suficiente para acomodar la tarjeta de notas */
 
-.orders-and-notes-wrapper {
-    display: flex;
-    flex: 1; // Añade esta línea para que tome todo el espacio horizontal disponible
-}
-
 .orders-wrapper {
-    flex: 1;  // Esta línea hace que ocupe todo el espacio disponible
-    display: flex;  // Si deseas que las tarjetas de orden se alineen horizontalmente
-    overflow-x: auto;  // Para el desplazamiento si hay muchas tarjetas
-    max-width: 76.5rem;
-}
-
-@media (max-width: 1871px) {
-  .orders-wrapper {
-    max-width: 57rem;
-  }
+  flex: 1;  // Esta línea hace que ocupe todo el espacio disponible
+  display: flex;  // Si deseas que las tarjetas de orden se alineen horizontalmente
 }
 
 
-.notes-wrapper {
-    // No necesitas especificar el ancho, tomará el espacio que necesita
-}
 
-.notes-content textarea {
-    background-color: #B0B0B0;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box; // Esto garantiza que el padding y el border no sumen al tamaño total
-    resize: none;
-}
+
 
 
 

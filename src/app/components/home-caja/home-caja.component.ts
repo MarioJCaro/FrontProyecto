@@ -72,7 +72,7 @@ export class HomeCajaComponent  implements OnInit{
 
   openModalConMesa(mesa: MesasResponse): void {  // Asegúrate de usar el tipo correcto en lugar de 'any' si tienes un modelo definido para 'mesa'
     const dialogRef = this.dialog.open(OrdenesMesaCajaModalComponent, {
-      width: '100rem',
+      width: '80%',
       data: { mesa: mesa }  // Pasando la data aquí
     });
 
