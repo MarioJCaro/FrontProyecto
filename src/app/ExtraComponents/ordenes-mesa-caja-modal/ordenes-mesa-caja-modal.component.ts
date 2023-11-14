@@ -89,6 +89,7 @@ getMesas(orden: Orden): string {
   openModalPagarTodo(): void {
     const dialogRef = this.dialog.open(PagarTodoModalComponent, {
       width: '30rem',
+      data: { ... this.ordenes }
       
     });
 

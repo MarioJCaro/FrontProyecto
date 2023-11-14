@@ -4,13 +4,15 @@ import { MesasService } from 'src/app/services/mesas/mesas.service';
 import { OrdenResponse, OrdenService } from 'src/app/services/orden/orden.service';
 import { ESTADOS } from 'src/app/constants/estadosOrden.constant';
 
+import { MatDialogRef } from '@angular/material/dialog';
+
+
 @Component({
   selector: 'app-historial-ordenes-modal',
   templateUrl: './historial-ordenes-modal.component.html',
   styleUrls: ['./historial-ordenes-modal.component.scss']
 })
 export class HistorialOrdenesModalComponent {
-
   ordenes: Orden[] = [];
   ESTADOS = ESTADOS; 
   
@@ -68,4 +70,10 @@ cambiarEstado(ordenId: number, nuevoEstado: string): void {
       }
   });
 }
+  
+  
+close(){
+  this.dialogRef.close();
+}
+
 }

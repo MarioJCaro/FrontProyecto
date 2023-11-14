@@ -9,7 +9,7 @@
         <h2>{{ mesa.nroMesa }}</h2> <!-- Asegúrate de usar la propiedad correcta de la mesa -->
         <div class="buttons">
           <button class="button button-2" (click)="navigateTo('ordenesmesa',mesa.id)"><mat-icon>menu</mat-icon></button>
-          <button class="button button-3" (click)="openDialog()"><mat-icon>done</mat-icon></button>
+          <button class="button button-3" (click)="openDialog(mesa)"><mat-icon>done</mat-icon></button>
         </div>
       </div>
     </div>
