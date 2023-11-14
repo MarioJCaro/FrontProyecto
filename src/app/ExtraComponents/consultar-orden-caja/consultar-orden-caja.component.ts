@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { ErrorHandlingService } from 'src/app/services/errorHandling/error-handling.service';
 import { PagosOrdenCajaModalComponent } from '../pagos-orden-caja-modal/pagos-orden-caja-modal.component';
 import { OrdenService, estadoPagosResponse } from 'src/app/services/orden/orden.service';
+import { EmpleadoResponse, EmpleadoService } from 'src/app/services/empleado/empleado.service';
 
 @Component({
   selector: 'app-consultar-orden-caja',

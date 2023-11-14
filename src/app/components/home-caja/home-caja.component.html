@@ -85,6 +85,13 @@
                 <mat-card-title
                   >Paga: {{ orden.paga ? "Sí" : "No" }}</mat-card-title
                 >
+                <button
+                *ngIf="orden.estado !== ESTADOS.POR_CONFIRMAR"
+                mat-raised-button
+                style="background-color: #FFFF66; text-align: center" (click)="openModificarOrdenModal(orden)"
+              >
+                <mat-icon class="big-icon" >edit</mat-icon>
+              </button>
               </mat-card-title-group>
             </mat-card-header>
             <mat-divider></mat-divider>

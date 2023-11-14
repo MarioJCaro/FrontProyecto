@@ -7,12 +7,14 @@
           <td>Hora</td>
           <td>Total</td>
           <td>Metodo Pago</td>
+          <td>Empleado</td>
         </tr>
         <tr *ngFor="let itemPago of data.estadoPagos.infoPagos">
             <td>{{ itemPago.fecha | date: 'shortDate' }}</td>
-            <td>{{ itemPago.hora | date: 'shortTime' }}</td>
+            <td>{{ (itemPago.fecha + 'T' + itemPago.hora) | date: 'shortTime' }}</td>
             <td>{{ itemPago.total | currency }}</td>
             <td>{{ itemPago.metodoPago }}</td>
+            <td>{{ empleados[itemPago.empleadoId].nombre }}</td>
         </tr>
       </table>
       <div class="div-obs">

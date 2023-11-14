@@ -128,6 +128,7 @@ import { ModificarMesaModalComponent } from './ExtraComponents/modificar-mesa-mo
 import { EliminarMesaModalComponent } from './ExtraComponents/eliminar-mesa-modal/eliminar-mesa-modal/eliminar-mesa-modal.component';
 import { ConsultarOrdenCajaComponent } from './ExtraComponents/consultar-orden-caja/consultar-orden-caja.component';
 import { PagosOrdenCajaModalComponent } from './ExtraComponents/pagos-orden-caja-modal/pagos-orden-caja-modal.component';
+import { ModificarOrdenModalComponent } from './ExtraComponents/modificar-orden-modal/modificar-orden-modal/modificar-orden-modal.component';
 
 @NgModule({
   declarations: [
@@ -215,6 +216,7 @@ import { PagosOrdenCajaModalComponent } from './ExtraComponents/pagos-orden-caja
     EliminarMesaModalComponent,
     ConsultarOrdenCajaComponent,
     PagosOrdenCajaModalComponent,
+    ModificarOrdenModalComponent,
 
 
 

@@ -16,6 +16,7 @@ import { AbrirBotellaModalComponent } from 'src/app/ExtraComponents/abrir-botell
 import { AccionesBotellasModalComponent } from 'src/app/ExtraComponents/acciones-botellas-modal/acciones-botellas-modal.component';
 import { HistorialOrdenesModalComponent } from 'src/app/ExtraComponents/historial-ordenes-modal/historial-ordenes-modal.component';
 import { ConsultarOrdenCajaComponent } from 'src/app/ExtraComponents/consultar-orden-caja/consultar-orden-caja.component';
+import { ModificarOrdenModalComponent } from 'src/app/ExtraComponents/modificar-orden-modal/modificar-orden-modal/modificar-orden-modal.component';
 
 
 @Component({
@@ -82,6 +83,13 @@ export class HomeCajaComponent  implements OnInit{
     const dialogRef = this.dialog.open(PagarOrdenModalComponent, {
       width: '60rem',
       data: { orden: orden } 
+    });
+  }
+
+  openModificarOrdenModal(orden: Orden){
+    const dialogRef = this.dialog.open(ModificarOrdenModalComponent, {
+      width: '45rem',
+      data: { orden } 
     });
   }
 
