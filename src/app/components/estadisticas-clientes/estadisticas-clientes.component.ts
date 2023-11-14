@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Cliente } from 'src/app/models/cliente.model';
+import { ClienteResponse, ClienteService } from 'src/app/services/cliente/cliente.service';
+import { EstadisticasService } from 'src/app/services/estadisticas/estadisticas.service';
 
 @Component({
   selector: 'app-estadisticas-clientes',
@@ -12,16 +15,14 @@ export class EstadisticasClientesComponent {
   months: string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
   years: number[] = []; // Puedes llenarlo dinámicamente con los años que desees.
   currentOptions: (string | number)[] = [];
-
-
+  clientesPreferenciales: ClienteResponse[] = [];
+  selectedDate: Date = new Date();
   consumoTotalEfectivo!: number;
   topClientes!: any[];
-  selectedClient!: string;
+  selectedClient!: number;
   clientConsumption!: number;  // Para almacenar el consumo del cliente seleccionado
-  clients: string[] = ['Cliente 1', 'Cliente 2', 'Cliente 3']; // Puedes llenar esta lista desde un servicio o de donde venga tu data.
-
-
-  constructor() {
+  
+  constructor(private estadisticasService: EstadisticasService, private clienteService: ClienteService) {
     const currentYear = new Date().getFullYear();
     for(let i = 0; i < 10; i++) {  // Añade 10 años al array, desde el año actual.
       this.years.push(currentYear - i);
@@ -29,38 +30,153 @@ export class EstadisticasClientesComponent {
   }
 
   ngOnInit(): void {
-    // Aquí puedes inicializar tus variables o hacer llamadas iniciales a servicios
-    this.fetchData();
+    const currentYear = new Date().getFullYear();
+    for (let i = 0; i < 10; i++) {
+      this.years.push(currentYear - i);
+    }
+    this.selectedFilter = 'mes';
+    this.cargarClientes();
+    this.updateSecondSelect(this.selectedFilter);
+    this.fetchConsumoClientes(); // Llama a la función después de inicializar el filtro
+    this.fetchTopClientes();
   }
 
-  updateSecondSelect(value: string) {
-    if (value === 'mes') {
-        this.currentOptions = this.months;
-    } else if (value === 'año') {
-        this.currentOptions = this.years.map(year => year.toString());  // convertir a string
-    } else {
-        this.currentOptions = [];
+  cargarClientes(): void {
+    this.clienteService.getAllClientesByLimit().subscribe({
+      next: (response) => {
+        this.clientesPreferenciales = response.items;
+      },
+      error: (error) => {
+        console.error('Error al cargar los clientes:', error);
+      }
+    });
+  }
+
+  onClientChange(event: any) {
+    this.selectedClient = event.value;
+    this.fetchClienteConsumo(this.selectedClient);
+  }
+
+  fetchClienteConsumo(clienteId: number) {
+    let filterType = '';
+    let filterValue = '';
+  
+    if (this.selectedFilter === 'mes') {
+      filterType = 'mes';
+      filterValue = this.getMonthNumber(this.selectedValue).toString().padStart(2, '0');
+    } else if (this.selectedFilter === 'anio') {
+      filterType = 'anio';
+      filterValue = this.selectedValue;
+    } else if (this.selectedFilter === 'dia') {
+      filterType = 'dia';
+      filterValue = this.formatDate(this.selectedDate);
     }
-    this.selectedValue = this.currentOptions[0].toString();  // convertir a string
+  
+    this.estadisticasService.getConsumoPorClienteId(clienteId, filterType, filterValue).subscribe({
+      next: (data) => {
+        this.clientConsumption = data; // Asumiendo que la respuesta tiene un campo 'totalConsumo'
+        // Realizar las actualizaciones necesarias en la vista, si es necesario
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+  }
+
+  fetchConsumoClientes() {
+    let filterType = '';
+    let filterValue = '';
+
+    if (this.selectedFilter === 'mes') {
+      filterType = 'mes';
+      filterValue = this.getMonthNumber(this.selectedValue).toString().padStart(2, '0');
+    } else if (this.selectedFilter === 'anio') {
+      filterType = 'anio';
+      filterValue = this.selectedValue;
+    } else if (this.selectedFilter === 'dia') {
+      filterType = 'dia';
+      filterValue = this.formatDate(this.selectedDate);
+    }
+
+    this.estadisticasService.getConsumoClientesEstadisticas(filterType, filterValue).subscribe({
+      next: (data) => {
+        this.consumoTotalEfectivo = data; // Asumiendo que la respuesta tiene un campo `cantidad`
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+  }
+
+  fetchTopClientes() {
+    let filterType = '';
+    let filterValue = '';
+    
+    if (this.selectedFilter === 'mes') {
+      filterType = 'mes';
+      filterValue = this.getMonthNumber(this.selectedValue).toString().padStart(2, '0');
+    } else if (this.selectedFilter === 'anio') {
+      filterType = 'anio';
+      filterValue = this.selectedValue;
+    } else if (this.selectedFilter === 'dia') {
+      filterType = 'dia';
+      filterValue = this.formatDate(this.selectedDate);
+    }
+      this.estadisticasService.getTopClientes(filterType, filterValue).subscribe({
+        next: (data) => {
+          this.topClientes = data;
+        },
+        error: (error) => {
+          console.error('Error al cargar el top de clientes:', error);
+        }
+      });
+  }
+
+  formatDate(date: Date): string {
+    return date.toISOString().split('T')[0]; // Formato 'yyyy-mm-dd'
+  } 
+  onFilterChange(event: any) {
+    this.selectedFilter = event.value;
+    this.updateSecondSelect(this.selectedFilter);
+    // Si el filtro es 'dia', inicializa selectedDate con la fecha actual
+    if (this.selectedFilter === 'dia') {
+      this.selectedDate = new Date();
+    } else {
+      this.selectedValue = this.currentOptions[0].toString();
+    }
+    this.fetchConsumoClientes();
+    this.fetchClienteConsumo(this.selectedClient);
+    this.fetchTopClientes();
+    
+  }
+
+  onSecondFilterChange(event: any) {
+    this.selectedValue = event.value;
+    this.fetchConsumoClientes();
+    this.fetchClienteConsumo(this.selectedClient);
+    this.fetchTopClientes();
+    
+  }
+
+getMonthNumber(monthName: string): number {
+  return this.months.indexOf(monthName) + 1; // Asegúrate de que tu array 'months' esté en orden correcto
 }
 
-  private fetchData(): void {
-    // Simulando la obtención de datos
-    this.consumoTotalEfectivo = 100000; // Esta sería la lógica para obtener los datos reales
-    
-    this.topClientes = [
-      { nombre: 'Cliente 1', cantidad: '$150'},
-      { nombre: 'Cliente 2', cantidad: '$120'},
-      { nombre: 'Cliente 3', cantidad: '$100'},
-      { nombre: 'Cliente 4', cantidad: '$80'},
-      { nombre: 'Cliente 5', cantidad: '$60'}
-    ];
+updateSecondSelect(value: string) {
+  if (value === 'mes') {
+    this.currentOptions = this.months;
+    this.selectedValue = this.months[new Date().getMonth()]; // Establece el mes actual como valor predeterminado
+  } else if (value === 'anio') {
+    this.currentOptions = this.years.map(year => year.toString()); // Convertir a string si es necesario
+    this.selectedValue = this.years[0].toString(); // Establece el primer año como valor predeterminado
+  } else {
+    this.currentOptions = [];
+    this.selectedValue = '';
   }
-
-  updateClientConsumption(client: string) {
-    // Aquí debes buscar el consumo del cliente seleccionado, por ahora pondré un valor fijo como ejemplo.
-    // Idealmente deberías tener una función que te retorne este valor desde un servicio o desde un arreglo de datos.
-    this.clientConsumption = 100; // Este es solo un valor de ejemplo, reemplázalo por la lógica adecuada.
+  // Esto asegurará que el valor seleccionado se actualice en el segundo select.
+  this.fetchConsumoClientes();
+  this.fetchClienteConsumo(this.selectedClient);
+  this.fetchTopClientes();
 }
 
 }

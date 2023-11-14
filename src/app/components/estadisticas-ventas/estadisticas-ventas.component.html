@@ -11,33 +11,32 @@
             <button mat-raised-button (click)="updateView('Anual')">Anual</button>
         </div>
 
-       <!-- Label y Select -->
-<div class="report-section">
-    <label>Reporte {{ selectedView }}</label>
-    <mat-form-field appearance="fill" *ngIf="selectedView !== 'HorasPico'">
-        <mat-label>Opciones</mat-label>
-        <mat-select [(value)]="selectedOption">
-            <ng-container *ngIf="selectedView === 'Mensual'">
-                <mat-option *ngFor="let month of ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']" [value]="month">{{ month }}</mat-option>
-            </ng-container>
-            <ng-container *ngIf="selectedView === 'Anual'">
-                <!-- Aquí debes cargar la lista de años que desees -->
-                <mat-option *ngFor="let year of [2021, 2022, 2023]" [value]="year">{{ year }}</mat-option>
-            </ng-container>
-        </mat-select>
-    </mat-form-field>
-    <mat-form-field appearance="fill" *ngIf="selectedView === 'HorasPico'">
-        <input matInput [matDatepicker]="picker" placeholder="Elige una fecha">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-</div>
-
+        <!-- Label y Select -->
+        <div class="report-section">
+            <label>Reporte {{ selectedView }}</label>
+            <mat-form-field appearance="fill" *ngIf="selectedView === 'Mensual'">
+                <mat-label>Opciones</mat-label>
+                <mat-select [(value)]="selectedOption" (selectionChange)="onMonthSelect($event)">
+                    <mat-option *ngFor="let month of months" [value]="month.value">{{ month.name }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" *ngIf="selectedView === 'Anual'">
+                <mat-label>Año</mat-label>
+                <mat-select [(value)]="selectedOption" (selectionChange)="onYearSelect($event)">
+                  <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            <mat-form-field appearance="fill" *ngIf="selectedView === 'HorasPico'">
+                <input matInput [matDatepicker]="picker" placeholder="Elige una fecha" (dateChange)="onDateChange($event)">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
 
         <!-- Gráfica -->
         <div class="chart-container">
             <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [legend]="lineChartLegend"
-                [options]="lineChartOptions" [type]="lineChartType">
+                    [options]="lineChartOptions" [type]="lineChartType">
             </canvas>
         </div>
     </mat-card-content>
