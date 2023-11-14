@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Movimiento } from 'src/app/models/movimiento.model';
 import { Time } from "@angular/common";
+import { CajaService } from 'src/app/services/caja/caja.service';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-movimientos-caja-modal',
@@ -10,26 +12,38 @@ import { Time } from "@angular/common";
 })
 export class MovimientosCajaModalComponent {
 
-  displayedColumns: string[] = ['tipo', 'monto', 'observacion', 'nroOrden','fecha','hora'];
+  displayedColumns: string[] = ['tipo', 'total', 'observacion','fecha','hora'];
   dataSource!: MatTableDataSource<Movimiento>;
+  totalCount: number = 0;
+  pageEvent: PageEvent = {pageIndex: 0, pageSize: 10, length: 0};
 
-   // Datos ficticios para el dataSource
-   movimientos: Movimiento[] = [
-    { id: 1, tipo: 'Ingreso Efectivo', fecha:new Date(), hora: this.getCurrentTime() , observacion: 'HOLAAAA', total: 300, nroOrden:1},
-    { id: 2, tipo: 'Ingreso Efectivo', fecha:new Date(), hora: this.getCurrentTime() , observacion: 'HOLAAAA', total: 300, nroOrden:0},
-    { id: 3, tipo: 'Ingreso Efectivo', fecha:new Date(), hora: this.getCurrentTime() , observacion: 'HOLAAAA', total: 300, nroOrden:0},
-    // ... puedes agregar más items
-  ];
+  constructor(
+    // ... otros servicios ...
+    private cajaService: CajaService
+  ) {}
 
-  ngOnInit(){
-    this.dataSource = new MatTableDataSource(this.movimientos);
+  ngOnInit() {
+    this.getMovimientos();
   }
 
-  getCurrentTime(): string {
-    const now = new Date();
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    return `${hours}:${minutes}`;
+  getMovimientos() {
+    // Aquí asumimos que ya tienes un ID de caja definido.
+    const cajaId = 1;
+    this.cajaService.getMovimientosCaja(cajaId, this.pageEvent.pageIndex + 1, this.pageEvent.pageSize).subscribe({
+      next: (response) => {
+        this.dataSource = new MatTableDataSource(response.items);
+        this.totalCount = response.total;
+      },
+      error: (error) => {
+        // Manejar el error
+      }
+    });
   }
+
+ onPaginateChange(event: PageEvent) {
+  this.pageEvent = event;
+  this.getMovimientos();
+}
+  
   
 }

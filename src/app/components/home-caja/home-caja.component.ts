@@ -38,7 +38,8 @@ export class HomeCajaComponent  implements OnInit{
 
   constructor(private ordenService: OrdenService, private mesasService: MesasService, private toastService: ToastService, public dialog: MatDialog) {
   this.socket = io(this.socketUrl);
-   }
+  }  
+
 
 
   ngOnInit(): void {
@@ -208,7 +209,7 @@ openAbrirBotellasModal(){
 
 openHistorialOrdenes(){
   const dialogRef = this.dialog.open(HistorialOrdenesModalComponent, {
-    width: '70rem',
+    width: '80%',
     height: '50rem',
     data: {}  // Puedes pasar la data inicial aquí si es necesario.
   });

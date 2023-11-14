@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { RetirarEfectivoModalComponent } from '../retirar-efectivo-modal/retirar-efectivo-modal.component';
 import { IngresarEfectivoModalComponent } from '../ingresar-efectivo-modal/ingresar-efectivo-modal.component';
 import { CajaResponse, CajaService } from 'src/app/services/caja/caja.service';
+import { HistorialCajaComponent } from '../historial-caja/historial-caja.component';
 
 @Component({
   selector: 'app-footer-caja',
@@ -103,4 +104,13 @@ openIngresoModal(): void {
   });
 
 }
+
+openHistorialModal(): void {
+  const dialogRef = this.dialog.open(HistorialCajaComponent, {
+    width: '70rem',
+    height: '50rem'
+  });
+
+}
+
 }

@@ -122,6 +122,8 @@ import { HistorialOrdenesModalComponent } from './ExtraComponents/historial-orde
 
 import { ConfirmarCancelarOrdenModalComponent } from './ExtraComponents/confirmar-cancelar-orden-modal/confirmar-cancelar-orden-modal/confirmar-cancelar-orden-modal.component';
 import { AgregarObservacionOrdenModalComponent } from './ExtraComponents/agregar-observacion-orden-modal/agregar-observacion-orden-modal/agregar-observacion-orden-modal.component';
+import { HistorialCajaComponent } from './ExtraComponents/historial-caja/historial-caja.component';
+import { PagosCajaModalComponent } from './ExtraComponents/pagos-caja-modal/pagos-caja-modal.component';
 import { MesasComponent } from './components/mesas/mesas/mesas.component';
 import { AgregarMesaModalComponent } from './ExtraComponents/agregar-mesa-modal/agregar-mesa-modal/agregar-mesa-modal.component';
 import { ModificarMesaModalComponent } from './ExtraComponents/modificar-mesa-modal/modificar-mesa-modal/modificar-mesa-modal.component';
@@ -211,6 +213,8 @@ import { EliminarItemOrdenComponent } from './ExtraComponents/eliminar-item-orde
 
     ConfirmarCancelarOrdenModalComponent,
     AgregarObservacionOrdenModalComponent,
+    HistorialCajaComponent,
+    PagosCajaModalComponent,
     MesasComponent,
     AgregarMesaModalComponent,
     ModificarMesaModalComponent,

@@ -1,7 +1,7 @@
 <div class="caja-container" fxLayout="row" fxLayoutAlign="space-between center">
-    <mat-card class="caja-total">
+    <mat-card class="caja-total" >
       <div fxLayout="row" fxLayoutAlign="space-between center">
-        <span>CAJA ${{cajaTotal}}</span>
+        <span (click)="openHistorialModal()" >CAJA ${{cajaTotal}}</span>
         <button mat-icon-button style="background-color: #F96464; color: #FFFFFF; margin-left: 10px;" (click)="openRetiroModal()">
           <mat-icon>remove</mat-icon>
         </button>
