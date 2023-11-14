@@ -23,7 +23,7 @@ export class EliminarItemOrdenComponent {
 
   onConfirm() {
     if (this.data) { // Asegúrate de que data y data.itemId estén definidos
-      const itemsParaEliminar = [this.data.item.itemMenuId]; // Crea un arreglo con la ID del ítem
+      const itemsParaEliminar = [this.data.item.id]; // Crea un arreglo con la ID del ítem
       
       // Llama al servicio y pasa el arreglo
       this.ordenService.removeItem(this.data.item.ordenId, itemsParaEliminar).subscribe({

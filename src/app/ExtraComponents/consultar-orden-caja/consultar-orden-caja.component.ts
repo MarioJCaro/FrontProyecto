@@ -5,6 +5,8 @@ import { PagosOrdenCajaModalComponent } from '../pagos-orden-caja-modal/pagos-or
 import { OrdenService, estadoPagosResponse } from 'src/app/services/orden/orden.service';
 import { EmpleadoResponse, EmpleadoService } from 'src/app/services/empleado/empleado.service';
 import { EliminarItemOrdenComponent } from '../eliminar-item-orden/eliminar-item-orden.component';
+import { environment } from 'src/environments/environments';
+import { Socket, io } from 'socket.io-client';
 
 @Component({
   selector: 'app-consultar-orden-caja',
@@ -13,16 +15,22 @@ import { EliminarItemOrdenComponent } from '../eliminar-item-orden/eliminar-item
 })
 export class ConsultarOrdenCajaComponent {
   estadoPagos!: estadoPagosResponse;
+  private socketUrl = environment.socketUrl;
+  private socket: Socket;
 
   constructor(public dialogRef: MatDialogRef<ConsultarOrdenCajaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private errorHandler:ErrorHandlingService,
     public dialog: MatDialog,
     private ordenService: OrdenService
-    ) { }
+    ) {
+      this.socket = io(this.socketUrl);
+    }
 
     ngOnInit() {
-      this.cargarEstadosPagos(this.data.orden.id);
+      this.socket.on('fetchOrdenes', (data: any) => {
+        this.cargarEstadosPagos(this.data.orden.id);
+      });
     }
 
     cargarEstadosPagos(idOrden: number) {
@@ -48,10 +56,19 @@ export class ConsultarOrdenCajaComponent {
     }
 
     abrirModalEliminarItem(item: any) {
-      this.dialog.open(EliminarItemOrdenComponent, {
-        width: '250px', // Ancho del modal
-        data: { item: item } // Pasando el item al modal
+      const dialogRef = this.dialog.open(EliminarItemOrdenComponent, {
+        width: '250px',
+        data: { item: item }
       });
+    
+      dialogRef.afterClosed().subscribe(result => {
+        // Este bloque de código se ejecutará después de cerrar el modal
+        if (result) {
+          // Actualiza los datos si el modal se cerró con alguna acción relevante
+          this.dialogRef.close();
+        }
+      });
+      
     }
     
 }
