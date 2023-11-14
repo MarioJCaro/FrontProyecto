@@ -90,7 +90,49 @@ export interface removeMesaRequest{
   mesas: number[];
 }
 
+export interface responseInfoPagos{
+  ordenesIds: number[];
+  totalGeneralPagado: number;
+  totalGeneralOrden: number;
+  detalles: detalleInfoPagos[];
+}
 
+export interface detalleInfoPagos{
+  ordenId: number;
+  totalPagado: number;
+  totalOrden: number;
+  paga: boolean;
+}
+
+export interface pagarTodoRequest{
+  ordenes: number[];
+  metodoPago: string;
+  cajaId: number;
+  empleadoId: number;
+}
+
+export interface pagarTodoResponse{
+  message: string;
+  pagos: nuevoPagoData[];
+}
+
+export interface nuevoPagoData{
+  nuevoPago: nuevoPago;
+  ordenPagada: boolean;
+}
+
+export interface nuevoPago{
+  id: number;
+  fecha: Date;
+  hora: Date;
+  metodoPago: string;
+  total: number;
+  ordenId: number;
+  cajaId: number;
+  empleadoId: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -173,4 +215,29 @@ export class OrdenService {
         catchError(this.errorHandler.handleError)
     );
   }
+
+  getInfoPagos(ids:number[]){
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let url = `${this.apiUrl}/ordenes/infoPagos/general/?Ids=`;
+    ids.forEach((id, index) => {
+      if(index == 0){
+        url += `${id}`;
+      }
+      else{
+        url += `,${id}`;
+      }
+    });
+    return this.http.get<responseInfoPagos>(url, { headers }).pipe(
+        catchError(this.errorHandler.handleError)
+    );
+    
+  }
+
+  pagarTodo(item: pagarTodoRequest): Observable<pagarTodoResponse> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<pagarTodoResponse>(`${this.apiUrl}/ordenes/pagarTodo`, item, { headers }).pipe(
+      catchError(this.errorHandler.handleError));
+  }
+
+  
 }
