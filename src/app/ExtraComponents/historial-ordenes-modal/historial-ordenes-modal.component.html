@@ -43,12 +43,13 @@
 
                             <mat-card-actions class="order-actions">
                                 <button mat-raised-button
+                                    (click)="openConsultarOrden(orden)"
                                     style="background-color: #57bcdc; text-align: center">
                                     <mat-icon class="big-icon">info</mat-icon>
                                 </button>
                                 <button *ngIf="orden.estado !== ESTADOS.CANCELADA" mat-raised-button
                                     style="background-color: #e98383; text-align: center"
-                                    (click)="cambiarEstado(orden.id, ESTADOS.CANCELADA)">
+                                    (click)="cancelarOrden(orden.id)">
                                     <mat-icon class="big-icon">delete</mat-icon>
                                 </button>
                             </mat-card-actions>
