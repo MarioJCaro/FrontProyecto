@@ -10,6 +10,7 @@ import { OrdenResponse, OrdenService } from 'src/app/services/orden/orden.servic
 import { PagarOrdenModalComponent } from '../pagar-orden-modal/pagar-orden-modal.component';
 import { ConsultarOrdenCajaComponent } from '../consultar-orden-caja/consultar-orden-caja.component';
 import { ToastService } from 'src/app/services/toast/toast.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ordenes-mesa-caja-modal',
@@ -24,7 +25,7 @@ export class OrdenesMesaCajaModalComponent implements OnInit{
 
   ordenes: Orden[] = [];
   
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, private ordenService: OrdenService, private toastService: ToastService) { 
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, private ordenService: OrdenService, private toastService: ToastService, private router: Router) { 
     this.socket = io(this.socketUrl);
     this.mesaId = data.mesa.id;
     console.log(data.mesa); // Aquí tendrás la información de la mesa
@@ -129,6 +130,10 @@ openConsultarOrden(orden : Orden){
     console.log('El modal fue cerrado', result);
     // Aquí puedes manejar el resultado del modal, por ejemplo, guardar el nuevo ítem.
   });
+}
+
+close(){
+  this.dialog.closeAll();
 }
 
 }

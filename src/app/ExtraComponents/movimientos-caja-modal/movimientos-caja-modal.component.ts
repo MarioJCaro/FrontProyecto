@@ -4,6 +4,7 @@ import { Movimiento } from 'src/app/models/movimiento.model';
 import { Time } from "@angular/common";
 import { CajaService } from 'src/app/services/caja/caja.service';
 import { PageEvent } from '@angular/material/paginator';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-movimientos-caja-modal',
@@ -18,7 +19,7 @@ export class MovimientosCajaModalComponent {
   pageEvent: PageEvent = {pageIndex: 0, pageSize: 10, length: 0};
 
   constructor(
-    // ... otros servicios ...
+    public dialogRef: MatDialogRef<MovimientosCajaModalComponent>,
     private cajaService: CajaService
   ) {}
 
@@ -45,5 +46,8 @@ export class MovimientosCajaModalComponent {
   this.getMovimientos();
 }
   
+closeModal(): void {
+  this.dialogRef.close();
+}
   
 }

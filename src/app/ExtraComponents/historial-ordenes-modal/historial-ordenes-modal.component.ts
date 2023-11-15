@@ -8,6 +8,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogRef } from '@angular/cdk/dialog';
 import { ConsultarOrdenCajaComponent } from '../consultar-orden-caja/consultar-orden-caja.component';
 import { ToastService } from 'src/app/services/toast/toast.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class HistorialOrdenesModalComponent {
   ordenes: Orden[] = [];
   ESTADOS = ESTADOS; 
   
-constructor(private ordenService: OrdenService, private mesasService: MesasService, private dialogRef: DialogRef,  public dialog: MatDialog, private toastService: ToastService ) { }
+constructor(private ordenService: OrdenService, private mesasService: MesasService, private dialogRef: DialogRef,  public dialog: MatDialog, private toastService: ToastService, private router: Router ) { }
   ngOnInit(): void {
     this.fetchOrdenesEnCaja();
   }

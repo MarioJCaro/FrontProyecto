@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Pago } from 'src/app/models/pago.model';
@@ -17,7 +18,7 @@ export class PagosCajaModalComponent {
   pageEvent: PageEvent = {pageIndex: 0, pageSize: 10, length: 0};
 
   constructor(
-    // ... otros servicios ...
+    public dialogRef: MatDialogRef<PagosCajaModalComponent>,
     private cajaService: CajaService
   ) {}
 
@@ -42,5 +43,9 @@ export class PagosCajaModalComponent {
   onPaginateChange(event: PageEvent) {
     this.pageEvent = event;
     this.getPagos();
+  }
+
+  closeModal(): void {
+    this.dialogRef.close();
   }
 }
