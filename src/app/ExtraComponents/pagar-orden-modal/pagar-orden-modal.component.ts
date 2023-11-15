@@ -21,6 +21,7 @@ export class PagarOrdenModalComponent {
   metodosPago = [
     { value: METODOSPAGO.EFECTIVO, viewValue: METODOSPAGO.EFECTIVO },
     { value: METODOSPAGO.TRANSFERENCIA, viewValue: METODOSPAGO.TRANSFERENCIA },
+    { value: METODOSPAGO.CREDITO, viewValue: METODOSPAGO.CREDITO}
     // Puedes seguir añadiendo más métodos de pago si es necesario
   ];
 
