@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 10px; /* Ajusta el margen inferior según sea necesario */
+    padding-top: 20px;
 }
 
 .history-button{
@@ -37,8 +38,8 @@ background-color: #347763; /* Cambia el color de fondo al hacer hover */
         padding-top: 2.5vh; /* Ajusta el espacio superior en unidades relativas */
         padding-bottom: 10vh; /* Ajusta el espacio inferior en unidades relativas */
         max-width: 90vw; /* Establece un ancho máximo en unidades relativas */
-        min-height: 125vw;
-        max-height: 125vw;
+        overflow-y: auto; /* Habilita el desplazamiento vertical */
+        max-height: 90vh; /* Cambia la altura máxima a un porcentaje de la altura de la ventana gráfica */
         margin: 0 auto; /* Centra el contenedor horizontalmente */
         border-radius: 20px;
     }
@@ -56,13 +57,14 @@ background-color: #347763; /* Cambia el color de fondo al hacer hover */
 
     .table-box {
         background-color: #E8FFF9;
-        padding: 20px;
+        padding: 2%;
         border-radius: 10px;
         margin-bottom: 2vh;
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 100%;
+        box-sizing: border-box;
     }
 
     .content {
@@ -70,6 +72,7 @@ background-color: #347763; /* Cambia el color de fondo al hacer hover */
         align-items: center;
         justify-content: space-between;
         width: 100%; /* Agrega esta línea para asegurarte de que ocupe todo el ancho */
+        margin: 10px;
     }
 
     /* Número de Mesa */

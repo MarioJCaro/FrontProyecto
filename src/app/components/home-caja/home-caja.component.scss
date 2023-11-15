@@ -89,3 +89,21 @@
   justify-content: space-between; /* Separa los elementos uniformemente */
   align-items: center; /* Centra los elementos verticalmente */
 }
+
+/* Estilos para las celdas de la tabla */
+.table th,
+.table td {
+    text-align: center; /* Centra el contenido horizontalmente */
+    vertical-align: middle; /* Centra el contenido verticalmente */
+    /* Resto de tus estilos */
+}
+
+/* Si necesitas ajustar el encabezado de la tabla específicamente */
+.table thead th {
+    text-align: center; /* Centra horizontalmente los encabezados de la tabla */
+    vertical-align: middle; /* Centra verticalmente los encabezados de la tabla */
+    /* Resto de tus estilos para el encabezado */
+}
+
+
+

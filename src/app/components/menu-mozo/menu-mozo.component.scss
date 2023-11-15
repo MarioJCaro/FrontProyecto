@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 10px; /* Ajusta el margen inferior según sea necesario */
+    padding-top: 20px;
 }
 
 .history-button{
@@ -44,9 +45,12 @@ background-color: #347763; /* Cambia el color de fondo al hacer hover */
     }
 
     .mat-expansion-panel-header {
-        color: #000; /* Establece el color de texto deseado */
-        background-color: #E8FFF9;
-      }
+      color: #000; /* Establece el color de texto deseado */
+      background-color: #E8FFF9;
+      font-weight: bold; /* Hace el texto negrita */
+      /* Resto de tus estilos */
+  }
+  
 
     .mat-expansion-panel input::placeholder {
     text-align: center;
@@ -75,9 +79,27 @@ background-color: #347763; /* Cambia el color de fondo al hacer hover */
         justify-content: flex-end; /* Alinea los elementos al extremo derecho */
       }
 
-      .cantidad{
-        width: 20%;
+      /* Estilos para el input de cantidad */
+      .cantidad {
+        width: 40px; /* Ajusta el ancho como sea necesario */
+        height: 24px; /* Ajusta la altura para que coincida con la altura de los botones */
         text-align: center;
+        border: none; /* Elimina el borde */
+        outline: none; /* Elimina el contorno que aparece al enfocar el input */
+        background-color: transparent; /* Hace el fondo transparente */
+        /* Resto de tus estilos */
+      }
+
+      /* Estilos para eliminar las flechas de los inputs numéricos en navegadores que usan Webkit como motor de renderizado */
+      .cantidad::-webkit-outer-spin-button,
+      .cantidad::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Estilos para eliminar las flechas de los inputs numéricos en Firefox */
+      .cantidad[type=number] {
+        -moz-appearance: textfield;
       }
 
       .remove{
@@ -91,6 +113,12 @@ background-color: #347763; /* Cambia el color de fondo al hacer hover */
       }
 
       .option-buttons button {
-        padding: 5px; /* Ajusta el padding de los botones */
-        font-size: 14px; /* Reducir el tamaño del texto de los botones si es necesario */
+        padding: 0; /* Elimina el padding para que no afecte la forma del círculo */
+        font-size: 12px; /* Ajusta el tamaño del texto como sea necesario */
+        width: 24px; /* Mismo tamaño para width y height para formar un círculo */
+        height: 24px; /* Mismo tamaño para width y height para formar un círculo */
+        border-radius: 12px; /* La mitad del width/height para hacer el círculo perfecto */
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
