@@ -19,6 +19,7 @@ import { ToastService } from 'src/app/services/toast/toast.service';
 
 import { ConsultarOrdenCajaComponent } from 'src/app/ExtraComponents/consultar-orden-caja/consultar-orden-caja.component';
 import { ModificarOrdenModalComponent } from 'src/app/ExtraComponents/modificar-orden-modal/modificar-orden-modal/modificar-orden-modal.component';
+import { ConfirmarEliminarOrdenCajaComponent } from 'src/app/ExtraComponents/confirmar-eliminar-orden-caja/confirmar-eliminar-orden-caja.component';
 
 
 @Component({
@@ -156,14 +157,28 @@ export class HomeCajaComponent  implements OnInit{
 }
 
 cancelarOrden(ordenId: number): void {
+  const dialogRef = this.dialog.open(ConfirmarEliminarOrdenCajaComponent, {
+    width: '250px'
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this.procederCancelarOrden(ordenId);
+    }
+  });
+}
+
+private procederCancelarOrden(ordenId: number) {
   this.ordenService.deleteOrden(ordenId).subscribe({
-      next: (response) => {
-          console.log('Orden eliminada, respuesta:', response);
-          this.toastService.showSuccess("Orden cancelada con exito");      },
-      error: (error) => {
-          console.error('Hubo un error al eliminar la orden:', error);
-          // Aquí podrías manejar errores, como mostrar mensajes de error al usuario
-      }
+    next: (response) => {
+      console.log('Orden eliminada, respuesta:', response);
+      this.toastService.showSuccess("Orden cancelada con éxito");
+      // Actualizar la lista de órdenes aquí si es necesario
+    },
+    error: (error) => {
+      console.error('Hubo un error al eliminar la orden:', error);
+      // Aquí podrías manejar errores, como mostrar mensajes de error al usuario
+    }
   });
 }
 

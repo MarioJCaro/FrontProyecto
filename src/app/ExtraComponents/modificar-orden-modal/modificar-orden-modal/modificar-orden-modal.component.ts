@@ -8,6 +8,7 @@ import { GrupoComidaService } from 'src/app/services/grupoComida/grupo-comida.se
 import { ItemMenuResponse, MenuMozoService } from 'src/app/services/menumozo/menu-mozo.service';
 import { AgregarObservacionOrdenModalComponent } from '../../agregar-observacion-orden-modal/agregar-observacion-orden-modal/agregar-observacion-orden-modal.component';
 import { ItemsRequest, OrdenService } from 'src/app/services/orden/orden.service';
+import { ConfirmarModificarOrdenComponent } from '../../confirmar-modificar-orden/confirmar-modificar-orden.component';
 
 interface ItemOrden {
   itemMenuId: number;
@@ -89,26 +90,35 @@ export class ModificarOrdenModalComponent {
       });
     }
 
-finalizarOrden(){
-  const itemsParaAgregar: ItemsRequest[] = this.construirItemsParaAgregar();
-
-  // Crear el objeto de request con la propiedad 'items' que contiene el arreglo de ItemsRequest.
-  const requestPayload = {
-    items: itemsParaAgregar
-  };
-
-  // Llamar al servicio con el objeto de request que tiene la estructura esperada.
-  this.ordenService.addItem(this.data.orden.id, requestPayload).subscribe({
-    next: (response) => {
-      console.log('Items agregados con éxito', response);
-      this.dialogRef.close(); // Cerrar el diálogo tras una respuesta exitosa.
-    },
-    error: (error) => {
-      console.log('Error al agregar items', error);
-      // Aquí podrías mostrar un mensaje de error o manejar la situación de alguna otra manera.
+    finalizarOrden() {
+      const dialogRef = this.dialog.open(ConfirmarModificarOrdenComponent, {
+        width: '250px'
+      });
+    
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.modificarOrden();
+        }
+      });
     }
-  });
-}
+    
+    private modificarOrden() {
+      const itemsParaAgregar: ItemsRequest[] = this.construirItemsParaAgregar();
+      const requestPayload = {
+        items: itemsParaAgregar
+      };
+    
+      this.ordenService.addItem(this.data.orden.id, requestPayload).subscribe({
+        next: (response) => {
+          console.log('Items agregados con éxito', response);
+          this.dialogRef.close(); // Cierra el diálogo tras una respuesta exitosa
+        },
+        error: (error) => {
+          console.log('Error al agregar items', error);
+          // Manejo de errores
+        }
+      });
+    }
 
   
     private construirItemsParaAgregar(): ItemsRequest[] {

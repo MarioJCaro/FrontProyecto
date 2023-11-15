@@ -23,6 +23,12 @@ export class ConfirmarOrdenMenuComponent {
   ) {}
 
   crearOrden(){
+    if (!this.nombreCliente.trim()) {
+      // Puedes usar una alerta simple o tu propio sistema de notificaciones para informar al usuario
+      alert('Por favor, ingresa el nombre del responsable.');
+      return; // Detiene la ejecución adicional del método
+    }
+
     //Primero mapeamos los items
     const itemsParaEnvio = this.data.itemsMenu.map(item => ({
       itemMenuId: item.id,

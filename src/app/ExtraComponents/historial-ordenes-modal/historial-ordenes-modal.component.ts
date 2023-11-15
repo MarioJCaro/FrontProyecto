@@ -9,6 +9,7 @@ import { DialogRef } from '@angular/cdk/dialog';
 import { ConsultarOrdenCajaComponent } from '../consultar-orden-caja/consultar-orden-caja.component';
 import { ToastService } from 'src/app/services/toast/toast.service';
 import { Router } from '@angular/router';
+import { ConfirmarEliminarOrdenCajaComponent } from '../confirmar-eliminar-orden-caja/confirmar-eliminar-orden-caja.component';
 
 
 @Component({
@@ -42,6 +43,18 @@ constructor(private ordenService: OrdenService, private mesasService: MesasServi
   }
 
   cancelarOrden(ordenId: number): void {
+    const dialogRef = this.dialog.open(ConfirmarEliminarOrdenCajaComponent, {
+      width: '250px'
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.procederCancelarOrden(ordenId);
+      }
+    });
+  }
+
+  procederCancelarOrden(ordenId: number): void {
     this.ordenService.deleteOrden(ordenId).subscribe({
         next: (response) => {
             console.log('Orden eliminada, respuesta:', response);

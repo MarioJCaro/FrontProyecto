@@ -22,19 +22,14 @@ export class ConfirmarCancelarOrdenModalComponent {
   }
 
   confirmar(): void {
-    const datosActualizar: UpdateOrdenRequest = {
-      estado: ESTADOS.CANCELADA, // Aquí estamos actualizando el estado de la orden
-    };
-
-    // Llamamos al método de actualización del servicio y nos suscribimos al Observable
-    this.ordenService.updateOrden(this.data.id, datosActualizar).subscribe({
+    this.ordenService.deleteOrden(this.data.id).subscribe({
       next: (response) => {
-        console.log('Orden actualizada, respuesta:', response);
-        this.dialogRef.close();
-        // Aquí podrías también manejar cualquier lógica post-actualización como alertas de éxito o refrescar la lista de órdenes
+        console.log('Orden eliminada, respuesta:', response);
+        this.toastService.showSuccess("Orden cancelada con éxito");
+        // Actualizar la lista de órdenes aquí si es necesario
       },
       error: (error) => {
-        console.error('Hubo un error al actualizar la orden:', error);
+        console.error('Hubo un error al eliminar la orden:', error);
         // Aquí podrías manejar errores, como mostrar mensajes de error al usuario
       }
     });

@@ -19,7 +19,6 @@ export class ConsultarItemMenuModalComponent {
 
   catId: number = 0;
   ingredients: number[] = []; // Lista de ingredientes seleccionados
-  availableIngredients: string[] = ['Coca Cola 2L', 'Fernet Branca 1L']; // Lista de ingredientes disponibles
   items: Item[] = [];
   totalCount: number = 0;
   pageEvent: PageEvent = {pageIndex: 0, pageSize: 10, length: 0};

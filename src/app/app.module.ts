@@ -134,6 +134,10 @@ import { ModificarOrdenModalComponent } from './ExtraComponents/modificar-orden-
 import { EliminarItemOrdenComponent } from './ExtraComponents/eliminar-item-orden/eliminar-item-orden.component';
 import { OrganizacionComponent } from './components/organizacion/organizacion/organizacion.component';
 import { GestionHomesComponent } from './components/gestion-homes/gestion-homes.component';
+import { ConfirmarModificarOrdenComponent } from './ExtraComponents/confirmar-modificar-orden/confirmar-modificar-orden.component';
+import { ConfirmarEliminarOrdenCajaComponent } from './ExtraComponents/confirmar-eliminar-orden-caja/confirmar-eliminar-orden-caja.component';
+import { ConfirmarOrdenMenuMozoComponent } from './ExtraComponents/confirmar-orden-menu-mozo/confirmar-orden-menu-mozo.component';
+import { ConsultarOrdenMozoComponent } from './ExtraComponents/consultar-orden-mozo/consultar-orden-mozo.component';
 
 @NgModule({
   declarations: [
@@ -227,6 +231,10 @@ import { GestionHomesComponent } from './components/gestion-homes/gestion-homes.
     EliminarItemOrdenComponent,
     OrganizacionComponent,
     GestionHomesComponent,
+    ConfirmarModificarOrdenComponent,
+    ConfirmarEliminarOrdenCajaComponent,
+    ConfirmarOrdenMenuMozoComponent,
+    ConsultarOrdenMozoComponent,
 
 
 

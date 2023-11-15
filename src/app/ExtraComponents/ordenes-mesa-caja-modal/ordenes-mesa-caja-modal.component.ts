@@ -11,6 +11,7 @@ import { PagarOrdenModalComponent } from '../pagar-orden-modal/pagar-orden-modal
 import { ConsultarOrdenCajaComponent } from '../consultar-orden-caja/consultar-orden-caja.component';
 import { ToastService } from 'src/app/services/toast/toast.service';
 import { Router } from '@angular/router';
+import { ConfirmarEliminarOrdenCajaComponent } from '../confirmar-eliminar-orden-caja/confirmar-eliminar-orden-caja.component';
 
 @Component({
   selector: 'app-ordenes-mesa-caja-modal',
@@ -84,6 +85,18 @@ cambiarEstado(ordenId: number, nuevoEstado: string): void {
 }
 
 cancelarOrden(ordenId: number): void {
+  const dialogRef = this.dialog.open(ConfirmarEliminarOrdenCajaComponent, {
+    width: '250px'
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this.procederCancelarOrden(ordenId);
+    }
+  });
+}
+
+procederCancelarOrden(ordenId: number): void {
   this.ordenService.deleteOrden(ordenId).subscribe({
       next: (response) => {
           console.log('Orden eliminada, respuesta:', response);
