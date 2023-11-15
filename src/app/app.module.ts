@@ -132,6 +132,8 @@ import { ConsultarOrdenCajaComponent } from './ExtraComponents/consultar-orden-c
 import { PagosOrdenCajaModalComponent } from './ExtraComponents/pagos-orden-caja-modal/pagos-orden-caja-modal.component';
 import { ModificarOrdenModalComponent } from './ExtraComponents/modificar-orden-modal/modificar-orden-modal/modificar-orden-modal.component';
 import { EliminarItemOrdenComponent } from './ExtraComponents/eliminar-item-orden/eliminar-item-orden.component';
+import { OrganizacionComponent } from './components/organizacion/organizacion/organizacion.component';
+import { GestionHomesComponent } from './components/gestion-homes/gestion-homes.component';
 
 @NgModule({
   declarations: [
@@ -223,6 +225,8 @@ import { EliminarItemOrdenComponent } from './ExtraComponents/eliminar-item-orde
     PagosOrdenCajaModalComponent,
     ModificarOrdenModalComponent,
     EliminarItemOrdenComponent,
+    OrganizacionComponent,
+    GestionHomesComponent,
 
 
 
