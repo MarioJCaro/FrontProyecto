@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSelectChange } from '@angular/material/select';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { InfoOrdenModalComponent } from 'src/app/ExtraComponents/info-orden-modal/info-orden-modal.component';
 import { ESTADOS } from 'src/app/constants/estadosOrden.constant';
 import { Orden } from 'src/app/models/orden.model';
@@ -29,7 +30,8 @@ export class HistorialVentasComponent {
 
   constructor(
     public dialog: MatDialog,
-    private ordenService: OrdenService // Injecta el OrdenService aquí
+    private ordenService: OrdenService, // Injecta el OrdenService aquí
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -121,4 +123,8 @@ onPaginateChange(event: PageEvent) {
     });
   }
   
+  navigateTo(route: string) {
+    this.router.navigate([route]);
+  }
+
 }

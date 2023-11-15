@@ -33,6 +33,8 @@ import { GruposComponent } from './components/grupos/grupos/grupos.component';
 import { InfoUsuarioComponent } from './components/info-usuario/info-usuario.component';
 import { HeaderComponent } from './ExtraComponents/header/header.component';
 import { MesasComponent } from './components/mesas/mesas/mesas.component';
+import { OrganizacionComponent } from './components/organizacion/organizacion/organizacion.component';
+import { GestionHomesComponent } from './components/gestion-homes/gestion-homes.component';
 
 
 
@@ -67,6 +69,8 @@ const routes: Routes = [
   {path: 'infousuario', component:InfoUsuarioComponent},
   {path: 'header', component:HeaderComponent},
   {path: 'mesas', component:MesasComponent},
+  {path: 'organizacion', component:OrganizacionComponent},
+  {path: 'gestionhome', component:GestionHomesComponent},
 ];
 
 @NgModule({
