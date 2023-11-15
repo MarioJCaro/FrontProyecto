@@ -28,6 +28,7 @@ export class ConsultarOrdenCajaComponent {
     }
 
     ngOnInit() {
+      this.cargarEstadosPagos(this.data.orden.id);
       this.socket.on('fetchOrdenes', (data: any) => {
         this.cargarEstadosPagos(this.data.orden.id);
       });
@@ -37,7 +38,8 @@ export class ConsultarOrdenCajaComponent {
       this.ordenService.getEstadosPagos(idOrden).subscribe({
         next: (response) => {
           // Guarda la respuesta completa en la variable del componente
-          this.estadoPagos = response;
+          this.estadoPagos = response
+          console.log(this.estadoPagos);
         },
         error: (error) => {
           this.errorHandler.handleError(error);

@@ -25,6 +25,9 @@
                                 <p>
                                     Mesa {{ getMesas(orden) }} - Mozo: {{ orden.empleado?.nombre || 'Autoservicio'}}
                                 </p>
+                                <ng-container *ngIf="orden.cliente">
+                                    <p>Cliente: {{ orden.cliente.nombre }}</p>
+                                  </ng-container>
                                 <div class="order-items">
                                     <p *ngFor="let item of orden.items">
                                         {{ item.cantidad }} x {{ item.itemMenu.nombre }}
