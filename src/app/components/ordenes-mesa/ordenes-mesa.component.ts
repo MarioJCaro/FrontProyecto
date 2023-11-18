@@ -77,15 +77,13 @@ export class OrdenesMesaComponent implements OnInit {
     });
   }
 
-  openConsultarOrden(id:number){
+  openConsultarOrden(orden: Orden){
     const dialogRef = this.dialog.open(ConsultarOrdenMozoComponent, {
-      width: '250px'
+      width: '20rem',
+      data: orden
     });
   
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.procederConfirmarOrden(id);
-      }
     });
   }
   

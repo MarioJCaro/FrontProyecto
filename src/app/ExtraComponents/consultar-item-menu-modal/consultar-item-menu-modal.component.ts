@@ -7,7 +7,7 @@ import { Item } from 'src/app/models/item.model';
 import { CategoriaService } from 'src/app/services/categoria/categoria.service';
 import { ErrorHandlingService } from 'src/app/services/errorHandling/error-handling.service';
 import { GetAllItemResponse, InventarioService } from 'src/app/services/inventario/inventario.service';
-import { MenubackofficeService, addItemInventarioRequest } from 'src/app/services/menubackoffice/menubackoffice.service';
+import { MenubackofficeService, addItemInventarioRequest, getItemMenuResponse } from 'src/app/services/menubackoffice/menubackoffice.service';
 
 
 @Component({
@@ -16,14 +16,16 @@ import { MenubackofficeService, addItemInventarioRequest } from 'src/app/service
   styleUrls: ['./consultar-item-menu-modal.component.scss']
 })
 export class ConsultarItemMenuModalComponent {
-
   catId: number = 0;
   ingredients: number[] = []; // Lista de ingredientes seleccionados
   items: Item[] = [];
   totalCount: number = 0;
   pageEvent: PageEvent = {pageIndex: 0, pageSize: 10, length: 0};
-  saleType: boolean = false; // Valor por defecto, puedes cambiarlo si lo necesitas
-
+  saleType: boolean | null = null;; // Valor por defecto, puedes cambiarlo si lo necesitas
+  loading = false;
+  itemMenuDetails: getItemMenuResponse | null = null;
+  seleccionPorUnidad !: boolean;
+  displayedChips: any[] = [];
 
   constructor(public dialogRef: MatDialogRef<ConsultarItemMenuModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -31,14 +33,71 @@ export class ConsultarItemMenuModalComponent {
     private errorHandler:ErrorHandlingService,
     private menuService: MenubackofficeService,
     private categoriaService: CategoriaService,
+    private backofficeService: MenubackofficeService
     ) { }
 
-  addIngredient(event: MatSelectChange) {
-    this.ingredients.push(event.value);
-}
+    addIngredient(event: MatSelectChange) {
+      const selectedItemId = event.value;
+      const selectedItem = this.items.find(item => item.id === selectedItemId);
+  
+      // Asegúrate de que el ítem no esté ya en la lista de chips mostrados
+      if (selectedItem && !this.displayedChips.some(chip => chip.id === selectedItem.id)) {
+        this.displayedChips.push({
+          id: selectedItem.id,
+          nombre: selectedItem.nombre
+          // Copia aquí otras propiedades necesarias del ítem para los chips
+        });
+        this.ingredients.push(selectedItemId); // Sigue manteniendo la lista de ingredientes seleccionados
+      }
+    }
 
 ngOnInit() {
   this.getItems();
+  this.getItemsMenu(this.data.id);
+  this.initializeDisplayedChips();
+}
+
+initializeDisplayedChips() {
+  // Solo si itemMenuDetails está definido y tiene ítems, actualizamos displayedChips
+  if (this.itemMenuDetails && this.itemMenuDetails.ItemInventarios) {
+    this.displayedChips = this.itemMenuDetails.ItemInventarios.map(item => ({
+      id: item.id,
+      nombre: item.nombre
+      // Copia aquí otras propiedades necesarias de los ítems para los chips
+    }));
+  }
+}
+
+getFilteredItems() {
+  // Asumimos que `itemMenuDetails?.ItemInventarios` y `items` están definidos y contienen los datos relevantes.
+  if (this.itemMenuDetails) {
+    // Creamos un Set con los IDs de los elementos ya presentes en itemMenuDetails para una búsqueda más eficiente.
+    const presentItemIds = new Set(this.itemMenuDetails.ItemInventarios.map(item => item.id));
+    // Filtramos el arreglo de `items` para excluir los que ya están presentes.
+    this.items = this.items.filter(item => !presentItemIds.has(item.id));
+  }
+}
+
+getItemsMenu(id: number): void {
+  this.loading = true;
+  this.backofficeService.getItemsMenu(id).subscribe({
+    next: (response) => {
+      this.itemMenuDetails = response;
+      this.getFilteredItems();
+      this.initializeDisplayedChips();
+
+      // Establecemos saleType basado en ItemInventarios si no está vacío, de lo contrario será null
+      this.saleType = response.ItemInventarios.length > 0
+        ? response.ItemInventarios.some(item => item.porUnidad)
+        : null;
+
+      this.loading = false;
+    },
+    error: (error) => {
+      console.error('Error fetching item menu details:', error);
+      this.loading = false;
+    }
+  });
 }
 
 getIdCat(): Promise<number> {
@@ -81,6 +140,7 @@ async getItems(campo?: any, valor?: any) {
       }));
 
       this.items = itemsToAdd;
+      this.getFilteredItems();
       
       },
       error: (error) => {
@@ -93,7 +153,7 @@ async getItems(campo?: any, valor?: any) {
 }
 
 confirmSelection() {
-  if (this.saleType && this.ingredients.length > 1) {
+  if (this.saleType && this.displayedChips.length > 1) {
     // Mostrar algún mensaje de error al usuario
     console.error('No se puede agregar más de un ítem cuando la venta es por unidad.');
     return;
@@ -104,8 +164,6 @@ confirmSelection() {
   );
 
   Promise.all(validations).then(items => {
-    // Aquí `items` es un arreglo de los ítems recuperados de las promesas
-
     // Realizar la validación 2 y 3 aquí
     const isSaleTypeTrue = this.saleType === true;
 
@@ -142,6 +200,48 @@ confirmSelection() {
 
 onCancel(): void {
   this.dialogRef.close(false);
+}
+
+borrarItems(){
+  // Asegúrate de que displayedChips esté definido en tu componente.
+  if (!this.displayedChips || this.displayedChips.length === 0 || this.itemMenuDetails?.ItemInventarios.length === 0) {
+    // Manejar el caso donde displayedChips es vacío o no tiene elementos
+    console.error('No hay elementos para borrar.');
+    return;
+  }
+
+  // Mapea los displayedChips para obtener solo las IDs.
+  const formattedItems = this.displayedChips.map(chip => {
+    return { id: chip.id };
+  });
+
+  // Toma el valor de saleType para establecerlo en el request, asegurándote de que esta propiedad refleje la selección actual del usuario.
+  const itemToSubmit: addItemInventarioRequest = {
+    itemsInventario: formattedItems,
+    porUnidad: null // Utiliza saleType que ya refleja la selección del usuario.
+  };
+
+  // Aquí asumimos que tienes el id del itemMenu al que pertenecen estos itemsInventario.
+  const itemMenuId = this.data.id; // Utiliza data.id que se inyecta en el componente.
+
+  // Envía la request al servicio.
+  this.menuService.removeItemsInventario(itemMenuId, itemToSubmit).subscribe({
+    next: (response) => {
+      // Maneja la respuesta exitosa aquí.
+      console.log('Operación exitosa', response);
+      // Limpia displayedChips después de la operación exitosa.
+      this.displayedChips = [];
+      this.ingredients = [];
+      // Aquí puedes realizar acciones adicionales como cerrar un modal o mostrar un mensaje al usuario.
+    },
+    error: (error) => {
+      // Maneja los errores aquí.
+      console.error('Error al enviar la request', error);
+      // Muestra al usuario un mensaje de error si es necesario.
+    }
+  });
+
+  this.dialogRef.close();
 }
 
 }
