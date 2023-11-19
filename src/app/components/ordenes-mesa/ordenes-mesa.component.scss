@@ -1,11 +1,15 @@
 /* Estilos para los botones "Añadir Orden" y "Ver Ordenes Antiguas" */ 
 
 .button-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px; /* Ajusta el margen inferior según sea necesario */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px; /* Agrega un margen en la parte superior */
+  margin-bottom: 10px; /* Ajusta el margen inferior según sea necesario */
+  padding-top: 20px; /* También puedes usar padding si eso es preferible */
+  /* Resto de tus estilos */
 }
+
 
 .history-button{
     margin-right: 5%;
@@ -39,6 +43,8 @@ background-color: #347763; /* Cambia el color de fondo al hacer hover */
         max-height: 125vw;
         margin: 0 auto; /* Centra el contenedor horizontalmente */
         border-radius: 20px;
+        overflow-x: hidden; /* Evita el desbordamiento de contenido */
+        overflow-y: auto;
     }
 
 /* Titulo "Mesas Ocupadas" */
@@ -64,7 +70,10 @@ background-color: #347763; /* Cambia el color de fondo al hacer hover */
           background-color: #E8FFF9;
           border-radius: 10px;
           margin-bottom: 2.5%;
-          padding: 2%
+          padding: 2%;
+          box-sizing: border-box; /* Incluye padding y border en el ancho y alto */
+          max-width: calc(100% - 4%); /* Resta el padding del ancho total */
+          max-height: calc(100% - 5%); /* Resta el margen del alto total */
         }
 
         /* Estilos para listar las mesas */
@@ -92,14 +101,17 @@ background-color: #347763; /* Cambia el color de fondo al hacer hover */
 
     .table-number {
       display: flex;
+      align-items: center; /* Asegura que los elementos estén alineados verticalmente */
+      justify-content: space-between; /* Espacia los elementos entre sí */
       margin: 0;
       width: 100%;
     }
-
+    
     .buttons {
       display: flex;
       gap: 10px;
-      margin-left: auto; /* Mueve los botones al extremo derecho del div */
+      align-items: center; /* Alinea los botones verticalmente con el texto "Mesa:" */
+      /* No necesitas margin-left: auto; si estás usando justify-content: space-between en .table-number */
     }
 
     .button {

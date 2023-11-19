@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { AgregarOrdenModalComponent } from 'src/app/ExtraComponents/agregar-orden-modal/agregar-orden-modal.component';
 import { ConfirmarCancelarOrdenModalComponent } from 'src/app/ExtraComponents/confirmar-cancelar-orden-modal/confirmar-cancelar-orden-modal/confirmar-cancelar-orden-modal.component';
+import { ConfirmarOrdenMenuMozoComponent } from 'src/app/ExtraComponents/confirmar-orden-menu-mozo/confirmar-orden-menu-mozo.component';
+import { ConsultarOrdenMozoComponent } from 'src/app/ExtraComponents/consultar-orden-mozo/consultar-orden-mozo.component';
 import { ESTADOS } from 'src/app/constants/estadosOrden.constant';
 import { Mesa } from 'src/app/models/mesa.model';
 import { Orden } from 'src/app/models/orden.model';
@@ -51,10 +53,6 @@ export class OrdenesMesaComponent implements OnInit {
     });
   }
 
-  openEditarDialog(): void {
-    // Implementa esta función como lo tenías
-  }
-
   getOrdenesMesa(mesaId: number) {
     // Llama a la función del servicio para obtener las órdenes de la mesa
     this.ordenService.getOrdenMesa(mesaId).subscribe({
@@ -67,21 +65,40 @@ export class OrdenesMesaComponent implements OnInit {
     );
   }
 
-  confirmarOrden(id: number){
-    const datosActualizar: UpdateOrdenRequest = {
-      estado: ESTADOS.ENTREGADA, // Aquí estamos actualizando el estado de la orden
-    };
+  confirmarOrden(id: number) {
+    const dialogRef = this.dialog.open(ConfirmarOrdenMenuMozoComponent, {
+      width: '250px'
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.procederConfirmarOrden(id);
+      }
+    });
+  }
 
-    // Llamamos al método de actualización del servicio y nos suscribimos al Observable
+  openConsultarOrden(orden: Orden){
+    const dialogRef = this.dialog.open(ConsultarOrdenMozoComponent, {
+      width: '20rem',
+      data: orden
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+  
+  private procederConfirmarOrden(id: number) {
+    const datosActualizar: UpdateOrdenRequest = {
+      estado: ESTADOS.ENTREGADA, // Actualiza el estado a 'Entregada'
+    };
+  
     this.ordenService.updateOrden(id, datosActualizar).subscribe({
       next: (response) => {
-        console.log('Orden actualizada, respuesta:', response);
-        this.getOrdenesMesa(this.mesa.id);
-        // Aquí podrías también manejar cualquier lógica post-actualización como alertas de éxito o refrescar la lista de órdenes
+        console.log('Orden actualizada a entregada:', response);
+        this.getOrdenesMesa(this.mesa.id); // Actualiza la lista de órdenes
       },
       error: (error) => {
-        console.error('Hubo un error al actualizar la orden:', error);
-        // Aquí podrías manejar errores, como mostrar mensajes de error al usuario
+        console.error('Error al actualizar la orden:', error);
       }
     });
   }

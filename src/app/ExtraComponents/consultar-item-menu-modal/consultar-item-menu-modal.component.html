@@ -11,13 +11,13 @@
     <!-- Chips y Dropdown -->
     <div class="chip-list">
         <mat-chip-grid>
-            <!-- Aquí agregarás chips dinámicamente. Puedes usar *ngFor si los chips son generados desde un arreglo -->
-            <mat-chip-row  *ngFor="let ingredient of ingredients">{{ingredient}}
-                <button matChipRemove>
-                    <mat-icon>cancel</mat-icon>
-                  </button>
+            <!-- Chips que se agregan dinámicamente desde el select o que ya están presentes inicialmente -->
+            <mat-chip-row *ngFor="let chip of displayedChips">
+                {{ chip.nombre }}
             </mat-chip-row>
         </mat-chip-grid>
+
+        <button mat-button *ngIf="displayedChips.length > 0" (click)="borrarItems()">Limpiar</button>
     </div>
     
     <mat-form-field class="full-width">

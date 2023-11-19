@@ -1,6 +1,6 @@
 <div style="background-color: #D3D7D1; height: 100%;">
     <div class="header" style="background-color: #D3D7D1; padding-top: 0.5rem;">
-        <button mat-button class="back-button" style="font-size: 2rem;">
+        <button mat-button class="back-button" style="font-size: 2rem;" (click)="close()">
             <mat-icon>arrow_back</mat-icon> Volver
         </button>
     </div>
@@ -43,12 +43,13 @@
 
                             <mat-card-actions class="order-actions">
                                 <button mat-raised-button
+                                    (click)="openConsultarOrden(orden)"
                                     style="background-color: #57bcdc; text-align: center">
                                     <mat-icon class="big-icon">info</mat-icon>
                                 </button>
                                 <button *ngIf="orden.estado !== ESTADOS.CANCELADA" mat-raised-button
                                     style="background-color: #e98383; text-align: center"
-                                    (click)="cambiarEstado(orden.id, ESTADOS.CANCELADA)">
+                                    (click)="cancelarOrden(orden.id)">
                                     <mat-icon class="big-icon">delete</mat-icon>
                                 </button>
                             </mat-card-actions>

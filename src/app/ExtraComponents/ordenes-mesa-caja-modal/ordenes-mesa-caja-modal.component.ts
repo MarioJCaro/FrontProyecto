@@ -8,6 +8,10 @@ import { ESTADOS } from 'src/app/constants/estadosOrden.constant';
 import { Orden } from 'src/app/models/orden.model';
 import { OrdenResponse, OrdenService } from 'src/app/services/orden/orden.service';
 import { PagarOrdenModalComponent } from '../pagar-orden-modal/pagar-orden-modal.component';
+import { ConsultarOrdenCajaComponent } from '../consultar-orden-caja/consultar-orden-caja.component';
+import { ToastService } from 'src/app/services/toast/toast.service';
+import { Router } from '@angular/router';
+import { ConfirmarEliminarOrdenCajaComponent } from '../confirmar-eliminar-orden-caja/confirmar-eliminar-orden-caja.component';
 
 @Component({
   selector: 'app-ordenes-mesa-caja-modal',
@@ -22,7 +26,7 @@ export class OrdenesMesaCajaModalComponent implements OnInit{
 
   ordenes: Orden[] = [];
   
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, private ordenService: OrdenService) { 
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, private ordenService: OrdenService, private toastService: ToastService, private router: Router) { 
     this.socket = io(this.socketUrl);
     this.mesaId = data.mesa.id;
     console.log(data.mesa); // Aquí tendrás la información de la mesa
@@ -80,7 +84,29 @@ cambiarEstado(ordenId: number, nuevoEstado: string): void {
   });
 }
 
+cancelarOrden(ordenId: number): void {
+  const dialogRef = this.dialog.open(ConfirmarEliminarOrdenCajaComponent, {
+    width: '250px'
+  });
 
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this.procederCancelarOrden(ordenId);
+    }
+  });
+}
+
+procederCancelarOrden(ordenId: number): void {
+  this.ordenService.deleteOrden(ordenId).subscribe({
+      next: (response) => {
+          console.log('Orden eliminada, respuesta:', response);
+          this.toastService.showSuccess("Orden cancelada con exito");      },
+      error: (error) => {
+          console.error('Hubo un error al eliminar la orden:', error);
+          // Aquí podrías manejar errores, como mostrar mensajes de error al usuario
+      }
+  });
+}
 
 getMesas(orden: Orden): string {
   return orden.mesas.map(mesa => mesa.nroMesa).join(', ');
@@ -104,6 +130,23 @@ openModalOrdenModal(orden: Orden): void {
     console.log('El modal fue cerrado');
     // Aquí puedes manejar los resultados después de cerrar el modal
   });
+}
+
+openConsultarOrden(orden : Orden){
+  const dialogRef = this.dialog.open(ConsultarOrdenCajaComponent, {
+    width: '70rem',
+    height: '50rem',
+    data: {orden}  // Puedes pasar la data inicial aquí si es necesario.
+  });
+
+  dialogRef.afterClosed().subscribe((result: any) => {
+    console.log('El modal fue cerrado', result);
+    // Aquí puedes manejar el resultado del modal, por ejemplo, guardar el nuevo ítem.
+  });
+}
+
+close(){
+  this.dialog.closeAll();
 }
 
 }

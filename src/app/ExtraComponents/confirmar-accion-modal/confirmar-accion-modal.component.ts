@@ -58,7 +58,7 @@ export class ConfirmarAccionModalComponent {
       // Toma el valor de seleccionPorUnidad para establecerlo en el request.
       const itemToSubmit: addItemInventarioRequest = {
         itemsInventario: formattedItems,
-        porUnidad: this.seleccionPorUnidad // Asegúrate de que esta propiedad refleje la selección actual del usuario
+        porUnidad: null // Asegúrate de que esta propiedad refleje la selección actual del usuario
       };
     
       // Aquí asumimos que tienes el id del itemMenu al que pertenecen estos itemsInventario.

@@ -44,7 +44,7 @@ export interface ItemMenuResponse {
 
 export interface addItemInventarioRequest {
   itemsInventario: { id: number }[];
-  porUnidad: boolean;
+  porUnidad: boolean | null;
 }
 
 
