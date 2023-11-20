@@ -41,6 +41,7 @@ import { GestionHomesComponent } from './components/gestion-homes/gestion-homes.
 
 
 const routes: Routes = [
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   {path:'homecocina', component:HomeCocinaComponent, canActivate: [AuthGuard], data: { roles: ['Admin', 'Cocina'] }},
   {path:'homecaja', component:HomeCajaComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},
   {path:'homeadmin', component:HomeAdminComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] }},

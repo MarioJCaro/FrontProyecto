@@ -16,6 +16,7 @@ import {
   MesasResponse,
   MesasService,
 } from 'src/app/services/mesas/mesas.service';
+import { OrdenService } from 'src/app/services/orden/orden.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
 
 @Component({
@@ -28,6 +29,11 @@ export class AgregarOrdenModalComponent {
   OrdenForm!: FormGroup;
   pageEvent: PageEvent = { pageIndex: -1, pageSize: 10, length: 0 };
   clientes: any[] = [];
+  ocupacionLocal: number = 50;
+
+  ordenFormValues = {
+    cantComensales: 0
+  };
 
   constructor(
     public dialogRef: MatDialogRef<AgregarOrdenModalComponent>,
@@ -38,7 +44,7 @@ export class AgregarOrdenModalComponent {
     private mesaService: MesasService,
     private clienteService: ClienteService,
     private dataTransferService: DataTransferService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -53,18 +59,22 @@ export class AgregarOrdenModalComponent {
       nombreCliente: [''],
     });
 
-    this.OrdenForm.get('clientePreferencial')?.valueChanges.subscribe(
-      (value) => {
-        if (value) {
-          // Si hay un valor en clientePreferencial, deshabilita y limpia el campo nombreCliente.
-          this.OrdenForm.get('nombreCliente')?.disable();
-          this.OrdenForm.get('nombreCliente')?.setValue('');
-        } else {
-          // Si clientePreferencial está vacío, habilita el campo nombreCliente.
-          this.OrdenForm.get('nombreCliente')?.enable();
-        }
+    this.OrdenForm.get('clientePreferencial')?.valueChanges.subscribe((value) => {
+      if (value) {
+        this.OrdenForm.get('nombreCliente')?.disable();
+        this.OrdenForm.get('nombreCliente')?.setValue('');
+      } else {
+        this.OrdenForm.get('nombreCliente')?.enable();
       }
-    );
+    });
+  }
+
+  validateCantComensales(value: number): void {
+    if (value < 0) {
+      this.ordenFormValues.cantComensales = 0;
+    } else if (value > this.ocupacionLocal) {
+      this.ordenFormValues.cantComensales = this.ocupacionLocal;
+    }
   }
 
   getMesas() {

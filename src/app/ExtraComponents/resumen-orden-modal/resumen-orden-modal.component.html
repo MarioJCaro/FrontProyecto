@@ -15,11 +15,11 @@
             <td>{{ item.cantidad * item.precio }}</td>
         </tr>
     </table>
+    <mat-label style="display:flex; justify-content:flex-end; padding-right: 1rem;">
+      TOTAL: ${{ calcularTotal() }}
+    </mat-label>
       <div class="div-obs">
           <mat-divider></mat-divider>
-          <mat-label style="display:flex; justify-content:flex-end; padding-right: 1rem;">
-            TOTAL: ${{ calcularTotal() }}
-          </mat-label>
           <h3>Observaciones</h3>
           <ul>
             <li *ngFor="let obs of observacionesSeparadas">{{ obs }}</li>
