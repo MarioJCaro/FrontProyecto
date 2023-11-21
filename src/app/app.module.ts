@@ -1,4 +1,4 @@
-import { NgModule, ViewChild } from '@angular/core';
+import { NgModule, ViewChild, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
@@ -138,6 +138,7 @@ import { ConfirmarModificarOrdenComponent } from './ExtraComponents/confirmar-mo
 import { ConfirmarEliminarOrdenCajaComponent } from './ExtraComponents/confirmar-eliminar-orden-caja/confirmar-eliminar-orden-caja.component';
 import { ConfirmarOrdenMenuMozoComponent } from './ExtraComponents/confirmar-orden-menu-mozo/confirmar-orden-menu-mozo.component';
 import { ConsultarOrdenMozoComponent } from './ExtraComponents/consultar-orden-mozo/consultar-orden-mozo.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -267,7 +268,13 @@ import { ConsultarOrdenMozoComponent } from './ExtraComponents/consultar-orden-m
     MatToolbarModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    NgChartsModule
+    NgChartsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
 
   ],
   providers: [
