@@ -61,4 +61,8 @@ export class IngresarEfectivoModalComponent {
       }});
     }
   }
+
+  onCancel(){
+    this.dialogRef.close();
+  }
 }

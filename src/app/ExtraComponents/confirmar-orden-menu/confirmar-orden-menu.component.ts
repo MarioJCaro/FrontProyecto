@@ -19,14 +19,20 @@ export class ConfirmarOrdenMenuComponent {
     public dialogRef: MatDialogRef<ConfirmarOrdenMenuComponent>,
     private ordenService: OrdenService,
     private estadoCompartidoService: EstadoCompartidoService,
-    @Inject(MAT_DIALOG_DATA) public data: { itemsMenu: itemSeleccionado[], observaciones: string, totalOrden: number}
-  ) {}
+    @Inject(MAT_DIALOG_DATA) public data: { itemsMenu: itemSeleccionado[], observaciones: string, totalOrden: number }
+  ) { }
 
-  crearOrden(){
+  crearOrden() {
     if (!this.nombreCliente.trim()) {
       // Puedes usar una alerta simple o tu propio sistema de notificaciones para informar al usuario
       alert('Por favor, ingresa el nombre del responsable.');
       return; // Detiene la ejecución adicional del método
+    }
+
+    // Validación para la cantidad de comensales.
+    if (this.cantidadComensales < 0 || this.cantidadComensales > 50) {
+      alert('La cantidad de comensales debe ser entre 0 y 50.');
+      return;
     }
 
     //Primero mapeamos los items
@@ -40,17 +46,17 @@ export class ConfirmarOrdenMenuComponent {
     const ahora = new Date();
 
     const fecha = `${ahora.getFullYear()}-${String(ahora.getMonth() + 1).padStart(2, '0')}-${String(ahora.getDate()).padStart(2, '0')}`;
-    
+
     const hora = `${String(ahora.getHours()).padStart(2, '0')}:${String(ahora.getMinutes()).padStart(2, '0')}:${String(ahora.getSeconds()).padStart(2, '0')}`;
 
     //Buscamos el numero mesa en la local storage
     const numeroMesa = localStorage.getItem('numeroMesa');
-    
+
     //Creamos la request
     const orderRequest: CreateOrdenClienteRequest = {
       fecha: fecha,
       hora: hora,
-      responsable: this.nombreCliente,  
+      responsable: this.nombreCliente,
       ocupacion: this.cantidadComensales,
       observaciones: this.data.observaciones,
       items: itemsParaEnvio,
@@ -85,7 +91,7 @@ export class ConfirmarOrdenMenuComponent {
     const dialogRef = this.dialog.open(ExitoOrdenMenuComponent, {
       width: '80%',
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
       console.log('El dialogo fue cerrado', result);
     });
