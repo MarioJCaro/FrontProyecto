@@ -45,7 +45,7 @@
         </mat-label>
         <h3>Observaciones</h3>
         <ul>
-          <li>{{ data.orden.observaciones }}</li>
+          <li *ngFor="let obs of observacionesArray">{{ obs }}</li>
         </ul>
       </div>
     </div>
