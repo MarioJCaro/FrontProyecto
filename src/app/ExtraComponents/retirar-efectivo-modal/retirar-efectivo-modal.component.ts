@@ -62,4 +62,8 @@ export class RetirarEfectivoModalComponent {
     }
     
   }
+
+  onCancel(){
+    this.dialogRef.close();
+  }
 }

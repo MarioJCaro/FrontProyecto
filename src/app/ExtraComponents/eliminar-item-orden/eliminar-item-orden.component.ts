@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ErrorHandlingService } from 'src/app/services/errorHandling/error-handling.service';
 import { OrdenService } from 'src/app/services/orden/orden.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
 
@@ -14,7 +15,8 @@ export class EliminarItemOrdenComponent {
     public dialogRef: MatDialogRef<EliminarItemOrdenComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private toastService: ToastService,
-    private ordenService: OrdenService
+    private ordenService: OrdenService,
+    private errorHandler:ErrorHandlingService
   ) {}
 
   ngOnInit(){
@@ -32,7 +34,7 @@ export class EliminarItemOrdenComponent {
           this.dialogRef.close(true); // Cierra el modal y pasa el valor 'true' como resultado
         },
         error: (error) => {
-          this.toastService.showError('Error al eliminar ítem'); // Mensaje de error
+          this.errorHandler.handleError(error);
           this.dialogRef.close(false); // Cierra el modal y pasa el valor 'false' como resultado
         }
       });

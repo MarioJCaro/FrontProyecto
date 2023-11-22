@@ -17,14 +17,18 @@
       placeholder="Cantidad"
       type="number"
       formControlName="cantComensales"
+      [min]="0"
+      [max]="ocupacionLocal"
+      [(ngModel)]="ordenFormValues.cantComensales"
+      (ngModelChange)="validateCantComensales($event)"
     />
   </div>
 
   <div class="form-field">
     <mat-form-field appearance="fill" class="half-width">
       <mat-label>Cliente Preferencial</mat-label>
-      <mat-select formControlName="clientePreferencial">
-        <!-- Opciones para tu dropdown aquí -->
+      <mat-select formControlName="clientePreferencial" placeholder="Seleccione si aplica">
+        <mat-option>None</mat-option> <!-- Opción para deseleccionar -->
         <mat-option *ngFor="let cliente of clientes" [value]="cliente.id">
           {{ cliente.nombre }}
         </mat-option>

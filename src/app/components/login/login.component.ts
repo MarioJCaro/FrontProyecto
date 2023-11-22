@@ -13,6 +13,14 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router, private toastService: ToastService) {}
 
+  ngOnInit() {
+    const rol = localStorage.getItem('role');
+
+    if (rol) {
+      this.authService.redirectUserBasedOnRole(rol);
+    }
+  }
+
   login() {
     const loginData: LoginRequest = {
       nick: this.nick,
@@ -21,7 +29,6 @@ export class LoginComponent {
   
     this.authService.login(loginData).subscribe({
       next: (response) => {
-
         console.log('Login Success:', response)
         localStorage.setItem('authToken', response.token);
         localStorage.setItem('role', response.empleado.rol);
@@ -33,7 +40,7 @@ export class LoginComponent {
       },
       error: (error) => {
         console.error('Login Error:', error.error);
-        
+        this.toastService.showError("Los datos de inicio de sesión son incorrectos.");
       }
     });
   }

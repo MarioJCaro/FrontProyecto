@@ -62,7 +62,7 @@ export class AuthService {
         this.router.navigate(['/homecocina']);
         break;
       default:
-        this.router.navigate(['/default-home']);
+        this.router.navigate(['/login']);
         break;
     }
   }

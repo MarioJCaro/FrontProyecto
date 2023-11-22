@@ -17,6 +17,7 @@ export class ConsultarOrdenCajaComponent {
   estadoPagos!: estadoPagosResponse;
   private socketUrl = environment.socketUrl;
   private socket: Socket;
+  observacionesArray: string[] = [];
 
   constructor(public dialogRef: MatDialogRef<ConsultarOrdenCajaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -32,6 +33,16 @@ export class ConsultarOrdenCajaComponent {
       this.socket.on('fetchOrdenes', (data: any) => {
         this.cargarEstadosPagos(this.data.orden.id);
       });
+      this.procesarObservaciones();
+    }
+
+    procesarObservaciones() {
+      // Suponiendo que las observaciones vienen en un formato como "clave:valor & clave2:valor2"
+      // primero verifica que existan observaciones para evitar errores
+      if (this.data.orden.observaciones) {
+        // Separa las observaciones por el símbolo `&` y las almacena en el arreglo
+        this.observacionesArray = this.data.orden.observaciones.split(' & ');
+      }
     }
 
     cargarEstadosPagos(idOrden: number) {

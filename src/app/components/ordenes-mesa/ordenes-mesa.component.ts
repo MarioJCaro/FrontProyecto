@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AgregarOrdenModalComponent } from 'src/app/ExtraComponents/agregar-orden-modal/agregar-orden-modal.component';
 import { ConfirmarCancelarOrdenModalComponent } from 'src/app/ExtraComponents/confirmar-cancelar-orden-modal/confirmar-cancelar-orden-modal/confirmar-cancelar-orden-modal.component';
 import { ConfirmarOrdenMenuMozoComponent } from 'src/app/ExtraComponents/confirmar-orden-menu-mozo/confirmar-orden-menu-mozo.component';
@@ -25,7 +25,8 @@ export class OrdenesMesaComponent implements OnInit {
     public dialog: MatDialog,
     private route: ActivatedRoute,
     private ordenService: OrdenService,
-    private mesaService: MesaService
+    private mesaService: MesaService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -127,4 +128,7 @@ export class OrdenesMesaComponent implements OnInit {
     );
   }
   
+  navigateTo(route: string) {
+    this.router.navigate([route]);
+  }
 }

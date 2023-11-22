@@ -15,8 +15,6 @@ import { PageEvent } from '@angular/material/paginator';
 import { Categoria } from 'src/app/models/categoria.model';
 import { Router } from '@angular/router';
 
-
-
 @Component({
   selector: 'app-inventario',
   templateUrl: './inventario.component.html',
@@ -179,11 +177,8 @@ openAddStockDialog(item: Item): void {
     data: { item: item }
   });
   
-  dialogRef.afterClosed().subscribe(newStock => {
-    if (newStock) {
-      // Aquí puedes actualizar el stock del ítem
-      item.stock = newStock;
-    }
+  dialogRef.afterClosed().subscribe(result => {
+    this.getItems();
   });
 }
 
@@ -194,11 +189,7 @@ openRemoveStockDialog(item: Item): void {
   });
 
   dialogRef.afterClosed().subscribe(result => {
-    if (result !== undefined) {
-      // Actualizar el stock del ítem en base al valor devuelto por el modal
-      // TODO: Implementa la lógica para actualizar el stock
-      item.stock = result;
-    }
+    this.getItems();
   });
 }
 
