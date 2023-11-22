@@ -42,7 +42,8 @@ export class HomeCocinaComponent implements OnInit {
           //recorremos las ordenes y para cada una de ellas recorremos sus items, guardamos en filteredItemsMap todos los items cuyo item.itemMenu.grupo.nombre != "bebida"
           this.ordenes.forEach(orden => {
             this.filteredItemsMap[orden.id] = orden.items.filter(item =>
-              !EXCLUDED_GROUPS.includes(item.itemMenu.grupo?.nombre ?? '')
+              //nos quedemos con los items que no sean bebidas, es decir que item.itemMenu.grupo.esBebida == false
+              item.itemMenu.grupo.esBebida == false
             );
             
           }

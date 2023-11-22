@@ -1,6 +1,6 @@
 <div class="modal-container">
     <!-- Imagen del producto -->
-    <img [src]="data.item.imagen" alt="{{ data.item.nombre }}" class="product-image">
+    <img [src]="'data:image/png;base64,' + data.item.imagen" alt="{{ data.item.nombre }}" class="product-image">
   
     <!-- Título y Descripción -->
     <h2 class="product-title">{{ data.item.nombre }}</h2>
