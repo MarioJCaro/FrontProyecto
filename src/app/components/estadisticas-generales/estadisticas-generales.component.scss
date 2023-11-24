@@ -8,7 +8,7 @@
 
   mat-form-field {
     width: 100%;
-    margin-bottom: 1rem;
+    margin-bottom: 1rem; /* Ya en rem */
   }
 }
 
@@ -18,9 +18,9 @@
 }
 
 .stat-card {
-  margin-top: 1rem;
+  margin-top: 1rem; /* Ya en rem */
   text-align: center;
-  
+
   &.total-ventas {
     background-color: #4CA78E;
   }
@@ -35,15 +35,15 @@
 }
 
 .stat-value {
-  font-size: 1.5em;
-  margin-top: 1rem;
+  font-size: 1.5rem; /* Cambiado de em a rem para mantener consistencia */
+  margin-top: 1rem; /* Ya en rem */
 }
 
 .card-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;  // Añade un poco de espacio alrededor del contenido
+  padding: 1.25rem; /* 20px convertido a rem, asumiendo un tamaño de fuente base de 16px */
 }
 
 .stat-card.top-productos {
@@ -76,10 +76,10 @@
 }
 
 .producto-imagen {
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-  border-radius: 5px;
+  width: 2.5rem; /* 40px convertido a rem */
+  height: 2.5rem; /* 40px convertido a rem */
+  margin-right: 0.625rem; /* 10px convertido a rem */
+  border-radius: 5px; /* El radio del borde suele dejarse en px */
   object-fit: cover;
 }
 
@@ -87,5 +87,5 @@
   flex-grow: 1;
   display: flex;
   align-items: center; 
-  min-width: 150px;
+  min-width: 9.375rem; /* 150px convertido a rem */
 }

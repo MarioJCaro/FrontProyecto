@@ -1,22 +1,22 @@
 .container {
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 2rem; /* Unidades relativas basadas en tamaño de fuente del root */
+}
 
-  .header {
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .back-button,
+  .actions {
     display: flex;
-    justify-content: space-between;
     align-items: center;
 
-    .back-button,
-    .actions {
-      display: flex;
-      align-items: center;
-
-      .filter,
-      .search {
-        margin-right: 1em; // Cambiado a unidades relativas
-      }
+    .filter,
+    .search {
+      margin-right: 1em; /* Unidades relativas basadas en tamaño de fuente del elemento */
     }
   }
 }
@@ -24,38 +24,27 @@
 mat-paginator {
   display: flex;
   justify-content: center;
-  /* Centra horizontalmente */
   align-items: center;
-  /* Centra verticalmente */
-  margin-top: 1em; // Cambiado a unidades relativas
+  margin-top: 1em; /* Unidades relativas basadas en tamaño de fuente del elemento */
 }
 
 .actions {
   display: flex;
   align-items: stretch;
-  /* Hace que todos los elementos hijos se estiren al mismo tamaño */
 
   .filter,
   .search {
-    margin-right: 1rem;
+    margin-right: 1rem; /* Unidades relativas basadas en tamaño de fuente del root */
   }
 
   .add-button {
     align-self: stretch;
-    /* Esto estirará el botón para que tenga la misma altura que sus hermanos */
     display: flex;
-    /* Para centrar el contenido del botón */
     flex-direction: column;
-    /* Distribución vertical */
     justify-content: center;
-    /* Centrar contenido verticalmente */
-    height: 3.45rem;
+    height: 3.45rem; /* Unidades relativas basadas en tamaño de fuente del root */
     background-color: #4CAF50 !important;
-    /* Color verde */
-    line-height: 1;
-    /* Para controlar el espacio entre las líneas */
-    font-size: 0.9em;
-    /* Si deseas que el texto sea un poco más pequeño */
+    line-height: 1; /* Normalmente se deja en 1 si no se necesita ajuste específico */
+    font-size: 0.9rem; /* Unidades relativas basadas en tamaño de fuente del root */
   }
-
 }

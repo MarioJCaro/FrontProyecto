@@ -1,25 +1,23 @@
 .cards-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;  // Divide el contenedor en 4 columnas
-    gap: 20px;
-    padding: 20px;
-  }
-  
-  .clickable-card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 200px;
-    width: 300px;
-    cursor: pointer;
-  
-    &:hover {
-      background-color: rgba(0,0,0,0.05);
-    }
-  }
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);  /* Ahora con 4 columnas, la declaración se mantiene igual */
+  gap: 1.25rem; /* 20px convertido a rem */
+  padding: 1.25rem; /* 20px convertido a rem */
+}
 
-  
-  mat-card-title {
-    font-size: 24px;  // Cambia este valor al tamaño de fuente deseado
+.clickable-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 12.5rem; /* 200px convertido a rem */
+  width: 18.75rem; /* 300px convertido a rem */
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(0,0,0,0.05); /* No necesita conversión */
   }
-  
+}
+
+mat-card-title {
+  font-size: 1.5rem; /* 24px convertido a rem */
+}

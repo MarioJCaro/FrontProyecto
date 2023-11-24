@@ -45,6 +45,7 @@
 
                     <!-- Agrega el select de clientes aquí -->
                     <!-- Agrega el select de clientes aquí -->
+                    <div class="filters">
                     <mat-form-field appearance="fill" style="margin-top: 0.5rem;">
                         <mat-label>Cliente</mat-label>
                         <mat-select [(value)]="selectedClient" (selectionChange)="onClientChange($event)">
@@ -53,6 +54,7 @@
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
+                    </div>
                     <!-- Muestra el consumo del cliente seleccionado -->
                     <div class="stat-value" *ngIf="selectedClient">{{ clientConsumption | currency }}</div>
                 </mat-card-content>

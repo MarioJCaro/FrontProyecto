@@ -1,22 +1,22 @@
 .container {
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 2rem; /* Ya está en unidades relativas */
+}
 
-  .header {
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .back-button,
+  .actions {
     display: flex;
-    justify-content: space-between;
     align-items: center;
 
-    .back-button,
-    .actions {
-      display: flex;
-      align-items: center;
-
-      .filter,
-      .search {
-        margin-right: 1em; // Cambiado a unidades relativas
-      }
+    .filter,
+    .search {
+      margin-right: 1em; /* Se usa 'em' para ser relativo al texto */
     }
   }
 }
@@ -24,38 +24,27 @@
 mat-paginator {
   display: flex;
   justify-content: center;
-  /* Centra horizontalmente */
   align-items: center;
-  /* Centra verticalmente */
-  margin-top: 1em; // Cambiado a unidades relativas
+  margin-top: 1em; /* Se usa 'em' para mantener la relación con el texto */
 }
 
 .actions {
   display: flex;
   align-items: stretch;
-  /* Hace que todos los elementos hijos se estiren al mismo tamaño */
 
   .filter,
   .search {
-    margin-right: 1rem;
+    margin-right: 1rem; /* Convertido a 'rem' para espaciado consistente */
   }
 
   .add-button {
     align-self: stretch;
-    /* Esto estirará el botón para que tenga la misma altura que sus hermanos */
     display: flex;
-    /* Para centrar el contenido del botón */
     flex-direction: column;
-    /* Distribución vertical */
     justify-content: center;
-    /* Centrar contenido verticalmente */
-    height: 3.45rem;
+    height: 3.45rem; /* Convertido a 'rem' para altura consistente */
     background-color: #4CAF50 !important;
-    /* Color verde */
-    line-height: 1;
-    /* Para controlar el espacio entre las líneas */
-    font-size: 0.9em;
-    /* Si deseas que el texto sea un poco más pequeño */
+    line-height: 1; /* Mantiene línea única si es basado en tamaño de fuente actual */
+    font-size: 0.9rem; /* Convertido a 'rem' para consistencia */
   }
-
 }
