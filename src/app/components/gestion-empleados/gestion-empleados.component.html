@@ -65,6 +65,9 @@
 <ng-container matColumnDef="acciones">
   <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
   <mat-cell *matCellDef="let item">
+    <button mat-icon-button (click)="openResetPasswordModal(item.id)">
+      <mat-icon>lock</mat-icon>
+    </button>
     <button mat-icon-button (click)="openEditDialog(item)">
       <mat-icon>edit</mat-icon>
     </button>    

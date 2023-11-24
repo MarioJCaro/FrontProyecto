@@ -6,9 +6,9 @@
         <!-- Vista previa de la imagen -->
         <div class="image-preview" [style.backgroundImage]="selectedImage ? 'url(' + selectedImage + ')' : 'none'">
             <input type="file" (change)="onImageSelected($event)" hidden #imageInput>
-            <button mat-icon-button class="upload-button" (click)="imageInput.click()">
+            <button mat-icon-button class="upload-button" type="button" (click)="imageInput.click()">
                 <mat-icon>add_a_photo</mat-icon>
-            </button>
+              </button>
         </div>
 
         <!-- Campo de Nombre -->
@@ -20,7 +20,7 @@
         <!-- Dropdown de Categoría y campo de Precio -->
         <div class="row">
             <mat-form-field class="half-width">
-                <mat-label>Categoría</mat-label>
+                <mat-label>Grupo</mat-label>
                 <mat-select formControlName="grupoId">
                     <mat-option *ngFor="let grupo of grupos" [value]="grupo.id">
                         {{ grupo.nombre }}

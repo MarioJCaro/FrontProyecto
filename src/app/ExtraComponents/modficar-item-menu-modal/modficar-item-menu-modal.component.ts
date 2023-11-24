@@ -32,17 +32,20 @@ export class ModificarItemMenuModalComponent {
     }
 
     ngOnInit(): void {
+      this.initEmptyForm();
       this.getGrupos();
-
+      
       this.selectedImage = 'data:image/png;base64,' + this.data.imagen;
-      console.log(this.selectedImage);
+    }
+
+    initEmptyForm() {
       this.ItemMenuForm = this.formBuilder.group({
-        nombre: [this.data.nombre],
-        descripcion: [this.data.descripcion],
+        nombre: ['', Validators.required],
+        descripcion: ['', Validators.required],
         grupoId: ['', Validators.required],
-        precio: [this.data.precio],  // Campo de imagen en base64
-        imagen: ['']  // Campo de imagen en base64
-    });   
+        precio: ['', [Validators.required, Validators.pattern(/^\d+\.?\d*$/)]],
+        imagen: ['']  // Asume que la imagen se manejará como un string base64
+      });
     }
 
     getGrupos() {
@@ -57,6 +60,7 @@ export class ModificarItemMenuModalComponent {
             }));
     
             this.grupos = grupos; // Asignar el resultado mapeado a la variable de categorías
+            this.initForm();
           } else {
             console.error('La respuesta del servicio no es un array válido.');
           }
@@ -65,6 +69,16 @@ export class ModificarItemMenuModalComponent {
           catchError(this.errorHandler.handleError);
         }
       );
+    }
+
+    initForm(){
+      this.ItemMenuForm = this.formBuilder.group({
+        nombre: [this.data.nombre],
+        descripcion: [this.data.descripcion],
+        grupoId: [this.data.categoria.id, Validators.required],
+        precio: [this.data.precio],  // Campo de imagen en base64
+        imagen: [this.data.imagen]  // Campo de imagen en base64
+    });   
     }
 
     onImageSelected(event: any): void {
