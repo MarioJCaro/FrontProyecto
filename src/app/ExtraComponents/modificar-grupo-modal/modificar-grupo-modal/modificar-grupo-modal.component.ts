@@ -14,6 +14,7 @@ import { ToastService } from 'src/app/services/toast/toast.service';
 export class ModificarGrupoModalComponent {
   GrupoForm!: FormGroup;
   idGrupo: number = this.grupo.id;
+  nombreOriginal: string = this.grupo.nombre;
 
   constructor(
     public dialogRef: MatDialogRef<ModificarGrupoModalComponent>,
@@ -25,7 +26,7 @@ export class ModificarGrupoModalComponent {
 
   ngOnInit(): void {
     this.GrupoForm = this.formBuilder.group({
-      nombre: [this.grupo.nombre, Validators.required],
+      nombre: [this.grupo.nombre],
       esBebida: [this.grupo.esBebida, Validators.required], // Suponiendo que 'esBebida' es una propiedad del grupo
       
     });
@@ -55,6 +56,12 @@ export class ModificarGrupoModalComponent {
   onSubmit() {
     if (this.GrupoForm.valid) {
       const formData = this.GrupoForm.value;
+      
+      // Verificar si el campo 'nombre' ha cambiado
+      if (formData.nombre === this.nombreOriginal) {
+        delete formData.nombre; // Si no ha cambiado, eliminar la propiedad del objeto
+      }
+      
       this.updateGrupo(formData);
     }
   }

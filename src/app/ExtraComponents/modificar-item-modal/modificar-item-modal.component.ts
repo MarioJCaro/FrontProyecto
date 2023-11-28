@@ -99,18 +99,21 @@ export class ModificarItemModalComponent {
 
   onSubmit() {
     if (this.ItemForm.valid) {
-      // Puedes acceder a los valores del formulario como this.ItemForm.value
       const formData = this.ItemForm.value;
       
-      if(formData.porUnidad == "unidad"){
+      // Verificar si el campo 'nombre' ha cambiado
+      if (formData.nombre === this.item.nombre) {
+        delete formData.nombre; // Si no ha cambiado, eliminar la propiedad del objeto
+      }
+  
+      if (formData.porUnidad === "unidad") {
         formData.porUnidad = true;
-      }else{
+      } else {
         formData.porUnidad = false;
       }
-
+  
       this.updateItem(formData);
-
-      this.dialogRef.close();
+      // No se necesita cerrar el diálogo aquí ya que se cierra en updateItem en caso de éxito
     }
   }
 

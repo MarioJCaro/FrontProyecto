@@ -40,7 +40,7 @@ export class ModificarItemMenuModalComponent {
 
     initEmptyForm() {
       this.ItemMenuForm = this.formBuilder.group({
-        nombre: ['', Validators.required],
+        nombre: [''],
         descripcion: ['', Validators.required],
         grupoId: ['', Validators.required],
         precio: ['', [Validators.required, Validators.pattern(/^\d+\.?\d*$/)]],
@@ -108,12 +108,15 @@ export class ModificarItemMenuModalComponent {
 
   onSubmit(): void {
     if (this.ItemMenuForm.valid) {
-      // Puedes acceder a los valores del formulario como this.ItemForm.value
       const formData = this.ItemMenuForm.value;
-
+  
+      // Verificar si el campo 'nombre' ha cambiado
+      if (formData.nombre === this.data.nombre) {
+        delete formData.nombre; // Si no ha cambiado, eliminar la propiedad del objeto
+      }
+  
       this.updateItem(formData);
-
-      this.dialogRef.close();
+      // No cierres el diálogo aquí ya que se cierra en updateItem en caso de éxito
     }
   }
 
