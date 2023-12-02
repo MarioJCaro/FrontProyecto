@@ -26,7 +26,7 @@
       <!-- Dropdown de categorías para filtrar -->
       <ng-container *ngIf="filterField === 'rol'">
         <mat-form-field appearance="fill" class="search">
-            <mat-label>Categoría</mat-label>
+            <mat-label>Rol</mat-label>
             <mat-select (selectionChange)="onCategoryChange($event)">
                 <mat-option *ngFor="let rol of roles" [value]="rol">{{ rol }}</mat-option>
             </mat-select>
