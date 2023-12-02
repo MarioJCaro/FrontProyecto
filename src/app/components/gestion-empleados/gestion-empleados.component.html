@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="container">
 
   <div class="header">
@@ -62,16 +63,34 @@
     </ng-container>
 
     <!-- Acciones Column -->
+
 <ng-container matColumnDef="acciones">
   <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
   <mat-cell *matCellDef="let item">
-    <button mat-icon-button (click)="openEditDialog(item)">
-      <mat-icon>edit</mat-icon>
-    </button>    
-    <button mat-icon-button (click)="eliminarEmpleado(item)">
-      <mat-icon>delete</mat-icon>
-    </button>
+    <!-- Botones individuales, visibles solo en pantallas grandes -->
+    <div class="actions-large-screen">
+      <button mat-icon-button (click)="openEditDialog(item)">
+        <mat-icon>edit</mat-icon>
+      </button>    
+      <button mat-icon-button (click)="eliminarEmpleado(item)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
     
+    <!-- Botón de menú desplegable, visible solo en pantallas pequeñas -->
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="actions-small-screen">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="openEditDialog(item)">
+        <mat-icon>edit</mat-icon>
+        <span>Editar</span>
+      </button>    
+      <button mat-menu-item (click)="eliminarEmpleado(item)">
+        <mat-icon>delete</mat-icon>
+        <span>Eliminar</span>
+      </button>
+    </mat-menu>
   </mat-cell>
 </ng-container>
 

@@ -1,34 +1,31 @@
 .info-usuario-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    .info-card {
-      width: 100%;
-      max-width: 37rem; // Puedes cambiar esto según tu diseño preferido
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
-      mat-card-title {
-        font-size: 1.2rem;
-        margin-bottom: 1rem;
+  .info-card {
+    width: 100%;
+    max-width: 37rem; // Se mantiene, ya que ya está en rem y puede cambiar según el diseño preferido
+
+    mat-card-title {
+      font-size: 1.2rem; // Se mantiene, ya está en rem
+      margin-bottom: 1rem; // Se mantiene, ya está en rem
+    }
+
+    p {
+      margin: 0.25rem 0; // 4px convertido a rem
+      strong {
+        color: rgba(0, 0, 0, 0.87); // No requiere conversión
       }
-  
-      p {
-        margin: 4px 0;
-        strong {
-          color: rgba(0, 0, 0, 0.87);
-        }
-      }
-  
-      mat-card-actions {
-        display: flex;
-        justify-content: flex-end;
-  
-        button {
-          margin-left: 8px;
-        }
+    }
+
+    mat-card-actions {
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        margin-left: 0.5rem; // 8px convertido a rem
       }
     }
   }
-
-  
-  
+}

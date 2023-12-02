@@ -1,61 +1,112 @@
 .container {
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 2rem; /* Unidades relativas para el relleno del contenedor */
+}
 
-  .header {
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .back-button,
+  .actions {
     display: flex;
-    justify-content: space-between;
     align-items: center;
 
-    .back-button,
-    .actions {
-      display: flex;
-      align-items: center;
-
-      .filter,
-      .search {
-        margin-right: 1em; // Cambiado a unidades relativas
-      }
+    .filter,
+    .search {
+      margin-right: 1em; /* Unidades relativas al texto para el margen */
     }
   }
+}
+.actions {
+  display: flex;
+  align-items: stretch;
+
+  .filter,
+  .search {
+    margin-right: 1rem; /* Espaciado consistente para los elementos de filtrado y búsqueda */
+  }
+
+  .add-button {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 3.45rem; /* Altura consistente */
+    background-color: #4CAF50 !important;
+    line-height: 1; /* Línea única para el texto */
+    font-size: 0.9rem; /* Tamaño de fuente consistente */
+  }
+}
+
+mat-header-cell, mat-cell {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  text-align: center; // Esto es para el contenido que no es un flex container
 }
 
 mat-paginator {
   display: flex;
   justify-content: center;
-  /* Centra horizontalmente */
   align-items: center;
-  /* Centra verticalmente */
-  margin-top: 1em; // Cambiado a unidades relativas
+  margin-top: 1em;
 }
 
-.actions {
+/* Estilos para pantallas grandes por defecto */
+.actions-large-screen {
   display: flex;
-  align-items: stretch;
-  /* Hace que todos los elementos hijos se estiren al mismo tamaño */
+}
 
-  .filter,
-  .search {
-    margin-right: 1rem;
+.actions-small-screen {
+  display: none;
+}
+
+/* Ocultar botones grandes y mostrar botón de menú en pantallas pequeñas */
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 1rem;
   }
 
-  .add-button {
-    align-self: stretch;
-    /* Esto estirará el botón para que tenga la misma altura que sus hermanos */
-    display: flex;
-    /* Para centrar el contenido del botón */
+  .header {
     flex-direction: column;
-    /* Distribución vertical */
-    justify-content: center;
-    /* Centrar contenido verticalmente */
-    height: 3.45rem;
-    background-color: #4CAF50 !important;
-    /* Color verde */
-    line-height: 1;
-    /* Para controlar el espacio entre las líneas */
-    font-size: 0.9em;
-    /* Si deseas que el texto sea un poco más pequeño */
+
+    .back-button,
+    .actions {
+      width: 100%;
+      justify-content: flex-start;
+      margin-bottom: 0.5rem;
+    }
+
+    .filter,
+    .search {
+      width: 100%; // Asegura que los elementos de entrada usen toda la anchura
+      margin-bottom: 0.5rem;
+    }
+
+    .add-button {
+      margin-bottom: 1rem;
+      order: 3; // Se ajusta el orden para que 'Agregar Ítem' vaya al final
+    }
   }
 
+  mat-paginator {
+    flex-direction: column;
+    margin-top: 0.5rem;
+  }
+
+  .actions-large-screen {
+    display: none;
+  }
+
+  .actions-small-screen {
+    display: inline-block;
+  }
+
+  .mat-cell,
+  .mat-header-cell {
+    padding: 8px;
+  }
 }
