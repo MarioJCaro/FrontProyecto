@@ -146,5 +146,10 @@ navigateTo(route: string) {
   this.router.navigate([route]);
 }
 
+onPaginateChange(event: PageEvent) {
+  this.pageEvent = event;
+  
+  this.getItems();
+}
 
 }

@@ -1,120 +1,107 @@
 /* Estilos para los botones "Añadir Orden" y "Ver Ordenes Antiguas" */ 
-
 .button-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 10px; /* Ajusta el margen inferior según sea necesario */
+    margin-bottom: 0.625rem; /* 10px convertido a rem */
 }
 
-.history-button{
-    margin-right: 5%;
+.history-button {
+    margin-right: 5%; /* Se mantiene, es un valor porcentual para diseño responsivo */
 }  
 
 .add-order-button {
     background-color: #4CA78E;
     color: white;
     border: none;
-    border-radius: 10px;
-    padding: 10px 20px;
+    border-radius: 0.625rem; /* 10px convertido a rem */
+    padding: 0.625rem 1.25rem; /* 10px y 20px convertidos a rem */
     cursor: pointer;
-    margin-bottom: 10px; /* Ajusta el margen inferior según sea necesario */
-    margin-left: 3vh;
+    margin-bottom: 0.625rem; /* 10px convertido a rem */
+    margin-left: 3vh; /* Se mantiene, es un valor de viewport para diseño responsivo */
 }
 
 .add-order-button:hover {
-background-color: #347763; /* Cambia el color de fondo al hacer hover */
+    background-color: #347763; /* No requiere conversión */
 }
 
 /* Estilos para listar las mesas */ 
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea a la izquierda */
+    background-color: #1B4338;
+    padding-top: 2.5vh; /* Se mantiene, es un valor de viewport para diseño responsivo */
+    padding-bottom: 10vh; /* Se mantiene, es un valor de viewport para diseño responsivo */
+    max-width: 90vw; /* Se mantiene, es un valor de viewport para diseño responsivo */
+    overflow-y: auto; /* No requiere conversión */
+    max-height: 90vh; /* Se mantiene, es un valor de viewport para diseño responsivo */
+    margin: 0 auto; /* No requiere conversión */
+    border-radius: 1.25rem; /* 20px convertido a rem */
+}
 
-/* Container con el fondo verde */ 
-    .container {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start; /* Alinea a la izquierda */
-        background-color: #1B4338;
-        padding-top: 2.5vh; /* Ajusta el espacio superior en unidades relativas */
-        padding-bottom: 10vh; /* Ajusta el espacio inferior en unidades relativas */
-        max-width: 90vw; /* Establece un ancho máximo en unidades relativas */
-        overflow-y: auto; /* Habilita el desplazamiento vertical */
-        max-height: 90vh; /* Cambia la altura máxima a un porcentaje de la altura de la ventana gráfica */
-        margin: 0 auto; /* Centra el contenedor horizontalmente */
-        border-radius: 20px;
-    }
+h3 {
+    margin: 0;
+    color: white; /* No requiere conversión */
+    align-self: flex-start; /* No requiere conversión */
+    padding-bottom: 2.5vh; /* Se mantiene, es un valor de viewport para diseño responsivo */
+}
 
-/* Titulo "Mesas Ocupadas" */
+.table-box {
+    background-color: #E8FFF9;
+    padding: 2%; /* Se mantiene, es un valor porcentual para diseño responsivo */
+    border-radius: 0.625rem; /* 10px convertido a rem */
+    margin-bottom: 2vh; /* Se mantiene, es un valor de viewport para diseño responsivo */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; /* No requiere conversión */
+    box-sizing: border-box; /* No requiere conversión */
+}
 
-    h3 {
-        margin: 0;
-        color: white; /* Cambia el color del texto a blanco */
-        align-self: flex-start; /* Alinea el título a la izquierda */
-        padding-bottom: 2.5vh;
-    }
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%; /* No requiere conversión */
+    margin: 0.625rem; /* 10px convertido a rem */
+}
 
-/* Elementos de la lista */
+h2 {
+    margin: 0; /* No requiere conversión */
+}
 
-    .table-box {
-        background-color: #E8FFF9;
-        padding: 2%;
-        border-radius: 10px;
-        margin-bottom: 2vh;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        box-sizing: border-box;
-    }
+.buttons {
+    display: flex;
+    gap: 0.625rem; /* 10px convertido a rem */
+    margin-left: auto; /* No requiere conversión */
+}
 
-    .content {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%; /* Agrega esta línea para asegurarte de que ocupe todo el ancho */
-        margin: 10px;
-    }
+.button {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.875rem; /* 30px convertido a rem */
+    height: 1.875rem; /* 30px convertido a rem */
+    border-radius: 0.625rem; /* 10px convertido a rem */
+    overflow: hidden;
+    cursor: pointer;
+    border: none;
+    font-size: 0.625rem; /* Ajuste según tu preferencia, convertido a rem */
+    padding-left: 3%; /* Se mantiene, es un valor porcentual para diseño responsivo */
+}
 
-    /* Número de Mesa */
+.button:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* No requiere conversión */
+}
 
-        h2 {
-            margin: 0;
-        }
+.button-2 {
+    background-color: #57BCDC !important;
+    color: white; /* No requiere conversión */
+}
 
-    /* Botones para las opciones de la mesa */
-
-        .buttons {
-            display: flex;
-            gap: 10px;
-            margin-left: auto; /* Alinea los botones a la derecha del div .content */
-        }
-
-        .button {
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 30px;
-            height: 30px;
-            border-radius: 10px;
-            overflow: hidden;
-            cursor: pointer;
-            border: none;
-            font-size: 0.01vh;
-            padding-left: 3%;
-        }
-
-        /* Colores para los botones */
-
-            .button:hover {
-                background-color: rgba(255, 255, 255, 0.2);
-            }
-
-            .button-2 {
-                background-color: #57BCDC !important;
-                color: white;
-            }
-
-            .button-3 {
-                background-color: #4CA78E !important;
-                color: white;
-            }
+.button-3 {
+    background-color: #4CA78E !important;
+    color: white; /* No requiere conversión */
+}

@@ -70,21 +70,46 @@
 <ng-container matColumnDef="acciones">
   <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
   <mat-cell *matCellDef="let item">
-    <button mat-icon-button (click)="openAddStockDialog(item)">
-      <mat-icon>add_circle_outline</mat-icon>
-    </button>    
-    <button mat-icon-button (click)="openRemoveStockDialog(item)">
-      <mat-icon>remove_circle_outline</mat-icon>
-    </button>    
-    <button mat-icon-button (click)="openEditDialog(item)">
-      <mat-icon>edit</mat-icon>
+    <!-- Botones individuales, visibles solo en pantallas grandes -->
+    <div class="actions-large-screen">
+      <button mat-icon-button (click)="openAddStockDialog(item)">
+        <mat-icon>add_circle_outline</mat-icon>
+      </button>    
+      <button mat-icon-button (click)="openRemoveStockDialog(item)">
+        <mat-icon>remove_circle_outline</mat-icon>
+      </button>    
+      <button mat-icon-button (click)="openEditDialog(item)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="openDeleteDialog(item)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    
+    <!-- Botón de menú desplegable, visible solo en pantallas pequeñas -->
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="actions-small-screen">
+      <mat-icon>more_vert</mat-icon>
     </button>
-    <button mat-icon-button (click)="openDeleteDialog(item)">
-      <mat-icon>delete</mat-icon>
-    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="openAddStockDialog(item)">
+        <mat-icon>add_circle_outline</mat-icon>
+        <span>Añadir stock</span>
+      </button>
+      <button mat-menu-item (click)="openRemoveStockDialog(item)">
+        <mat-icon>remove_circle_outline</mat-icon>
+        <span>Remover stock</span>
+      </button>
+      <button mat-menu-item (click)="openEditDialog(item)">
+        <mat-icon>edit</mat-icon>
+        <span>Editar</span>
+      </button>
+      <button mat-menu-item (click)="openDeleteDialog(item)">
+        <mat-icon>delete</mat-icon>
+        <span>Eliminar</span>
+      </button>
+    </mat-menu>
   </mat-cell>
 </ng-container>
-
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>

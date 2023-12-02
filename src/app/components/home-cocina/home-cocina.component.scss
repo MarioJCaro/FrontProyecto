@@ -1,54 +1,46 @@
 .order-card {
-  border: 1px solid #ccc;
-  padding: 15px;
-  margin-bottom: 20px;
+  border: 1px solid #ccc; /* El borde suele mantenerse en px */
+  padding: 0.9375rem; /* 15px convertido a rem */
+  margin-bottom: 1.25rem; /* 20px convertido a rem */
   background-color: #F4F4F4;
-  border-radius: 20px;
-  margin-right: 10px;
+  border-radius: 1.25rem; /* 20px convertido a rem */
+  margin-right: 0.625rem; /* 10px convertido a rem */
 }
 
 .green-card {
   background-color: #7D9A93;
-  padding: 10px;
-  border-radius: 20px;
+  padding: 0.625rem; /* 10px convertido a rem */
+  border-radius: 1.25rem; /* 20px convertido a rem */
 }
 
 .mat-card {
-  border: 1px solid #ccc;
-  border-radius: 20px;
-}
-/* Define una clase personalizada para el botón */
-/* Aumentar la especificidad */
-/* Estilos personalizados para la tarjeta */
-.custom-card {
-  border: 1px solid #ccc;
-  padding: 15px;
-  margin-bottom: 20px;
-  background-color: #F4F4F4;
-  border-radius: 20px;
-  margin-right: 10px;
+  border: 1px solid #ccc; /* El borde suele mantenerse en px */
+  border-radius: 1.25rem; /* 20px convertido a rem */
 }
 
-/* Estilos personalizados para el título */
+.custom-card {
+  border: 1px solid #ccc; /* El borde suele mantenerse en px */
+  padding: 0.9375rem; /* 15px convertido a rem */
+  margin-bottom: 1.25rem; /* 20px convertido a rem */
+  background-color: #F4F4F4;
+  border-radius: 1.25rem; /* 20px convertido a rem */
+  margin-right: 0.625rem; /* 10px convertido a rem */
+}
+
 .custom-title {
   font-weight: bold;
-  font-size: 1.2em; /* Ajusta el tamaño según tu preferencia */
+  font-size: 1.2rem; /* Convertido a rem */
 }
 
-/* Estilos personalizados para la información */
 .custom-info {
-  font-size: 1em; /* Ajusta el tamaño según tu preferencia */
+  font-size: 1rem; /* Convertido a rem */
 }
 
-/* Estilos personalizados para las observaciones */
 .custom-observation {
   font-style: italic;
 }
 
-/* Estilos para el botón (usando la clase mi-boton) */
 .mi-boton {
   background-color: #4CA78E !important;
   color: #000000 !important;
 }
-
-

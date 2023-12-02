@@ -38,14 +38,13 @@ export class HomeCocinaComponent implements OnInit {
   fetchOrdenesEnCocina(): void {
     this.ordenService.getAll(1, 4, undefined, undefined, ESTADOS.EN_COCINA).subscribe({
         next: (response: OrdenResponse) => {
+
             // Primero, filtra los ítems de cada orden
             console.log(response.items);
             this.ordenes = response.items.map(orden => {
                 const filteredItems = orden.items.filter(item => item.itemMenu.grupo.esBebida == false);
                 return { ...orden, items: filteredItems };
             });
-            
-
             // Luego, filtra las órdenes que se quedaron sin ítems
             this.ordenes = this.ordenes.filter(orden => orden.items.length > 0);
 

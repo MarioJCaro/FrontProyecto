@@ -4,127 +4,112 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 10px; /* Ajusta el margen inferior según sea necesario */
+  margin-bottom: 0.625rem; /* 10px convertido a rem */
 }
 
-
-.history-button{
-    margin-right: 5%;
+.history-button {
+    margin-right: 5%; /* Se mantiene, es un valor porcentual */
 }  
 
 .add-order-button {
     background-color: #4CA78E;
     color: white;
     border: none;
-    border-radius: 10px;
-    padding: 10px 20px;
+    border-radius: 0.625rem; /* 10px convertido a rem */
+    padding: 0.625rem 1.25rem; /* 10px y 20px convertidos a rem */
     cursor: pointer;
-    margin-bottom: 10px; /* Ajusta el margen inferior según sea necesario */
-    margin-left: 3vh;
+    margin-bottom: 0.625rem; /* 10px convertido a rem */
+    margin-left: 3vh; /* Se mantiene, es un valor relativo al alto de la ventana */
 }
 
 .add-order-button:hover {
-background-color: #347763; /* Cambia el color de fondo al hacer hover */
+    background-color: #347763; /* No requiere conversión */
 }
 
 /* Container con el fondo verde */ 
-    .container {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start; /* Alinea a la izquierda */
-        background-color: #1B4338;
-        padding-top: 2.5vh; /* Ajusta el espacio superior en unidades relativas */
-        padding-bottom: 10vh; /* Ajusta el espacio inferior en unidades relativas */
-        max-width: 90vw; /* Establece un ancho máximo en unidades relativas */
-        min-height: 125vw;
-        max-height: 125vw;
-        margin: 0 auto; /* Centra el contenedor horizontalmente */
-        border-radius: 20px;
-        overflow-x: hidden; /* Evita el desbordamiento de contenido */
-        overflow-y: auto;
-    }
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #1B4338;
+    padding-top: 2.5vh; /* Se mantiene */
+    padding-bottom: 10vh; /* Se mantiene */
+    max-width: 90vw; /* Se mantiene */
+    min-height: 125vw; /* Se mantiene */
+    max-height: 125vw; /* Se mantiene */
+    margin: 0 auto; /* No requiere conversión */
+    border-radius: 1.25rem; /* 20px convertido a rem */
+    overflow-x: hidden; /* No requiere conversión */
+    overflow-y: auto; /* No requiere conversión */
+}
 
-/* Titulo "Mesas Ocupadas" */
+h3 {
+    margin: 0;
+    color: white; /* No requiere conversión */
+    align-self: flex-start; /* No requiere conversión */
+    padding-bottom: 2.5vh; /* Se mantiene */
+}
 
-    h3 {
-        margin: 0;
-        color: white; /* Cambia el color del texto a blanco */
-        align-self: flex-start; /* Alinea el título a la izquierda */
-        padding-bottom: 2.5vh;
-    }
+.table-box {
+    padding: 2%; /* Se mantiene, es un valor porcentual */
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; /* No requiere conversión */
+    margin-bottom: 5%; /* Se mantiene, es un valor porcentual */
+}
 
-    /* Elementos de la lista */
+.content {
+    background-color: #E8FFF9;
+    border-radius: 0.625rem; /* 10px convertido a rem */
+    margin-bottom: 2.5%; /* Se mantiene, es un valor porcentual */
+    padding: 2%; /* Se mantiene, es un valor porcentual */
+    box-sizing: border-box; /* No requiere conversión */
+    max-width: calc(100% - 4%); /* Se mantiene, calcula el porcentaje */
+    max-height: calc(100% - 5%); /* Se mantiene, calcula el porcentaje */
+}
 
-        .table-box {
-            padding: 2%;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            margin-bottom: 5%;
-        }
+.order-info {
+    display: flex;
+    align-items: center;
+    width: 100%; /* No requiere conversión */
+}
 
-        .content{
-          background-color: #E8FFF9;
-          border-radius: 10px;
-          margin-bottom: 2.5%;
-          padding: 2%;
-          box-sizing: border-box; /* Incluye padding y border en el ancho y alto */
-          max-width: calc(100% - 4%); /* Resta el padding del ancho total */
-          max-height: calc(100% - 5%); /* Resta el margen del alto total */
-        }
+.order-number, .order-time {
+    width: 50%; /* No requiere conversión */
+}
 
-        /* Estilos para listar las mesas */
+.order-time p {
+    margin: 0; /* No requiere conversión */
+}
 
-        .order-info {
-          display: flex;
-          align-items: center;
-          width: 100%;
-        }
+.table-number {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0; /* No requiere conversión */
+    width: 100%; /* No requiere conversión */
+}
 
-        .order-number {
-          width: 50%;
-        }
+.buttons {
+    display: flex;
+    gap: 0.625rem; /* 10px convertido a rem */
+    align-items: center;
+}
 
-        .order-time {
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-          width: 50%;
-        }
-
-    .order-time p {
-      margin: 0;
-    }
-
-    .table-number {
-      display: flex;
-      align-items: center; /* Asegura que los elementos estén alineados verticalmente */
-      justify-content: space-between; /* Espacia los elementos entre sí */
-      margin: 0;
-      width: 100%;
-    }
-    
-    .buttons {
-      display: flex;
-      gap: 10px;
-      align-items: center; /* Alinea los botones verticalmente con el texto "Mesa:" */
-      /* No necesitas margin-left: auto; si estás usando justify-content: space-between en .table-number */
-    }
-
-    .button {
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 30px;
-      height: 30px;
-      border-radius: 10px;
-      overflow: hidden;
-      cursor: pointer;
-      border: none;
-      font-size: 0.01vh;
-      padding-left: 3%;
-    }
+.button {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.875rem; /* 30px convertido a rem */
+    height: 1.875rem; /* 30px convertido a rem */
+    border-radius: 0.625rem; /* 10px convertido a rem */
+    overflow: hidden;
+    cursor: pointer;
+    border: none;
+    font-size: 0.625rem; /* 10px convertido a rem, aunque esto es muy pequeño para un tamaño de fuente, verifica si es lo que quieres */
+    padding-left: 3%; /* Se mantiene, es un valor porcentual */
+}
 
     /* Colores para los botones */
 
