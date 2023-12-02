@@ -38,17 +38,23 @@ export class HomeCocinaComponent implements OnInit {
   fetchOrdenesEnCocina(): void {
     this.ordenService.getAll(1, 4, undefined, undefined, ESTADOS.EN_COCINA).subscribe({
         next: (response: OrdenResponse) => {
-            this.ordenes = response.items;
-          //recorremos las ordenes y para cada una de ellas recorremos sus items, guardamos en filteredItemsMap todos los items cuyo item.itemMenu.grupo.nombre != "bebida"
-          this.ordenes.forEach(orden => {
-            this.filteredItemsMap[orden.id] = orden.items.filter(item =>
-              !EXCLUDED_GROUPS.includes(item.itemMenu.grupo?.nombre ?? '')
-            );
+            // Primero, filtra los ítems de cada orden
+            console.log(response.items);
+            this.ordenes = response.items.map(orden => {
+                const filteredItems = orden.items.filter(item => item.itemMenu.grupo.esBebida == false);
+                return { ...orden, items: filteredItems };
+            });
             
-          }
-          );
-          
-         
+
+            // Luego, filtra las órdenes que se quedaron sin ítems
+            this.ordenes = this.ordenes.filter(orden => orden.items.length > 0);
+
+            // Construye el mapa de ítems filtrados
+            this.filteredItemsMap = {};
+            this.ordenes.forEach(orden => {
+                this.filteredItemsMap[orden.id] = orden.items;
+            });
+
             console.log(this.filteredItemsMap);
         },
         error: (error) => {

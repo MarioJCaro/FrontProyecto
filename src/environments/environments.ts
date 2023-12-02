@@ -1,6 +1,6 @@
 export const environment = {
-    production: false,
-    apiBaseUrl: 'http://localhost:3000/api',
-    socketUrl: 'http://localhost:3000'
+  production: true,
+  apiBaseUrl: 'https://puerta-verde-backend-test-qagoh4glsq-rj.a.run.app/api',
+  socketUrl: 'https://puerta-verde-backend-test-qagoh4glsq-rj.a.run.app'
 
   };
