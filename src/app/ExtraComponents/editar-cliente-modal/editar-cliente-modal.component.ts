@@ -42,14 +42,22 @@ export class EditarClienteModalComponent {
     );
   }
 
-  onSubmit(){
+  onSubmit() {
     if (this.ClienteForm.valid) {
-      // Puedes acceder a los valores del formulario como this.ItemForm.value
       const formData = this.ClienteForm.value;
-
+      
+      // Verificar si el campo 'nombre' ha cambiado
+      if (formData.nombre === this.cliente.nombre) {
+        delete formData.nombre; // Si no ha cambiado, eliminar la propiedad del objeto
+      }
+  
+      // Verificar si el campo 'apellido' ha cambiado
+      if (formData.apellido === this.cliente.apellido) {
+        delete formData.apellido; // Si no ha cambiado, eliminar la propiedad del objeto
+      }
+  
       this.updateCliente(formData);
-
-      this.dialogRef.close();
+      // No es necesario cerrar el diálogo aquí, se cierra en updateCliente en caso de éxito
     }
   }
 

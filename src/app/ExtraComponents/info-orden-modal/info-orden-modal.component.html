@@ -1,19 +1,15 @@
 <mat-dialog-content>
   <h1>Resumen de la Orden</h1>
-  <!-- Bloque de detalles -->
   <div class="order-details">
-    <!-- Columna izquierda: Nro Mesa, Fecha -->
     <div class="detail-column">
-      <span><strong>Nro Mesa:</strong> 14</span>
-      <span><strong>Mozo:</strong> María</span>
-      <span><strong>Entregado en mesa:</strong> 00:40</span>
+      <span><strong>Nro Mesa:</strong> {{ data.mesas[0]?.nroMesa ?? 'No especificado' }}</span>
+      <span><strong>Mozo:</strong> {{ data.empleado?.nombre ?? 'No asignado' }}</span>
+      <span><strong>Entregado en mesa:</strong> {{ data.hora ?? 'Pendiente' }}</span>
     </div>
-
-    <!-- Columna derecha: Mozo, Cliente, Entregado en mesa y Cobrado -->
     <div class="detail-column">
-      <span><strong>Fecha:</strong> 22/08/2023</span>
-      <span><strong>Cliente Preferencial:</strong> Juan</span>
-      <span><strong>Cobrado:</strong> 1:20</span>
+      <span><strong>Fecha:</strong> {{ data.fecha ?? 'No disponible' }}</span>
+      <span><strong>Cliente Preferencial:</strong> {{ data.cliente?.nombre ?? 'General' }}</span>
+      <span><strong>Cobrado:</strong> {{ data.createdAt | date:'HH:mm' ?? 'No registrado' }}</span>
     </div>
   </div>
   <div class="div-resumen">
@@ -24,30 +20,27 @@
         <td>$ por unidad</td>
         <td>$total</td>
       </tr>
-      <tr>
-        <td>1</td>
-        <td>Hamburguesa con Fritas</td>
-        <td>120</td>
-        <td>120</td>
+      <tr *ngFor="let item of data.items">
+        <td>{{ item.cantidad }}</td>
+        <td>{{ item.itemMenuId }}</td> <!-- Asumiendo que quieras mostrar el ID del menú -->
+        <td>{{ item.precio }}</td>
+        <td>{{ item.cantidad * item.precio }}</td>
       </tr>
-      <!-- Agrega más filas según sea necesario -->
     </table>
     <mat-divider></mat-divider>
-    <mat-label style="display:flex; justify-content:flex-end; padding-right: 1rem;">TOTAL: $1700</mat-label>
+    <mat-label style="display:flex; justify-content:flex-end; padding-right: 1rem;">TOTAL: ${{ data.total }}</mat-label>
   </div>
 
   <div class="div-obs">
     <h3>Observaciones</h3>
     <ul>
-      <li>Sin pepino</li>
-      <li>Sin mayonesa</li>
+      <li *ngFor="let obs of data.observaciones.split(': ')">{{ obs }}</li>
     </ul>
   </div>
-
 </mat-dialog-content>
 <mat-dialog-actions>
   <div class="buttons">
-    <button mat-button>Volver</button>
-    <button mat-button class="confirm">Confirmar</button>
+    <button mat-button (click)="dialogRef.close()">Volver</button>
+    <button mat-button class="confirm" (click)="dialogRef.close()">Confirmar</button>
   </div>
 </mat-dialog-actions>

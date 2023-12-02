@@ -7,6 +7,7 @@ import { catchError } from 'rxjs';
 import { AgregarEmpleadoModalComponent } from 'src/app/ExtraComponents/agregar-empleado-modal/agregar-empleado-modal.component';
 import { EditarEmpleadoModalComponent } from 'src/app/ExtraComponents/editar-empleado-modal/editar-empleado-modal.component';
 import { EliminarEmpleadoModalComponent } from 'src/app/ExtraComponents/eliminar-empleado-modal/eliminar-empleado-modal.component';
+import { ResetPasswordModalComponent } from 'src/app/ExtraComponents/reset-password-modal/reset-password-modal.component';
 import { Empleado } from 'src/app/models/empleado.model';
 import { EmpleadoService, GetAllEmpleadosResponse } from 'src/app/services/empleado/empleado.service';
 import { ErrorHandlingService } from 'src/app/services/errorHandling/error-handling.service';
@@ -137,6 +138,21 @@ applyFilter() {
         this.getEmpleados();
       } else {
         console.log('Operación cancelada');
+      }
+    });
+  }
+
+  openResetPasswordModal(idEmpleado: number): void {
+    const dialogRef = this.dialog.open(ResetPasswordModalComponent, {
+      width: '15rem',
+      data: { userId: idEmpleado } // Si necesitas pasar datos
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // result contiene la contraseña actual y la nueva
+        console.log('Dialog result:', result);
+        // Aquí puedes llamar al servicio para cambiar la contraseña
       }
     });
   }

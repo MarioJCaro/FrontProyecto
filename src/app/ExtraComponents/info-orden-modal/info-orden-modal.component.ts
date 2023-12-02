@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ErrorHandlingService } from 'src/app/services/errorHandling/error-handling.service';
 
 @Component({
   selector: 'app-info-orden-modal',
@@ -7,4 +9,14 @@ import { Component } from '@angular/core';
 })
 export class InfoOrdenModalComponent {
 
+
+  constructor(public dialogRef: MatDialogRef<InfoOrdenModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private errorHandler:ErrorHandlingService,
+    public dialog: MatDialog,
+    ) {}
+
+  ngOnInit(){
+    console.log(this.data);
+  }
 }

@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError } from 'rxjs';
 import { Categoria } from 'src/app/models/categoria.model';
 import { Item } from 'src/app/models/item.model';
@@ -31,20 +30,22 @@ export class ModificarItemModalComponent {
 
   ngOnInit(): void {
     this.getCategorias();
-
-    this.ItemForm = this.formBuilder.group({
-      nombre: [this.item.nombre],
-      descripcion: [this.item.descripcion],
-      categoriaId: [this.item.categoria],
-      cantxCasillero: [this.item.cantxCasillero],
-      porUnidad: [this.item.porUnidad],
-      stock: [this.item.stock],
-      costo: [this.item.costo],
-    });
   }
 
   onCancel(): void {
     this.dialogRef.close();
+  }
+
+  initEmptyForm() {
+    this.ItemForm = this.formBuilder.group({
+      nombre: ['', Validators.required],
+      descripcion: ['', Validators.required],
+      categoriaId: [''], // Asegúrate de que esta propiedad exista y tenga el valor correcto
+      cantxCasillero: [''],
+      porUnidad: [''], // Configura el valor inicial basado en la propiedad porUnidad
+      stock: [''],
+      costo: [''],
+    });
   }
 
   getCategorias() {
@@ -61,6 +62,7 @@ export class ModificarItemModalComponent {
           }));
   
           this.categorias = categorias; // Asignar el resultado mapeado a la variable de categorías
+          this.initForm();
         } else {
           console.error('La respuesta del servicio no es un array válido.');
         }
@@ -69,6 +71,19 @@ export class ModificarItemModalComponent {
         catchError(this.errorHandler.handleError);
       }
     );
+  }
+
+  initForm() {
+    // Asegúrate de usar this.item.categoriaId si esa es la propiedad que contiene el ID
+    this.ItemForm = this.formBuilder.group({
+      nombre: [this.item.nombre],
+      descripcion: [this.item.descripcion],
+      categoriaId: [this.item.categoria.id], // Asegúrate de que esta propiedad exista y tenga el valor correcto
+      cantxCasillero: [this.item.cantxCasillero],
+      porUnidad: [this.item.porUnidad ? 'unidad' : 'casillero'], // Configura el valor inicial basado en la propiedad porUnidad
+      stock: [this.item.stock],
+      costo: [this.item.costo],
+    });
   }
 
   updateItem(item: any){
@@ -84,18 +99,21 @@ export class ModificarItemModalComponent {
 
   onSubmit() {
     if (this.ItemForm.valid) {
-      // Puedes acceder a los valores del formulario como this.ItemForm.value
       const formData = this.ItemForm.value;
       
-      if(formData.porUnidad == "unidad"){
+      // Verificar si el campo 'nombre' ha cambiado
+      if (formData.nombre === this.item.nombre) {
+        delete formData.nombre; // Si no ha cambiado, eliminar la propiedad del objeto
+      }
+  
+      if (formData.porUnidad === "unidad") {
         formData.porUnidad = true;
-      }else{
+      } else {
         formData.porUnidad = false;
       }
-
+  
       this.updateItem(formData);
-
-      this.dialogRef.close();
+      // No se necesita cerrar el diálogo aquí ya que se cierra en updateItem en caso de éxito
     }
   }
 

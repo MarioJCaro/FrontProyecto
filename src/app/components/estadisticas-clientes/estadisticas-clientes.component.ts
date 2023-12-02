@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Cliente } from 'src/app/models/cliente.model';
 import { ClienteResponse, ClienteService } from 'src/app/services/cliente/cliente.service';
 import { EstadisticasService } from 'src/app/services/estadisticas/estadisticas.service';
@@ -22,7 +23,7 @@ export class EstadisticasClientesComponent {
   selectedClient!: number;
   clientConsumption!: number;  // Para almacenar el consumo del cliente seleccionado
   
-  constructor(private estadisticasService: EstadisticasService, private clienteService: ClienteService) {
+  constructor(private estadisticasService: EstadisticasService, private clienteService: ClienteService, private router: Router) {
     const currentYear = new Date().getFullYear();
     for(let i = 0; i < 10; i++) {  // Añade 10 años al array, desde el año actual.
       this.years.push(currentYear - i);
@@ -177,6 +178,10 @@ updateSecondSelect(value: string) {
   this.fetchConsumoClientes();
   this.fetchClienteConsumo(this.selectedClient);
   this.fetchTopClientes();
+}
+
+navigateTo(route: string) {
+  this.router.navigate([route]);
 }
 
 }

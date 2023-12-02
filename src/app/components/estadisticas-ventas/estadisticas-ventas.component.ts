@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { Router } from '@angular/router';
 import { ChartDataset, Color } from 'chart.js';
 import { EstadisticasService, EstadisticaHoraPico } from 'src/app/services/estadisticas/estadisticas.service';
 
@@ -59,7 +60,7 @@ export class EstadisticasVentasComponent implements OnInit {
     }
   };
 
-  constructor(private estadisticasService: EstadisticasService) { }
+  constructor(private estadisticasService: EstadisticasService, private router: Router) { }
 
   ngOnInit(): void {
     this.selectedDate = new Date(); 
@@ -246,5 +247,9 @@ fetchIngresosAnuales(anio: number): void {
       console.error(error);
     }
   });
+}
+
+navigateTo(route: string) {
+  this.router.navigate([route]);
 }
 }

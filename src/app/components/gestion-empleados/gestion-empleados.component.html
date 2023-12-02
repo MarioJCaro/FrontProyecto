@@ -27,7 +27,7 @@
       <!-- Dropdown de categorías para filtrar -->
       <ng-container *ngIf="filterField === 'rol'">
         <mat-form-field appearance="fill" class="search">
-            <mat-label>Categoría</mat-label>
+            <mat-label>Rol</mat-label>
             <mat-select (selectionChange)="onCategoryChange($event)">
                 <mat-option *ngFor="let rol of roles" [value]="rol">{{ rol }}</mat-option>
             </mat-select>
@@ -69,6 +69,9 @@
   <mat-cell *matCellDef="let item">
     <!-- Botones individuales, visibles solo en pantallas grandes -->
     <div class="actions-large-screen">
+      <button mat-icon-button (click)="openResetPasswordModal(item.id)">
+        <mat-icon>lock</mat-icon>
+      </button>
       <button mat-icon-button (click)="openEditDialog(item)">
         <mat-icon>edit</mat-icon>
       </button>    
@@ -76,12 +79,17 @@
         <mat-icon>delete</mat-icon>
       </button>
     </div>
+
     
     <!-- Botón de menú desplegable, visible solo en pantallas pequeñas -->
     <button mat-icon-button [matMenuTriggerFor]="menu" class="actions-small-screen">
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
+     <button mat-icon-button (click)="openResetPasswordModal(item.id)">
+      <mat-icon>lock</mat-icon>
+       <span>Reset Password</span>
+     </button>
       <button mat-menu-item (click)="openEditDialog(item)">
         <mat-icon>edit</mat-icon>
         <span>Editar</span>
