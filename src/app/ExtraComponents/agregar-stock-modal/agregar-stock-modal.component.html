@@ -2,19 +2,20 @@
 
 <mat-dialog-content class="dialog-content">
   <!-- Stock actual -->
-  <div class="stock-section">
+  <div class="stock-section" >
     <button mat-icon-button (click)="decreaseStock()" [disabled]="currentStock <= item.stock">
       <mat-icon>remove</mat-icon>
     </button>
     
     <mat-form-field>
-        <input matInput type="number" [(ngModel)]="currentStock">
-      </mat-form-field>
-      
+      <input matInput type="number" [(ngModel)]="currentStock">
+    </mat-form-field>
+    
     <button mat-icon-button (click)="increaseStock()">
       <mat-icon>add</mat-icon>
     </button>
   </div>
+  
   
   <div class="total-section">
     Cantidad que se agregará: {{currentStock}}

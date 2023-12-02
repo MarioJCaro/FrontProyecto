@@ -1,6 +1,7 @@
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);  /* Ahora con 4 columnas, la declaración se mantiene igual */
+  grid-template-columns: repeat(4, 1fr); /* 4 columnas, se mantiene igual */
+  grid-template-rows: repeat(2, 1fr); /* 2 filas, se mantiene igual */
   gap: 1.25rem; /* 20px convertido a rem */
   padding: 1.25rem; /* 20px convertido a rem */
 }
@@ -8,16 +9,34 @@
 .clickable-card {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 12.5rem; /* 200px convertido a rem */
-  width: 18.75rem; /* 300px convertido a rem */
+  text-align: center;
+  height: 12.5rem; /* 200px convertido a rem para la altura fija de las tarjetas */
   cursor: pointer;
 
   &:hover {
-    background-color: rgba(0,0,0,0.05); /* No necesita conversión */
+    background-color: rgba(0,0,0,0.05); /* No requiere conversión */
   }
 }
 
 mat-card-title {
   font-size: 1.5rem; /* 24px convertido a rem */
+}
+
+// Media queries
+@media (max-width: 768px) { // para tablets
+  .cards-container {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+  mat-card-title {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) { // para móviles
+  .cards-container {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+  mat-card-title {
+    font-size: 1rem;
+  }
 }

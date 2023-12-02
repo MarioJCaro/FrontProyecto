@@ -1,7 +1,9 @@
 .green-card {
   background-color: #7D9A93;
-  padding: 3.125rem; /* 50px convertido a rem */
-  
+  padding-left: 3.125rem;
+  padding-right: 3.125rem; /* 50px convertido a rem */
+  padding-bottom: 1rem;
+  padding-top: 1rem;
   border-radius: 1.25rem; /* 20px convertido a rem */
 }
 /* Contenedor flex para las tarjetas de órdenes */
