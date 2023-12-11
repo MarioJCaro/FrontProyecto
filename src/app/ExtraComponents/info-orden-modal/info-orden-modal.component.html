@@ -9,7 +9,7 @@
     <div class="detail-column">
       <span><strong>Fecha:</strong> {{ data.fecha ?? 'No disponible' }}</span>
       <span><strong>Cliente Preferencial:</strong> {{ data.cliente?.nombre ?? 'General' }}</span>
-      <span><strong>Cobrado:</strong> {{ data.createdAt | date:'HH:mm' ?? 'No registrado' }}</span>
+      <span><strong>Cobrado:</strong> {{ data.createdAt | date:'HH:mm' }}</span>
     </div>
   </div>
   <div class="div-resumen">
@@ -22,7 +22,7 @@
       </tr>
       <tr *ngFor="let item of data.items">
         <td>{{ item.cantidad }}</td>
-        <td>{{ item.itemMenuId }}</td> <!-- Asumiendo que quieras mostrar el ID del menú -->
+        <td>{{ item.itemMenu.nombre }}</td> <!-- Asumiendo que quieras mostrar el ID del menú -->
         <td>{{ item.precio }}</td>
         <td>{{ item.cantidad * item.precio }}</td>
       </tr>
@@ -31,12 +31,14 @@
     <mat-label style="display:flex; justify-content:flex-end; padding-right: 1rem;">TOTAL: ${{ data.total }}</mat-label>
   </div>
 
-  <div class="div-obs">
-    <h3>Observaciones</h3>
-    <ul>
-      <li *ngFor="let obs of data.observaciones.split(': ')">{{ obs }}</li>
-    </ul>
-  </div>
+  <!-- En tu plantilla HTML -->
+<div class="div-obs">
+  <h3>Observaciones</h3>
+  <ul>
+    <li *ngFor="let obs of data.observaciones">{{ obs }}</li>
+  </ul>
+</div>
+
 </mat-dialog-content>
 <mat-dialog-actions>
   <div class="buttons">

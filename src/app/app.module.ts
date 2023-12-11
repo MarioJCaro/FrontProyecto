@@ -139,6 +139,7 @@ import { ConfirmarEliminarOrdenCajaComponent } from './ExtraComponents/confirmar
 import { ConfirmarOrdenMenuMozoComponent } from './ExtraComponents/confirmar-orden-menu-mozo/confirmar-orden-menu-mozo.component';
 import { ConsultarOrdenMozoComponent } from './ExtraComponents/consultar-orden-mozo/consultar-orden-mozo.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { HistorialMozoComponent } from './ExtraComponents/historial-mozo/historial-mozo/historial-mozo.component';
 
 @NgModule({
   declarations: [
@@ -236,6 +237,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     ConfirmarEliminarOrdenCajaComponent,
     ConfirmarOrdenMenuMozoComponent,
     ConsultarOrdenMozoComponent,
+    HistorialMozoComponent,
 
 
 
