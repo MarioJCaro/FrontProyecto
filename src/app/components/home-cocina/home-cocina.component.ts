@@ -36,7 +36,7 @@ export class HomeCocinaComponent implements OnInit {
   
 
   fetchOrdenesEnCocina(): void {
-    this.ordenService.getAll(1, 4, undefined, undefined, ESTADOS.EN_COCINA).subscribe({
+    this.ordenService.getAll(1, 20, undefined, undefined, ESTADOS.EN_COCINA).subscribe({
         next: (response: OrdenResponse) => {
 
             // Primero, filtra los ítems de cada orden
