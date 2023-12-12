@@ -40,7 +40,7 @@ grupoIds: number[] = [];
     this.empleadoNombre = localStorage.getItem('empleadoNombre');
     this.cargarClientes();
     this.setHoraActual();
-    this.loadGrupoIdAndThenMenuItems();
+    this.loadMenuItems();
     this.cargarClientes();
 
 }
@@ -132,51 +132,16 @@ cargarClientes(): void {
   });
 }
 
-loadGrupoIdAndThenMenuItems(): void {
-  // Convertir los nombres de grupos en un array de observables que obtienen el ID de cada grupo
-  const observables = Object.values(GRUPOSVENTARAPIDA).map(grupoNombre => 
-    this.grupoService.getGrupoByNombre(grupoNombre).pipe(
-      map(response => {
-        if (response.items && response.items.length > 0) {
-          return response.items[0].id;
-        } else {
-          throw new Error(`No se encontró el grupo "${grupoNombre}".`);
-        }
-      })
-    )
-  );
-
-  // Combina todos los observables en uno y suscríbete a él
-  forkJoin(observables).subscribe({
-    next: (grupoIds) => {
-      // Ahora tienes todos los IDs de grupo en grupoIds
-      this.loadMenuItems(grupoIds);
-    },
-    error: (error) => {
-      console.error('Error al obtener los IDs de grupo:', error);
-    }
-  });
-}
-
 
 
 searchMenuItems(): void {
-  // Verificar si ya tienes los grupoIds cargados, si no, cargarlos primero
-  if (this.grupoIds.length > 0) {
-    // Realizar la búsqueda incluyendo los grupoIds si ya están disponibles
-    this.menuService.getAll(1, 100, 'nombre', this.searchTerm, 'grupoId', this.grupoIds.join()).subscribe(response => {
+    this.menuService.getAll(1, 100, 'nombre', this.searchTerm, 'esBebida', true).subscribe(response => {
       this.dataSource = response.items;
     });
-  } else {
-    // Si no se han cargado los grupoIds, cárgalos primero
-    this.loadGrupoIdAndThenMenuItems();
-  }
 }
 
-// Modifica la función loadMenuItems para guardar los IDs de grupo
-loadMenuItems(grupoIds: number[]): void {
-  this.grupoIds = grupoIds; // Almacena los IDs de grupo en la variable de clase
-  this.menuService.getAll(1, 100, 'grupoId', grupoIds.join()).subscribe(response => {
+loadMenuItems(): void {
+  this.menuService.getAll(1, 100, 'esBebida', true).subscribe(response => {
       this.dataSource = response.items;
   });
 }
